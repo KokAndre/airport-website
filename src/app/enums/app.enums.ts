@@ -1,0 +1,16 @@
+export enum AppRoutes {
+    Home = '/home',
+    ClubHouse = '/club-house',
+    FollowUs = '/follow-us',
+    TedderfieldHistory = '/tedderfield-history',
+    ContactUs = '/contact-us',
+    Login = '/login',
+    Register = '/register',
+    MapAndLocation = '/map-and-location',
+    AirfieldInformation = '/airfield-information',
+    JoiningAndLanding = '/joining-and-landing',
+    LiveWeatherUpdates = 'live-weather-updates',
+    OtherAirfields = 'other-airfields',
+    ReportingHazards = 'reporting-hazards',
+    SurroundingAirfields = 'surrounding-airfields',
+}

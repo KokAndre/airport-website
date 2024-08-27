@@ -1,39 +1,92 @@
 <!-- Header -->
 <div class="main-container">
     <div class="header row mx-0 px-4">
-        <div class="col-3 center-align-vertical">
+        <div class="col-3 center-align-vertical pointer" (click)="navigateToRoute(navigationRoutes.Home)">
             <div class="logo-image"></div>
         </div>
         <div class="col-9 center-align-vertical">
 
-            <div class="row mx-0">
-                <div class="pointer col-auto">
-                    <p class="m-2">Aircraft</p>
+            <div class="row mx-0 navbar">
+                <div class="dropdown pointer px-0 mr-2">
+                    <div class="dropbtn">
+                        About Us <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ClubHouse)">Club House
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUs)">Follow Us
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldHistory)">
+                            Tedderfield History</div>
+                    </div>
                 </div>
 
-                <div class="pointer col-auto">
-                    <p class="m-2">Distributor</p>
+                <div class="dropdown pointer px-0 mr-2">
+                    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)">
+                        Contac Us
+                    </div>
                 </div>
 
-                <div class="pointer col-auto">
-                    <p class="m-2">News & Events</p>
+                <div class="dropdown pointer px-0 mr-2">
+                    <div class="dropbtn">
+                        Members <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Register)">Register
+                        </div>
+                    </div>
+
+                    <!-- TODO: Implement the options when logged in!!!! -->
                 </div>
 
-                <div class="pointer col-auto">
-                    <p class="m-2">About Us</p>
+                <div class="dropdown pointer px-0 mr-2">
+                    <div class="dropbtn">
+                        Pilot Information <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MapAndLocation)">Map
+                            and Location</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.AirfieldInformation)">
+                            Airfield Information</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.JoiningAndLanding)">
+                            Joining and Landing</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.LiveWeatherUpdates)">
+                            Live Weather Updates </div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.OtherAirfields)">
+                            Other Airfields</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
+                            Reporting Hazards</div>
+                        <mat-divider></mat-divider>
+                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
+                            Surrounding Airfields
+                        </div>
+                    </div>
                 </div>
 
-                <div class="pointer col-auto">
-                    <p class="m-2">Contact</p>
+
+                <div class="dropdown pointer px-0 mr-2">
+                    <p class="m-2">Home</p>
                 </div>
-
-                <div class="pointer col-auto">
-                    <p class="m-2">Support</p>
+                <div class="dropdown pointer px-0 mr-2">
+                    <p class="m-2">Projects</p>
                 </div>
-
-
-                <div class="pointer col-auto">
-                    <p class="m-2">Store</p>
+                <div class="dropdown pointer px-0 mr-2">
+                    <p class="m-2">Fata Market</p>
+                </div>
+                <div class="dropdown pointer px-0 mr-2">
+                    <p class="m-2">Training and Renewals</p>
+                </div>
+                <div class="dropdown pointer px-0">
+                    <p class="m-2">Galary</p>
                 </div>
             </div>
 
