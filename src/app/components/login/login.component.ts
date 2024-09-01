@@ -4,6 +4,11 @@ import { LoginRequest } from 'src/app/models/login-request.model';
 import { RegisterRequest } from 'src/app/models/register-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import * as zxcvbn from 'zxcvbn';
+import * as CryptoJS from 'crypto-js';
+import { EncryptionKeys, SessionStorageKeys } from 'src/app/enums/app.enums';
+import { LoginToken } from 'src/app/models/login-token.model';
+import * as moment from 'moment';
+import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-login',
@@ -117,9 +122,7 @@ export class LoginComponent implements OnInit {
     requestData.name = this.registerNameControl?.value;
     requestData.surname = this.registerSurnameControl?.value;
     requestData.email = this.registerEmailControl?.value;
-    requestData.password = this.registerPasswordControl?.value; // TODO: Add encryption for passwords
-
-    console.log('Request for Register: ', requestData);
+    requestData.password = CryptoJS.AES.encrypt(this.registerPasswordControl?.value, EncryptionKeys.LoginPasswordEncryptionKey).toString();
 
     this.loginService.registerNewUser(requestData).then(results => {
       console.log('Register Results: ', results);
@@ -129,13 +132,29 @@ export class LoginComponent implements OnInit {
   public loginClicked() {
     const requestData = new LoginRequest();
     requestData.email = this.loginEmailControl?.value;
-    requestData.password = this.loginPasswordControl?.value; // TODO: Add encryption for passwords
+    requestData.password = CryptoJS.AES.encrypt(this.loginPasswordControl?.value, EncryptionKeys.LoginPasswordEncryptionKey).toString();
 
     console.log('Request for Login: ', requestData);
 
-    this.loginService.loginUser(requestData).then(results => {
-      console.log('Login Results: ', results);
-    });
+    const tokenToStore = new LoginToken();
+    tokenToStore.name = 'TestName';
+    tokenToStore.surname = 'TestSurname';
+    tokenToStore.loginDateTime = new Date().toISOString();
+    tokenToStore.logoutDateTime = moment(new Date()).add(2, 'm').toISOString();
+
+    console.log('TOKEN: ', tokenToStore);
+
+    const stringToken = JSON.stringify(tokenToStore);
+
+    console.log('STRING TOKEN: ', stringToken);
+
+    const encryptedToken = CryptoJS.AES.encrypt(stringToken, EncryptionKeys.TokenEncryptionKey).toString();
+
+    SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
+
+    // this.loginService.loginUser(requestData).then(results => {
+    //   console.log('Login Results: ', results);
+    // });
   }
 
   public get registerNameControl() {

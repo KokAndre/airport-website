@@ -32,3 +32,12 @@ export enum Endpoints {
     Register = '/register.php',
     Login = '/login.php',
 }
+
+export enum EncryptionKeys {
+    LoginPasswordEncryptionKey = '12uyegrcbgy3tg74637gfndkdy442gdfedfwjn',
+    TokenEncryptionKey = 'edrfg6543mnjcxdew845fhbuwefhdf45fok24o'
+}
+
+export enum SessionStorageKeys {
+    Token = 'token'
+}
