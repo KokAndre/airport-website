@@ -9,6 +9,7 @@ import { AppRoutes } from 'src/app/enums/app.enums';
 })
 export class SideNavComponent implements OnInit {
   public navigationRoutes = AppRoutes;
+  public displayHeaderAsSolid = false;
 
   constructor(public router: Router) { }
 
@@ -17,6 +18,16 @@ export class SideNavComponent implements OnInit {
 
   public navigateToRoute(newRoute: string) {
     this.router.navigateByUrl(newRoute);
+  }
+
+  public setHeaderColour(event: any) {
+    console.log('Scroll Event: ', event.srcElement.scrollTop);
+    
+    if(event?.srcElement?.scrollTop > 10) {
+      this.displayHeaderAsSolid = true;
+    } else {
+      this.displayHeaderAsSolid = false;
+    }
   }
 
 }

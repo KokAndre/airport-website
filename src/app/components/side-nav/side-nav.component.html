@@ -1,103 +1,169 @@
 <!-- Header -->
 <div class="main-container">
-    <div class="header row mx-0 px-4">
-        <div class="col-3 center-align-vertical pointer" (click)="navigateToRoute(navigationRoutes.Home)">
-            <div class="logo-image"></div>
-        </div>
-        <div class="col-9 center-align-vertical">
-
-            <div class="row mx-0 navbar">
-                <div class="dropdown pointer px-0 mr-2">
-                    <div class="dropbtn">
-                        About Us <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
-                    </div>
-                    <div class="dropdown-content">
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ClubHouse)">Club House
-                        </div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUs)">Follow Us
-                        </div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldHistory)">
-                            Tedderfield History</div>
-                    </div>
-                </div>
-
-                <div class="dropdown pointer px-0 mr-2">
-                    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)">
-                        Contac Us
-                    </div>
-                </div>
-
-                <div class="dropdown pointer px-0 mr-2">
-                    <div class="dropbtn">
-                        Members <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
-                    </div>
-                    <div class="dropdown-content">
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Register)">Register
-                        </div>
-                    </div>
-
-                    <!-- TODO: Implement the options when logged in!!!! -->
-                </div>
-
-                <div class="dropdown pointer px-0 mr-2">
-                    <div class="dropbtn">
-                        Pilot Information <mat-icon class="dropdown-icon" fontIcon="keyboard_arrow_down"></mat-icon>
-                    </div>
-                    <div class="dropdown-content">
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MapAndLocation)">Map
-                            and Location</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.AirfieldInformation)">
-                            Airfield Information</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.JoiningAndLanding)">
-                            Joining and Landing</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.LiveWeatherUpdates)">
-                            Live Weather Updates </div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.OtherAirfields)">
-                            Other Airfields</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
-                            Reporting Hazards</div>
-                        <mat-divider></mat-divider>
-                        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
-                            Surrounding Airfields
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="dropdown pointer px-0 mr-2">
-                    <p class="m-2">Home</p>
-                </div>
-                <div class="dropdown pointer px-0 mr-2">
-                    <p class="m-2">Projects</p>
-                </div>
-                <div class="dropdown pointer px-0 mr-2">
-                    <p class="m-2">Fata Market</p>
-                </div>
-                <div class="dropdown pointer px-0 mr-2">
-                    <p class="m-2">Training and Renewals</p>
-                </div>
-                <div class="dropdown pointer px-0">
-                    <p class="m-2">Galary</p>
-                </div>
+    <div class="col-12 px-0">
+        <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
+            <div class="col-3 center-align-vertical pointer" (click)="navigateToRoute(navigationRoutes.Welcome)">
+                <div class="logo-image"></div>
             </div>
+            <div class="col-9 center-align-vertical">
 
+                <div class="row mx-0 navbar">
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            About Us<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ClubHouse)">Club
+                                House
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUs)">Follow
+                                Us
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2"
+                                (click)="navigateToRoute(navigationRoutes.TedderfieldHistory)">
+                                Tedderfield History</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)">
+                            Contac Us
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            Members<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Register
+                            </div>
+                        </div>
+
+                        <!-- TODO: Implement the options when logged in!!!! -->
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            Pilot Information<mat-icon class="dropdown-icon ml-1"
+                                fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MapAndLocation)">
+                                Map
+                                and Location</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2"
+                                (click)="navigateToRoute(navigationRoutes.AirfieldInformation)">
+                                Airfield Information</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2"
+                                (click)="navigateToRoute(navigationRoutes.JoiningAndLanding)">
+                                Joining and Landing</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2"
+                                (click)="navigateToRoute(navigationRoutes.LiveWeatherUpdates)">
+                                Live Weather Updates </div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.OtherAirfields)">
+                                Other Airfields</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
+                                Reporting Hazards</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2"
+                                (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
+                                Surrounding Airfields
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Projects)">
+                            Projects
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            FATA Merch<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Classifieds)">
+                                Classifieds</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
+                                Hangar
+                                Renting</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
+                                Hangars for Sale</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            Training and Renewals<mat-icon class="dropdown-icon ml-1"
+                                fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FAQS)">
+                                FAQ's</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Info)">Info</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Instructors)">
+                                Instructors</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.NeedHelp)">Need
+                                help
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <div class="dropbtn">
+                            Gallery<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Airfield)">
+                                Airfield</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Dane)">Dane</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FlyAways)">
+                                Fly Aways</div>
+                            <mat-divider></mat-divider>
+                            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Stories)">Stories
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="dropdown pointer px-0 mr-2">
+                        <p class="m-2">Home</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+
 
     <!-- <div class="header-bottom-border"></div> -->
     <!-- End of Header -->
 
     <!-- Body -->
-    <div class="content-container" id="content-container">
+    <div class="content-container" id="content-container" (scroll)="setHeaderColour($event)">
         <router-outlet></router-outlet>
     </div>
     <!-- End of Body -->

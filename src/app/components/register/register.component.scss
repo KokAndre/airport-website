@@ -1,0 +1,48 @@
+.center-container {
+    height: 100%;
+    width: 100%;
+}
+
+.password-strength-container {
+    width: 100%;
+    background-color: #ebebeb;
+}
+.strengthBar {
+    height: 20px;
+}
+.progress-bar-25 {
+    background: #ed1b2e;
+    width: 25%;
+}
+.progress-bar-50 {
+    background: #fdb813;
+    width: 50%;
+}
+.progress-bar-75 {
+    background: #118acb;
+    width: 75%;
+}
+.progress-bar-100 {
+    background: #76b042;
+    width: 100%;
+}
+.icon-size-close {
+    font-size: 100px;
+}
+.icon-size {
+    font-size: 83.5px;
+    padding-top: 11px;
+    padding-bottom: 10px;
+}
+.text-size-17 {
+    font-size: 17px;
+}
+.opacity-5 {
+    opacity: 1;
+}
+.opacity-2 {
+    opacity: 0.4;
+}
+input {
+    -webkit-user-select: text !important;
+}
