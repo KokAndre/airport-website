@@ -30,7 +30,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   public setHeaderColour(event: any) {
-    console.log('Scroll Event: ', event.srcElement.scrollTop);
+    // console.log('Scroll Event: ', event.srcElement.scrollTop);
     
     if(event?.srcElement?.scrollTop > 10) {
       this.displayHeaderAsSolid = true;
@@ -42,6 +42,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public initializeIsLoggedInCheck() {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
+      // console.log('IS AUTH: ', this.isAuthorised);
     }, 1000);
   }
 

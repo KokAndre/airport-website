@@ -28,14 +28,14 @@ export enum AppRoutes {
 }
 
 export enum Endpoints {
-    BaseURL = 'http://BaseURL/', // TODO: Implement correct endpoints
+    BaseURL = 'https://ppldevelopment.co.za/teddefield-airfield/members', // TODO: Implement correct endpoints
     Register = '/register.php',
     Login = '/login.php',
 }
 
 export enum EncryptionKeys {
-    LoginPasswordEncryptionKey = '12uyegrcbgy3tg74637gfndkdy442gdfedfwjn',
-    TokenEncryptionKey = 'edrfg6543mnjcxdew845fhbuwefhdf45fok24o'
+    LoginPasswordEncryptionKey = 'dhey27rfc89037fsnsdju3ijdp0bvvg4',
+    TokenEncryptionKey = 'wert24356vjkol85cvsjeyufifised6p'
 }
 
 export enum SessionStorageKeys {

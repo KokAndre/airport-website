@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { EncryptionKeys, Endpoints, SessionStorageKeys } from 'src/app/enums/app.enums';
-import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
+import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { LoginRequest } from 'src/app/models/login-request.model';
 import { LoginToken } from 'src/app/models/login-token.model';
 import { RegisterRequest } from 'src/app/models/register-request.model';
@@ -20,7 +20,22 @@ export class LoginService {
     return fetch(Endpoints.BaseURL + Endpoints.Register, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
-    });
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 200) {
+          const tokenToStore = new LoginToken();
+          tokenToStore.name = data.data.name;
+          tokenToStore.surname = data.data.surname;
+          tokenToStore.loginDateTime = new Date().toISOString();
+          tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
+
+          const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
+
+          SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
+        }
+        return data;
+      });
   }
 
   public loginUser(requestData: LoginRequest) {
@@ -30,23 +45,18 @@ export class LoginService {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.responseCode === 200) {
+        if (data.status === 200) {
           const tokenToStore = new LoginToken();
-          tokenToStore.name = data.name;
-          tokenToStore.surname = data.surname;
+          tokenToStore.name = data.data.name;
+          tokenToStore.surname = data.data.surname;
           tokenToStore.loginDateTime = new Date().toISOString();
           tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
 
-          console.log('TOKEN: ', tokenToStore);
-
-          const stringToken = JSON.stringify(tokenToStore);
-
-          const encryptedToken = CryptoJS.AES.encrypt(stringToken, EncryptionKeys.TokenEncryptionKey).toString();
+          const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
 
           SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
-
-          return data;
         }
+        return data;
       });
   }
 
@@ -59,12 +69,11 @@ export class LoginService {
     if (!stringToken) {
       return false;
     } else {
-      const decryptedBytes = CryptoJS.AES.decrypt(stringToken, EncryptionKeys.TokenEncryptionKey);
+      const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const decryptedBytes = CryptoJS.AES.decrypt(stringToken, keyHex, { iv: ivHex });
       const dectyptedStringToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
-      console.log('DECRYPTED STRING TOKEN: ', dectyptedStringToken);
       const token = JSON.parse(dectyptedStringToken);
-
-      console.log('DECRYPTED JSON TOKEN: ', token);
 
       const currentDate = new Date();
       const tokenExpiryDate = new Date(token.logoutDateTime);

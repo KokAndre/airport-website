@@ -5,10 +5,11 @@ import { RegisterRequest } from 'src/app/models/register-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import * as zxcvbn from 'zxcvbn';
 import * as CryptoJS from 'crypto-js';
-import { EncryptionKeys, SessionStorageKeys } from 'src/app/enums/app.enums';
+import { AppRoutes, EncryptionKeys, SessionStorageKeys } from 'src/app/enums/app.enums';
 import { LoginToken } from 'src/app/models/login-token.model';
 import * as moment from 'moment';
-import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
+import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   public passwordIsStrong = false;
   public disableSaveButton = true;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService) { }
+  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router) { }
 
   ngOnInit() {
     this.initializeControls();
@@ -69,31 +70,31 @@ export class LoginComponent implements OnInit {
         this.strengthMeterClass = 'progress-bar-25';
         this.passwordStrengthText = 'Too weak';
         this.passwordIsStrong = false;
-        this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
+        // this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
         break;
       case 1:
         this.strengthMeterClass = 'progress-bar-25';
         this.passwordStrengthText = 'Too weak';
         this.passwordIsStrong = false;
-        this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
+        // this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
         break;
       case 2:
         this.strengthMeterClass = 'progress-bar-50';
         this.passwordStrengthText = 'Not strong enough';
         this.passwordIsStrong = false;
-        this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
+        // this.registerConfirmPasswordControl?.disable({ onlySelf: true, emitEvent: false });
         break;
       case 3:
         this.strengthMeterClass = 'progress-bar-75';
         this.passwordStrengthText = 'Strong';
         this.passwordIsStrong = true;
-        this.registerConfirmPasswordControl?.enable({ onlySelf: true, emitEvent: false });
+        // this.registerConfirmPasswordControl?.enable({ onlySelf: true, emitEvent: false });
         break;
       case 4:
         this.strengthMeterClass = 'progress-bar-100';
         this.passwordStrengthText = 'Very Strong';
         this.passwordIsStrong = true;
-        this.registerConfirmPasswordControl?.enable({ onlySelf: true, emitEvent: false });
+        // this.registerConfirmPasswordControl?.enable({ onlySelf: true, emitEvent: false });
         break;
     }
     // only show errors when password is strong
@@ -115,46 +116,37 @@ export class LoginComponent implements OnInit {
   }
 
   public registerClicked() {
-    console.log('EMAIL: ', this.registerEmailControl?.value);
-    console.log('Password: ', this.registerPasswordControl?.value);
-
     const requestData = new RegisterRequest();
     requestData.name = this.registerNameControl?.value;
     requestData.surname = this.registerSurnameControl?.value;
     requestData.email = this.registerEmailControl?.value;
-    requestData.password = CryptoJS.AES.encrypt(this.registerPasswordControl?.value, EncryptionKeys.LoginPasswordEncryptionKey).toString();
+    requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
 
     this.loginService.registerNewUser(requestData).then(results => {
       console.log('Register Results: ', results);
+      if (results.status === 200) {
+        this.navigateToHomePage();
+      }
     });
   }
 
   public loginClicked() {
     const requestData = new LoginRequest();
     requestData.email = this.loginEmailControl?.value;
-    requestData.password = CryptoJS.AES.encrypt(this.loginPasswordControl?.value, EncryptionKeys.LoginPasswordEncryptionKey).toString();
+    requestData.password = AppHelperFunction.encryptPassword(this.loginPasswordControl?.value);
 
     console.log('Request for Login: ', requestData);
 
-    const tokenToStore = new LoginToken();
-    tokenToStore.name = 'TestName';
-    tokenToStore.surname = 'TestSurname';
-    tokenToStore.loginDateTime = new Date().toISOString();
-    tokenToStore.logoutDateTime = moment(new Date()).add(2, 'm').toISOString();
+    this.loginService.loginUser(requestData).then(results => {
+      console.log('Login Results: ', results);
+      if (results.status === 200) {
+        this.navigateToHomePage();
+      }
+    });
+  }
 
-    console.log('TOKEN: ', tokenToStore);
-
-    const stringToken = JSON.stringify(tokenToStore);
-
-    console.log('STRING TOKEN: ', stringToken);
-
-    const encryptedToken = CryptoJS.AES.encrypt(stringToken, EncryptionKeys.TokenEncryptionKey).toString();
-
-    SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
-
-    // this.loginService.loginUser(requestData).then(results => {
-    //   console.log('Login Results: ', results);
-    // });
+  public navigateToHomePage() {
+    this.router.navigateByUrl(AppRoutes.Welcome);
   }
 
   public get registerNameControl() {
