@@ -1,48 +1,18 @@
-<div>
-  <h1 class="my-5">Test some shitty text</h1>
+<div class="login-screen-header">
+  <div class="col-10 mx-auto px-0">
+    <div class="col-10 px-0 mx-auto">
+      <p class="mb-0 text-size-22">Account</p>
+      <p class="mb-0">Members / Account</p>
+    </div>
+  </div>
 </div>
 
-
-<svg class="svgmask " xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5000" height="35" viewBox="0 0 5000 35">
-  <defs>
-  <filter id="filter-mask3" x="-50" y="-50" width="200" height="200" name="filter-mask3">
-  <feOffset result="shadowOffsetInner1" dy="3" in="SourceAlpha"></feOffset>
-  <feGaussianBlur result="shadowBlurInner1" stdDeviation="2" in="shadowOffsetInner1"></feGaussianBlur>
-  <feComposite result="shadowInnerInner1" operator="arithmetic" k2="-1" k3="1" in="shadowBlurInner1" in2="SourceAlpha"></feComposite>
-  <feColorMatrix result="shadowMatrixInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" in="shadowInnerInner1"></feColorMatrix>
-  <feMerge><feMergeNode in="SourceGraphic"></feMergeNode><feMergeNode in="shadowMatrixInner1"></feMergeNode></feMerge>
-  </filter>
-  <clipPath id="clip-path"><path class="cls-1" fill="none" d="M2450,5H0V6H2452ZM5000,6V5H2550l-2,1Z"></path></clipPath>
-  </defs>
-  <g filter="url(#filter-mask3)"><polygon class="bmask-bgfill" style="fill:#f5f5f5;" points="0 6 2452 6 2500 30 2548 6 5000 6 5000 36 2500 36 0 36 0 6"></polygon></g>
-  <polygon class="bmask-invert" style="fill:#f5f5f5;" points="5000 5 2550 5 2500 30 2450 5 0 5 0 0 5000 0 5000 5"></polygon>
-  <g clip-path="url(#clip-path)">
-  <rect class="borderleft" fill="#EE202E" y="5" width="2500" height="1"></rect>
-  <rect class="borderright" fill="#790002" x="2500" y="5" width="2500" height="1"></rect>
-  </g>
-  <path class="arrowleft" fill="#EE202E" d="M2500,30V17.5L2450,5Z"></path>
-  <path class="arrowright" fill="#790002" d="M2500,17.5V30l50-25Z"></path>
-  </svg>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
 <div class="login-background">
-  <div class="col-8 px-0 mx-auto login-component-top-spacing">
+  <div class="col-10 px-0 mx-auto login-component-top-spacing">
     <div class="row mx-0">
-      <div class="col-6">
+      <div class="col-6 px-0">
         <h1 class="text-center mb-0">Login</h1>
 
         <div class="col-10 px-0 mx-auto" [formGroup]="loginFormGroup">
@@ -77,7 +47,7 @@
 
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6 px-0">
         <h1 class="text-center mb-0">Register</h1>
 
         <div class="col-10 px-0 mx-auto" [formGroup]="registerFormGroup">
