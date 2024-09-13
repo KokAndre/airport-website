@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ArrowDividerComponent implements OnInit {
   @Input() public isLightToDark: boolean;
+  @Input() public isSmallDivider: boolean;
 
   constructor() { }
 

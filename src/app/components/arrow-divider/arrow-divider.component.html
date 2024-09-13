@@ -1,5 +1,5 @@
-<div class="divider-container-dark row mx-0" [ngClass]="isLightToDark ? 'divider-container-light' : 'divider-container-dark'">
-  <div class="left-border"></div>
-  <div class="center-arrow" [ngClass]="isLightToDark ? 'center-arrow-light-to-dark' : 'center-arrow-dark-to-light'"></div>
-  <div class="right-border"></div>
+<div class="row mx-0" [ngClass]="isLightToDark ? isSmallDivider ? 'divider-container-dark-small' : 'divider-container-dark' : isSmallDivider ? 'divider-container-light-small' : 'divider-container-light'">
+  <div class="" [ngClass]="isSmallDivider ? 'left-border-small' : 'left-border'"></div>
+  <div class="" [ngClass]="[isLightToDark ? 'center-arrow-light-to-dark' : 'center-arrow-dark-to-light', isSmallDivider ? 'center-arrow-small' : 'center-arrow']"></div>
+  <div class="" [ngClass]="isSmallDivider ? 'right-border-small' : 'right-border'"></div>
 </div>

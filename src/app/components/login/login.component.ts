@@ -5,11 +5,12 @@ import { RegisterRequest } from 'src/app/models/register-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import * as zxcvbn from 'zxcvbn';
 import * as CryptoJS from 'crypto-js';
-import { AppRoutes, EncryptionKeys, SessionStorageKeys } from 'src/app/enums/app.enums';
+import { AppRoutes, EncryptionKeys, ModalTypes, SessionStorageKeys } from 'src/app/enums/app.enums';
 import { LoginToken } from 'src/app/models/login-token.model';
 import * as moment from 'moment';
 import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { Router } from '@angular/router';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +29,10 @@ export class LoginComponent implements OnInit {
   public strengthMeterClass: string;
   public passwordIsStrong = false;
   public disableSaveButton = true;
+  public isLoginButtonFocused = false;
+  public isRegisterButtonFocused = false;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router) { }
+  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.initializeControls();
@@ -58,6 +61,20 @@ export class LoginComponent implements OnInit {
         this.registerConfirmPasswordControl?.markAsTouched();
       }, 500);
       this.passwordLogicHandling();
+    });
+
+    this.checkOnEnterButtonFocus();
+  }
+
+  public checkOnEnterButtonFocus() {
+    this.loginFormGroup.valueChanges.subscribe(() => {
+      this.isLoginButtonFocused = true;
+      this.isRegisterButtonFocused = false;
+    });
+
+    this.registerFormGroup.valueChanges.subscribe(() => {
+      this.isLoginButtonFocused = false;
+      this.isRegisterButtonFocused = true;
     });
   }
 
@@ -125,7 +142,10 @@ export class LoginComponent implements OnInit {
     this.loginService.registerNewUser(requestData).then(results => {
       console.log('Register Results: ', results);
       if (results.status === 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Register', 'You have successfully registered.', null);
         this.navigateToHomePage();
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Register', results.message, null);
       }
     });
   }
@@ -140,13 +160,20 @@ export class LoginComponent implements OnInit {
     this.loginService.loginUser(requestData).then(results => {
       console.log('Login Results: ', results);
       if (results.status === 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', 'You have successfully logged in.', null);
         this.navigateToHomePage();
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', results.message, null);
       }
     });
   }
 
   public navigateToHomePage() {
     this.router.navigateByUrl(AppRoutes.Welcome);
+  }
+
+  public displayTermsAndConditions() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
   }
 
   public get registerNameControl() {

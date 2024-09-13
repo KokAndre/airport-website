@@ -12,6 +12,11 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ArrowDividerComponent } from './components/arrow-divider/arrow-divider.component';
+import { IsRouterLinkActiveDirective } from './directives/is-router-link-active/is-router-link-active.directive';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { OnEnterDirective } from './directives/on-enter/on-enter.directive';
+import { AppModalComponent } from './components/app-modal/app-modal.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,11 @@ import { ArrowDividerComponent } from './components/arrow-divider/arrow-divider.
     LoginComponent,
     HomePageComponent,
     RegisterComponent,
-    ArrowDividerComponent
+    ArrowDividerComponent,
+    IsRouterLinkActiveDirective,
+    NavBarComponent,
+    OnEnterDirective,
+    AppModalComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +38,12 @@ import { ArrowDividerComponent } from './components/arrow-divider/arrow-divider.
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

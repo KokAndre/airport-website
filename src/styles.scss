@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,13 +19,15 @@ $airport-website-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$airport-website-theme: mat.define-light-theme((
-  color: (
-    primary: $airport-website-primary,
-    accent: $airport-website-accent,
-    warn: $airport-website-warn,
+$airport-website-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $airport-website-primary,
+      accent: $airport-website-accent,
+      warn: $airport-website-warn
+    )
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -35,8 +36,15 @@ $airport-website-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: hidden; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-y: hidden;
+}
 
 .center-align-vertical {
   align-self: center;
@@ -52,45 +60,209 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y:
 }
 
 // Fonts sizes
-$h1-font-size:                22px;
-$h2-font-size:                20px;
-$h3-font-size:                18px;
-$h4-font-size:                16px;
-$h5-font-size:                14px;
-$h6-font-size:                12px;
-h1, .h1 { font-size: $h1-font-size; }
-h2, .h2 { font-size: $h2-font-size; }
-h3, .h3 { font-size: $h3-font-size; }
-h4, .h4 { font-size: $h4-font-size; }
-h5, .h5 { font-size: $h5-font-size; }
-h6, .h6 { font-size: $h6-font-size; }
+$h1-font-size: 22px;
+$h2-font-size: 20px;
+$h3-font-size: 18px;
+$h4-font-size: 16px;
+$h5-font-size: 14px;
+$h6-font-size: 12px;
+h1,
+.h1 {
+  font-size: $h1-font-size;
+}
+h2,
+.h2 {
+  font-size: $h2-font-size;
+}
+h3,
+.h3 {
+  font-size: $h3-font-size;
+}
+h4,
+.h4 {
+  font-size: $h4-font-size;
+}
+h5,
+.h5 {
+  font-size: $h5-font-size;
+}
+h6,
+.h6 {
+  font-size: $h6-font-size;
+}
 
 //Font weights
-$font-weight-light:                 300;
-$font-weight-regular:               400;
-$font-weight-semibold:              600;
-$font-weight-bold:                  700;
-$font-weight-extrabold:             800;
-$font-weight-bolder:                bolder;
-h1, .h1 { font-weight: $font-weight-semibold; line-height: 30px; }
-h2, .h2 { font-weight: $font-weight-regular; line-height: 28px; }
-h3, .h3 { font-weight: $font-weight-semibold; line-height: 24px; }
-h4, .h4 { font-weight: $font-weight-semibold; line-height: 22px; }
-h5, .h5 { font-weight: $font-weight-regular; line-height: 20px; }
-h6, .h6 { font-weight: $font-weight-regular; line-height: 20px; }
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-bolder: bolder;
+h1,
+.h1 {
+  font-weight: $font-weight-semibold;
+  line-height: 30px;
+}
+h2,
+.h2 {
+  font-weight: $font-weight-regular;
+  line-height: 28px;
+}
+h3,
+.h3 {
+  font-weight: $font-weight-semibold;
+  line-height: 24px;
+}
+h4,
+.h4 {
+  font-weight: $font-weight-semibold;
+  line-height: 22px;
+}
+h5,
+.h5 {
+  font-weight: $font-weight-regular;
+  line-height: 20px;
+}
+h6,
+.h6 {
+  font-weight: $font-weight-regular;
+  line-height: 20px;
+}
 
-.text-size-10 { font-size: 10px !important; }
-.text-size-12 { font-size: 12px !important; }
-.text-size-14 { font-size: 14px !important; }
-.text-size-16 { font-size: 16px !important; }
-.text-size-18 { font-size: 18px !important; }
-.text-size-20 { font-size: 20px !important; }
-.text-size-22 { font-size: 22px !important; }
-.text-size-24 { font-size: 24px !important; }
-.text-size-30 { font-size: 30px !important; }
+.text-size-10 {
+  font-size: 10px !important;
+}
+.text-size-12 {
+  font-size: 12px !important;
+}
+.text-size-14 {
+  font-size: 14px !important;
+}
+.text-size-16 {
+  font-size: 16px !important;
+}
+.text-size-18 {
+  font-size: 18px !important;
+}
+.text-size-20 {
+  font-size: 20px !important;
+}
+.text-size-22 {
+  font-size: 22px !important;
+}
+.text-size-24 {
+  font-size: 24px !important;
+}
+.text-size-30 {
+  font-size: 30px !important;
+}
 .text-size-40 {
   font-size: 40px;
   line-height: 40px;
 }
-.text-size-xl { font-size: 6.5rem !important; }
-.text-size-m { font-size: 3rem !important; }
+.text-size-xl {
+  font-size: 6.5rem !important;
+}
+.text-size-m {
+  font-size: 3rem !important;
+}
+
+.text-semi-bold {
+  font-weight: $font-weight-semibold;
+}
+
+.text-bold {
+  font-weight: $font-weight-extrabold;
+}
+
+.ml-1 {
+  margin-left: 0.25rem !important;
+}
+.ml-2 {
+  margin-left: 0.5rem !important;
+}
+.ml-3 {
+  margin-left: 0.75rem !important;
+}
+.ml-4 {
+  margin-left: 1rem !important;
+}
+.ml-5 {
+  margin-left: 1.25rem !important;
+}
+.ml-6 {
+  margin-left: 1.5rem !important;
+}
+
+.mr-1 {
+  margin-right: 0.25rem !important;
+}
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+.mr-3 {
+  margin-right: 0.75rem !important;
+}
+.mr-4 {
+  margin-right: 1rem !important;
+}
+.mr-5 {
+  margin-right: 1.25rem !important;
+}
+.mr-6 {
+  margin-right: 1.5rem !important;
+}
+.pl-1 {
+  padding-left: 0.25rem !important;
+}
+.pl-2 {
+  padding-left: 0.5rem !important;
+}
+.pl-3 {
+  padding-left: 0.75rem !important;
+}
+.pl-4 {
+  padding-left: 1rem !important;
+}
+.pl-5 {
+  padding-left: 1.25rem !important;
+}
+.pl-6 {
+  padding-left: 1.5rem !important;
+}
+
+.pr-1 {
+  padding-right: 0.25rem !important;
+}
+.pr-2 {
+  padding-right: 0.5rem !important;
+}
+.pr-3 {
+  padding-right: 0.75rem !important;
+}
+.pr-4 {
+  padding-right: 1rem !important;
+}
+.pr-5 {
+  padding-right: 1.25rem !important;
+}
+.pr-6 {
+  padding-right: 1.5rem !important;
+}
+
+.full-width-dialog .mat-dialog-container {
+  max-width: 98vw !important;
+  width: 98vw !important;
+  min-width: 98vw !important;
+  margin-left: 1vw;
+  position: absolute;
+  height: 99vh;
+  left: 0vw;
+}
+
+.half-width-dialog .mat-dialog-container {
+  max-width: 44vw !important;
+  width: 44vw !important;
+  min-width: 44vw !important;
+  margin-left: 1vw;
+}

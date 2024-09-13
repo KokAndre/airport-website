@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppRoutes } from 'src/app/enums/app.enums';
+import { MatDialog } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { ModalDetails } from 'src/app/models/app-modal.model';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import { AppModalComponent } from '../app-modal/app-modal.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -13,16 +18,23 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public displayHeaderAsSolid = false;
   public checkIsAuthInterval: any;
   public isAuthorised = false;
+  public modal$: Subscription;
+  public dialogRefModel: any = null;
 
-  constructor(public router: Router, public loginService: LoginService) { }
+  constructor(public router: Router, public loginService: LoginService, public appModalService: AppModalService, private modalDialog: MatDialog) { }
 
   ngOnInit() {
-    this.initializeIsLoggedInCheck()
+    this.initializeIsLoggedInCheck();
+    this.initializeModal();
   }
 
   ngOnDestroy(): void {
     this.checkIsAuthInterval = null;
     this.loginService.logoutUser();
+
+    if (this.modal$) {
+      this.modal$.unsubscribe();
+    }
   }
 
   public navigateToRoute(newRoute: string) {
@@ -31,8 +43,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   public setHeaderColour(event: any) {
     // console.log('Scroll Event: ', event.srcElement.scrollTop);
-    
-    if(event?.srcElement?.scrollTop > 10) {
+
+    if (event?.srcElement?.scrollTop > 10) {
       this.displayHeaderAsSolid = true;
     } else {
       this.displayHeaderAsSolid = false;
@@ -48,6 +60,54 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   public logout() {
     this.loginService.logoutUser();
+  }
+
+  public getLoggedInUsername() {
+    return this.loginService.getLoggedInUsername();
+  }
+
+  public initializeModal() {
+    this.modal$ = this.appModalService.onEmmitModal.subscribe((modalDetails: ModalDetails) => {
+      if (modalDetails === null) {
+        this.modalDialog.closeAll();
+        return;
+      }
+
+      const retData = modalDetails;
+
+      // Close the current mddal before a new one can be opened
+      this.modalDialog.closeAll();
+      this.dialogRefModel = null;
+
+      switch (modalDetails.type) {
+        case ModalTypes.PDFModal:
+          this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+            data: modalDetails, disableClose: false, height: '99%', width: '100%', panelClass: 'full-width-dialog'
+          });
+          break;
+
+        case ModalTypes.InformationModal:
+          this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+            data: modalDetails, disableClose: false, minWidth: '400px'
+          });
+          break;
+
+        default:
+          this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+            data: modalDetails,
+          });
+          break;
+      }
+
+
+      if (this.dialogRefModel !== null) {
+        this.dialogRefModel.afterClosed().subscribe(result => {
+          modalDetails.callbackMessageResult(result, retData);
+          this.dialogRefModel = null;
+        });
+      }
+      // }
+    });
   }
 
 }

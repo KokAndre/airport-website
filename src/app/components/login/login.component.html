@@ -1,125 +1,174 @@
 <div class="login-screen-header">
   <div class="col-10 mx-auto px-0">
     <div class="col-10 px-0 mx-auto">
-      <p class="mb-0 text-size-22">Account</p>
-      <p class="mb-0">Members / Account</p>
+      <p class="mb-0 account-header-text">Account</p>
+      <p class="mb-0 text-size-14">Members / <span class="child-path-text">Account</span></p>
     </div>
   </div>
 </div>
 
 <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-<div class="login-background">
-  <div class="col-10 px-0 mx-auto login-component-top-spacing">
+<div class="dark-background pb-5">
+  <div class="col-10 px-0 mx-auto">
     <div class="row mx-0">
       <div class="col-6 px-0">
-        <h1 class="text-center mb-0">Login</h1>
-
         <div class="col-10 px-0 mx-auto" [formGroup]="loginFormGroup">
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Email</mat-label>
-              <input style="color: black;" matInput required maxlength="50" formControlName="loginEmailControl">
-              <mat-error *ngIf="loginEmailControl?.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="loginEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
+          <h1 class="text-size-24 mb-2">Login</h1>
+          <div class="login-form-background p-4">
+            <div class="row justify-content-center mx-0">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Email</mat-label>
+                <input style="color: black;" matInput required maxlength="50" formControlName="loginEmailControl">
+                <mat-error *ngIf="loginEmailControl?.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="loginEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
 
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Password</mat-label>
-              <input style="color: black;" [type]="hideNewPin ? 'password' : 'text'" matInput required maxlength="50"
-                formControlName="loginPasswordControl">
-              <button mat-icon-button matSuffix (click)="hideNewPin = !hideNewPin" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideNewPin">
-                <mat-icon class="ml-n2 mb-n4 pt-1">{{hideNewPin ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="loginPasswordControl?.hasError('required')">Email is required</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
+            <div class="row justify-content-center mt-2 mx-0">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Password</mat-label>
+                <input style="color: black;" [type]="hideNewPin ? 'password' : 'text'" matInput required maxlength="50"
+                  formControlName="loginPasswordControl">
+                <button mat-icon-button matSuffix (click)="hideNewPin = !hideNewPin" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideNewPin">
+                  <mat-icon class="ml-n2 mb-n4 pt-1">{{hideNewPin ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginPasswordControl?.hasError('required')">Email is required</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
 
-          <div class="row mx-0 justify-content-center">
-            <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-6"
-              (click)="loginClicked()">Login</button>
+            <div class="row mx-0 justify-content-center">
+              <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-6" appOnEnter
+                [isButtonFocused]="isLoginButtonFocused" (click)="loginClicked()">Login</button>
+            </div>
           </div>
-
         </div>
       </div>
+
+
+
+
       <div class="col-6 px-0">
-        <h1 class="text-center mb-0">Register</h1>
-
         <div class="col-10 px-0 mx-auto" [formGroup]="registerFormGroup">
+          <h1 class="text-size-24 mb-2">Register</h1>
 
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Name</mat-label>
-              <input style="color: black;" matInput required maxlength="50" formControlName="registerNameControl">
-              <mat-error *ngIf="registerNameControl?.hasError('required')">Name is required</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
 
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Surname</mat-label>
-              <input style="color: black;" matInput required maxlength="50" formControlName="registerSurnameControl">
-              <mat-error *ngIf="registerSurnameControl?.hasError('required')">Surname is required</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
+          <div class="register-form-background p-4">
 
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Email</mat-label>
-              <input style="color: black;" matInput required maxlength="100" formControlName="registerEmailControl">
-              <mat-error *ngIf="registerEmailControl?.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="registerEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
-
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Password</mat-label>
-              <input style="color: black;" [type]="hideNewPin ? 'password' : 'text'" matInput required maxlength="50"
-                formControlName="registerPasswordControl">
-              <button mat-icon-button matSuffix (click)="hideNewPin = !hideNewPin" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideNewPin">
-                <mat-icon class="ml-n2 mb-n4 pt-1">{{hideNewPin ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="registerPasswordControl?.hasError('required')">Password is required</mat-error>
-            </mat-form-field>
-            <div *ngIf="showStrength" class="mb-3 mt-n2 text-size-12 px-0">
-              <div class="password-strength-container">
-                <div class="strengthBar" [ngClass]="strengthMeterClass"></div>
-              </div>
-              <span>{{ strengthText }} {{ passwordStrengthText }}</span>
+            <div class="row mx-0 justify-content-center">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Name</mat-label>
+                <input style="color: black;" matInput required maxlength="50" formControlName="registerNameControl">
+                <mat-error *ngIf="registerNameControl?.hasError('required')">Name is required</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
             </div>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
 
-          <div class="row justify-content-center mt-2">
-            <mat-form-field class="col-12 px-0">
-              <mat-label>Confirm Password</mat-label>
-              <input style="color: black;" [type]="hideConfirmPin ? 'password' : 'text'" matInput required
-                maxlength="50" [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl">
-              <button mat-icon-button matSuffix (click)="hideConfirmPin = !hideConfirmPin"
-                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPin">
-                <mat-icon class="ml-n2 mb-n4 pt-1">{{hideConfirmPin ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="registerConfirmPasswordControl?.hasError('required')">Password is required</mat-error>
-              <mat-error *ngIf="registerConfirmPasswordControl?.hasError('noMatch')">Passwords do not match</mat-error>
-            </mat-form-field>
-            <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-          </div>
-          <div class="row mx-0 justify-content-center">
-            <button mat-raised-button [disabled]="registerFormGroup.invalid" class="text-size-20 col-6"
-              (click)="registerClicked()">Register</button>
+            <div class="row mx-0 justify-content-center mt-2">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Surname</mat-label>
+                <input style="color: black;" matInput required maxlength="50" formControlName="registerSurnameControl">
+                <mat-error *ngIf="registerSurnameControl?.hasError('required')">Surname is required</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
+
+            <div class="row mx-0 justify-content-center mt-2">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Email</mat-label>
+                <input style="color: black;" matInput required maxlength="100" formControlName="registerEmailControl">
+                <mat-error *ngIf="registerEmailControl?.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="registerEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
+
+            <div class="row mx-0 justify-content-center mt-2">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Password</mat-label>
+                <input style="color: black;" [type]="hideNewPin ? 'password' : 'text'" matInput required maxlength="50"
+                  formControlName="registerPasswordControl">
+                <button mat-icon-button matSuffix (click)="hideNewPin = !hideNewPin" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hideNewPin">
+                  <mat-icon class="ml-n2 mb-n4 pt-1">{{hideNewPin ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerPasswordControl?.hasError('required')">Password is required</mat-error>
+              </mat-form-field>
+              <div *ngIf="showStrength" class="mb-3 mt-n2 text-size-12 px-0">
+                <div class="password-strength-container">
+                  <div class="strengthBar" [ngClass]="strengthMeterClass"></div>
+                </div>
+                <span>{{ strengthText }} {{ passwordStrengthText }}</span>
+              </div>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
+
+            <div class="row mx-0 justify-content-center mt-2">
+              <mat-form-field class="col-12 px-0">
+                <mat-label>Confirm Password</mat-label>
+                <input style="color: black;" [type]="hideConfirmPin ? 'password' : 'text'" matInput required
+                  maxlength="50" [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl">
+                <button mat-icon-button matSuffix (click)="hideConfirmPin = !hideConfirmPin"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPin">
+                  <mat-icon class="ml-n2 mb-n4 pt-1">{{hideConfirmPin ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerConfirmPasswordControl?.hasError('required')">Password is required</mat-error>
+                <mat-error *ngIf="registerConfirmPasswordControl?.hasError('noMatch')">Passwords do not
+                  match</mat-error>
+              </mat-form-field>
+              <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+            </div>
+            <div class="row mx-0 mx-0 justify-content-center">
+              <button mat-raised-button [disabled]="registerFormGroup.invalid" class="text-size-20 col-6" appOnEnter
+                [isButtonFocused]="isRegisterButtonFocused" (click)="registerClicked()">Register</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-arrow-divider class="mt-5" [isLightToDark]="false"></app-arrow-divider>
+
+<div class="col-10 px-0 mx-auto">
+  <div class="row mx-0 py-2">
+    <div class="col-6 px-0 align-content-center">
+      <!-- <p class="mb-2 text-size-12 red-hyperlink-text">Privacy Policy <span class="color-black">|</span> Terms &
+        Conditions</p> -->
+
+        <p class="mb-0">
+          <a class="text-size-12 red-hyperlink-text no-underline pointer">Privacy Policy</a> | <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayTermsAndConditions()">Terms & Conditions</a>
+        </p>
+
+      <p class="mb-0">
+        <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a>
+      </p>
+
+      <p class="mb-0">
+        <a class="text-size-12 red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">Email: info&#64;tedderfield.co.za</a>
+      </p>
+
+
+    </div>
+    <div class="col-6 px-0 align-content-center">
+      <p class="mb-0 text-end">
+        <a class="text-size-14 red-hyperlink-text no-underline text-semi-bold" target="_blank" href="https://slingaircraft.com/">Sling Aircraft</a>
+      </p>
+
+      <div class="row mx-0 justify-content-end">
+        <a class="facebook-icon-size p-0" target="_blank" href="https://www.facebook.com/groups/1485616671675820/"><div class="facebook-icon"></div></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 
+1 =  082 900 4299 and email = info@tedderfield.co.za
+2 = only facebook and put in a link to Sling Aircraft website 
+https://www.facebook.com/groups/1485616671675820/
+-->

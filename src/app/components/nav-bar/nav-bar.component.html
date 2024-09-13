@@ -1,0 +1,172 @@
+<div class="row mx-0 p-0">
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Welcome)" appIsRouterLinkActive
+      navLinkToCheck="/welcome" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Home</div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <!-- [routerLink]="['/about-us']"  -->
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/about-us" [currentRoute]="currentRoute">
+      <div class="nav-link-text">About Us<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+      </div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ClubHouse)">Club
+          House
+        </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUs)">Follow
+          Us
+        </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldHistory)">
+          Tedderfield History</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)" appIsRouterLinkActive
+      navLinkToCheck="/contact-us" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Contact Us</div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/members" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Members<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+      </div>
+    </div>
+    <div *ngIf="!isAuthorised" class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Register
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isAuthorised" class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">TEST 1
+        </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="logout()">LOGOUT
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/pilot-information" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Pilot Information<mat-icon class="dropdown-icon ml-1"
+          fontIcon="keyboard_arrow_down"></mat-icon></div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MapAndLocation)">
+          Map
+          and Location</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.AirfieldInformation)">
+          Airfield Information</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.JoiningAndLanding)">
+          Joining and Landing</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.LiveWeatherUpdates)">
+          Live Weather Updates </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.OtherAirfields)">
+          Other Airfields</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
+          Reporting Hazards</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
+          Surrounding Airfields
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Projects)" appIsRouterLinkActive
+      navLinkToCheck="/projects" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Projects</div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/merch" [currentRoute]="currentRoute">
+      <div class="nav-link-text">FATA Merch<mat-icon class="dropdown-icon ml-1"
+          fontIcon="keyboard_arrow_down"></mat-icon></div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Classifieds)">
+          Classifieds</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
+          Hangar
+          Renting</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
+          Hangars for Sale</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/training-and-renewals" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Training and Renewals<mat-icon class="dropdown-icon ml-1"
+          fontIcon="keyboard_arrow_down"></mat-icon></div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FAQS)">
+          FAQ's</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Info)">Info</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Instructors)">
+          Instructors</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.NeedHelp)">Need
+          help
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/gallery" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Gallery<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+      </div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Airfield)">
+          Airfield</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Dane)">Dane</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FlyAways)">
+          Fly Aways</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Stories)">Stories
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

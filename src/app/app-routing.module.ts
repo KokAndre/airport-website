@@ -40,6 +40,9 @@ const routes: Routes = [
       },
       {
         path: 'gallery', loadChildren: () => import('./modules/gallery/gallery.module').then(m => m.GalleryModule)
+      },
+      {
+        path: 'members', loadChildren: () => import('./modules/members/members.module').then(m => m.MembersModule)
       }
     ]
   }

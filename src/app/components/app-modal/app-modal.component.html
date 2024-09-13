@@ -1,0 +1,40 @@
+<ng-container [ngSwitch]="data.type">
+  <ng-container *ngSwitchCase="modalTypesEnum.InformationModal" [ngTemplateOutlet]="InformationModal"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.PDFModal" [ngTemplateOutlet]="PDFModal"></ng-container>
+</ng-container>
+
+<ng-template #InformationModal>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon matDialogClose="false" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div *ngIf="data.details" class="row mx-0 p-3">
+    <p class="text-size-18 text-center" [innerHTML]="data.details"></p>
+  </div>
+</ng-template>
+
+<ng-template #PDFModal>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 py-2">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon matDialogClose="false" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div *ngIf="data.details" class="row mx-0">
+    <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="false" [original-size]="true"></pdf-viewer>
+  </div>
+</ng-template>

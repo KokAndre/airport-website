@@ -12,6 +12,7 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 export class LoginService {
+  public loggedInUser: string;
 
   constructor(http: HttpClient) {
   }
@@ -62,9 +63,10 @@ export class LoginService {
 
   public logoutUser() {
     SessionStorageHelper.removeItem(SessionStorageKeys.Token);
+    this.loggedInUser = '';
   }
 
-  public isAuthorised() {
+  public isAuthorised(returnLoggedInUsername?: boolean) {
     const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
     if (!stringToken) {
       return false;
@@ -79,6 +81,9 @@ export class LoginService {
       const tokenExpiryDate = new Date(token.logoutDateTime);
 
       if (currentDate < tokenExpiryDate) {
+        if (returnLoggedInUsername) {
+          return token.name;
+        }
         return true;
       } else {
         this.logoutUser();
@@ -87,6 +92,15 @@ export class LoginService {
     }
   }
 
-
+  public getLoggedInUsername() {
+    if (this.loggedInUser) {
+      return this.loggedInUser;
+    } else if (this.isAuthorised(true)) {
+      this.loggedInUser = this.isAuthorised(true);
+      return this.loggedInUser;
+    } else {
+      return '';
+    }
+  }
 
 }
