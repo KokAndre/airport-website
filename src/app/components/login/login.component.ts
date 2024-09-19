@@ -172,9 +172,9 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl(AppRoutes.Welcome);
   }
 
-  public displayTermsAndConditions() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
-  }
+  // public displayTermsAndConditions() {
+  //   this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
+  // }
 
   public get registerNameControl() {
     return this.registerFormGroup.get('registerNameControl');

@@ -110,4 +110,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
     });
   }
 
+  public displayTermsAndConditions() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
+  }
+
+
 }

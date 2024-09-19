@@ -11,12 +11,12 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ArrowDividerComponent } from './components/arrow-divider/arrow-divider.component';
 import { IsRouterLinkActiveDirective } from './directives/is-router-link-active/is-router-link-active.directive';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { OnEnterDirective } from './directives/on-enter/on-enter.directive';
 import { AppModalComponent } from './components/app-modal/app-modal.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     LoginComponent,
     HomePageComponent,
     RegisterComponent,
-    ArrowDividerComponent,
     IsRouterLinkActiveDirective,
     NavBarComponent,
     OnEnterDirective,
@@ -39,11 +38,12 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    SharedModule
   ],
   exports: [
     MaterialModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

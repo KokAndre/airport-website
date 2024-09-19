@@ -149,6 +149,12 @@
   </div>
 
   <div class="dropdown pointer px-0 mr-2">
+    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.GalleryLanding)" appIsRouterLinkActive
+      navLinkToCheck="/gallery" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Gallery</div>
+    </div>
+  </div>
+  <!-- <div class="dropdown pointer px-0 mr-2">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/gallery" [currentRoute]="currentRoute">
       <div class="nav-link-text">Gallery<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
       </div>
@@ -168,5 +174,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

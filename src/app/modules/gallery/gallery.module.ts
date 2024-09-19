@@ -5,6 +5,8 @@ import { DaneComponent } from './components/dane/dane.component';
 import { FlyAwaysComponent } from './components/fly-aways/fly-aways.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { GalleryRoutingModule } from './gallery-routing.module';
+import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,11 +15,15 @@ import { GalleryRoutingModule } from './gallery-routing.module';
     AirfieldComponent,
     DaneComponent,
     FlyAwaysComponent,
-    StoriesComponent
+    StoriesComponent,
+    GalleryLandingComponent,
   ],
   imports: [
     CommonModule,
-    GalleryRoutingModule
-  ]
+    GalleryRoutingModule,
+    SharedModule
+]
 })
 export class GalleryModule { }
+
+

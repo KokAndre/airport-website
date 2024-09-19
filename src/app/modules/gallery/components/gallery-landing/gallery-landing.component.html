@@ -1,0 +1,24 @@
+<div class="gallery-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Gallery</p>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngFor="let section of galleryData; let last = last; let index = index"
+  [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-30 mb-0 pt-3" [innerHTML]="section.title"></p>
+    <p [innerHTML]="section.description"></p>
+
+    <div class="row mx-n2">
+      <div class="col-3 p-2" *ngFor="let img of section.images">
+        <img [src]="img.imagePath" [alt]="img.imageName" width="350" height="350" />
+      </div>
+    </div>
+  </div>
+
+  <app-arrow-divider *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+
+</div>
