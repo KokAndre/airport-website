@@ -20,23 +20,23 @@ export class IsRouterLinkActiveDirective implements AfterViewInit, OnChanges {
   }
 
   public checkIfLinkIsActive() {
-    console.log('IN DIRECTIVE: ');
+    // console.log('IN DIRECTIVE: ');
     // console.log('WINDOW LOCATION: ', window.location.pathname);
     // console.log('ROUTER URL: ', this.router.url);
 
     const linkToCheck = this.router.url ? this.router.url : window.location.pathname;
 
-    console.log('LINK TO CHECK: ', linkToCheck);
+    // console.log('LINK TO CHECK: ', linkToCheck);
 
-    console.log('navLinkToCheck: ', this.navLinkToCheck);
+    // console.log('navLinkToCheck: ', this.navLinkToCheck);
 
-    console.log('ELEMENT: ', this.el.nativeElement);
+    // console.log('ELEMENT: ', this.el.nativeElement);
 
     if (linkToCheck.includes(this.navLinkToCheck)) {
-      console.log('ADD!!!!');
+      // console.log('ADD!!!!');
       this.renderer.addClass(this.el.nativeElement, 'nav-link-active');
     } else {
-      console.log('REMOVE!!!!!!');
+      // console.log('REMOVE!!!!!!');
       this.renderer.removeClass(this.el.nativeElement, 'nav-link-active');
     }
   }

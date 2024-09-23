@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AppRoutes } from 'src/app/enums/app.enums';
+import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class NavBarComponent implements OnInit {
   
   @Input() public isAuthorised = false;
 
-  constructor(public router: Router, public loginService: LoginService) {
+  constructor(public router: Router, public loginService: LoginService, public appModalService: AppModalService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.urlAfterRedirects;
@@ -32,6 +33,14 @@ export class NavBarComponent implements OnInit {
 
   public logout() {
     this.loginService.logoutUser();
+  }
+
+  public displayRunwayInfoDocument() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', 'assets/documents/FATA-Runway-Information-FATA.pdf', null);
+  }
+
+  public displayEmergencyContactsDocument() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', 'assets/documents/FATA-Emergency-Contacts-FATA.pdf', null);
   }
 
 }

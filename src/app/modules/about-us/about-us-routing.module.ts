@@ -3,6 +3,7 @@ import { ClubHouseComponent } from './components/club-house/club-house.component
 import { FollowUsComponent } from './components/follow-us/follow-us.component';
 import { TedderfieldHistoryComponent } from './components/tedderfield-history/tedderfield-history.component';
 import { NgModule } from '@angular/core';
+import { LiveWeatherComponent } from './components/live-weather/live-weather.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'tedderfield-history', component: TedderfieldHistoryComponent
+  },
+  {
+    path: 'live-weather', component: LiveWeatherComponent
   },
 ];
 

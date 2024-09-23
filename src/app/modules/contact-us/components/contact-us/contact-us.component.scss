@@ -1,0 +1,97 @@
+.contact-us-header {
+    padding-top: 115px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+.dark-background {
+    background-color: #f5f5f5;
+    // width: 100%;
+}
+
+.heading-underline {
+    width: 70px;
+    height: 3px;
+    background-color: #ee202e;
+}
+
+.contact-us-map {
+    background-image: url("../../../../../assets/contact-us-map.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.map-overlay-container {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    z-index: 2;
+    position: absolute;
+    top: calc((100% - 200px) / 2);
+    left: calc((100% - 400px) / 2);
+    align-content: center;
+}
+
+.social-media-container {
+    height: 60px;
+    width: 60px;
+    border-radius: 3px;
+    background-color: black;
+    padding: 0px;
+    align-content: center;
+    // text-align: center;
+    // vertical-align: middle;
+    transition-duration: 300ms;
+
+    &:hover {
+        background-color: #ee202e !important;
+    }
+}
+
+.facebook-icon {
+    background-image: url("../../../../../assets/facebook-icon.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+}
+
+// .red-button {
+//     background-color: #ee202e;
+//     width: fit-content;
+//     padding: 10px 12px;
+//     line-height: 1.25 !important;
+//     transition-duration: 300ms;
+//     cursor: pointer;
+//     flex-direction: row;
+//     display: flex;
+
+//     &:hover {
+//         background-color: #cd2122 !important;
+//     }
+
+//     p {
+//         color: white !important;
+//         font-size: 14px;
+//     }
+    
+// }
+
+// .red-button-icon {
+//     background-image: url("../../../../../assets/button-arrow-light.svg");
+//     background-size: cover;
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     width: 20px;
+//     height: 14px;
+//     display: block;
+//     margin-left: 5px;
+// }
+
+.google-maps-area {
+    height: 100%;
+    width: 100%;
+}

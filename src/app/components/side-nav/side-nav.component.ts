@@ -114,5 +114,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
   }
 
+  public navigateToLiveWeather() {
+    this.router.navigateByUrl(AppRoutes.LiveWeather);
+  }
 
 }

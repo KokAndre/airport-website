@@ -15,6 +15,7 @@ export enum AppRoutes {
     ClubHouse = '/about-us/club-house',
     FollowUs = '/about-us/follow-us',
     TedderfieldHistory = '/about-us/tedderfield-history',
+    LiveWeather = '/about-us/live-weather',
     MapAndLocation = '/pilot-information/map-and-location',
     AirfieldInformation = '/pilot-information/airfield-information',
     JoiningAndLanding = '/pilot-information/joining-and-landing',
@@ -32,6 +33,7 @@ export enum Endpoints {
     BaseURL = 'https://ppldevelopment.co.za/teddefield-airfield/members', // TODO: Implement correct endpoints
     Register = '/register.php',
     Login = '/login.php',
+    SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php'
 }
 
 export enum EncryptionKeys {

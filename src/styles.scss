@@ -153,6 +153,9 @@ h6,
 .text-size-24 {
   font-size: 24px !important;
 }
+.text-size-26 {
+  font-size: 26px !important;
+}
 .text-size-30 {
   font-size: 30px !important;
 }
@@ -277,8 +280,44 @@ h6,
 
 .section-header-text {
   font-family: "Roboto Condensed", Helvetica, Arial, sans-serif !important;
-  font-size: 42px !important;
+  font-size: 35px !important;
   line-height: 1.2 !important;
   font-weight: 400 !important;
   font-style: normal !important;
+}
+
+.color-black {
+  color: black !important;
+}
+
+.red-button {
+  background-color: #ee202e;
+  width: fit-content;
+  padding: 10px 12px;
+  line-height: 1.25 !important;
+  transition-duration: 300ms;
+  cursor: pointer;
+  flex-direction: row;
+  display: flex;
+
+  &:hover {
+      background-color: #cd2122 !important;
+  }
+
+  p {
+      color: white !important;
+      font-size: 14px;
+  }
+  
+}
+
+.red-button-icon {
+  background-image: url("assets/button-arrow-light.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 14px;
+  display: block;
+  margin-left: 5px;
 }

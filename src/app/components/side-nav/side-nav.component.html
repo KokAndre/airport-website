@@ -1,63 +1,78 @@
 <!-- Header -->
 <div class="main-container">
-    <div class="col-12 px-0">
-        <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
-            <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Welcome)">
-                <div class="logo-image"></div>
-            </div>
-            <div class="col-9 px-0 center-align-vertical">
-                <app-nav-bar [isAuthorised]="isAuthorised"></app-nav-bar>
-            </div>
-            <div class="col-1 center-align-vertical">
-                <p class="mb-0 text-size-24 text-end" *ngIf="isAuthorised">Welcome<span class="text-bold ml-2">{{ getLoggedInUsername() }}</span></p>
-            </div>
-        </div>
+  <div class="col-12 px-0">
+    <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
+      <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Welcome)">
+        <div class="logo-image"></div>
+      </div>
+      <div class="col-9 px-0 center-align-vertical">
+        <app-nav-bar [isAuthorised]="isAuthorised"></app-nav-bar>
+      </div>
+      <div class="col-1 center-align-vertical">
+        <p class="mb-0 text-size-24 text-end" *ngIf="isAuthorised">Welcome<span class="text-bold ml-2">{{
+            getLoggedInUsername() }}</span></p>
+      </div>
     </div>
+  </div>
 
 
-    <!-- <div class="header-bottom-border"></div> -->
-    <!-- End of Header -->
+  <!-- <div class="header-bottom-border"></div> -->
+  <!-- End of Header -->
 
-    <!-- Body -->
-    <div class="content-container" id="content-container" (scroll)="setHeaderColour($event)">
-        <router-outlet></router-outlet>
-    </div>
-    <!-- End of Body -->
+  <!-- Body -->
+  <div class="content-container" id="content-container" (scroll)="setHeaderColour($event)">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- End of Body -->
 
-    <!-- Footer -->
-    <div class="footer-container align-content-center">
-        <div class="col-10 px-0 mx-auto">
-            <div class="row mx-0 py-2">
-              <div class="col-6 px-0 align-content-center">
-                <!-- <p class="mb-2 text-size-12 red-hyperlink-text">Privacy Policy <span class="color-black">|</span> Terms &
+  <!-- Footer -->
+  <div class="footer-container align-content-center">
+    <div class="col-10 px-0 mx-auto">
+      <div class="row mx-0 py-2">
+        <div class="col-6 px-0 align-content-center">
+          <!-- <p class="mb-2 text-size-12 red-hyperlink-text">Privacy Policy <span class="color-black">|</span> Terms &
                   Conditions</p> -->
-          
-                  <p class="mb-0">
-                    <a class="text-size-12 red-hyperlink-text no-underline pointer">Privacy Policy</a> | <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayTermsAndConditions()">Terms & Conditions</a>
-                  </p>
-          
-                <p class="mb-0">
-                  <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a>
-                </p>
-          
-                <p class="mb-0">
-                  <a class="text-size-12 red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">Email: info&#64;tedderfield.co.za</a>
-                </p>
-          
-          
-              </div>
-              <div class="col-6 px-0 align-content-center">
-                <p class="mb-0 text-end">
-                  <a class="text-size-14 red-hyperlink-text no-underline text-semi-bold" target="_blank" href="https://slingaircraft.com/">Sling Aircraft</a>
-                </p>
-          
-                <div class="row mx-0 justify-content-end">
-                  <a class="facebook-icon-size p-0" target="_blank" href="https://www.facebook.com/groups/1485616671675820/"><div class="facebook-icon"></div></a>
-                </div>
-          
-              </div>
+
+          <p class="mb-0">
+            <a class="text-size-12 red-hyperlink-text no-underline pointer">Privacy Policy</a> | <a
+              class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayTermsAndConditions()">Terms &
+              Conditions</a>
+          </p>
+
+          <p class="mb-0">
+            <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a>
+          </p>
+
+          <p class="mb-0">
+            <a class="text-size-12 red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">Email:
+              info&#64;tedderfield.co.za</a>
+          </p>
+
+
+        </div>
+        <div class="col-5 p-0 align-content-center">
+          <div class="row mx-0 justify-content-end">
+            <div class="red-button" (click)="navigateToLiveWeather()">
+              <p class="mb-0">LIVE WX</p>
+              <span class="red-button-icon"></span>
             </div>
           </div>
+        </div>
+        <div class="col-1 px-0 align-content-center">
+          <p class="mb-0 text-end">
+            <a class="text-size-14 red-hyperlink-text no-underline text-semi-bold" target="_blank"
+              href="https://slingaircraft.com/">Sling Aircraft</a>
+          </p>
+
+          <div class="row mx-0 justify-content-end">
+            <a class="facebook-icon-size p-0" target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
+              <div class="facebook-icon"></div>
+            </a>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <!-- End of Footer -->
+  </div>
+  <!-- End of Footer -->
 </div>

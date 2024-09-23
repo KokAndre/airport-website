@@ -1,0 +1,272 @@
+.fade {
+    opacity: 1
+}
+
+.weather-wrapper {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center
+}
+
+@media (max-width:1300px) {
+    .weather-wrapper {
+        width: 100%;
+        height: 100%;
+        flex-direction: column
+    }
+}
+
+.weather,
+.cams {
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 70px -10px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 70px -10px rgb(0 0 0 / 20%);
+    background-color: #222831;
+    color: #fff;
+    width: 50%;
+    margin: 1px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center
+}
+
+@media (max-width:1300px) {
+
+    .weather,
+    .cams {
+        width: 100%;
+        max-width: 768px;
+        margin: 0 auto
+    }
+
+    .weather {
+        margin-bottom: 10px
+    }
+}
+
+@media (max-width:575px) {
+
+    .weather,
+    .cams {
+        width: 100%
+    }
+
+    .weather {
+        flex-direction: column
+    }
+}
+
+.weather-side {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 3px;
+    background-image: url(https://www.slingaircraft.com/live-cam/images/sling-widget-side-image.jpg);
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: cover;
+    width: 45%;
+    -webkit-box-shadow: 0 0 20px -10px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 20px -10px rgb(0 0 0 / 20%);
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap
+}
+
+.weather-gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(135deg, #ee202e 10%, #790002 100%);
+    border-radius: 3px;
+    opacity: .75;
+    z-index: 0
+}
+
+.date-container {
+    padding: 25px;
+    z-index: 10
+}
+
+.sling-logo {
+    display: block;
+    width: 115px;
+    margin-bottom: 10px
+}
+
+.date-datename {
+    margin: 0;
+    margin-left: 17px
+}
+
+.date-datetime {
+    display: block;
+    margin-left: 17px;
+    margin-bottom: 5px
+}
+
+.date-update {
+    font-size: 11px;
+    font-style: italic;
+    margin-left: 17px
+}
+
+.location-icon {
+    display: inline-block;
+    height: 12px;
+    width: auto;
+    margin-right: 2px
+}
+
+.location {
+    display: inline-block;
+    margin-top: 10px
+}
+
+.weather-container {
+    padding: 25px;
+    z-index: 10
+}
+
+.weather-icon {
+    display: inline-block;
+    height: 60px;
+    width: auto
+}
+
+.weather-temp {
+    margin: 0;
+    font-weight: 700;
+    font-size: 4em
+}
+
+.weather-desc {
+    display: inline-block;
+    margin: 0;
+    text-transform: capitalize
+}
+
+.info-side {
+    position: relative;
+    width: 55%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center
+}
+
+@media (max-width:575px) {
+    .weather-side {
+        width: 100%
+    }
+
+    .info-side {
+        width: 100%
+    }
+}
+
+.today-info {
+    padding: 25px
+}
+
+.today-info>div:not(:last-child) {
+    margin: 0 0 8px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(255 255 255 / 20%)
+}
+
+.today-info>div .title {
+    display: inline-block;
+    font-weight: 700;
+    width: calc(100% - 100px)
+}
+
+.today-info>div .title small {
+    display: none
+}
+
+.today-info>div .value {
+    display: inline-block;
+    width: 95px;
+    text-align: right
+}
+
+.cam-viewer {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 25px
+}
+
+ul#tabs-nav {
+    list-style: none;
+    margin: 0 0 1px 0;
+    padding: 0;
+    overflow: auto
+}
+
+ul#tabs-nav li {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 2px;
+    padding: 5px 10px;
+    border-radius: 1px;
+    cursor: pointer
+}
+
+ul#tabs-nav li:hover,
+ul#tabs-nav li.active {
+    background-color: #ee202e
+}
+
+#tabs-nav li a {
+    text-decoration: none;
+    color: #fff
+}
+
+.tab-content {
+    line-height: 0;
+    padding: 0;
+    background-color: #FFF
+}
+
+.tab-content img {
+    width: 100%;
+    height: auto
+}
+
+.widget-status {
+    padding: 10px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center
+}
+
+.widget-info {
+    padding: 10px;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center
+}
