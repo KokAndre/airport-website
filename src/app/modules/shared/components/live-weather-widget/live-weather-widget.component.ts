@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AboutUsService } from 'src/app/modules/about-us/services/about-us.service';
 
 @Component({
@@ -6,11 +6,16 @@ import { AboutUsService } from 'src/app/modules/about-us/services/about-us.servi
   templateUrl: './live-weather-widget.component.html',
   styleUrls: ['./live-weather-widget.component.scss']
 })
-export class LiveWeatherWidgetComponent implements OnInit {
+export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
   public weatherblock = "";
   public camblock = "";
+  public timeoutId: any;
 
   constructor(public aboutUsService: AboutUsService) { }
+
+  ngOnDestroy(): void {
+    clearInterval(this.timeoutId);
+  }
 
   ngOnInit() {
     console.log('LIVE WEATHER WIDGET!!!!!!!!!');
@@ -20,7 +25,7 @@ export class LiveWeatherWidgetComponent implements OnInit {
     var secdelay = 10000;
     var sec = Math.floor(DateObj.getSeconds() * 1000) + DateObj.getMilliseconds();
     var secdiff = Math.floor((60000 - sec) + secdelay);
-    var interval, timeoutId;
+    // var interval, timeoutId;
     // timeoutId = setTimeout( () => {
     //   this.getFeed();
     //   interval = setInterval(this.getFeed, 60000);
@@ -28,10 +33,13 @@ export class LiveWeatherWidgetComponent implements OnInit {
     // }, secdiff);
 
 
-    this.getFeed();
-    timeoutId = setInterval(() => {
+    // setTimeout(() => {
       this.getFeed();
-    }, 60000);
+      this.timeoutId = setInterval(() => {
+        this.getFeed();
+      }, 60000);
+    // }, secdiff);
+
 
 
     $('#tabs-nav li:first-child').addClass('active');

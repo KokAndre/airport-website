@@ -45,7 +45,9 @@ import { SharedModule } from './modules/shared/shared.module';
     MaterialModule,
     PdfViewerModule,
   ],
-  providers: [],
+  providers: [
+    {provide: 'googleTagManagerId', useValue: 'G-25PYHR38DD'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

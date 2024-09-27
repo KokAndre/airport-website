@@ -7,6 +7,8 @@ import { ModalDetails } from 'src/app/models/app-modal.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { AppModalComponent } from '../app-modal/app-modal.component';
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,11 +23,29 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public modal$: Subscription;
   public dialogRefModel: any = null;
 
-  constructor(public router: Router, public loginService: LoginService, public appModalService: AppModalService, private modalDialog: MatDialog) { }
+  constructor(public router: Router,
+    public loginService: LoginService,
+    public appModalService: AppModalService,
+    private modalDialog: MatDialog,
+    private gtmService: GoogleTagManagerService) { }
 
   ngOnInit() {
     this.initializeIsLoggedInCheck();
     this.initializeModal();
+
+    this.router.events.forEach(item => {
+      if (item instanceof NavigationEnd) {
+        const gtmTag = {
+          event: 'navigate',
+          isLoggedIn: this.isAuthorised,
+          name: this.isAuthorised ? this.loginService.isAuthorised(true) : '',
+          url: item.url,
+          dateTime: moment(new Date()).format('YYYY-MM-DD - HH:mm:ss:SSS')
+        };
+        console.log('GTM TAG', gtmTag);
+        this.gtmService.pushTag(gtmTag);
+      }
+    });
   }
 
   ngOnDestroy(): void {
