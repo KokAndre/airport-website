@@ -66,6 +66,9 @@ MIT
 @angular/router
 MIT
 
+angular-google-tag-manager
+MIT
+
 bootstrap
 MIT
 The MIT License (MIT)
