@@ -7,6 +7,7 @@ import { StoriesComponent } from './components/stories/stories.component';
 import { GalleryRoutingModule } from './gallery-routing.module';
 import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
 import { SharedModule } from '../shared/shared.module';
+import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
 
 
 
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     FlyAwaysComponent,
     StoriesComponent,
     GalleryLandingComponent,
+    GalleryAdminPageComponent
   ],
   imports: [
     CommonModule,

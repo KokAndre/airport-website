@@ -1,7 +1,8 @@
 <!-- Header -->
 <div class="main-container">
-  <div class="col-12 px-0">
-    <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
+  <!-- <div class="col-12 px-0"> -->
+    <div class="heaader-container">
+      <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
       <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Welcome)">
         <div class="logo-image"></div>
       </div>
@@ -13,7 +14,9 @@
             getLoggedInUsername() }}</span></p>
       </div>
     </div>
-  </div>
+    </div>
+    
+  <!-- </div> -->
 
 
   <!-- <div class="header-bottom-border"></div> -->

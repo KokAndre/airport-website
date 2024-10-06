@@ -88,7 +88,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   public initializeModal() {
     this.modal$ = this.appModalService.onEmmitModal.subscribe((modalDetails: ModalDetails) => {
-      if (modalDetails === null) {
+      console.log('MODAL DETAILS IN SIDE NAV SUBSCRIPTION: ', modalDetails);
+      if (!modalDetails) {
         this.modalDialog.closeAll();
         return;
       }
@@ -107,10 +108,18 @@ export class SideNavComponent implements OnInit, OnDestroy {
           break;
 
         case ModalTypes.InformationModal:
+        case ModalTypes.ConfirmationModal:
+        case ModalTypes.CaptureGallerySectionTitle:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: false, minWidth: '400px'
           });
           break;
+
+        // case ModalTypes.ConfirmationModal:
+        //   this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+        //     data: modalDetails, disableClose: false, minWidth: '400px'
+        //   });
+        //   break;
 
         default:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {

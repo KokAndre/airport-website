@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/enums/app.enums';
 
 @Component({
   selector: 'app-gallery-landing',
@@ -7,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryLandingComponent implements OnInit {
 
+
+  // TODO: Remove the below test data and get from DB
+  public isLoggedInUserAdmin = true;
   public galleryData = [
     {
+      sectionId: 1,
       title: 'Section - Peter',
       description: 'This is the description for section - Peter',
       isDarkSection: false,
@@ -56,6 +62,7 @@ export class GalleryLandingComponent implements OnInit {
       ]
     },
     {
+      sectionId: 2,
       title: 'Section - Stewie',
       description: 'This is the description for section - Stewie',
       isDarkSection: false,
@@ -88,6 +95,7 @@ export class GalleryLandingComponent implements OnInit {
       ]
     },
     {
+      sectionId: 3,
       title: 'Section - Chris',
       description: 'This is the description for section - Chris',
       isDarkSection: false,
@@ -126,20 +134,13 @@ export class GalleryLandingComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
-    // this.setSectionThemes();
   }
 
-  // public setSectionThemes() {
-  //   let sectionIndex = 1;
-  //   this.galleryData.forEach(x => {
-  //     x.isDarkSection = (sectionIndex & 1) ? true : false;
-  //     ++sectionIndex;
-  //   });
-
-  //   console.log('GALLERY DATA: ', this.galleryData);
-  // }
+  public navigateToEditGalleryPage() {
+    this.router.navigateByUrl(AppRoutes.GalleryAdmin);
+  }
 
 }

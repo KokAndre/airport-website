@@ -8,6 +8,7 @@ export enum AppRoutes {
     // FlyAways = '/gallery/fly-aways',
     // Stories = '/gallery/stories',
     GalleryLanding='/gallery',
+    GalleryAdmin='/gallery/admin',
     FAQS = '/training-and-renewals/faqs',
     Info = '/training-and-renewals/info',
     Instructors = '/training-and-renewals/instructors',
@@ -47,5 +48,14 @@ export enum SessionStorageKeys {
 
 export enum ModalTypes {
     InformationModal = 'informationModal',
-    PDFModal = 'pdfModal'
+    PDFModal = 'pdfModal',
+    ConfirmationModal = 'confirmationModal',
+    CaptureGallerySectionTitle = 'captureGallerySectionTitle'
+}
+
+export enum ModalOutcomeOptions {
+    Close = 'close',
+    Cancel = 'cancel',
+    Confirm = 'confirm',
+    Update = 'update'
 }

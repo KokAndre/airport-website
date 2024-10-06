@@ -1,6 +1,8 @@
-<ng-container [ngSwitch]="data.type">
+<ng-container [ngSwitch]="data.type" *ngIf="!isLoading">
   <ng-container *ngSwitchCase="modalTypesEnum.InformationModal" [ngTemplateOutlet]="InformationModal"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.PDFModal" [ngTemplateOutlet]="PDFModal"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.ConfirmationModal" [ngTemplateOutlet]="ConfirmationModal"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CaptureGallerySectionTitle" [ngTemplateOutlet]="CaptureGallerySectionTitle"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -10,7 +12,7 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon matDialogClose="false" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
@@ -28,7 +30,7 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon matDialogClose="false" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
@@ -36,5 +38,79 @@
 
   <div *ngIf="data.details" class="row mx-0">
     <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="false" [original-size]="true"></pdf-viewer>
+  </div>
+</ng-template>
+
+<ng-template #ConfirmationModal>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div *ngIf="data.details" class="row mx-0 p-3">
+    <p class="text-size-18 text-center mb-0" [innerHTML]="data.details"></p>
+  </div>
+
+  <div class="row mx-0 my-4 justify-content-center">
+    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+      <p class="mb-0">Cancel</p>
+      <span class="white-button-icon"></span>
+    </div>
+
+    <div class="red-button ml-3" [matDialogClose]="modalOutcomeOptions.Confirm">
+      <p class="mb-0">Confirm</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #CaptureGallerySectionTitle>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div class="row mx-3 justify-content-center mt-2">
+    <mat-form-field class="col-12 px-0">
+      <mat-label>Heading</mat-label>
+      <input style="color: black;" matInput required maxlength="100" [(ngModel)]="gallerySectionToEditData.title">
+      <mat-error *ngIf="!gallerySectionToEditData.title">Section heading is required</mat-error>
+    </mat-form-field>
+    <p class="custom-mat-hint">{{ gallerySectionToEditData.title ? gallerySectionToEditData.title.length : 0}}/100</p>
+  </div>
+
+  <div class="row mx-3 justify-content-center mt-2">
+    <mat-form-field class="col-12 px-0">
+      <mat-label>Description</mat-label>
+      <input style="color: black;" matInput maxlength="2000" [(ngModel)]="gallerySectionToEditData.description">
+      <!-- <mat-error *ngIf="!gallerySectionToEditData.description">Section description is required</mat-error> -->
+    </mat-form-field>
+    <p class="custom-mat-hint">{{ gallerySectionToEditData.description ? gallerySectionToEditData.description.length : 0}}/2000</p>
+  </div>
+
+  <div class="row mx-0 my-4 justify-content-center">
+    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+      <p class="mb-0">Cancel</p>
+      <span class="white-button-icon"></span>
+    </div>
+
+    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !gallerySectionToEditData.title}" (click)="confirmGallerySectionChanges()">
+      <p class="mb-0">Confirm</p>
+      <span class="red-button-icon"></span>
+    </div>
   </div>
 </ng-template>

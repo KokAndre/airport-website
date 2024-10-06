@@ -5,10 +5,15 @@ import { DaneComponent } from './components/dane/dane.component';
 import { FlyAwaysComponent } from './components/fly-aways/fly-aways.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
+import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
 
 const routes: Routes = [
   {
     path: '', component: GalleryLandingComponent
+  },
+  {
+    // TODO: Add route guard so only logged in admin can see this page!!
+    path: 'admin', component: GalleryAdminPageComponent
   }
   // {
   //   path: 'airfield', component: AirfieldComponent
