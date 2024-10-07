@@ -40,7 +40,7 @@ export class NavBarComponent implements OnInit {
   }
 
   public displayEmergencyContactsDocument() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', 'assets/documents/FATA-Emergency-Contacts-FATA.pdf', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20240419-FATAEmergencyContacts-FATA-011.pdf', null);
   }
 
 }

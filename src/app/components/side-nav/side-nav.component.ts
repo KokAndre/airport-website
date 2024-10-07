@@ -103,7 +103,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       switch (modalDetails.type) {
         case ModalTypes.PDFModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, height: '99%', width: '100%', panelClass: 'full-width-dialog'
+            data: modalDetails, disableClose: false, height: '90%', width: '100%', panelClass: 'full-width-dialog'
           });
           break;
 

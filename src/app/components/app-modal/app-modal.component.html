@@ -36,7 +36,7 @@
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
   </div>
 
-  <div *ngIf="data.details" class="row mx-0">
+  <div *ngIf="data.details">
     <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="false" [original-size]="true"></pdf-viewer>
   </div>
 </ng-template>

@@ -31,7 +31,8 @@ export enum AppRoutes {
 }
 
 export enum Endpoints {
-    BaseURL = 'https://ppldevelopment.co.za/teddefield-airfield/members', // TODO: Implement correct endpoints
+    // BaseURL = 'https://ppldevelopment.co.za/teddefield-airfield/members', // TODO: Implement correct endpoints
+    BaseURL = 'http://localhost/teddefield-airfield/members',
     Register = '/register.php',
     Login = '/login.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php'
