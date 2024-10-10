@@ -1,5 +1,5 @@
 export enum AppRoutes {
-    Welcome = '/welcome',
+    Home = '/home',
     ContactUs = '/contact-us',
     Login = '/login',
     Register = '/register',
@@ -17,6 +17,8 @@ export enum AppRoutes {
     FollowUs = '/about-us/follow-us',
     TedderfieldHistory = '/about-us/tedderfield-history',
     LiveWeather = '/about-us/live-weather',
+    MissionStatement = '/about-us/mission-statement',
+    VisionStatement = '/about-us/vision-statement',
     MapAndLocation = '/pilot-information/map-and-location',
     AirfieldInformation = '/pilot-information/airfield-information',
     JoiningAndLanding = '/pilot-information/joining-and-landing',
@@ -28,13 +30,19 @@ export enum AppRoutes {
     Classifieds = '/merch/classifieds',
     HangarRenting = '/merch/hangar-renting',
     HangarsForSale = '/merch/hangars-for-sale',
+
+    MembersWelcome = '/members/welcome',
+
+
+    PropertyForSaleBase = '/property-for-sale/'
 }
 
 export enum Endpoints {
-    // BaseURL = 'https://ppldevelopment.co.za/teddefield-airfield/members', // TODO: Implement correct endpoints
-    BaseURL = 'http://localhost/teddefield-airfield/members',
-    Register = '/register.php',
-    Login = '/login.php',
+    BaseURL = 'https://tedderfield.co.za/welcome',
+    // BaseURL = 'http://localhost/teddefield-airfield',
+    Register = '/members/register.php',
+    Login = '/members/login.php',
+    CheckWhitelisting = '/members/whitelisitng.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php'
 }
 

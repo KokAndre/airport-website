@@ -1,12 +1,12 @@
 <div class="row mx-0 p-0">
-  <div class="dropdown pointer px-0 mr-2">
-    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Welcome)" appIsRouterLinkActive
-      navLinkToCheck="/welcome" [currentRoute]="currentRoute">
+  <div class="dropdown pointer px-0">
+    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Home)" appIsRouterLinkActive
+      navLinkToCheck="/home" [currentRoute]="currentRoute">
       <div class="nav-link-text">Home</div>
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <!-- [routerLink]="['/about-us']"  -->
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/about-us" [currentRoute]="currentRoute">
       <div class="nav-link-text">About Us<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
@@ -27,20 +27,28 @@
           Tedderfield History</div>
 
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="displayEmergencyContactsDocument()">
+        <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.EmergencyContacts)">
           Emergency Contacts</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MissionStatement)">
+          Mission Statement</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.VisionStatement)">
+          Vision Statement</div>
       </div>
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)" appIsRouterLinkActive
       navLinkToCheck="/contact-us" [currentRoute]="currentRoute">
       <div class="nav-link-text">Contact Us</div>
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/members" [currentRoute]="currentRoute">
       <div class="nav-link-text">Members<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
       </div>
@@ -48,10 +56,13 @@
     <div *ngIf="!isAuthorised" class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
+
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersWelcome)">Welcome</div>
+
+        <!-- <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Register
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -67,7 +78,7 @@
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/pilot-information" [currentRoute]="currentRoute">
       <div class="nav-link-text">Pilot Information<mat-icon class="dropdown-icon ml-1"
           fontIcon="keyboard_arrow_down"></mat-icon></div>
@@ -98,21 +109,21 @@
           Surrounding Airfields
         </div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="displayRunwayInfoDocument()">
+        <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.RunwayInfo)">
           Runway Info
         </div>
       </div>
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <!-- <div class="dropdown pointer px-0">
     <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Projects)" appIsRouterLinkActive
       navLinkToCheck="/projects" [currentRoute]="currentRoute">
       <div class="nav-link-text">Projects</div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/merch" [currentRoute]="currentRoute">
       <div class="nav-link-text">FATA Merch<mat-icon class="dropdown-icon ml-1"
           fontIcon="keyboard_arrow_down"></mat-icon></div>
@@ -133,7 +144,7 @@
     </div>
   </div>
 
-  <div class="dropdown pointer px-0 mr-2">
+  <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/training-and-renewals" [currentRoute]="currentRoute">
       <div class="nav-link-text">Training and Renewals<mat-icon class="dropdown-icon ml-1"
           fontIcon="keyboard_arrow_down"></mat-icon></div>
@@ -162,25 +173,29 @@
       <div class="nav-link-text">Gallery</div>
     </div>
   </div>
-  <!-- <div class="dropdown pointer px-0 mr-2">
-    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/gallery" [currentRoute]="currentRoute">
-      <div class="nav-link-text">Gallery<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
-      </div>
+
+  <div class="dropdown pointer px-0">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Property for Sale<mat-icon class="dropdown-icon ml-1"
+          fontIcon="keyboard_arrow_down"></mat-icon></div>
     </div>
     <div class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Airfield)">
-          Airfield</div>
+        <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.SalesBrochure)">
+          Tedderfield Sales Brochure</div>
+
+
+        <!-- <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Info)">Info</div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Dane)">Dane</div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Instructors)">
+          Instructors</div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FlyAways)">
-          Fly Aways</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Stories)">Stories
-        </div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.NeedHelp)">Need
+          help
+        </div> -->
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

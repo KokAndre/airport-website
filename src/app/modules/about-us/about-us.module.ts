@@ -6,6 +6,8 @@ import { TedderfieldHistoryComponent } from './components/tedderfield-history/te
 import { AboutUsRoutingModule } from './about-us-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LiveWeatherComponent } from './components/live-weather/live-weather.component';
+import { MissionStatementComponent } from './components/mission-statement/mission-statement.component';
+import { VisionStatementComponent } from './components/vision-statement/vision-statement.component';
 
 
 
@@ -14,7 +16,9 @@ import { LiveWeatherComponent } from './components/live-weather/live-weather.com
     ClubHouseComponent,
     FollowUsComponent,
     TedderfieldHistoryComponent,
-    LiveWeatherComponent
+    LiveWeatherComponent,
+    MissionStatementComponent,
+    VisionStatementComponent
   ],
   imports: [
     CommonModule,

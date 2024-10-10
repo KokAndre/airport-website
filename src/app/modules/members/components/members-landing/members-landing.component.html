@@ -1,3 +1,85 @@
-<p>
-  members-landing works!
-</p>
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Welcome</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Welcome</span></p>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-24 mb-3">Welcome to the Tedderfield Airpark Members Only Portal</p>
+    <p class="">As a valued member of Tedderfield Airpark, you have access to exclusive content, updates, and resources
+      designed to enhance your experience within our aviation community. By signing in, you'll gain access to a range of
+      benefits tailored just for our members.</p>
+
+    <!-- <p class="text-size-18 text-bold">Why Sign In?</p>
+
+    <p>By logging into the members-only portal, you'll unlock the following benefits:</p>
+
+    <ul>
+      <li><span class="text-bold">Exclusive Access to Hangar and Stand Listings: </span>Be the first to view available hangars and stands before they're listed elsewhere. Secure your ideal spot within the airpark.</li>
+      <li><span class="text-bold">Community News & Updates: </span>Stay up-to-date with the latest news, Trustee decisions, and upcoming events at Tedderfield Airpark.</li>
+      <li><span class="text-bold">Event Invitations: </span>Receive priority invitations to fly-ins, social gatherings, and other special events organised for our airpark community.</li>
+      <li><span class="text-bold">Private Documents and Reports: </span>Access essential documents such as the latest airpark meeting minutes, financial reports, and operational updates, all in one convenient location.</li>
+      <li><span class="text-bold">Maintenance & Service Requests: </span>Submit requests for maintenance or services directly to our management team, ensuring that your needs are attended to promptly</li>
+      <li><span class="text-bold">Special Offers & Discounts: </span>Take advantage of exclusive offers, including discounted rates for clubhouse bookings, maintenance services, and special event sponsorships.</li>
+    </ul>
+
+  <p class="text-size-18 text-bold">How to Access Your Account:</p>
+  
+  <p>Please enter your <span class="text-bold">registered email address</span> below to log in and gain full access to the Tedderfield Airpark Members Portal.</p> -->
+
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+
+<!-- <div class="dark-background"> -->
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-24 mb-3">Why Sign In?</p>
+
+    <p>By logging into the members-only portal, you'll unlock the following benefits:</p>
+
+    <ul>
+      <li><span class="text-bold">Exclusive Access to Hangar and Stand Listings: </span>Be the first to view available
+        hangars and stands before they're listed elsewhere. Secure your ideal spot within the airpark.</li>
+      <li><span class="text-bold">Community News & Updates: </span>Stay up-to-date with the latest news, Trustee
+        decisions, and upcoming events at Tedderfield Airpark.</li>
+      <li><span class="text-bold">Event Invitations: </span>Receive priority invitations to fly-ins, social gatherings,
+        and other special events organised for our airpark community.</li>
+      <li><span class="text-bold">Private Documents and Reports: </span>Access essential documents such as the latest
+        airpark meeting minutes, financial reports, and operational updates, all in one convenient location.</li>
+      <li><span class="text-bold">Maintenance & Service Requests: </span>Submit requests for maintenance or services
+        directly to our management team, ensuring that your needs are attended to promptly</li>
+      <li><span class="text-bold">Special Offers & Discounts: </span>Take advantage of exclusive offers, including
+        discounted rates for clubhouse bookings, maintenance services, and special event sponsorships.</li>
+    </ul>
+  </div>
+<!-- </div> -->
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4" >
+    <p class="text-size-24 mb-3">How to Access Your Account:</p>
+
+    <p>Please enter your <span class="text-bold">registered email address</span> below to log in and gain full access to
+      the Tedderfield Airpark Members Portal.</p>
+
+      <div class="row justify-content-center mx-0" [formGroup]="loginFormGroup">
+        <mat-form-field class="col-4 px-0">
+          <mat-label>Email</mat-label>
+          <input style="color: black;" matInput required maxlength="100" formControlName="loginEmailControl">
+          <mat-error *ngIf="loginEmailControl?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="loginEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center">
+        <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-1" appOnEnter
+          [isButtonFocused]="true" (click)="loginClicked()">Login</button>
+      </div>
+  </div>
+</div>

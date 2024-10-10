@@ -27,7 +27,6 @@ import { SharedModule } from './modules/shared/shared.module';
     RegisterComponent,
     IsRouterLinkActiveDirective,
     NavBarComponent,
-    OnEnterDirective,
     AppModalComponent
   ],
   imports: [
@@ -36,7 +35,6 @@ import { SharedModule } from './modules/shared/shared.module';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     PdfViewerModule,
     SharedModule

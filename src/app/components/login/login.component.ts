@@ -169,7 +169,7 @@ export class LoginComponent implements OnInit {
   }
 
   public navigateToHomePage() {
-    this.router.navigateByUrl(AppRoutes.Welcome);
+    this.router.navigateByUrl(AppRoutes.Home);
   }
 
   // public displayTermsAndConditions() {

@@ -57,7 +57,8 @@ const material = [
   MatStepperModule,
   MatProgressBarModule,
   MatTabsModule,
-  MatDividerModule
+  MatDividerModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

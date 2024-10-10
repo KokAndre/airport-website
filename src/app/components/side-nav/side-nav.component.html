@@ -3,7 +3,7 @@
   <!-- <div class="col-12 px-0"> -->
     <div class="heaader-container">
       <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
-      <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Welcome)">
+      <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Home)">
         <div class="logo-image"></div>
       </div>
       <div class="col-9 px-0 center-align-vertical">
@@ -37,13 +37,14 @@
                   Conditions</p> -->
 
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline pointer">Privacy Policy</a> | <a
+            <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy Policy</a> | <a
               class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
 
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a>
+            <!-- <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a> -->
+            <a class="text-size-12 red-hyperlink-text no-underline" target="_blank" href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
 
           <p class="mb-0">

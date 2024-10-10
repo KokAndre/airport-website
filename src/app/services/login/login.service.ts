@@ -17,6 +17,28 @@ export class LoginService {
   constructor(http: HttpClient) {
   }
 
+  public checkWhitelisting(userEmail: string) {
+    // return fetch(Endpoints.BaseURL + Endpoints.Login, {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: requestData })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.status === 200) {
+    //       const tokenToStore = new LoginToken();
+    //       tokenToStore.name = data.data.name;
+    //       tokenToStore.surname = data.data.surname;
+    //       tokenToStore.loginDateTime = new Date().toISOString();
+    //       tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
+
+    //       const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
+
+    //       SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
+    //     }
+    //     return data;
+    //   });
+  }
+
   public registerNewUser(requestData: RegisterRequest) {
     return fetch(Endpoints.BaseURL + Endpoints.Register, {
       method: 'post',

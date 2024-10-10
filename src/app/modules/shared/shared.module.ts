@@ -5,6 +5,7 @@ import { LiveWeatherWidgetComponent } from './components/live-weather-widget/liv
 import { MaterialModule } from 'src/app/material.module';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { OnEnterDirective } from 'src/app/directives/on-enter/on-enter.directive';
 
 @NgModule({
   imports: [
@@ -15,14 +16,16 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
     ArrowDividerComponent,
     LiveWeatherWidgetComponent,
     FileUploaderComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    OnEnterDirective
   ],
   exports: [
     ArrowDividerComponent,
     LiveWeatherWidgetComponent,
     FileUploaderComponent,
     ImageUploaderComponent,
-    MaterialModule
+    MaterialModule,
+    OnEnterDirective
   ]
 })
 export class SharedModule { }

@@ -4,6 +4,13 @@ import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
+enum DocumentsToDisplayEnum {
+  RunwayInfo = 'runwayInfo',
+  EmergencyContacts = 'emergencyContacts',
+  SalesBrochure = 'salesBrochure'
+
+}
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -12,7 +19,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class NavBarComponent implements OnInit {
   public currentRoute: string;
   public navigationRoutes = AppRoutes;
-  
+  public documentsToDisplayEnum = DocumentsToDisplayEnum;
+
   @Input() public isAuthorised = false;
 
   constructor(public router: Router, public loginService: LoginService, public appModalService: AppModalService) {
@@ -35,12 +43,18 @@ export class NavBarComponent implements OnInit {
     this.loginService.logoutUser();
   }
 
-  public displayRunwayInfoDocument() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', 'assets/documents/FATA-Runway-Information-FATA.pdf', null);
-  }
+  public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
+    switch (documentToDisplay) {
+      case DocumentsToDisplayEnum.RunwayInfo:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/FATA-Runway-Information-FATA.pdf', null);
+        break;
+      case DocumentsToDisplayEnum.EmergencyContacts:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20240419-FATAEmergencyContacts-FATA-011.pdf', null);
+        break;
+      case DocumentsToDisplayEnum.SalesBrochure:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20240429-TedderfieldSalesBrochure.pdf', null);
+        break;
+    }
 
-  public displayEmergencyContactsDocument() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20240419-FATAEmergencyContacts-FATA-011.pdf', null);
   }
-
 }

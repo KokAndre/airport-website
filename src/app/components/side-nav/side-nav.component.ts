@@ -103,7 +103,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       switch (modalDetails.type) {
         case ModalTypes.PDFModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, height: '90%', width: '100%', panelClass: 'full-width-dialog'
+            data: modalDetails, disableClose: false, height: 'fit-content', width: '90vw'
           });
           break;
 
@@ -140,7 +140,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   public displayTermsAndConditions() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Website Terms and Conditions  ', 'assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Terms and Conditions ', '../../../assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
+  }
+  public displayPrivacyPolicy() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Privacy Policy', '../../../assets/documents/20240801-FATA-Privacy-Policy.pdf', null);
   }
 
   public navigateToLiveWeather() {

@@ -2,7 +2,8 @@
   <ng-container *ngSwitchCase="modalTypesEnum.InformationModal" [ngTemplateOutlet]="InformationModal"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.PDFModal" [ngTemplateOutlet]="PDFModal"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.ConfirmationModal" [ngTemplateOutlet]="ConfirmationModal"></ng-container>
-  <ng-container *ngSwitchCase="modalTypesEnum.CaptureGallerySectionTitle" [ngTemplateOutlet]="CaptureGallerySectionTitle"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CaptureGallerySectionTitle"
+    [ngTemplateOutlet]="CaptureGallerySectionTitle"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -12,7 +13,8 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
@@ -30,14 +32,28 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
   </div>
 
   <div *ngIf="data.details">
-    <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="false" [original-size]="true"></pdf-viewer>
+    <!-- <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="true" [zoom-scale]="'page-height'" [autoresize]="true" ></pdf-viewer> -->
+
+    <div class="my-2 justify-content-center file-viewer-container">
+      <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false" [render-text]="true">
+      </pdf-viewer>
+      <!-- Deon - 21-07-2021 - ABA-19100 - Using Object from app-modal instead -->
+      <!-- <tld-file-viewer *ngIf="!displayZoomButtons" [src]="documentSource" [type]="contentType"></tld-file-viewer> -->
+  </div>
+
+
+
+
+
+
   </div>
 </ng-template>
 
@@ -48,7 +64,8 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
@@ -78,7 +95,8 @@
       <div class="col-10">
         <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
       </div>
-      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close" class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+      <div class="col-1 pl-0 pr-3 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
     </div>
 
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
@@ -99,7 +117,8 @@
       <input style="color: black;" matInput maxlength="2000" [(ngModel)]="gallerySectionToEditData.description">
       <!-- <mat-error *ngIf="!gallerySectionToEditData.description">Section description is required</mat-error> -->
     </mat-form-field>
-    <p class="custom-mat-hint">{{ gallerySectionToEditData.description ? gallerySectionToEditData.description.length : 0}}/2000</p>
+    <p class="custom-mat-hint">{{ gallerySectionToEditData.description ? gallerySectionToEditData.description.length :
+      0}}/2000</p>
   </div>
 
   <div class="row mx-0 my-4 justify-content-center">
@@ -108,7 +127,8 @@
       <span class="white-button-icon"></span>
     </div>
 
-    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !gallerySectionToEditData.title}" (click)="confirmGallerySectionChanges()">
+    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !gallerySectionToEditData.title}"
+      (click)="confirmGallerySectionChanges()">
       <p class="mb-0">Confirm</p>
       <span class="red-button-icon"></span>
     </div>

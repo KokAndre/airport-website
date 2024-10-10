@@ -4,7 +4,7 @@ import { MembersLandingComponent } from './components/members-landing/members-la
 
 const routes: Routes = [
   {
-    path: '', component: MembersLandingComponent
+    path: 'welcome', component: MembersLandingComponent
   },
 ];
 

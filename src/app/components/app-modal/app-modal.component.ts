@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { SectionDataModel } from 'src/app/modules/gallery/models/section-data.model';
@@ -14,6 +15,9 @@ export class AppModalComponent implements OnInit {
   public modalTypesEnum = ModalTypes;
   public modalOutcomeOptions = ModalOutcomeOptions;
   public gallerySectionToEditData: SectionDataModel.Section;
+
+  // @ViewChild(PdfViewerComponent, { static: false })
+  // private pdfComponent: PdfViewerComponent;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails,) { }
 
@@ -47,5 +51,14 @@ export class AppModalComponent implements OnInit {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.gallerySectionToEditData);
     }
   }
+
+  // public pageRendered() {
+  //   // if (this.adjustDocumentSize && this.contentType.includes('pdf')) {
+  //     this.pdfComponent.pdfViewer.currentScaleValue = 'page-fit';
+  //     // this.adjustDocumentSize = false;
+  //     // this.viewerZoom = Math.round(this.pdfComponent.pdfViewer.currentScale * 100);
+  //   // }
+
+  // }
 
 }

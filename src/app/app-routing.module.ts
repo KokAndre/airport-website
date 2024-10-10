@@ -9,10 +9,10 @@ const routes: Routes = [
   {
     path: '', component: SideNavComponent, children: [
       {
-        path: '', redirectTo: 'welcome', pathMatch: 'full'
+        path: '', redirectTo: 'home', pathMatch: 'full'
       },
       {
-        path: 'welcome', component: LandingPageComponent
+        path: 'home', component: LandingPageComponent
       },
       {
         path: 'login', component: LoginComponent
@@ -43,6 +43,9 @@ const routes: Routes = [
       },
       {
         path: 'members', loadChildren: () => import('./modules/members/members.module').then(m => m.MembersModule)
+      },
+      {
+        path: 'property-for-sale', loadChildren: () => import('./modules/property-for-sale/property-for-sale.module').then(m => m.PropertyForSaleModule)
       }
     ]
   }

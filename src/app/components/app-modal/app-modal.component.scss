@@ -3,10 +3,26 @@
 }
 
 .pdf-size {
-    width: 99%;
-    height: 80vh;
+    // width: 99%;
+    height: 100%;
 }
 
 .disable-user-click {
     cursor: not-allowed !important;
 }
+
+.file-viewer-container {
+    // width: 94vw !important;
+    height: 90vh !important;
+    background-color: grey;
+    border: 1px solid black;
+    margin: auto;
+}
+
+::ng-deep .ng2-pdf-viewer-container {
+    align-content: center !important;
+}
+
+// ::ng-deep .page {
+//     margin: 0px !important;
+// }
