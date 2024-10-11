@@ -1,20 +1,23 @@
-<div class="page-header">
-  <div class="col-10 mx-auto">
-    <p class="mb-0 section-header-text">Welcome</p>
-    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Welcome</span></p>
+<div *ngIf="!displayLoginScreen">
+  <div class="page-header">
+    <div class="col-10 mx-auto">
+      <p class="mb-0 section-header-text">Welcome</p>
+      <p class="mb-0 text-size-14">Members / <span class="child-path-text">Welcome</span></p>
+    </div>
   </div>
-</div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-<div class="dark-background">
-  <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Welcome to the Tedderfield Airpark Members Only Portal</p>
-    <p class="">As a valued member of Tedderfield Airpark, you have access to exclusive content, updates, and resources
-      designed to enhance your experience within our aviation community. By signing in, you'll gain access to a range of
-      benefits tailored just for our members.</p>
+  <div class="dark-background">
+    <div class="col-10 mx-auto pb-4">
+      <p class="text-size-24 mb-3">Welcome to the Tedderfield Airpark Members Only Portal</p>
+      <p class="">As a valued member of Tedderfield Airpark, you have access to exclusive content, updates, and
+        resources
+        designed to enhance your experience within our aviation community. By signing in, you'll gain access to a range
+        of
+        benefits tailored just for our members.</p>
 
-    <!-- <p class="text-size-18 text-bold">Why Sign In?</p>
+      <!-- <p class="text-size-18 text-bold">Why Sign In?</p>
 
     <p>By logging into the members-only portal, you'll unlock the following benefits:</p>
 
@@ -31,12 +34,12 @@
   
   <p>Please enter your <span class="text-bold">registered email address</span> below to log in and gain full access to the Tedderfield Airpark Members Portal.</p> -->
 
+    </div>
   </div>
-</div>
 
-<app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
 
-<!-- <div class="dark-background"> -->
+  <!-- <div class="dark-background"> -->
   <div class="col-10 mx-auto pb-4">
     <p class="text-size-24 mb-3">Why Sign In?</p>
 
@@ -57,16 +60,17 @@
         discounted rates for clubhouse bookings, maintenance services, and special event sponsorships.</li>
     </ul>
   </div>
-<!-- </div> -->
+  <!-- </div> -->
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-<div class="dark-background">
-  <div class="col-10 mx-auto pb-4" >
-    <p class="text-size-24 mb-3">How to Access Your Account:</p>
+  <div class="dark-background">
+    <div class="col-10 mx-auto pb-4">
+      <p class="text-size-24 mb-3">How to Access Your Account:</p>
 
-    <p>Please enter your <span class="text-bold">registered email address</span> below to log in and gain full access to
-      the Tedderfield Airpark Members Portal.</p>
+      <p>Please enter your <span class="text-bold">registered email address</span> below to log in and gain full access
+        to
+        the Tedderfield Airpark Members Portal.</p>
 
       <div class="row justify-content-center mx-0" [formGroup]="loginFormGroup">
         <mat-form-field class="col-4 px-0">
@@ -78,8 +82,21 @@
       </div>
 
       <div class="row mx-0 justify-content-center">
-        <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-1" appOnEnter
-          [isButtonFocused]="true" (click)="loginClicked()">Login</button>
+        <!-- <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-1" appOnEnter
+          [isButtonFocused]="true" (click)="loginClicked()">Login</button> -->
+
+
+        <div class="red-button" [ngClass]="{'disable-user-click': loginFormGroup.invalid}"
+          (click)="loginClicked()">
+          <p class="mb-0">Login</p>
+          <span class="red-button-icon"></span>
+        </div>
+
       </div>
+    </div>
   </div>
+</div>
+
+<div *ngIf="displayLoginScreen">
+  <app-login [userData]="userData" (errorFetchingDataEmit)="displayLoginPageNoDataError()" (returnToWelcomePageEmit)="displayWelcomePage()"></app-login>
 </div>

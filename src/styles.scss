@@ -309,7 +309,7 @@ h6,
 
   p {
       color: white !important;
-      font-size: 14px;
+      font-size: 18px;
   }
   
 }
@@ -325,6 +325,11 @@ h6,
   margin-left: 5px;
 }
 
+.red-button.disable-user-click {
+  cursor: not-allowed !important;
+  pointer-events: none;
+  background-color: #e9747c;
+}
 
 .white-button {
   background-color: white;
@@ -345,7 +350,7 @@ h6,
 
   p {
       color: #ee202e !important;
-      font-size: 14px;
+      font-size: 18px;
   }
   
 }
@@ -359,6 +364,12 @@ h6,
   height: 14px;
   display: block;
   margin-left: 5px;
+}
+
+.white-button.disable-user-click {
+  cursor: not-allowed !important;
+  pointer-events: none;
+  background-color: #efefef;
 }
 
 .custom-mat-hint {
@@ -383,3 +394,9 @@ h6,
 .child-path-text {
   color: rgba(0, 0, 0, 0.5);
 }
+
+// .disable-user-click {
+//   cursor: not-allowed !important;
+//   pointer-events: none;
+//   background-color: #e9747c;
+// }

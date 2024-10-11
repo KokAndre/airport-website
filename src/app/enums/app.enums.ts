@@ -32,6 +32,7 @@ export enum AppRoutes {
     HangarsForSale = '/merch/hangars-for-sale',
 
     MembersWelcome = '/members/welcome',
+    MembersFAQS = '/members/faqs',
 
 
     PropertyForSaleBase = '/property-for-sale/'

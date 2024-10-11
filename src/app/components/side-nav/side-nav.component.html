@@ -6,10 +6,10 @@
       <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Home)">
         <div class="logo-image"></div>
       </div>
-      <div class="col-9 px-0 center-align-vertical">
+      <div class="col-8 px-0 center-align-vertical">
         <app-nav-bar [isAuthorised]="isAuthorised"></app-nav-bar>
       </div>
-      <div class="col-1 center-align-vertical">
+      <div class="col-2 center-align-vertical">
         <p class="mb-0 text-size-24 text-end" *ngIf="isAuthorised">Welcome<span class="text-bold ml-2">{{
             getLoggedInUsername() }}</span></p>
       </div>
@@ -57,7 +57,7 @@
         <div class="col-5 p-0 align-content-center">
           <div class="row mx-0 justify-content-end">
             <div class="red-button" (click)="navigateToLiveWeather()">
-              <p class="mb-0">LIVE WX</p>
+              <p class="mb-0 text-size-16">LIVE WX</p>
               <span class="red-button-icon"></span>
             </div>
           </div>

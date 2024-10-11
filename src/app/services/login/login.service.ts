@@ -8,6 +8,7 @@ import { LoginToken } from 'src/app/models/login-token.model';
 import { RegisterRequest } from 'src/app/models/register-request.model';
 import * as CryptoJS from 'crypto-js';
 import { AppModalService } from '../app-modal/app-modal.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,7 @@ export class LoginService {
       body: JSON.stringify({ userEmail: userEmail })
     })
       .then(response => response.json())
-      .then(data => {
-        console.log('DATA: ', data);
+      .then((data: GetUserDataResponse.RootObject) => {
         if (data.status !== 200) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, data.header, data.message, null);
         }

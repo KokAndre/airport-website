@@ -53,29 +53,38 @@
       <div class="nav-link-text">Members<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
       </div>
     </div>
-    <div *ngIf="!isAuthorised" class="dropdown-content-container">
+
+
+    <div class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
 
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersWelcome)">Welcome</div>
+        <div *ngIf="!isAuthorised">
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersWelcome)">Welcome</div>
+        </div>
 
-        <!-- <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Login</div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">Register
-        </div> -->
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersFAQS)">FAQ's
+          </div>
+
+        <div *ngIf="isAuthorised">
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="logout()">LOGOUT
+          </div>
+        </div>
       </div>
     </div>
 
-    <div *ngIf="isAuthorised" class="dropdown-content-container">
+    <!-- <div *ngIf="isAuthorised" class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Login)">TEST 1
+        <div class="dropdown-item p-2">Member section coming soon!
         </div>
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="logout()">LOGOUT
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="dropdown pointer px-0">
