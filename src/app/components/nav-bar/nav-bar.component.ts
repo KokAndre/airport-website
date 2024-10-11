@@ -7,8 +7,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 enum DocumentsToDisplayEnum {
   RunwayInfo = 'runwayInfo',
   EmergencyContacts = 'emergencyContacts',
-  SalesBrochure = 'salesBrochure'
-
+  SalesBrochure = 'salesBrochure',
+  ParamotorPilots = 'aramotorPilots',
 }
 
 @Component({
@@ -54,6 +54,8 @@ export class NavBarComponent implements OnInit {
       case DocumentsToDisplayEnum.SalesBrochure:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20240429-TedderfieldSalesBrochure.pdf', null);
         break;
+      case DocumentsToDisplayEnum.ParamotorPilots:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Flying-the-Circuit-at-Tedderfield-Airpark-Paramotor-V3.pdf', null);
     }
 
   }

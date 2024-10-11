@@ -4,8 +4,7 @@ import { FollowUsComponent } from './components/follow-us/follow-us.component';
 import { TedderfieldHistoryComponent } from './components/tedderfield-history/tedderfield-history.component';
 import { NgModule } from '@angular/core';
 import { LiveWeatherComponent } from './components/live-weather/live-weather.component';
-import { MissionStatementComponent } from './components/mission-statement/mission-statement.component';
-import { VisionStatementComponent } from './components/vision-statement/vision-statement.component';
+import { MissionAndVisionStatementComponent } from './components/mission-and-vision-statement/mission-and-vision-statement.component';
 
 const routes: Routes = [
   {
@@ -21,10 +20,7 @@ const routes: Routes = [
     path: 'live-weather', component: LiveWeatherComponent
   },
   {
-    path: 'mission-statement', component: MissionStatementComponent
-  },
-  {
-    path: 'vision-statement', component: VisionStatementComponent
+    path: 'mission-and-vision-statement', component: MissionAndVisionStatementComponent
   }
 ];
 

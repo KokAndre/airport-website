@@ -23,7 +23,7 @@ export class MembersLandingComponent implements OnInit {
 
   public initializeControls() {
     this.loginFormGroup = this.formBuilder.group({
-      loginEmailControl: new FormControl('andre.kok97@outlook.com', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
+      loginEmailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
     });
   }
 
