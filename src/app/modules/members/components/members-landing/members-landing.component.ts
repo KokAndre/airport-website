@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-members-landing',
@@ -9,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class MembersLandingComponent implements OnInit {
   public loginFormGroup: FormGroup;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, public loginService: LoginService) { }
 
   ngOnInit() {
     this.initializeControls();
@@ -18,12 +19,13 @@ export class MembersLandingComponent implements OnInit {
   public initializeControls() {
     this.loginFormGroup = this.formBuilder.group({
       loginEmailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
-      loginPasswordControl: new FormControl('', [Validators.required]),
     });
   }
 
   public loginClicked() {
-    //
+    this.loginService.checkWhitelisting(this.loginEmailControl?.value).then(result => {
+      console.log('RESULTS: ', result);
+    });
   }
 
 

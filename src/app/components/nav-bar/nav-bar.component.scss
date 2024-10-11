@@ -3,8 +3,6 @@
 }
 
 .dropbtn {
-    // border-bottom: 3px solid transparent;
-    // border-radius: 6px;
     padding-left: 10px;
     padding-right: 10px;
     height: 100px;
@@ -16,44 +14,30 @@
 .dropdown:hover .dropbtn {
     background-color: rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid #fe432a;
-    // border-bottom: 3px solid white;
 }
 
 .dropdown-content-container {
     display: none;
     visibility: hidden;
     position: absolute;
-    // background-color: #f9f9f9;
-    // min-width: 160px;
-    // box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-
-    // color: black !important;
-    // margin-top: 5px;
     min-width: 100%;
 }
 
 .dropdown-content {
-    // display: none;
-    // position: absolute;
     background-color: #f9f9f9;
-    // min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-
     color: black !important;
-    // margin-top: 5px;
     min-width: 100%;
 }
 
 .dropdown-content-up-arrow {
     height: 10px;
     width: 15px;
-    // position: absolute;
-    // color: pink;
     z-index: 2;
     margin-left: 10px;
-    background-image: url('../../../assets/drop-down-top-arrow.svg');
+    background-image: url('../../../assets/drop-down-top-arrow3.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

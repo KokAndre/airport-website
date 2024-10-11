@@ -38,11 +38,11 @@ export enum AppRoutes {
 }
 
 export enum Endpoints {
-    BaseURL = 'https://tedderfield.co.za/welcome',
+    BaseURL = 'https://www.tedderfield.co.za/api',
     // BaseURL = 'http://localhost/teddefield-airfield',
     Register = '/members/register.php',
     Login = '/members/login.php',
-    CheckWhitelisting = '/members/whitelisitng.php',
+    CheckWhitelisting = '/members/get-member.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php'
 }
 
