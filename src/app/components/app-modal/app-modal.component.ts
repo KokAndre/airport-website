@@ -16,9 +16,6 @@ export class AppModalComponent implements OnInit {
   public modalOutcomeOptions = ModalOutcomeOptions;
   public gallerySectionToEditData: SectionDataModel.Section;
 
-  // @ViewChild(PdfViewerComponent, { static: false })
-  // private pdfComponent: PdfViewerComponent;
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails,) { }
 
   ngOnInit() {
@@ -38,7 +35,7 @@ export class AppModalComponent implements OnInit {
         console.log('VALUES IN MODAL: ', this.gallerySectionToEditData);
         this.isLoading = false;
         break;
-    
+
       default:
         this.isLoading = false;
         break;
@@ -52,13 +49,24 @@ export class AppModalComponent implements OnInit {
     }
   }
 
-  // public pageRendered() {
-  //   // if (this.adjustDocumentSize && this.contentType.includes('pdf')) {
-  //     this.pdfComponent.pdfViewer.currentScaleValue = 'page-fit';
-  //     // this.adjustDocumentSize = false;
-  //     // this.viewerZoom = Math.round(this.pdfComponent.pdfViewer.currentScale * 100);
-  //   // }
+  public downloadDocument() {
+    if (this.data.title && this.data.details) {
+      fetch(this.data.details)
+        .then(response => response.blob())
+        .then(blob => {
 
-  // }
+          // Create new blob to add content type
+          const pdfBlob = new Blob([blob], { type: 'application/pdf' });
+          // Create the url to open the blob in a new window
+          const data = window.URL.createObjectURL(pdfBlob);
+
+          // Create an a tag to download the file
+          const link = document.createElement('a');
+          link.href = data;
+          link.download = this.data.title;
+          link.click();
+        });
+    }
+  }
 
 }

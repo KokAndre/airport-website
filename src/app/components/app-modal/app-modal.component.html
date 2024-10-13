@@ -49,10 +49,13 @@
       <!-- <tld-file-viewer *ngIf="!displayZoomButtons" [src]="documentSource" [type]="contentType"></tld-file-viewer> -->
   </div>
 
-
-
-
-
+  <div class="row mx-0 justify-content-center mb-2">
+    <div class="red-button"
+          (click)="downloadDocument()">
+          <p class="mb-0">Download</p>
+          <span class="red-button-icon"></span>
+        </div>
+  </div>
 
   </div>
 </ng-template>
