@@ -132,7 +132,7 @@
 
     <div class="red-button ml-3" [ngClass]="{'disable-user-click': !gallerySectionToEditData.title}"
       (click)="confirmGallerySectionChanges()">
-      <p class="mb-0">Confirm</p>
+      <p class="mb-0">{{ gallerySectionToEditData.id ? 'Confirm' : 'Add Section' }}</p>
       <span class="red-button-icon"></span>
     </div>
   </div>

@@ -8,7 +8,6 @@ export enum AppRoutes {
     // FlyAways = '/gallery/fly-aways',
     // Stories = '/gallery/stories',
     GalleryLanding='/gallery',
-    GalleryAdmin='/gallery/admin',
     FAQS = '/training-and-renewals/faqs',
     Info = '/training-and-renewals/info',
     Instructors = '/training-and-renewals/instructors',
@@ -34,16 +33,26 @@ export enum AppRoutes {
     MembersFAQS = '/members/faqs',
 
 
-    PropertyForSaleBase = '/property-for-sale/'
+    PropertyForSaleBase = '/property-for-sale/',
+    
+    GalleryAdmin='/admin/edit-gallery',
 }
 
 export enum Endpoints {
-    BaseURL = 'https://www.tedderfield.co.za/api',
-    // BaseURL = 'http://localhost/teddefield-airfield',
+    // BaseURL = 'https://www.tedderfield.co.za/api',
+    BaseURL = 'http://localhost/teddefield-airfield',
+    // GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
+    GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
-    SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php'
+    SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',
+    UploadImage = '/gallery/upload-image.php',
+    CreateGallerySection = '/gallery/create-section.php',
+    GetGalleryData = '/gallery/get-gallery-data.php',
+    DeleteImage = '/gallery/delete-image.php',
+    DeleteSection = '/gallery/delete-section.php',
+    EditSection = '/gallery/edit-section.php'
 }
 
 export enum EncryptionKeys {

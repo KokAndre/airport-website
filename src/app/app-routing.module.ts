@@ -38,6 +38,10 @@ const routes: Routes = [
       },
       {
         path: 'property-for-sale', loadChildren: () => import('./modules/property-for-sale/property-for-sale.module').then(m => m.PropertyForSaleModule)
+      },
+      {
+        // TODO: Add route guard so only logged in admin can see this page!!
+        path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
       }
     ]
   }

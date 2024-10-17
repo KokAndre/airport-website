@@ -86,7 +86,7 @@
           [isButtonFocused]="true" (click)="loginClicked()">Login</button> -->
 
 
-        <div class="red-button" [ngClass]="{'disable-user-click': loginFormGroup.invalid}"
+        <div appOnEnter [isButtonFocused]="true" class="red-button" [ngClass]="{'disable-user-click': loginFormGroup.invalid}"
           (click)="loginClicked()">
           <p class="mb-0">Login</p>
           <span class="red-button-icon"></span>

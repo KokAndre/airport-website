@@ -47,7 +47,7 @@
             <span class="white-button-icon"></span>
           </div>
 
-          <div class="red-button ml-3" [ngClass]="{'disable-user-click': loginFormGroup.invalid}"
+          <div appOnEnter [isButtonFocused]="true" class="red-button ml-3" [ngClass]="{'disable-user-click': loginFormGroup.invalid}"
             (click)="loginClicked()">
             <p class="mb-0">Take Off</p>
             <span class="red-button-icon"></span>
@@ -139,7 +139,7 @@
             <span class="white-button-icon"></span>
           </div>
 
-          <div class="red-button ml-3" [ngClass]="{'disable-user-click': registerFormGroup.invalid}"
+          <div appOnEnter [isButtonFocused]="true" class="red-button ml-3" [ngClass]="{'disable-user-click': registerFormGroup.invalid}"
             (click)="registerClicked()">
             <p class="mb-0">Register</p>
             <span class="red-button-icon"></span>

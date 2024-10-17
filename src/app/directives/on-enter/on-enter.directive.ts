@@ -24,7 +24,7 @@ export class OnEnterDirective {
 
   keyEvent(event: KeyboardEvent) {
     // Multi browser support
-    const key = event.key.toUpperCase() || event.keyCode;
+    const key = event.key?.toUpperCase() || event.keyCode;
 
     if (this.isButtonFocused) {
       if (key === KEY_CODE.ENTER || key === KEY_CODE_NAME.ENTER) {

@@ -3,4 +3,6 @@ export class LoginToken {
     surname: string;
     loginDateTime: string;
     logoutDateTime: string;
+    id: number;
+    isAdmin: number;
 }
