@@ -22,6 +22,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public isAuthorised = false;
   public modal$: Subscription;
   public dialogRefModel: any = null;
+  public isUserAdmin = false;
+  private resizeObserver: ResizeObserver;
+  public isMobileView = false;
 
   constructor(public router: Router,
     public loginService: LoginService,
@@ -32,6 +35,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initializeIsLoggedInCheck();
     this.initializeModal();
+    this.initializeScreenSizeCheck();
 
     this.router.events.forEach(item => {
       if (item instanceof NavigationEnd) {
@@ -42,7 +46,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
           url: item.url,
           dateTime: moment(new Date()).format('YYYY-MM-DD - HH:mm:ss:SSS')
         };
-        console.log('GTM TAG', gtmTag);
         this.gtmService.pushTag(gtmTag);
       }
     });
@@ -74,7 +77,11 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public initializeIsLoggedInCheck() {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
-      // console.log('IS AUTH: ', this.isAuthorised);
+      if(this.isAuthorised) {
+        this.isUserAdmin = this.loginService.isLogedInUserAdmin();
+      } else {
+        this.isUserAdmin = false;
+      }
     }, 1000);
   }
 
@@ -137,6 +144,24 @@ export class SideNavComponent implements OnInit, OnDestroy {
       }
       // }
     });
+  }
+
+  public initializeScreenSizeCheck() {
+    const body = document.getElementsByTagName("body")[0];
+    this.resizeObserver = new ResizeObserver(() => {
+      const widthToCheck = window.innerWidth;
+      console.log('WIDTH: ', widthToCheck);
+      if (widthToCheck < 1210) {
+        this.isMobileView = true;
+      } else {
+        this.isMobileView = false;
+      }
+      console.log('IS MOBILE: ', this.isMobileView);
+  
+  });
+  
+  // Add a listener to body
+  this.resizeObserver.observe(body);
   }
 
   public displayTermsAndConditions() {

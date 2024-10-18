@@ -1,25 +1,20 @@
 <!-- Header -->
 <div class="main-container">
   <!-- <div class="col-12 px-0"> -->
-    <div class="heaader-container">
-      <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
-      <div class="col-2 px-0 pointer" (click)="navigateToRoute(navigationRoutes.Home)">
+  <div class="heaader-container">
+    <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
+      <div class="col-lg-1 col-md-1 col-sm-4 px-0 pointer center-align-vertical" (click)="navigateToRoute(navigationRoutes.Home)">
         <div class="logo-image"></div>
       </div>
-      <div class="col-8 px-0 center-align-vertical">
-        <app-nav-bar [isAuthorised]="isAuthorised"></app-nav-bar>
+      <div class="col-lg-10 col-md-10 col-sm-2 px-0 center-align-vertical">
+        <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin" [isMobileView]="isMobileView"></app-nav-bar>
       </div>
-      <div class="col-2 center-align-vertical">
-        <p class="mb-0 text-size-24 text-end" *ngIf="isAuthorised">Welcome<span class="text-bold ml-2">{{
-            getLoggedInUsername() }}</span></p>
+      <div class="col-lg-1 col-md-1 col-sm-6 center-align-vertical">
+        <p class="mb-0 text-size-20 text-center" *ngIf="isAuthorised">Welcome</p>
+        <p class="mb-0 text-size-20 text-center"><span class="text-bold ml-2">{{ getLoggedInUsername() }}</span></p>
       </div>
     </div>
-    </div>
-    
-  <!-- </div> -->
-
-
-  <!-- <div class="header-bottom-border"></div> -->
+  </div>
   <!-- End of Header -->
 
   <!-- Body -->
@@ -33,18 +28,17 @@
     <div class="col-10 px-0 mx-auto">
       <div class="row mx-0 py-2">
         <div class="col-6 px-0 align-content-center">
-          <!-- <p class="mb-2 text-size-12 red-hyperlink-text">Privacy Policy <span class="color-black">|</span> Terms &
-                  Conditions</p> -->
 
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy Policy</a> | <a
-              class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayTermsAndConditions()">Terms &
+            <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
+              Policy</a> | <a class="text-size-12 red-hyperlink-text no-underline pointer"
+              (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
 
           <p class="mb-0">
-            <!-- <a class="text-size-12 red-hyperlink-text no-underline" href="tel:0829004299">Call: 082 900 4299</a> -->
-            <a class="text-size-12 red-hyperlink-text no-underline" target="_blank" href="https://mayday-sa.org.za/">Mayday-SA</a>
+            <a class="text-size-12 red-hyperlink-text no-underline" target="_blank"
+              href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
 
           <p class="mb-0">
@@ -63,10 +57,6 @@
           </div>
         </div>
         <div class="col-1 px-0 align-content-center">
-          <!-- <p class="mb-0 text-end">
-            <a class="text-size-14 red-hyperlink-text no-underline text-semi-bold" target="_blank"
-              href="https://slingaircraft.com/">Sling Aircraft</a>
-          </p> -->
 
           <div class="row mx-0 justify-content-end">
             <a class="facebook-icon-size p-0" target="_blank" href="https://www.facebook.com/groups/1485616671675820/">

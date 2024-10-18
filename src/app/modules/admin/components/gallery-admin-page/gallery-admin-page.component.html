@@ -33,20 +33,16 @@
 
     <div class="row mx-0 align-items-center">
       <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
-      <!-- <mat-icon class="pointer edit-icon">edit</mat-icon> -->
     </div>
 
     <div class="row mx-n2 mt-3">
-      <div class="col-3 p-2 image-container" *ngFor="let img of section.images">
+      <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center image-container" *ngFor="let img of section.images">
         <mat-icon class="pointer delete-image-icon"
           (click)="deleteImageClicked(img.name, img.id)">delete</mat-icon>
-        <img [src]="img.imageSource" [alt]="img.name" width="100%" height="300" />
+        <img [src]="img.imageSource" [alt]="img.name" width="100%" />
       </div>
 
-      <div class="col-3 p-2">
-        <!-- <div class="add-image-section pointer">
-          <mat-icon class="add-image-icon">add_photo_alternate</mat-icon>
-        </div> -->
+      <div class="col-lg-3 col-md-6 col-sm-12 p-2">
         <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)"></app-image-uploader>
       </div>
     </div>

@@ -73,7 +73,7 @@
         the Tedderfield Airpark Members Portal.</p>
 
       <div class="row justify-content-center mx-0" [formGroup]="loginFormGroup">
-        <mat-form-field class="col-4 px-0">
+        <mat-form-field class="col-lg-4 col-md-6 col-sm-10 px-0">
           <mat-label>Email</mat-label>
           <input style="color: black;" matInput required maxlength="100" formControlName="loginEmailControl">
           <mat-error *ngIf="loginEmailControl?.hasError('required')">Email is required</mat-error>

@@ -152,16 +152,28 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- <div *ngIf="isAuthorised" class="dropdown-content-container">
-      <div class="dropdown-content-up-arrow"></div>
-      <div class="dropdown-content">
-        <div class="dropdown-item p-2">Member section coming soon!
-        </div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="logout()">LOGOUT
+    <!-- Admin -->
+    <div *ngIf="isUserAdmin" class="dropdown pointer px-0">
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Admin<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon></div>
+      </div>
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
+            Manage Gallery</div>
+
+          <!-- <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
+            Hangars to Rent</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
+            Hangars for Sale</div> -->
+
         </div>
       </div>
-    </div> -->
-  </div>
+    </div>
 </div>
