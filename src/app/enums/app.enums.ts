@@ -41,10 +41,10 @@ export enum AppRoutes {
 }
 
 export enum Endpoints {
-    // BaseURL = 'https://www.tedderfield.co.za/api',
-    BaseURL = 'http://localhost/teddefield-airfield',
-    // GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
-    GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
+    BaseURL = 'https://www.tedderfield.co.za/api',
+    // BaseURL = 'http://localhost/teddefield-airfield',
+    GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
+    // GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
