@@ -25,9 +25,9 @@
 
   <!-- Footer -->
   <div class="footer-container align-content-center">
-    <div *ngIf="" class="col-12 px-0 mx-auto">
+    <div class="col-12 col-sm-12 col-md-10 col-lg-10 pr-0 pl-0 mx-auto" [ngClass]="{'pl-2': isMobileView}">
       <div class="row mx-0 py-2">
-        <div class="col-6 px-0 align-content-center">
+        <div class="col-7 col-sm-7 col-md-6 col-lg-6 px-0 align-content-center">
 
           <p class="mb-0">
             <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
@@ -44,17 +44,17 @@
               info&#64;tedderfield.co.za</a>
           </p>
         </div>
-        <div class="col-5 p-0 align-content-center">
+        <div class="col-4 col-sm-4 col-md-5 col-lg-5 p-0 align-content-center" [ngClass]="{'pr-3': isMobileView}">
           <div class="row mx-0 justify-content-end">
             <div class="red-button" (click)="navigateToLiveWeather()">
-              <p class="mb-0 text-size-16">LIVE WX</p>
-              <span class="red-button-icon"></span>
+              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">LIVE WX</p>
+              <span [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
             </div>
           </div>
         </div>
-        <div class="col-1 px-0 align-content-center">
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1 px-0 align-content-center">
           <div class="row mx-0 justify-content-end">
-            <a class="facebook-icon-size p-0" target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
+            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView}" target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
               <div class="facebook-icon"></div>
             </a>
           </div>

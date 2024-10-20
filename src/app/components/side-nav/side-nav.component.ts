@@ -25,6 +25,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public isUserAdmin = false;
   private resizeObserver: ResizeObserver;
   public isMobileView = false;
+  public isFooterMobileView = false;
 
   constructor(public router: Router,
     public loginService: LoginService,
@@ -154,6 +155,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.isMobileView = true;
       } else {
         this.isMobileView = false;
+      }
+
+      if (widthToCheck < 400) {
+        this.isFooterMobileView = true;
+      } else {
+        this.isFooterMobileView = false;
       }
     });
 

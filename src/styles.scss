@@ -325,6 +325,17 @@ h6,
   margin-left: 5px;
 }
 
+.red-button-icon-small {
+  background-image: url("assets/button-arrow-light.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 7px;
+  display: block;
+  margin-left: 4px; 
+}
+
 .red-button.disable-user-click {
   cursor: not-allowed !important;
   pointer-events: none;
