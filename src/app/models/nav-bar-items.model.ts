@@ -8,7 +8,8 @@ export namespace NavBarItems {
         navLinkToCheck: string;
         subItems: NavBarSubItems[];
         displayForAdminOnly: boolean;
-        displayForLoggedInUserOnly
+        displayForLoggedInUserOnly: boolean;
+        displayForLoggedOutUserOnly: boolean;
     }
 
     export class NavBarSubItems {
@@ -16,5 +17,7 @@ export namespace NavBarItems {
         documentToOpen: string;
         linkToNavigateTo: AppRoutes;
         displayForAdminOnly: boolean;
+        displayForLoggedInUserOnly: boolean;
+        displayForLoggedOutUserOnly: boolean;
     }
 }

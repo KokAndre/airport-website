@@ -1,4 +1,4 @@
-<div class="row mx-0 p-0">
+<div class="row mx-0 p-0" *ngIf="!isMobileView">
   <!-- Home -->
   <div class="dropdown pointer px-0">
     <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Home)" appIsRouterLinkActive navLinkToCheck="/home"
@@ -154,26 +154,279 @@
     </div>
   </div>
 
+  <!-- Admin -->
+  <div *ngIf="isUserAdmin" class="dropdown pointer px-0">
+    <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
+      <div class="nav-link-text">Admin<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+      </div>
+    </div>
+    <div class="dropdown-content-container">
+      <div class="dropdown-content-up-arrow"></div>
+      <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
+          Manage Gallery</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mx-0 p-0 justify-content-center" *ngIf="isMobileView">
+
+  <!-- [matMenuTriggerFor]="menu" -->
+  <button class="mobile-view-menu-container" mat-icon-button  aria-label="Menu">
+    <mat-icon class="mobile-menu-icon">menu</mat-icon>
+  </button>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <button class="py-0 pt-1" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+    <mat-icon class="mobile-menu-icon">more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.Home)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.Home}">
+        <p class="m-2 text-size-22">Home</p>
+    </div>
+
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.OurStory)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.OurStory}">
+        <p class="m-2 text-size-22">Our story</p>
+    </div>
+
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.Venue)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.Venue}">
+        <p class="m-2 text-size-22">Venue</p>
+    </div>
+
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.Schedule)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.Schedule}">
+        <p class="m-2 text-size-22">Schedule</p>
+    </div>
+
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.FAQ)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.FAQ}">
+        <p class="m-2 text-size-22">FAQ's</p>
+    </div>
+
+    <div class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.RSVP)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.RSVP}">
+        <p class="m-2 text-size-22">RSVP</p>
+    </div>
+
+    <div *ngIf="activeUserData.isAdmin === '1'" class="pointer transparent-border" mat-menu-item
+        (click)="setActiveScreen(availableScreens.RSVPStatus)"
+        [ngClass]="{'active-nav-link': activeScreen === availableScreens.RSVPStatus}">
+        <p class="m-2 text-size-22">RSVP Status</p>
+    </div>
+</mat-menu> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div *ngIf="false">
+    <!-- Home -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Home)" appIsRouterLinkActive navLinkToCheck="/home"
+        [currentRoute]="currentRoute">
+        <div class="nav-link-text">Home</div>
+      </div>
+    </div>
+
+    <!-- About Us -->
+    <div class="dropdown pointer px-0">
+      <!-- [routerLink]="['/about-us']"  -->
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/about-us" [currentRoute]="currentRoute">
+        <div class="nav-link-text">About Us<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon>
+        </div>
+      </div>
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ClubHouse)">Club
+            House
+          </div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUs)">Follow
+            Us
+          </div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldHistory)">
+            Tedderfield History</div>
+
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.EmergencyContacts)">
+            Emergency Contacts</div>
+
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MissionAndVisionStatement)">
+            Mission & Vision Statement</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)" appIsRouterLinkActive
+        navLinkToCheck="/contact-us" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Contact Us</div>
+      </div>
+    </div>
+
+    <!-- Pilot Information -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/pilot-information" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Pilot Information<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon></div>
+      </div>
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MapAndLocation)">
+            Map
+            and Location</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.AirfieldInformation)">
+            Airfield Information</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.JoiningAndLanding)">
+            Joining and Landing</div>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
+            Reporting Hazards</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.RunwayInfo)">
+            Runway Info
+          </div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.ParamotorPilots)">
+            Paramotor Pilots
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FATA Merch -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/merch" [currentRoute]="currentRoute">
+        <div class="nav-link-text">FATA Merch<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon></div>
+      </div>
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Classifieds)">
+            Classifieds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.GalleryLanding)" appIsRouterLinkActive
+        navLinkToCheck="/gallery" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Gallery</div>
+      </div>
+    </div>
+
+    <!-- Property for Sale and Rent -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Property for Sale and Rent<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon></div>
+      </div>
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+          <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.SalesBrochure)">
+            Tedderfield Sales Brochure</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
+            Hangars to Rent</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
+            Hangars for Sale</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Members -->
+    <div class="dropdown pointer px-0">
+      <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/members" [currentRoute]="currentRoute">
+        <div class="nav-link-text">Members<mat-icon class="dropdown-icon ml-1"
+            fontIcon="keyboard_arrow_down"></mat-icon>
+        </div>
+      </div>
+
+
+      <div class="dropdown-content-container">
+        <div class="dropdown-content-up-arrow"></div>
+        <div class="dropdown-content">
+
+          <div *ngIf="!isAuthorised">
+            <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersWelcome)">Welcome</div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersFAQS)">FAQ's
+          </div>
+
+          <div *ngIf="isAuthorised">
+            <mat-divider></mat-divider>
+            <div class="dropdown-item p-2" (click)="logout()">LOGOUT
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Admin -->
     <div *ngIf="isUserAdmin" class="dropdown pointer px-0">
       <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
-        <div class="nav-link-text">Admin<mat-icon class="dropdown-icon ml-1"
-            fontIcon="keyboard_arrow_down"></mat-icon></div>
+        <div class="nav-link-text">Admin<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
+        </div>
       </div>
       <div class="dropdown-content-container">
         <div class="dropdown-content-up-arrow"></div>
         <div class="dropdown-content">
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
             Manage Gallery</div>
-
-          <!-- <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
-            Hangars to Rent</div>
-          <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
-            Hangars for Sale</div> -->
-
         </div>
       </div>
     </div>
+  </div>
 </div>

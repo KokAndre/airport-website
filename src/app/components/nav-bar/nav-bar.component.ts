@@ -194,6 +194,54 @@ export class NavBarComponent implements OnInit {
 
     this.navBarItems.push(PropertyForSaleAndRentItemToAdd);
 
+    // Members
+    const membersItemToAdd = new NavBarItems.NavLink();
+    membersItemToAdd.title = 'Members';
+    membersItemToAdd.navLinkToCheck = '/members';
+    membersItemToAdd.subItems = new Array<NavBarItems.NavBarSubItems>();
+
+    const membersWelcomeSubItemToAdd = new NavBarItems.NavBarSubItems();
+    membersWelcomeSubItemToAdd.title = 'Welcome';
+    membersWelcomeSubItemToAdd.linkToNavigateTo = this.navigationRoutes.MembersWelcome;
+    membersWelcomeSubItemToAdd.displayForLoggedOutUserOnly = true;
+    membersItemToAdd.subItems.push(membersWelcomeSubItemToAdd);
+
+    const membersFAQsSubItemToAdd = new NavBarItems.NavBarSubItems();
+    membersFAQsSubItemToAdd.title = "FAQ's";
+    membersFAQsSubItemToAdd.linkToNavigateTo = this.navigationRoutes.MembersFAQS;
+    membersItemToAdd.subItems.push(membersFAQsSubItemToAdd);
+
+    // const membersLogoutSubItemToAdd = new NavBarItems.NavBarSubItems();
+    // membersLogoutSubItemToAdd.title = 'LOGOUT';
+    // membersLogoutSubItemToAdd.linkToNavigateTo = this.navigationRoutes.MembersWelcome;
+    // membersLogoutSubItemToAdd.displayForLoggedInUserOnly = true;
+    // membersItemToAdd.subItems.push(membersLogoutSubItemToAdd);
+
+    this.navBarItems.push(membersItemToAdd);
+  
+
+
+
+
+
+
+
+
+
+    // Admin
+    const adminItemToAdd = new NavBarItems.NavLink();
+    adminItemToAdd.title = 'Admin';
+    adminItemToAdd.navLinkToCheck = '/admin';
+    adminItemToAdd.displayForAdminOnly = true;
+    adminItemToAdd.subItems = new Array<NavBarItems.NavBarSubItems>();
+
+    const adminManageGallerySubItemToAdd = new NavBarItems.NavBarSubItems();
+    adminManageGallerySubItemToAdd.title = 'Manage Gallery';
+    adminManageGallerySubItemToAdd.linkToNavigateTo = this.navigationRoutes.GalleryAdmin;
+    adminItemToAdd.subItems.push(adminManageGallerySubItemToAdd);
+
+    this.navBarItems.push(adminItemToAdd);
+
   }
 
   public navigateToRoute(newRoute: string) {

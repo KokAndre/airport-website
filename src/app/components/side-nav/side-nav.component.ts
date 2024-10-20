@@ -77,7 +77,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public initializeIsLoggedInCheck() {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
-      if(this.isAuthorised) {
+      if (this.isAuthorised) {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
       } else {
         this.isUserAdmin = false;
@@ -150,18 +150,15 @@ export class SideNavComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName("body")[0];
     this.resizeObserver = new ResizeObserver(() => {
       const widthToCheck = window.innerWidth;
-      console.log('WIDTH: ', widthToCheck);
       if (widthToCheck < 1210) {
         this.isMobileView = true;
       } else {
         this.isMobileView = false;
       }
-      console.log('IS MOBILE: ', this.isMobileView);
-  
-  });
-  
-  // Add a listener to body
-  this.resizeObserver.observe(body);
+    });
+
+    // Add a listener to body
+    this.resizeObserver.observe(body);
   }
 
   public displayTermsAndConditions() {
