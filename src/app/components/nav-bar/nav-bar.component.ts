@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
 import { NavBarItems } from 'src/app/models/nav-bar-items.model';
@@ -26,6 +26,8 @@ export class NavBarComponent implements OnInit {
   @Input() public isAuthorised = false;
   @Input() public isUserAdmin = false;
   @Input() public isMobileView = false;
+
+  // @ViewChild('drawer') public drawer;
 
   constructor(public router: Router, public loginService: LoginService, public appModalService: AppModalService) {
     this.initializeNavBarItems();

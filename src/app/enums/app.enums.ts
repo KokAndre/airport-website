@@ -26,8 +26,10 @@ export enum AppRoutes {
     SurroundingAirfields = '/pilot-information/surrounding-airfields',
     Projects = '/projects',
     Classifieds = '/merch/classifieds',
-    HangarRenting = '/merch/hangar-renting',
-    HangarsForSale = '/merch/hangars-for-sale',
+
+
+    HangarRenting = '/property-for-sale/hangar-renting',
+    HangarsForSale = '/property-for-sale/hangars-for-sale',
 
     MembersWelcome = '/members/welcome',
     MembersFAQS = '/members/faqs',
