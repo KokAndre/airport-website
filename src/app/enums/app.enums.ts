@@ -66,6 +66,10 @@ export enum SessionStorageKeys {
     Token = 'token'
 }
 
+export enum LocalStorageKeys {
+    PrefferedWelcomeEmail = 'prefferedWelcomeEmail'
+}
+
 export enum ModalTypes {
     InformationModal = 'informationModal',
     PDFModal = 'pdfModal',

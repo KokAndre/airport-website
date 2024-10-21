@@ -39,6 +39,44 @@ export class SessionStorageHelper {
 
 }
 
+export class LocalStorageHelper {
+    static storeItem(key: string, value: string) {
+        localStorage.setItem(key, value);
+        return localStorage.getItem(key);
+    }
+
+    static getItem(key: string) {
+        return localStorage.getItem(key);
+    }
+
+    static removeItem(key: string) {
+        localStorage.removeItem(key);
+    }
+
+    static clearAllItems() {
+        localStorage.clear();
+    }
+
+    static storeArrayItem(key: string, value: any) {
+        let item = this.getItem(key);
+        // Does not yet exist - Create it
+        if (!item) {
+            localStorage.setItem(key, '[' + value + ']');
+        } else {
+            item = item.replace('[', '').replace(']', '') + ', ' + value;
+            // Append to the list
+            localStorage.setItem(key, '[' + item + ']');
+        }
+    }
+
+    static getArrayItem(key: any) {
+        const item = localStorage.getItem(key);
+
+        return JSON.parse(item ? item : '') as Array<string>;
+    }
+
+}
+
 export class AppHelperFunction {
     static encryptPassword(textToEncrypt: string) {
         const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
