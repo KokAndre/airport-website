@@ -39,7 +39,7 @@
       <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center image-container" *ngFor="let img of section.images">
         <mat-icon class="pointer delete-image-icon"
           (click)="deleteImageClicked(img.name, img.id)">delete</mat-icon>
-        <img [src]="img.imageSource" [alt]="img.name" width="100%" />
+        <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height"/>
       </div>
 
       <div class="col-lg-3 col-md-6 col-sm-12 p-2">
