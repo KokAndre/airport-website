@@ -260,7 +260,7 @@ export class NavBarComponent implements OnInit {
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/FATA-Runway-Information-FATA.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20240419-FATAEmergencyContacts-FATA-011.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241014 -FATA Emergency Contacts - FATA -011.pdf', null);
         break;
       case DocumentsToDisplayEnum.SalesBrochure:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20240429-TedderfieldSalesBrochure.pdf', null);

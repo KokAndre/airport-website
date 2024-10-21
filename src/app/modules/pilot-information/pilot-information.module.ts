@@ -8,6 +8,7 @@ import { LiveWeatherUpdatesComponent } from './components/live-weather-updates/l
 import { OtherAirfieldsComponent } from './components/other-airfields/other-airfields.component';
 import { ReportingHazardsComponent } from './components/reporting-hazards/reporting-hazards.component';
 import { SurroundingAirfieldsComponent } from './components/surrounding-airfields/surrounding-airfields.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -23,7 +24,8 @@ import { SurroundingAirfieldsComponent } from './components/surrounding-airfield
   ],
   imports: [
     CommonModule,
-    PilotInformationRoutingModule
+    PilotInformationRoutingModule,
+    SharedModule
   ]
 })
 export class PilotInformationModule { }
