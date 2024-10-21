@@ -22,5 +22,5 @@
       </div>
     </div>
   </div>
-  <app-arrow-divider [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+  <app-arrow-divider *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
 </div>
