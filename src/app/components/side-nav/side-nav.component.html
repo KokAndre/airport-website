@@ -2,16 +2,18 @@
 <div class="main-container">
   <!-- <div class="col-12 px-0"> -->
   <div class="header-container">
-    <div class="header row mx-0 px-4" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
-      <div class="col-lg-1 col-md-1 col-sm-5 col-5 px-0 pointer center-align-vertical" (click)="navigateToRoute(navigationRoutes.Home)">
+    <div class="header row mx-0" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
+      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 pointer center-align-vertical header-white-background"
+        (click)="navigateToRoute(navigationRoutes.Home)">
         <div class="logo-image"></div>
       </div>
-      <div class="col-lg-10 col-md-10 col-sm-2 col-2 px-0 center-align-vertical">
-        <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin" [isMobileView]="isMobileView"></app-nav-bar>
+      <div class="col-lg-8 col-md-8 col-sm-2 col-2 px-0 center-align-vertical">
+        <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin"
+          [isMobileView]="isMobileView"></app-nav-bar>
       </div>
-      <div class="col-lg-1 col-md-1 col-sm-5 col-5 center-align-vertical">
-        <p class="mb-0 text-size-20 text-center" *ngIf="isAuthorised">Welcome</p>
-        <p class="mb-0 text-size-20 text-center"><span class="text-bold ml-2">{{ getLoggedInUsername() }}</span></p>
+      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical" [ngClass]="{'header-white-background': isAuthorised}">
+        <p class="mb-0 text-size-20 text-center header-blue-text" *ngIf="isAuthorised">Welcome</p>
+        <p class="mb-0 text-size-20 text-center header-red-text" *ngIf="isAuthorised"><span class="text-bold">{{ getLoggedInUsername() }}</span></p>
       </div>
     </div>
   </div>
@@ -30,31 +32,34 @@
         <div class="col-7 col-sm-7 col-md-6 col-lg-6 px-0 align-content-center">
 
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
-              Policy</a> | <a class="text-size-12 red-hyperlink-text no-underline pointer"
+            <a class="text-size-12 white-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
+              Policy</a> | <a class="text-size-12 white-text no-underline pointer"
               (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline" target="_blank"
+            <a class="text-size-12 white-text no-underline" target="_blank"
               href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">Email:
+            <a class="text-size-12 white-text no-underline" href="mailto:info@tedderfield.co.za">Email:
               info&#64;tedderfield.co.za</a>
           </p>
         </div>
         <div class="col-4 col-sm-4 col-md-5 col-lg-5 p-0 align-content-center" [ngClass]="{'pr-3': isMobileView}">
           <div class="row mx-0 justify-content-end">
             <div class="red-button" (click)="navigateToLiveWeather()">
-              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">LIVE WX</p>
-              <span [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
+              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">LIVE
+                WX</p>
+              <span
+                [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
             </div>
           </div>
         </div>
         <div class="col-1 col-sm-1 col-md-1 col-lg-1 px-0 align-content-center">
           <div class="row mx-0 justify-content-end">
-            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView}" target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
+            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView}"
+              target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
               <div class="facebook-icon"></div>
             </a>
           </div>
@@ -75,17 +80,17 @@
         <div class="col-6 px-0 align-content-center">
 
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
-              Policy</a> | <a class="text-size-12 red-hyperlink-text no-underline pointer"
+            <a class="text-size-12 whitetext no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
+              Policy</a> | <a class="text-size-12 whitetext no-underline pointer"
               (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline" target="_blank"
+            <a class="text-size-12 whitetext no-underline" target="_blank"
               href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">Email:
+            <a class="text-size-12 whitetext no-underline" href="mailto:info@tedderfield.co.za">Email:
               info&#64;tedderfield.co.za</a>
           </p>
         </div>

@@ -13,7 +13,7 @@
 .dropbtn:hover,
 .dropdown:hover .dropbtn {
     background-color: rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid #fe432a;
+    border-bottom: 1px solid white;
 }
 
 .dropdown-content-container {
@@ -62,7 +62,7 @@
 }
 
 .nav-link-active {
-    border-bottom: 3px solid #fe432a !important;
+    border-bottom: 3px solid white !important;
     background-color: rgba(0, 0, 0, 0.2) !important;
 
     .nav-link-text {
@@ -71,7 +71,7 @@
 }
 
 .nav-link-active-mobile {
-    border-bottom: 3px solid #fe432a !important;
+    border-bottom: 3px solid white !important;
     // background-color: rgba(0, 0, 0, 0.2) !important;
 
     .nav-link-text {

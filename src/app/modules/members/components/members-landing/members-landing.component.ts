@@ -41,7 +41,7 @@ export class MembersLandingComponent implements OnInit {
 
   public displayLoginPageNoDataError() {
     this.displayLoginScreen = false;
-    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'No Member Data Provided', 'No member data was provided. Please contact <a class="red-hyperlink-text no-underline" href="mailto:info@tedderfield.co.za">info@tedderfield.co.za</a>', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'No Member Data Provided', 'No member data was provided. Please contact <a class="red-text no-underline" href="mailto:info@tedderfield.co.za">info@tedderfield.co.za</a>', null);
   }
 
   public displayWelcomePage() {
