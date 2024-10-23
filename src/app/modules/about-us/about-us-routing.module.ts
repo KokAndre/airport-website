@@ -5,6 +5,7 @@ import { TedderfieldHistoryComponent } from './components/tedderfield-history/te
 import { NgModule } from '@angular/core';
 import { LiveWeatherComponent } from './components/live-weather/live-weather.component';
 import { MissionAndVisionStatementComponent } from './components/mission-and-vision-statement/mission-and-vision-statement.component';
+import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'mission-and-vision-statement', component: MissionAndVisionStatementComponent
+  },
+  {
+    path: 'gallery', component: GalleryLandingComponent
   }
 ];
 

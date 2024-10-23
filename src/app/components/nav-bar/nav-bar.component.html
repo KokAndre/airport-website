@@ -35,6 +35,10 @@
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MissionAndVisionStatement)">
           Mission & Vision Statement</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
+          Gallery</div>
       </div>
     </div>
   </div>
@@ -101,12 +105,12 @@
   </div>
 
   <!-- Gallery -->
-  <div class="dropdown pointer px-0">
+  <!-- <div class="dropdown pointer px-0">
     <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.GalleryLanding)" appIsRouterLinkActive
       navLinkToCheck="/gallery" [currentRoute]="currentRoute">
       <div class="nav-link-text">Gallery</div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Property for Sale and Rent -->
   <div class="dropdown pointer px-0">
@@ -231,14 +235,14 @@
     <mat-divider></mat-divider>
 
     <!-- Gallery -->
-    <div class="pl-3 pr-0" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
+    <!-- <div class="pl-3 pr-0" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
       <div class="" appIsRouterLinkActive navLinkToCheck="/gallery" [currentRoute]="currentRoute"
         [isMobileView]="isMobileView">
         <div class="nav-link-text">Gallery</div>
       </div>
     </div>
 
-    <mat-divider></mat-divider>
+    <mat-divider></mat-divider> -->
 
     <!-- Property for Sale and Rent -->
     <div class="pl-3 pr-0" mat-menu-item [matMenuTriggerFor]="propertyForSaleRentMenu">
@@ -292,6 +296,9 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MissionAndVisionStatement)">
       Mission & Vision Statement</div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
+      Gallery</div>
   </mat-menu>
 
   <mat-menu #pilotInformationMenu="matMenu">

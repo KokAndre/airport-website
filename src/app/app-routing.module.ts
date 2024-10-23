@@ -31,9 +31,6 @@ const routes: Routes = [
         path: 'training-and-renewals', loadChildren: () => import('./modules/training-and-renewals/training-and-renewals.module').then(m => m.TrainingAndRenewalsModule)
       },
       {
-        path: 'gallery', loadChildren: () => import('./modules/gallery/gallery.module').then(m => m.GalleryModule)
-      },
-      {
         path: 'members', loadChildren: () => import('./modules/members/members.module').then(m => m.MembersModule)
       },
       {

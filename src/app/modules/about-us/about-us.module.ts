@@ -7,6 +7,7 @@ import { AboutUsRoutingModule } from './about-us-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LiveWeatherComponent } from './components/live-weather/live-weather.component';
 import { MissionAndVisionStatementComponent } from './components/mission-and-vision-statement/mission-and-vision-statement.component';
+import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
 
 
 
@@ -17,6 +18,7 @@ import { MissionAndVisionStatementComponent } from './components/mission-and-vis
     TedderfieldHistoryComponent,
     LiveWeatherComponent,
     MissionAndVisionStatementComponent,
+    GalleryLandingComponent
   ],
   imports: [
     CommonModule,
