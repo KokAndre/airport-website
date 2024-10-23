@@ -1,41 +1,131 @@
-<div
-  style="width: 100%; height: 500px; background-image: url('assets/sample-image.webp'); background-repeat: no-repeat; background-position: bottom; background-size: cover;">
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Follow Us</p>
+    <p class="mb-0 text-size-14">About Us / <span class="child-path-text">Follow Us</span></p>
+  </div>
 </div>
 
-<div class="col-12">
-  <h1 class="mt-3 mx-auto text-center">Follow Us Page</h1>
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nisl in nisi tempor sollicitudin eget et
-    dolor. Quisque posuere scelerisque tortor, vitae tempor nunc tempus id. Nam dui nunc, finibus in tincidunt non,
-    malesuada vitae neque. Suspendisse ac ligula risus. Suspendisse eleifend, augue eget finibus facilisis, lacus nibh
-    tempor turpis, eu rhoncus magna dolor quis sem. Phasellus imperdiet euismod nulla ac interdum. Mauris congue turpis
-    nisi. Integer in fermentum purus. Sed non finibus orci. Nam dapibus ullamcorper diam, at congue arcu pellentesque
-    ac. Nunc ut luctus lectus. Fusce quis ex dui. Aenean eget libero tincidunt, facilisis urna vitae, faucibus lacus.
-    Maecenas eget risus id justo dapibus ultrices. Nunc ac porta mauris. Duis tempus, urna eget dapibus rutrum, urna
-    ante tempus lacus, accumsan semper eros lacus eu ligula.
-    <br><br>
-    Cras mattis feugiat justo, at accumsan sem congue quis. Etiam turpis magna, tempus ac elit sit amet, eleifend
-    aliquet augue. Aliquam tempor commodo magna non congue. Mauris ultrices posuere ligula vitae ullamcorper. Maecenas
-    at condimentum orci. Phasellus eget ultrices mi, a pretium diam. Fusce suscipit auctor efficitur. Suspendisse luctus
-    eget libero id dapibus. Ut eu venenatis libero. Etiam malesuada est a quam condimentum, eu lacinia augue
-    consectetur.
-    <br><br>
-    Integer nunc augue, ultrices rhoncus mattis et, scelerisque sit amet turpis. Ut suscipit metus justo, ac iaculis
-    sapien iaculis rhoncus. Sed gravida luctus sem, iaculis condimentum nibh laoreet vitae. Proin condimentum est et
-    quam ultricies porta. Suspendisse vel augue ante. Donec vel lacus a ex consectetur auctor. Pellentesque eget felis
-    at elit faucibus maximus sed sed ex. Vestibulum blandit, nulla in fermentum dapibus, est orci imperdiet justo, nec
-    blandit nisl turpis vel lorem. Praesent consequat eros at ultrices imperdiet. Suspendisse congue a dolor egestas
-    cursus. Curabitur eget eleifend eros. Cras maximus magna ac augue fringilla, vel porttitor quam egestas.
-    <br><br>
-    Morbi vitae viverra est. Donec eleifend est quam, eget dapibus mauris ornare vel. Curabitur mauris nisl, hendrerit
-    ac mauris sit amet, suscipit dictum sem. Suspendisse potenti. Nullam vitae scelerisque ex, nec sodales ipsum. Nunc
-    consequat cursus tincidunt. Pellentesque venenatis luctus congue. Quisque commodo et enim vitae aliquam.
-    <br><br>
-    Cras gravida diam lectus, eu varius nisi vehicula accumsan. Sed arcu quam, tempus id ipsum quis, fringilla bibendum
-    nulla. Sed eget odio a risus gravida cursus. Donec scelerisque porttitor tincidunt. Donec dictum, dolor id maximus
-    posuere, enim diam malesuada est, nec faucibus diam massa ac nulla. Nulla interdum urna a mauris finibus, ac aliquam
-    arcu lobortis. Suspendisse egestas semper euismod. Fusce id lacus lectus. Vivamus egestas tortor pellentesque enim
-    ornare scelerisque.
-  </p>
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-24 mb-3">Stay Connected with Tedderfield Airpark</p>
+    <p class="">Thank you for your interest in Tedderfield Airpark! Whether you're looking to purchase a hangar, stand,
+      or participate in our vibrant aviation community, we're excited to keep you updated on our latest news and
+      offerings.</p>
+    <p>Please fill out the form below, and we will follow up with the information you need!</p>
+  </div>
+
+  <div class="mb-3 form-background-image py-4" [formGroup]="followUsFormGroup">
+    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto follow-us-form-background">
+      <div class="row mx-0 justify-content-center mt-4">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Name</mat-label>
+          <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
+          <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Email</mat-label>
+          <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+          <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+        </mat-form-field>
+        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+      </div>
+      <div class="row mx-0 justify-content-center">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Phone Number</mat-label>
+          <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl" (input)="numberControlInput()">
+          <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+          <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+        </mat-form-field>
+        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+      </div>
+
+      <div class="row mx-0 justify-content-center">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Are you interested in</mat-label>
+          <mat-select formControlName="interestsSelectControl">
+            <mat-option *ngFor="let item of interestsData" [value]="item.value">{{ item.displayValue }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="phoneNumberControl?.hasError('required')">Interests is required</mat-error>
+        </mat-form-field>
+        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+      </div>
+
+      <div *ngIf="interestsSelectControl?.value === 'other'" class="row mx-0 justify-content-center">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Other</mat-label>
+          <input style="color: black;" matInput required maxlength="100" formControlName="otherInterestsControl">
+          <mat-error *ngIf="otherInterestsControl?.hasError('required')">Other is required</mat-error>
+        </mat-form-field>
+        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+      </div>
+
+      <div class="row mx-0 justify-content-center">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Comments or Questions</mat-label>
+          <textarea style="color: black;" matInput maxlength="500" formControlName="commentsControl"></textarea>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="row mx-0 justify-content-center">
+        <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitButtonDisabled()}"
+          (click)="submitClicked()">
+          <p class="mb-0">Submit</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-10 mx-auto pb-4">
+    <p class=""><b>What Happens Next?</b></p>
+
+    <p>Once you submit the form, a member of our team will reach out to provide you with the details or answers you
+      need. In the meantime, feel free to explore the following:</p>
+
+    <ul>
+      <!-- TODO: Add correct router links !!!!!!!!!!! -->
+      <li><a class="mb-0 no-underline red-hyperlink-text" href="/members/welcome">Available Hangars &
+          Stands</a></li>
+      <li><a class="mb-0 no-underline red-hyperlink-text" href="/members/welcome">Upcoming Events</a></li>
+      <li><a class="mb-0 no-underline red-hyperlink-text" href="/members/welcome">Airfield Amenities</a>
+      </li>
+    </ul>
+  </div>
+
+  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="col-10 mx-auto pb-4">
+  <p class="text-size-24 mb-3">Follow Us and Stay Connected with Tedderfield Airpark!</p>
+  <p class="">At Tedderfield Airpark, we're more than just a runway—we're a community of passionate aviators and
+    enthusiasts. Stay in the loop with all the latest airpark news, events, and opportunities by following us on our
+    social media platforms!</p>
+
+  <p><b>Connect with us to:</b></p>
+
+  <ul>
+    <li>Be the first to know about <b>available hangars</b> and <b>stands for sale.</b></li>
+    <li>Stay updated on <b>fly-ins, aviation events,</b> and <b>community activities.</b></li>
+    <li>Learn about new <b>aviation services</b> offered at the airpark.</li>
+  </ul>
+
+  <p><b>Follow Us On Social Media:</b></p>
+
+  <ul>
+    <li><a class="mb-0 no-underline red-hyperlink-text" target="_blank"
+        href="https://www.facebook.com/groups/1485616671675820/">Facebook</a> <br />
+      <span class="text-italic">Join our Facebook community and engage with fellow pilots and aviation enthusiasts. We
+        post regular updates on events, property listings, and community highlights.</span>
+    </li>
+  </ul>
 </div>

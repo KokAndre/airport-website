@@ -61,8 +61,6 @@ export class LoginComponent implements OnInit {
       loginEmailControl: new FormControl(this.userData.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       loginPasswordControl: new FormControl('', [Validators.required]),
     });
-
-    // this.checkOnEnterButtonFocus();
   }
 
   public initializeRegisterControls() {

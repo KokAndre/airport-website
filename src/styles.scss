@@ -304,14 +304,13 @@ h6,
   border: 1px solid transparent;
 
   &:hover {
-      background-color: #cd2122 !important;
+    background-color: #cd2122 !important;
   }
 
   p {
-      color: white !important;
-      font-size: 18px;
+    color: white !important;
+    font-size: 18px;
   }
-  
 }
 
 .red-button-icon {
@@ -333,7 +332,7 @@ h6,
   width: 10px;
   height: 7px;
   display: block;
-  margin-left: 4px; 
+  margin-left: 4px;
 }
 
 .red-button.disable-user-click {
@@ -356,14 +355,13 @@ h6,
   border: 1px solid #ee202e;
 
   &:hover {
-      background-color: #f5f5f5 !important;
+    background-color: #f5f5f5 !important;
   }
 
   p {
-      color: #ee202e !important;
-      font-size: 18px;
+    color: #ee202e !important;
+    font-size: 18px;
   }
-  
 }
 
 .white-button-icon {
@@ -406,8 +404,6 @@ h6,
   color: rgba(0, 0, 0, 0.5);
 }
 
-// .disable-user-click {
-//   cursor: not-allowed !important;
-//   pointer-events: none;
-//   background-color: #e9747c;
-// }
+.text-italic {
+  font-style: italic;
+}

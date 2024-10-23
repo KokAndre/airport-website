@@ -1,3 +1,4 @@
+import { AbstractControl, FormControl } from "@angular/forms";
 import { EncryptionKeys } from "../enums/app.enums";
 import * as CryptoJS from 'crypto-js';
 
@@ -93,5 +94,10 @@ export class AppHelperFunction {
         const enc = CryptoJS.AES.encrypt(tokenString, keyHex, { iv: ivHex });
         const encryptedString = enc.ciphertext.toString(CryptoJS.enc.Base64);
         return encryptedString;
+    }
+
+    static removeNonNumericCharacters(value: string) {
+        value = value.toString().replace(/[^0-9]*/g, '');
+        return value;
     }
 }
