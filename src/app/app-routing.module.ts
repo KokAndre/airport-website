@@ -15,9 +15,9 @@ const routes: Routes = [
       {
         path: 'about-us', loadChildren: () => import('./modules/about-us/about-us.module').then(m => m.AboutUsModule)
       },
-      {
-        path: 'contact-us', loadChildren: () => import('./modules/contact-us/contact-us.module').then(m => m.ContactUsModule)
-      },
+      // {
+      //   path: 'contact-us', loadChildren: () => import('./modules/contact-us/contact-us.module').then(m => m.ContactUsModule)
+      // },
       {
         path: 'pilot-information', loadChildren: () => import('./modules/pilot-information/pilot-information.module').then(m => m.PilotInformationModule)
       },

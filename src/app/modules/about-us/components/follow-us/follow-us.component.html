@@ -39,7 +39,8 @@
       <div class="row mx-0 justify-content-center">
         <mat-form-field class="col-10 px-0">
           <mat-label>Phone Number</mat-label>
-          <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl" (input)="numberControlInput()">
+          <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
+            (input)="numberControlInput()">
           <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
           <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
         </mat-form-field>
@@ -85,21 +86,21 @@
     </div>
   </div>
 
-  <div class="col-10 mx-auto pb-4">
+
+  <!-- <div class="col-10 mx-auto pb-4">
     <p class=""><b>What Happens Next?</b></p>
 
     <p>Once you submit the form, a member of our team will reach out to provide you with the details or answers you
       need. In the meantime, feel free to explore the following:</p>
 
     <ul>
-      <!-- TODO: Add correct router links !!!!!!!!!!! -->
       <li><a class="mb-0 no-underline red-text" href="/members/welcome">Available Hangars &
           Stands</a></li>
       <li><a class="mb-0 no-underline red-text" href="/members/welcome">Upcoming Events</a></li>
       <li><a class="mb-0 no-underline red-text" href="/members/welcome">Airfield Amenities</a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
 

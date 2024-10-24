@@ -1,6 +1,5 @@
 export enum AppRoutes {
     Home = '/home',
-    ContactUs = '/contact-us',
     Login = '/login',
     Register = '/register',
     FAQS = '/training-and-renewals/faqs',
@@ -12,6 +11,7 @@ export enum AppRoutes {
     TedderfieldHistory = '/about-us/tedderfield-history',
     LiveWeather = '/about-us/live-weather',
     GalleryLanding='/about-us/gallery',
+    ContactUs = '/about-us/contact-us',
     MissionAndVisionStatement = '/about-us/mission-and-vision-statement',
     MapAndLocation = '/pilot-information/map-and-location',
     AirfieldInformation = '/pilot-information/airfield-information',

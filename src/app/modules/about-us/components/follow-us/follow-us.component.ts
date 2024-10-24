@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
+import { FollowUsRequest } from 'src/app/models/follow-us-request.model';
 
 @Component({
   selector: 'app-follow-us',
@@ -10,6 +11,7 @@ import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 export class FollowUsComponent implements OnInit {
   public followUsFormGroup: FormGroup;
   public appHelperFunctions = AppHelperFunction;
+  // public followUsRequestData: FollowUsRequest.RootObject;
   public interestsData = [
     {
       value: "purchaseHangerOrStand",
@@ -64,7 +66,22 @@ export class FollowUsComponent implements OnInit {
   }
 
   public submitClicked() {
-    console.log('SUBMIT CLICKED !!!!!!!!!!!');
+    const requestData = new FollowUsRequest.RootObject();
+    requestData.name = this.nameControl?.value;
+    requestData.email = this.emailControl?.value;
+    requestData.phoneNumber = this.phoneNumberControl?.value;
+    requestData.commentsAndQuestions = this.commentsControl?.value;
+
+    if (this.interestsSelectControl?.value === 'other') {
+      requestData.otherInterest = this.otherInterestsControl?.value;
+    }
+
+    const interestedInValue = this.interestsData.find(x => x.value === this.interestsSelectControl?.value);
+    if (interestedInValue?.displayValue) { 
+      requestData.interestedIn = interestedInValue.displayValue;
+    }
+
+    console.log('REQUEST DATA: ', requestData);
   }
 
   public get nameControl() {
