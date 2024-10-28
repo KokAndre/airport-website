@@ -151,7 +151,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName("body")[0];
     this.resizeObserver = new ResizeObserver(() => {
       const widthToCheck = window.innerWidth;
-      if (widthToCheck < 1210) {
+      if (widthToCheck < 1126) {
         this.isMobileView = true;
       } else {
         this.isMobileView = false;

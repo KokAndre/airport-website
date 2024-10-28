@@ -10,7 +10,7 @@ export enum AppRoutes {
     FollowUs = '/about-us/follow-us',
     TedderfieldHistory = '/about-us/tedderfield-history',
     LiveWeather = '/about-us/live-weather',
-    GalleryLanding='/about-us/gallery',
+    GalleryLanding = '/about-us/gallery',
     ContactUs = '/about-us/contact-us',
     MissionAndVisionStatement = '/about-us/mission-and-vision-statement',
     MapAndLocation = '/pilot-information/map-and-location',
@@ -22,18 +22,13 @@ export enum AppRoutes {
     SurroundingAirfields = '/pilot-information/surrounding-airfields',
     Projects = '/projects',
     Classifieds = '/merch/classifieds',
-
-
     HangarRenting = '/property-for-sale/hangar-renting',
     HangarsForSale = '/property-for-sale/hangars-for-sale',
-
     MembersWelcome = '/members/welcome',
     MembersFAQS = '/members/faqs',
-
-
     PropertyForSaleBase = '/property-for-sale/',
-    
-    GalleryAdmin='/admin/edit-gallery',
+    GalleryAdmin = '/admin/edit-gallery',
+    FollowUsRequests = '/admin/follow-us-requests',
 }
 
 export enum Endpoints {
@@ -50,7 +45,11 @@ export enum Endpoints {
     GetGalleryData = '/gallery/get-gallery-data.php',
     DeleteImage = '/gallery/delete-image.php',
     DeleteSection = '/gallery/delete-section.php',
-    EditSection = '/gallery/edit-section.php'
+    EditSection = '/gallery/edit-section.php',
+    SubmitFollowUsRequest = '/follow-us/submit-follow-up.php',
+    GetFollowUsData = '/follow-us/get-follow-us-data.php',
+    DeleteFollowUsItem = '/follow-us/delete-follow-us-item.php',
+    MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php'
 }
 
 export enum EncryptionKeys {

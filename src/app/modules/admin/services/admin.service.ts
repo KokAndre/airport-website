@@ -7,6 +7,7 @@ import { CreateSectionRequest } from 'src/app/models/create-section-request.mode
 import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
+import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +100,50 @@ export class AdminService {
     requestData.userId = this.loginService.getLoggedInUserId();
 
     return fetch(Endpoints.BaseURL + Endpoints.EditSection, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getFollowUsData() {
+    const requestData = new EditSectionRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetFollowUsData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteFollowUsEntry(followUsRequestId: string) {
+    const requestData = new UpdateFollowUsItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.followUsId = followUsRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteFollowUsItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editFollowUsEntry(followUsRequestId: string) {
+    const requestData = new UpdateFollowUsItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.followUsId = followUsRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkFollowUsAsFollowedUp, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

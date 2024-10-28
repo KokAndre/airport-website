@@ -274,12 +274,20 @@ h6,
   color: #ee202e;
 }
 
+.green-text {
+  color: green;
+}
+
 .white-text {
   color: white;
 }
 
 .no-underline {
   text-decoration: unset !important;
+}
+
+.text-no-wrap {
+  text-wrap: nowrap;
 }
 
 .section-header-text {

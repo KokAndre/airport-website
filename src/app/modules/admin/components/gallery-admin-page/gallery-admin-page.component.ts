@@ -28,7 +28,7 @@ export class GalleryAdminPageComponent implements OnInit {
   }
 
   public getGalleryData() {
-    this.adminService. getGalleryData().then((results: GetGalleryDataResponse.RootObject) => {
+    this.adminService.getGalleryData().then((results: GetGalleryDataResponse.RootObject) => {
       if (results.status === 200) {
         this.galleryData = results.sections;
         this.galleryData.forEach(section => {

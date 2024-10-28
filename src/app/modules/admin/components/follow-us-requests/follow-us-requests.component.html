@@ -1,0 +1,40 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Follow Us Requests
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Follow Us Requests</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col 12 col-sm-12 col-md 12 col-lg-12 px-2">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Interest</th>
+      <th>Other</th>
+      <th>Comments</th>
+      <th>Date Captured</th>
+      <th>Followed Up</th>
+      <th>Action</th>
+    </tr>
+
+    <tr *ngFor="let item of followUsRequests">
+      <td [innerHTML]="item.name"></td>
+      <td [innerHTML]="item.email"></td>
+      <td [innerHTML]="item.phoneNumber"></td>
+      <td [innerHTML]="item.interestedIn"></td>
+      <td [innerHTML]="item.otherInterest"></td>
+      <td [innerHTML]="item.commentsAndQuestions"></td>
+      <td [innerHTML]="item.dateAdded"></td>
+      <td><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold" fontIcon="close"></mat-icon></td>
+      <td class="text-no-wrap text-center"><mat-icon *ngIf="item.hasFollowedUp === '0'" class="green-text mr-2 pointer" fontIcon="check" (click)="markRequestAsFollowedUpClicked(item)"></mat-icon><mat-icon class="red-text pointer" fontIcon="delete" (click)="deleteFollowUpRequestClicked(item)"></mat-icon></td>
+    </tr>
+
+  </table>
+</div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 import { FollowUsRequest } from 'src/app/models/follow-us-request.model';
+import { AboutUsService } from '../../services/about-us.service';
+import { ModalTypes } from 'src/app/enums/app.enums';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 
 @Component({
   selector: 'app-follow-us',
@@ -31,7 +34,7 @@ export class FollowUsComponent implements OnInit {
     }
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private aboutUsService: AboutUsService, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.initializeFollowUsControls();
@@ -81,7 +84,27 @@ export class FollowUsComponent implements OnInit {
       requestData.interestedIn = interestedInValue.displayValue;
     }
 
-    console.log('REQUEST DATA: ', requestData);
+    this.aboutUsService.submitFollowUsForm(requestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Submit Follow Us Form', results.message, null);
+      if (results.status === 200) {
+        this.clearFormData();
+      }
+    });
+  }
+
+  public clearFormData() {
+    this.nameControl?.setValue('');
+    this.nameControl?.reset();
+    this.emailControl?.setValue('');
+    this.emailControl?.reset();
+    this.phoneNumberControl?.setValue('');
+    this.phoneNumberControl?.reset();
+    this.interestsSelectControl?.setValue('');
+    this.interestsSelectControl?.reset();
+    this.otherInterestsControl?.setValue('');
+    this.otherInterestsControl?.reset();
+    this.commentsControl?.setValue('');
+    this.commentsControl?.reset();
   }
 
   public get nameControl() {
