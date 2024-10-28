@@ -9,9 +9,9 @@ import { ReportingHazardsComponent } from './components/reporting-hazards/report
 import { SurroundingAirfieldsComponent } from './components/surrounding-airfields/surrounding-airfields.component';
 
 const routes: Routes = [
-  {
-    path: 'map-and-location', component: MapAndLocationComponent
-  },
+  // {
+  //   path: 'map-and-location', component: MapAndLocationComponent
+  // },
   {
     path: 'airfield-information', component: AirfieldInformationComponent
   },

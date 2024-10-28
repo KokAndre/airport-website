@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PilotInformationRoutingModule } from './pilot-information-routing.module';
-import { MapAndLocationComponent } from './components/map-and-location/map-and-location.component';
+// import { MapAndLocationComponent } from './components/map-and-location/map-and-location.component';
 import { AirfieldInformationComponent } from './components/airfield-information/airfield-information.component';
 import { JoiningAndLandingComponent } from './components/joining-and-landing/joining-and-landing.component';
 import { LiveWeatherUpdatesComponent } from './components/live-weather-updates/live-weather-updates.component';
@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    MapAndLocationComponent,
+    // MapAndLocationComponent,
     AirfieldInformationComponent,
     JoiningAndLandingComponent,
     LiveWeatherUpdatesComponent,
