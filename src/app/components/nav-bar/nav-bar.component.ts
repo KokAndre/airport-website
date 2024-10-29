@@ -10,6 +10,7 @@ enum DocumentsToDisplayEnum {
   EmergencyContacts = 'emergencyContacts',
   SalesBrochure = 'salesBrochure',
   ParamotorPilots = 'aramotorPilots',
+  GroundOperations = 'groundOperations'
 }
 
 @Component({
@@ -220,7 +221,7 @@ export class NavBarComponent implements OnInit {
     // membersItemToAdd.subItems.push(membersLogoutSubItemToAdd);
 
     this.navBarItems.push(membersItemToAdd);
-  
+
 
 
 
@@ -257,7 +258,7 @@ export class NavBarComponent implements OnInit {
   public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
     switch (documentToDisplay) {
       case DocumentsToDisplayEnum.RunwayInfo:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/FATA-Runway-Information-FATA.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20241028-TedderfielfAirpark-RunwayInformation.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241014 -FATA Emergency Contacts - FATA -011.pdf', null);
@@ -267,6 +268,10 @@ export class NavBarComponent implements OnInit {
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Flying-the-Circuit-at-Tedderfield-Airpark-Paramotor-V3.pdf', null);
+        break;
+      case DocumentsToDisplayEnum.GroundOperations:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028-TedderfieldAirpark-GroundOperations.pdf', null);
+        break;
     }
 
   }

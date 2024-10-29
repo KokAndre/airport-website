@@ -89,6 +89,10 @@
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
           Surrounding Airfields
         </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.GroundOperations)">
+          Ground Operations
+        </div>
       </div>
     </div>
   </div>
@@ -334,8 +338,12 @@
       Paramotor Pilots
     </div>
     <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.SurroundingAirfields)">
       Surrounding Airfields
+    </div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="displayDocument(documentsToDisplayEnum.GroundOperations)">
+      Ground Operations
     </div>
   </mat-menu>
 
