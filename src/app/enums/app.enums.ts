@@ -20,15 +20,18 @@ export enum AppRoutes {
     OtherAirfields = '/pilot-information/other-airfields',
     ReportingHazards = '/pilot-information/reporting-hazards',
     SurroundingAirfields = '/pilot-information/surrounding-airfields',
+    CircuitProcedures = '/pilot-information/circuit-procedures',
     Projects = '/projects',
     Classifieds = '/merch/classifieds',
-    HangarRenting = '/property-for-sale/hangar-renting',
+    StandsForSale = '/property-for-sale/stands-for-sale',
     HangarsForSale = '/property-for-sale/hangars-for-sale',
     MembersWelcome = '/members/welcome',
     MembersFAQS = '/members/faqs',
+    ReportAnIssue = '/members/report-an-issue',
     PropertyForSaleBase = '/property-for-sale/',
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
+    ReportIssueRequests = '/admin/report-issue-requests'
 }
 
 export enum Endpoints {
@@ -49,7 +52,11 @@ export enum Endpoints {
     SubmitFollowUsRequest = '/follow-us/submit-follow-up.php',
     GetFollowUsData = '/follow-us/get-follow-us-data.php',
     DeleteFollowUsItem = '/follow-us/delete-follow-us-item.php',
-    MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php'
+    MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php',
+    ReportIssue = '/report-issue/submit-report-issue.php',
+    GetReportIssueData = '/report-issue/get-report-issue-data.php',
+    MarkReportIssueAsFollowedUp = '/report-issue/update-report-issue-item.php',
+    DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php'
 }
 
 export enum EncryptionKeys {

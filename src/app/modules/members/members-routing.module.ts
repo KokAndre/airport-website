@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MembersLandingComponent } from './components/members-landing/members-landing.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
+import { ReportAnIssueComponent } from './components/report-an-issue/report-an-issue.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'faqs', component: FaqsComponent
+  },
+  {
+    path: 'report-an-issue', component: ReportAnIssueComponent
   },
 ];
 

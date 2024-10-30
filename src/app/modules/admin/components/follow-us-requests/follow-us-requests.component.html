@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="col 12 col-sm-12 col-md 12 col-lg-12 px-2">
+<div *ngIf="followUsRequests?.length" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2">
   <table>
     <tr>
       <th>Name</th>
@@ -32,9 +32,13 @@
       <td [innerHTML]="item.otherInterest"></td>
       <td [innerHTML]="item.commentsAndQuestions"></td>
       <td [innerHTML]="item.dateAdded"></td>
-      <td><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold" fontIcon="close"></mat-icon></td>
+      <td class="text-center"><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold" fontIcon="close"></mat-icon></td>
       <td class="text-no-wrap text-center"><mat-icon *ngIf="item.hasFollowedUp === '0'" class="green-text mr-2 pointer" fontIcon="check" (click)="markRequestAsFollowedUpClicked(item)"></mat-icon><mat-icon class="red-text pointer" fontIcon="delete" (click)="deleteFollowUpRequestClicked(item)"></mat-icon></td>
     </tr>
 
   </table>
+</div>
+
+<div *ngIf="!followUsRequests?.length" class="col-10 mx-auto">
+  <p class="text-size-24">There are currently no requests to review.</p>
 </div>

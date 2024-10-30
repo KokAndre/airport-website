@@ -8,6 +8,7 @@ import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
 import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
+import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -110,7 +111,7 @@ export class AdminService {
   }
 
   public getFollowUsData() {
-    const requestData = new EditSectionRequest.RootObject();
+    const requestData = new UpdateFollowUsItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();
 
     return fetch(Endpoints.BaseURL + Endpoints.GetFollowUsData, {
@@ -144,6 +145,50 @@ export class AdminService {
     requestData.followUsId = followUsRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkFollowUsAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getReportIssueData() {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetReportIssueData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteReportIssueEntry(reportIssueRequestId: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editReportIssueEntry(reportIssueRequestId: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkReportIssueAsFollowedUp, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

@@ -1,0 +1,96 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Report an Issue</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Report an Issue</span></p>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-24 mb-3">Report an Issue - We're Here to Help!</p>
+
+    <p class="">At Tedderfield Airpark, we take pride in making sure everything runs smoothly for our community. Whether
+      you're an owner, renter, or renting pilot, we've made it super easy for you to report any issues that need
+      attention — from maintenance requests to airfield concerns. Just log your issue here, and we'll get it sorted!</p>
+  </div>
+
+  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <div class="col-10 mx-auto pb-4">
+    <p class="text-size-24 mb-3">How It Works:</p>
+
+    <ol>
+      <li>Fill out a quick form describing the issue.</li>
+      <li>Submit your request.</li>
+      <li>Our team will review it and get to work on a solution.</li>
+    </ol>
+
+    <p>Your input helps us keep Tedderfield running like a well-oiled machine, so don't hesitate to let us know how we
+      can help!</p>
+
+  </div>
+
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+</div>
+
+
+<div class="dark-background">
+  <!-- <p class="text-size-24 mb-3">Follow Us and Stay Connected with Tedderfield Airpark!</p> -->
+
+
+  <div class="mb-3 py-4" [formGroup]="reportIssueFormGroup">
+    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto report-issue-form-background">
+      <div class="row mx-0 justify-content-center mt-4">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Name</mat-label>
+          <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
+          <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Email</mat-label>
+          <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+          <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-4">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Hangar or Section Number</mat-label>
+          <input style="color: black;" matInput required maxlength="50" formControlName="hangerOrsectionNumberControl">
+          <mat-error *ngIf="hangerOrsectionNumberControl?.hasError('required')">Hangar or Section Number is
+            required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center">
+        <mat-form-field class="col-10 px-0">
+          <mat-label>Please describe your issue here</mat-label>
+          <textarea style="color: black;" required="" matInput maxlength="500"
+            formControlName="descriptionControl"></textarea>
+          <mat-error *ngIf="descriptionControl?.hasError('required')">Issue description is required</mat-error>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="row mx-0 justify-content-center">
+        <div class="red-button mb-4" [ngClass]="{'disable-user-click': reportIssueFormGroup.invalid}"
+          (click)="submitClicked()">
+          <p class="mb-0">Submit</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

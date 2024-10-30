@@ -1,11 +1,4 @@
 <div class="row mx-0 p-0" *ngIf="!isMobileView">
-  <!-- Home -->
-  <!-- <div class="dropdown pointer px-0">
-    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.Home)" appIsRouterLinkActive navLinkToCheck="/home"
-      [currentRoute]="currentRoute">
-      <div class="nav-link-text">Home</div>
-    </div>
-  </div> -->
 
   <!-- About Us -->
   <div class="dropdown pointer px-0">
@@ -47,14 +40,6 @@
     </div>
   </div>
 
-  <!-- Contacts -->
-  <!-- <div class="dropdown pointer px-0">
-    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.ContactUs)" appIsRouterLinkActive
-      navLinkToCheck="/contact-us" [currentRoute]="currentRoute">
-      <div class="nav-link-text">Contact Us</div>
-    </div>
-  </div> -->
-
   <!-- Pilot Information -->
   <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/pilot-information" [currentRoute]="currentRoute">
@@ -93,6 +78,10 @@
         <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.GroundOperations)">
           Ground Operations
         </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.CircuitProcedures)">
+          Circuit Procedures
+        </div>
       </div>
     </div>
   </div>
@@ -112,14 +101,6 @@
     </div>
   </div>
 
-  <!-- Gallery -->
-  <!-- <div class="dropdown pointer px-0">
-    <div class="dropbtn" (click)="navigateToRoute(navigationRoutes.GalleryLanding)" appIsRouterLinkActive
-      navLinkToCheck="/gallery" [currentRoute]="currentRoute">
-      <div class="nav-link-text">Gallery</div>
-    </div>
-  </div> -->
-
   <!-- Property for Sale and Rent -->
   <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
@@ -132,8 +113,8 @@
         <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.SalesBrochure)">
           Tedderfield Sales Brochure</div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarRenting)">
-          Hangars to Rent</div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.StandsForSale)">
+          Stands for Sale</div>
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
           Hangars for Sale</div>
@@ -163,6 +144,10 @@
 
         <div *ngIf="isAuthorised">
           <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportAnIssue)">Report An Issue
+          </div>
+
+          <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">LOGOUT
           </div>
         </div>
@@ -183,6 +168,10 @@
           Manage Gallery</div>
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us Requests
+        </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Report Issue
+          Requests
         </div>
       </div>
     </div>
@@ -345,6 +334,10 @@
     <div class="dropdown-item p-2" mat-menu-item (click)="displayDocument(documentsToDisplayEnum.GroundOperations)">
       Ground Operations
     </div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.CircuitProcedures)">
+      Circuit Procedures
+    </div>
   </mat-menu>
 
   <mat-menu #fataMerchMenu="matMenu">
@@ -356,8 +349,8 @@
     <div class="dropdown-item p-2" mat-menu-item (click)="displayDocument(documentsToDisplayEnum.SalesBrochure)">
       Tedderfield Sales Brochure</div>
     <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.HangarRenting)">
-      Hangars to Rent</div>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.StandsForSale)">
+      Stands for Sale</div>
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.HangarsForSale)">
       Hangars for Sale</div>
@@ -373,6 +366,11 @@
     </div>
     <div *ngIf="isAuthorised">
       <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportAnIssue)">Report An
+        Issue
+      </div>
+
+      <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">LOGOUT
       </div>
     </div>
@@ -384,6 +382,10 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us
       Requests
+    </div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Report
+      Issue Requests
     </div>
   </mat-menu>
 </div>

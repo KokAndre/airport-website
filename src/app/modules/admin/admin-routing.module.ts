@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
 import { FollowUsRequestsComponent } from './components/follow-us-requests/follow-us-requests.component';
+import { ReportIssueRequestsComponent } from './components/report-issue-requests/report-issue-requests.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'follow-us-requests', component: FollowUsRequestsComponent
+  },
+  {
+    path: 'report-issue-requests', component: ReportIssueRequestsComponent
   }
 ];
 

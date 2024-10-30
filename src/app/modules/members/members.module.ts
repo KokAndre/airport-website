@@ -4,13 +4,15 @@ import { MembersLandingComponent } from './components/members-landing/members-la
 import { MembersRoutingModule } from './members-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FaqsComponent } from './components/faqs/faqs.component';
+import { ReportAnIssueComponent } from './components/report-an-issue/report-an-issue.component';
 
 
 
 @NgModule({
   declarations: [
     MembersLandingComponent,
-    FaqsComponent
+    FaqsComponent,
+    ReportAnIssueComponent
   ],
   imports: [
     CommonModule,

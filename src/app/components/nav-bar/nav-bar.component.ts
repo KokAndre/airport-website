@@ -184,8 +184,8 @@ export class NavBarComponent implements OnInit {
     PropertyForSaleAndRentItemToAdd.subItems.push(propertyForSaleTedderfieldSalesBrochureSubItem);
 
     const propertyForSaleHangerToRentBrochureSubItem = new NavBarItems.NavBarSubItems();
-    propertyForSaleHangerToRentBrochureSubItem.title = 'Hangars to Rent';
-    propertyForSaleHangerToRentBrochureSubItem.linkToNavigateTo = this.navigationRoutes.HangarRenting;
+    propertyForSaleHangerToRentBrochureSubItem.title = 'Stands for Sale';
+    propertyForSaleHangerToRentBrochureSubItem.linkToNavigateTo = this.navigationRoutes.StandsForSale;
     propertyForSaleHangerToRentBrochureSubItem.displayForAdminOnly = false;
     PropertyForSaleAndRentItemToAdd.subItems.push(propertyForSaleHangerToRentBrochureSubItem);
 
