@@ -5,6 +5,7 @@ import { MembersRoutingModule } from './members-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { FaqsComponent } from './components/faqs/faqs.component';
 import { ReportAnIssueComponent } from './components/report-an-issue/report-an-issue.component';
+import { GreenTedderfieldComponent } from './components/green-tedderfield/green-tedderfield.component';
 
 
 
@@ -12,7 +13,8 @@ import { ReportAnIssueComponent } from './components/report-an-issue/report-an-i
   declarations: [
     MembersLandingComponent,
     FaqsComponent,
-    ReportAnIssueComponent
+    ReportAnIssueComponent,
+    GreenTedderfieldComponent
   ],
   imports: [
     CommonModule,

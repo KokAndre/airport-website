@@ -70,6 +70,7 @@ export class LoginService {
           tokenToStore.name = data.data.name;
           tokenToStore.surname = data.data.surname;
           tokenToStore.id = data.data.id;
+          tokenToStore.email = data.data.email;
           tokenToStore.isAdmin = data.data.isAdmin;
           tokenToStore.loginDateTime = new Date().toISOString();
           tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
@@ -166,6 +167,38 @@ export class LoginService {
 
       if (currentDate < tokenExpiryDate) {
         return token.isAdmin;
+      } else {
+        this.logoutUser();
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
+        this.router.navigateByUrl(AppRoutes.Home);
+      }
+    }
+  }
+
+  public getLoggedInUserDetails() {
+    const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
+    if (!stringToken) {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
+      this.router.navigateByUrl(AppRoutes.Home);
+    } else {
+      const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const decryptedBytes = CryptoJS.AES.decrypt(stringToken, keyHex, { iv: ivHex });
+      const dectyptedStringToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      const token = JSON.parse(dectyptedStringToken);
+
+      const currentDate = new Date();
+      const tokenExpiryDate = new Date(token.logoutDateTime);
+
+      console.log('TOKEN:  ', token)
+
+      if (currentDate < tokenExpiryDate) {
+        const userdetails = new LoginToken();
+        userdetails.id = token.id;
+        userdetails.name = token.name;
+        userdetails.surname = token.surname;
+        userdetails.email = token.email;
+        return userdetails;
       } else {
         this.logoutUser();
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);

@@ -101,10 +101,10 @@
     </div>
   </div>
 
-  <!-- Property for Sale and Rent -->
+  <!-- Property for Sale -->
   <div class="dropdown pointer px-0">
     <div class="dropbtn" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute">
-      <div class="nav-link-text">Property for Sale and Rent<mat-icon class="dropdown-icon ml-1"
+      <div class="nav-link-text">Property for Sale<mat-icon class="dropdown-icon ml-1"
           fontIcon="keyboard_arrow_down"></mat-icon></div>
     </div>
     <div class="dropdown-content-container">
@@ -148,7 +148,11 @@
           </div>
 
           <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="logout()">LOGOUT
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GreeningTedderfield)">Greening Tedderfield
+          </div>
+
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
         </div>
       </div>
@@ -184,15 +188,6 @@
   </button>
 
   <mat-menu #mainMenu="matMenu" xPosition="before">
-    <!-- Home -->
-    <!-- <div class="pl-3 pr-0" mat-menu-item (click)="navigateToRoute(navigationRoutes.Home)">
-      <div class="" appIsRouterLinkActive navLinkToCheck="/home" [currentRoute]="currentRoute"
-        [isMobileView]="isMobileView">
-        <div class="nav-link-text">Home</div>
-      </div>
-    </div>
-
-    <mat-divider></mat-divider> -->
 
     <!-- About Us -->
     <div class="pl-3 pr-0" mat-menu-item [matMenuTriggerFor]="aboutUsMenu">
@@ -203,16 +198,6 @@
     </div>
 
     <mat-divider></mat-divider>
-
-    <!-- Contacts Us -->
-    <!-- <div class="pl-3 pr-0" mat-menu-item (click)="navigateToRoute(navigationRoutes.ContactUs)">
-      <div class="" appIsRouterLinkActive navLinkToCheck="/contact-us" [currentRoute]="currentRoute"
-        [isMobileView]="isMobileView">
-        <div class="nav-link-text">Contact Us</div>
-      </div>
-    </div>
-
-    <mat-divider></mat-divider> -->
 
     <!-- Pilot Information -->
     <div class="pl-3 pr-0" mat-menu-item [matMenuTriggerFor]="pilotInformationMenu">
@@ -234,21 +219,11 @@
 
     <mat-divider></mat-divider>
 
-    <!-- Gallery -->
-    <!-- <div class="pl-3 pr-0" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
-      <div class="" appIsRouterLinkActive navLinkToCheck="/gallery" [currentRoute]="currentRoute"
-        [isMobileView]="isMobileView">
-        <div class="nav-link-text">Gallery</div>
-      </div>
-    </div>
-
-    <mat-divider></mat-divider> -->
-
-    <!-- Property for Sale and Rent -->
+    <!-- Property for Sale -->
     <div class="pl-3 pr-0" mat-menu-item [matMenuTriggerFor]="propertyForSaleRentMenu">
       <div class="" appIsRouterLinkActive navLinkToCheck="/property-for-sale" [currentRoute]="currentRoute"
         [isMobileView]="isMobileView">
-        <div class="nav-link-text">Property for Sale and Rent</div>
+        <div class="nav-link-text">Property for Sale</div>
       </div>
     </div>
 
@@ -371,7 +346,11 @@
       </div>
 
       <mat-divider></mat-divider>
-      <div class="dropdown-item p-2" mat-menu-item (click)="logout()">LOGOUT
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GreeningTedderfield)">Greening Tedderfield
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>
     </div>
   </mat-menu>

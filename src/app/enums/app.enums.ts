@@ -28,6 +28,7 @@ export enum AppRoutes {
     MembersWelcome = '/members/welcome',
     MembersFAQS = '/members/faqs',
     ReportAnIssue = '/members/report-an-issue',
+    GreeningTedderfield = '/members/greening-tedderfield',
     PropertyForSaleBase = '/property-for-sale/',
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',

@@ -5,4 +5,5 @@ export class LoginToken {
     logoutDateTime: string;
     id: number;
     isAdmin: number;
+    email: string
 }

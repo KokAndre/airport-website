@@ -53,7 +53,7 @@
           <mat-select formControlName="interestsSelectControl">
             <mat-option *ngFor="let item of interestsData" [value]="item.value">{{ item.displayValue }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="phoneNumberControl?.hasError('required')">Interests is required</mat-error>
+          <mat-error *ngIf="interestsSelectControl?.hasError('required')">Interests is required</mat-error>
         </mat-form-field>
         <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
       </div>

@@ -1,0 +1,30 @@
+.greening-form-background {
+    background-color: rgb(171, 168, 168, 0.1) !important;
+    border-radius: 10px;
+    border: 1px solid #aba8a8;
+}
+
+::ng-deep .mat-pseudo-checkbox {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+    color: rgb(0, 0, 0, 0.87) !important;
+}
+
+::ng-deep .mdc-list-item--selected {
+    background-color: rgb(0, 0, 0, 0.1) !important;
+}
+
+::ng-deep .mat-mdc-option.mat-mdc-option-active {
+    background-color: white;
+}
+
+::ng-deep .mdc-floating-label.mat-mdc-floating-label {
+    text-wrap: wrap;
+}
+
+::ng-deep .mdc-floating-label--float-above {
+    text-wrap: nowrap !important;
+}
