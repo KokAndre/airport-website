@@ -179,8 +179,13 @@
           Requests
         </div>
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening Tedderfield
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening
+          Tedderfield
           Requests
+        </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">Manage Home
+          Screen Banner
         </div>
       </div>
     </div>
@@ -375,6 +380,10 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening Tedderfield Requests
+    </div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">
+      Manage Home Screen Banner
     </div>
   </mat-menu>
 </div>

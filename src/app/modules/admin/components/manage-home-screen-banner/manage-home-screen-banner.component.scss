@@ -1,0 +1,36 @@
+.file-viewer-container {
+    height: 60vh !important;
+    background-color: grey;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.pdf-size {
+    height: 100%;
+}
+
+::ng-deep .ng2-pdf-viewer-container {
+    overflow: hidden !important;
+}
+
+.delete-icon {
+    color: #ee202e;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.add-banner-container {
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #bfbfbf;
+    text-align: center;
+    align-content: center;
+}
+
+.add-banner-icon {
+    font-size: 100px;
+    height: fit-content;
+    width: fit-content;
+    margin: auto !important;
+}

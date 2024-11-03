@@ -8,11 +8,13 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 import { OnEnterDirective } from 'src/app/directives/on-enter/on-enter.directive';
 import { LoginComponent } from 'src/app/components/login/login.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    PdfViewerModule
   ],
   declarations: [
     ArrowDividerComponent,
@@ -29,7 +31,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     ImageUploaderComponent,
     MaterialModule,
     OnEnterDirective,
-    LoginComponent
+    LoginComponent,
+    PdfViewerModule
   ],
   providers: [NgxImageCompressService]
 })

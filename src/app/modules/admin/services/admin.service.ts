@@ -10,6 +10,7 @@ import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
 import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
 import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
 import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
+import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -234,6 +235,44 @@ export class AdminService {
     requestData.greeningItemId = greeninfTedderfieldRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkGreeningTedderfieldAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getHomePageBanner() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetHomePageBanner, {
+      method: 'get'
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteHomeScreenBanner() {
+    const requestData = new AddHomePageBannerRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteHomePageBanner, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public addHomeScreenBanner(fileName: string, fileData: string) {
+    const requestData = new AddHomePageBannerRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.fileName = fileName;
+    requestData.fileData = fileData;
+    return fetch(Endpoints.BaseURL + Endpoints.AddNewHomeScreenBanner, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

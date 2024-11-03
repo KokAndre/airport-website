@@ -40,13 +40,9 @@
   </div>
 
   <div *ngIf="data.details">
-    <!-- <pdf-viewer class="pdf-size" [src]="data.details" [fit-to-page]="true" [zoom-scale]="'page-height'" [autoresize]="true" ></pdf-viewer> -->
-
     <div class="my-2 justify-content-center file-viewer-container">
       <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false" [render-text]="true">
       </pdf-viewer>
-      <!-- Deon - 21-07-2021 - ABA-19100 - Using Object from app-modal instead -->
-      <!-- <tld-file-viewer *ngIf="!displayZoomButtons" [src]="documentSource" [type]="contentType"></tld-file-viewer> -->
   </div>
 
   <div class="row mx-0 justify-content-center mb-2">

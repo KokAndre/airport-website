@@ -10,29 +10,38 @@
   </div>
 </div>
 
-<div *ngIf="reportIssueRequests?.length" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2">
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Hanger or Section Number</th>
-      <th>Issue Description</th>
-      <th>Date Captured</th>
-      <th>Followed Up</th>
-      <th>Actions</th>
-    </tr>
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-    <tr *ngFor="let item of reportIssueRequests">
-      <td [innerHTML]="item.name"></td>
-      <td [innerHTML]="item.email"></td>
-      <td [innerHTML]="item.hangerOrSectionNumber"></td>
-      <td [innerHTML]="item.issueDescription"></td>
-      <td [innerHTML]="item.dateAdded"></td>
-      <td class="text-center"><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold" fontIcon="close"></mat-icon></td>
-      <td class="text-no-wrap text-center"><mat-icon *ngIf="item.hasFollowedUp === '0'" class="green-text mr-2 pointer" fontIcon="check" (click)="markIssueAsFollowedUpClicked(item)"></mat-icon><mat-icon class="red-text pointer" fontIcon="delete" (click)="deleteReportIssueRequestClicked(item)"></mat-icon></td>
-    </tr>
+<div *ngIf="reportIssueRequests?.length" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
+  <div class="col-12 py-4">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Hanger or Section Number</th>
+        <th>Issue Description</th>
+        <th>Date Captured</th>
+        <th>Followed Up</th>
+        <th>Actions</th>
+      </tr>
 
-  </table>
+      <tr *ngFor="let item of reportIssueRequests">
+        <td [innerHTML]="item.name"></td>
+        <td [innerHTML]="item.email"></td>
+        <td [innerHTML]="item.hangerOrSectionNumber"></td>
+        <td [innerHTML]="item.issueDescription"></td>
+        <td [innerHTML]="item.dateAdded"></td>
+        <td class="text-center"><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold"
+            fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold"
+            fontIcon="close"></mat-icon></td>
+        <td class="text-no-wrap text-center"><mat-icon *ngIf="item.hasFollowedUp === '0'"
+            class="green-text mr-2 pointer" fontIcon="check"
+            (click)="markIssueAsFollowedUpClicked(item)"></mat-icon><mat-icon class="red-text pointer" fontIcon="delete"
+            (click)="deleteReportIssueRequestClicked(item)"></mat-icon></td>
+      </tr>
+
+    </table>
+  </div>
 </div>
 
 <div *ngIf="!reportIssueRequests?.length" class="col-10 mx-auto">

@@ -4,6 +4,7 @@ import { FollowUsRequestsComponent } from './components/follow-us-requests/follo
 import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
 import { GreeningTedderfieldRequestsComponent } from './components/greening-tedderfield-requests/greening-tedderfield-requests.component';
 import { ReportIssueRequestsComponent } from './components/report-issue-requests/report-issue-requests.component';
+import { ManageHomeScreenBannerComponent } from './components/manage-home-screen-banner/manage-home-screen-banner.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'greening-tedderfield-requests', component: GreeningTedderfieldRequestsComponent
+  },
+  {
+    path: 'manage-home-screen-banner', component: ManageHomeScreenBannerComponent
   }
 ];
 

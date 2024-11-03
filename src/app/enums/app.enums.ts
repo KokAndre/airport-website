@@ -33,7 +33,8 @@ export enum AppRoutes {
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
     ReportIssueRequests = '/admin/report-issue-requests',
-    GreeningTedderfieldRequests = '/admin/greening-tedderfield-requests'
+    GreeningTedderfieldRequests = '/admin/greening-tedderfield-requests',
+    ManageHomeScreenBanner = '/admin/manage-home-screen-banner'
 }
 
 export enum Endpoints {
@@ -66,7 +67,9 @@ export enum Endpoints {
     MarkGreeningTedderfieldAsFollowedUp = '/greening-tedderfield/update-greening-tedderfield-item.php',
     DeleteGreeningTedderfieldItem = '/greening-tedderfield/delete-greening-tedderfield-item.php',
 
-    GetHomePageBanner = '/home/get-home-page-banner.php'
+    GetHomePageBanner = '/home/get-home-page-banner.php',
+    DeleteHomePageBanner = '/home/delete-home-page-banner.php',
+    AddNewHomeScreenBanner = '/home/add-home-page-banner.php'
 }
 
 export enum EncryptionKeys {
