@@ -207,4 +207,14 @@ export class LoginService {
     }
   }
 
+  public getHomePageBanner() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetHomePageBanner, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 }

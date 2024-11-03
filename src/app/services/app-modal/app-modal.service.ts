@@ -16,7 +16,7 @@ export class AppModalService {
     this.onEmmitModal.emit(new ModalDetails(type, title, details, callbackFunction, inputValues));
   }
 
-  public ShowConfirmationModal(type: ModalTypes, title: string, details: string, inputValues: any, callbackFunction: (result) => void = (res) => { }): void {
+  public ShowConfirmationModal(type: ModalTypes, title: string, details: any, inputValues: any, callbackFunction: (result) => void = (res) => { }): void {
     // Settime out helps control the closing and opening of a new modal immidiatly after one another.
     setTimeout(() => {
       this.emmitModal(type, title, details, callbackFunction, inputValues);

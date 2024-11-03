@@ -39,6 +39,7 @@ export enum AppRoutes {
 export enum Endpoints {
     BaseURL = 'https://www.tedderfield.co.za/api',
     // BaseURL = 'http://localhost/teddefield-airfield',
+    HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
     // GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
     Register = '/members/register.php',
@@ -63,7 +64,9 @@ export enum Endpoints {
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
     GetGreeningTedderfieldData = '/greening-tedderfield/get-greening-tedderfield-data.php',
     MarkGreeningTedderfieldAsFollowedUp = '/greening-tedderfield/update-greening-tedderfield-item.php',
-    DeleteGreeningTedderfieldItem = '/greening-tedderfield/delete-greening-tedderfield-item.php'
+    DeleteGreeningTedderfieldItem = '/greening-tedderfield/delete-greening-tedderfield-item.php',
+
+    GetHomePageBanner = '/home/get-home-page-banner.php'
 }
 
 export enum EncryptionKeys {
@@ -83,7 +86,7 @@ export enum ModalTypes {
     InformationModal = 'informationModal',
     PDFModal = 'pdfModal',
     ConfirmationModal = 'confirmationModal',
-    CaptureGallerySectionTitle = 'captureGallerySectionTitle'
+    CaptureGallerySectionTitle = 'captureGallerySectionTitle',
 }
 
 export enum ModalOutcomeOptions {

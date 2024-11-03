@@ -1,15 +1,21 @@
-.home-screen-video {
-    height: 101%;
-    object-fit: cover;
-    width: 101%;
+.page-top-images {
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 400px;
     display: block;
-    clip-path: inset(3px 3px);
-    margin-top: -3px;
-    margin-left: -3px;
 }
 
-.video-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.image1 {
+    background-image: url("../../../assets/home/home-1.jpg");
+}
+.image2 {
+    background-image: url("../../../assets/home/home-2.jpg");
+}
+.image3 {
+    background-image: url("../../../assets/home/home-3.jpg");
+}
+.image4 {
+    background-image: url("../../../assets/home/home-4.jpg");
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
         path: '', redirectTo: 'home', pathMatch: 'full'
       },
       {
-        path: 'home', component: LandingPageComponent
+        path: 'home', component: HomePageComponent
       },
       {
         path: 'about-us', loadChildren: () => import('./modules/about-us/about-us.module').then(m => m.AboutUsModule)

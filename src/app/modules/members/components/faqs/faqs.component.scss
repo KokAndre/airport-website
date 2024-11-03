@@ -32,3 +32,25 @@ F
 .dark-expansion-pannel {
     background-color: #f5f5f5 !important;
 }
+
+.page-top-images {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 300px;
+    display: block;
+}
+
+.image1 {
+    background-image: url("../../../../../assets/members/faqs/faq-1.jpg");
+}
+.image2 {
+    background-image: url("../../../../../assets/members/faqs/faq-2.jpg");
+}
+.image3 {
+    background-image: url("../../../../../assets/members/faqs/faq-3.jpg");
+}
+.image4 {
+    background-image: url("../../../../../assets/members/faqs/faq-4.jpg");
+}
