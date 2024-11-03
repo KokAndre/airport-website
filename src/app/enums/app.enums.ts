@@ -32,7 +32,8 @@ export enum AppRoutes {
     PropertyForSaleBase = '/property-for-sale/',
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
-    ReportIssueRequests = '/admin/report-issue-requests'
+    ReportIssueRequests = '/admin/report-issue-requests',
+    GreeningTedderfieldRequests = '/admin/greening-tedderfield-requests'
 }
 
 export enum Endpoints {
@@ -57,7 +58,12 @@ export enum Endpoints {
     ReportIssue = '/report-issue/submit-report-issue.php',
     GetReportIssueData = '/report-issue/get-report-issue-data.php',
     MarkReportIssueAsFollowedUp = '/report-issue/update-report-issue-item.php',
-    DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php'
+    DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
+
+    SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
+    GetGreeningTedderfieldData = '/greening-tedderfield/get-greening-tedderfield-data.php',
+    MarkGreeningTedderfieldAsFollowedUp = '/greening-tedderfield/update-greening-tedderfield-item.php',
+    DeleteGreeningTedderfieldItem = '/greening-tedderfield/delete-greening-tedderfield-item.php'
 }
 
 export enum EncryptionKeys {

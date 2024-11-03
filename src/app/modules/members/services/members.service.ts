@@ -22,7 +22,7 @@ export class MembersService {
   }
 
   public submitGreeningTedderfield(reportIssueData: SubmitGreeningTedderfieldRequest.RootObject) {
-    return fetch(Endpoints.BaseURL + Endpoints.ReportIssue, {
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitGreeninTedderfield, {
       method: 'post',
       body: JSON.stringify({ requestData: reportIssueData })
     })

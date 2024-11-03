@@ -57,14 +57,13 @@ export class GreenTedderfieldComponent implements OnInit {
       nameControl: new FormControl('', [Validators.required]),
       emailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       donateAmountSelectControl: new FormControl('', [Validators.required]),
-      otherIdeasControl: new FormControl('', [Validators.required]),
+      otherIdeasControl: new FormControl(''),
     });
 
     if (this.loggedInUserDetails.name && this.loggedInUserDetails.surname) {
       this.nameControl?.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
     }
 
-    console.log('LOGGED IN USER DETAILS: ', this.loggedInUserDetails);
     if (this.loggedInUserDetails.email) {
       this.emailControl?.setValue(this.loggedInUserDetails.email);
     }

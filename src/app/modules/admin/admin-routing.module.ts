@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
 import { FollowUsRequestsComponent } from './components/follow-us-requests/follow-us-requests.component';
+import { GalleryAdminPageComponent } from './components/gallery-admin-page/gallery-admin-page.component';
+import { GreeningTedderfieldRequestsComponent } from './components/greening-tedderfield-requests/greening-tedderfield-requests.component';
 import { ReportIssueRequestsComponent } from './components/report-issue-requests/report-issue-requests.component';
 
 const routes: Routes = [
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'report-issue-requests', component: ReportIssueRequestsComponent
+  },
+  {
+    path: 'greening-tedderfield-requests', component: GreeningTedderfieldRequestsComponent
   }
 ];
 

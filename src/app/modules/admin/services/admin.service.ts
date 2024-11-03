@@ -9,6 +9,7 @@ import { DeleteSectionRequest } from 'src/app/models/delete-section-request.mode
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
 import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
 import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
+import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -189,6 +190,50 @@ export class AdminService {
     requestData.reportIssueId = reportIssueRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkReportIssueAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getGreeningTedderfieldData() {
+    const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetGreeningTedderfieldData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteGreeningTedderfieldEntry(greeninfTedderfieldRequestId: string) {
+    const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.greeningItemId = greeninfTedderfieldRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteGreeningTedderfieldItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editGreeningTedderfieldEntry(greeninfTedderfieldRequestId: string) {
+    const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.greeningItemId = greeninfTedderfieldRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkGreeningTedderfieldAsFollowedUp, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })
