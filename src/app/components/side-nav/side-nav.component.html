@@ -48,7 +48,13 @@
         </div>
         <div class="col-4 col-sm-4 col-md-5 col-lg-5 p-0 align-content-center" [ngClass]="{'pr-3': isMobileView}">
           <div class="row mx-0 justify-content-end">
-            <div class="red-button" (click)="navigateToLiveWeather()">
+            <div class="red-button" [ngClass]="{'px-1 mb-2': isFooterMobileView}" (click)="openSearchAndRescue()">
+              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-10': isFooterMobileView}">Search & Rescue</p>
+              <span
+                [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
+            </div>
+
+            <div class="red-button ml-3" (click)="navigateToLiveWeather()">
               <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">LIVE
                 WX</p>
               <span

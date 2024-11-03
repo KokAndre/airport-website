@@ -118,6 +118,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.InformationModal:
         case ModalTypes.ConfirmationModal:
         case ModalTypes.CaptureGallerySectionTitle:
+        case ModalTypes.SearchAndSecueModal: 
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: false, minWidth: '400px'
           });
@@ -171,8 +172,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public displayTermsAndConditions() {
     this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Terms and Conditions ', '../../../assets/documents/FATA-Websites-Terms-and-Conditions.pdf', null);
   }
+
   public displayPrivacyPolicy() {
     this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Privacy Policy', '../../../assets/documents/20240801-FATA-Privacy-Policy.pdf', null);
+  }
+
+  public openSearchAndRescue() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.SearchAndSecueModal, 'Search and Rescue', '', null);
   }
 
   public navigateToLiveWeather() {
