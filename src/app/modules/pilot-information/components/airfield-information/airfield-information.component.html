@@ -19,100 +19,132 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isHighlightsExpanded = !isHighlightsExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Airfield Highlights</p>
+    <mat-expansion-panel hideToggle [expanded]="isHighlightsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Airfield Highlights</p>
+      </mat-expansion-panel-header>
 
-    <p><b>Our Little Slice of Aviation Paradise: </b>Nestled in Johannesburg South, Tedderfield Airpark started life as
-      a peach farm and has since evolved into a buzzing, vibrant airfield that offers so much. And yes, we've kept a
-      little of that peach-farm charm.</p>
+      <p><b>Our Little Slice of Aviation Paradise: </b>Nestled in Johannesburg South, Tedderfield Airpark started life
+        as
+        a peach farm and has since evolved into a buzzing, vibrant airfield that offers so much. And yes, we've kept a
+        little of that peach-farm charm.</p>
 
-    <p><b>A Runway with a View: </b>Runway 11/29 may not have the longest stretch in the world, but it more than makes
-      up for it with unbeatable views and a smooth, well-maintained surface. Just watch out for the occasional crosswind
-      gust - a Tedderfield trademark. And don't forget to wave at the clubhouse on your downwind leg! Well maybe not!
-    </p>
+      <p><b>A Runway with a View: </b>Runway 11/29 may not have the longest stretch in the world, but it more than makes
+        up for it with unbeatable views and a smooth, well-maintained surface. Just watch out for the occasional
+        crosswind
+        gust - a Tedderfield trademark. And don't forget to wave at the clubhouse on your downwind leg! Well maybe not!
+      </p>
 
-    <p class="text-size-20"><b>Flying In:</b></p>
+      <p class="text-size-20"><b>Flying In:</b></p>
 
-    <p><b>Circuit Patterns and Joining Procedures: </b>At Tedderfield, we like to keep it straightforward with simple
-      circuits unless otherwise noted. We recommend you check out our joining and landing procedures - taking in a wide
-      view of the airfield to make sure you're aware of any fellow aviators in the area. (Pro tip: Everyone appreciates
-      a good lookout!)</p>
+      <p><b>Circuit Patterns and Joining Procedures: </b>At Tedderfield, we like to keep it straightforward with simple
+        circuits unless otherwise noted. We recommend you check out our joining and landing procedures - taking in a
+        wide
+        view of the airfield to make sure you're aware of any fellow aviators in the area. (Pro tip: Everyone
+        appreciates
+        a good lookout!)</p>
 
-    <p><b>Wind Socks and Local Wildlife: </b>Keep an eye on the wind socks, and yes they are fickle and often indicate
-      differing directions simultaneously. If you see a furry friend roaming nearby - don't worry, we're on it. Still, a
-      quick check for feathered and furred traffic on finals won't hurt.</p>
+      <p><b>Wind Socks and Local Wildlife: </b>Keep an eye on the wind socks, and yes they are fickle and often indicate
+        differing directions simultaneously. If you see a furry friend roaming nearby - don't worry, we're on it. Still,
+        a
+        quick check for feathered and furred traffic on finals won't hurt.</p>
 
-    <p class="text-size-20"><b>Landing Tips:</b></p>
+      <p class="text-size-20"><b>Landing Tips:</b></p>
 
-    <p><b>Grease it Down, Please! </b>We take pride in keeping our landings as smooth as possible, not only for your
-      comfort but also to keep our neighbours happy. (And yes, we can all hear that last-minute power-up!) Let's leave
-      the corkscrews and cowboy landings for the aerobatic clubs and aim to keep it classy.</p>
+      <p><b>Grease it Down, Please! </b>We take pride in keeping our landings as smooth as possible, not only for your
+        comfort but also to keep our neighbours happy. (And yes, we can all hear that last-minute power-up!) Let's leave
+        the corkscrews and cowboy landings for the aerobatic clubs and aim to keep it classy.</p>
 
-    <p><b>Traffic Awareness: </b>Be mindful of who's around and what they're up to. Our radio etiquette is light-hearted
-      but polite. If you can keep chatter to a minimum and convey essentials (without too much sass), everyone benefits.
-    </p>
+      <p><b>Traffic Awareness: </b>Be mindful of who's around and what they're up to. Our radio etiquette is
+        light-hearted
+        but polite. If you can keep chatter to a minimum and convey essentials (without too much sass), everyone
+        benefits.
+      </p>
 
-    <p class="text-size-20"><b>On the Ground:</b></p>
+      <p class="text-size-20"><b>On the Ground:</b></p>
 
-    <p><b>Parking and Tiedowns: </b>Prime parking awaits! Secure your aircraft in the best spots for weather protection
-      and proximity to clubhouse amenities. Look out for the signage, along the northern side of the tarred runway.
-      Don't be shy to ask about anything.</p>
+      <p><b>Parking and Tiedowns: </b>Prime parking awaits! Secure your aircraft in the best spots for weather
+        protection
+        and proximity to clubhouse amenities. Look out for the signage, along the northern side of the tarred runway.
+        Don't be shy to ask about anything.</p>
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isMeetTheTrusteesExpanded = !isMeetTheTrusteesExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <h2 class="text-size-24 mb-3">Meet the Trustees</h2>
+    <mat-expansion-panel hideToggle [expanded]="isMeetTheTrusteesExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Meet the Trustees</p>
+      </mat-expansion-panel-header>
 
-    <p><b>Fred - Chairman Extraordinaire: </b>He's our official meeting wrangler but may occasionally let conversations
-      drift off course (especially if there's an interesting aviation topic involved).</p>
+      <p><b>Fred - Chairman Extraordinaire: </b>He's our official meeting wrangler but may occasionally let
+        conversations
+        drift off course (especially if there's an interesting aviation topic involved).</p>
 
-    <p><b>Ian - The Treasurer with a Passion for Rules: </b>A stickler for the books and a firm believer in the
-      Sectional Title Act, Ian's got the numbers handled.</p>
+      <p><b>Ian - The Treasurer with a Passion for Rules: </b>A stickler for the books and a firm believer in the
+        Sectional Title Act, Ian's got the numbers handled.</p>
 
-    <p><b>Nic - The Green Minded Secretary: </b>Nic's all about greening up Tedderfield and is passionate about a
-      well-kept airfield.</p>
+      <p><b>Nic - The Green Minded Secretary: </b>Nic's all about greening up Tedderfield and is passionate about a
+        well-kept airfield.</p>
 
-    <p><b>Alan - Organiser Extraordinaire: </b>Need help with an event? Alan's your guy - efficient, organised, and
-      always
-      ready to roll up his sleeves.</p>
+      <p><b>Alan - Organiser Extraordinaire: </b>Need help with an event? Alan's your guy - efficient, organised, and
+        always
+        ready to roll up his sleeves.</p>
 
-    <p><b>Manfred - The Veteran with a Heart for Maintenance: </b>Manfred has been here long enough to know every bolt
-      and runway stripe at Tedderfield. He may be old-school - just don't mention his aircraft maintenance organization,
-      where things are always "interesting."</p>
+      <p><b>Manfred - The Veteran with a Heart for Maintenance: </b>Manfred has been here long enough to know every bolt
+        and runway stripe at Tedderfield. He may be old-school - just don't mention his aircraft maintenance
+        organization,
+        where things are always "interesting."</p>
 
-    <p><b>Cathy - The Voice of Reason: </b>Cathy's sharp, practical, and can spot a problem before it even hits the
-      agenda. Known for keeping discussions balanced and on track, she's often the voice of reason when the debates get
-      heated. Her knack for diplomacy keeps the trustee meetings on an even keel.</p>
+      <p><b>Cathy - The Voice of Reason: </b>Cathy's sharp, practical, and can spot a problem before it even hits the
+        agenda. Known for keeping discussions balanced and on track, she's often the voice of reason when the debates
+        get
+        heated. Her knack for diplomacy keeps the trustee meetings on an even keel.</p>
 
-    <p><b>James - The Legal Eagle: </b>A lawyer by trade, James might change his mind now and then, but when he's
-      committed, he's all in. Occasionally slow on deliverables, but hey - that's what legal thoroughness is all about,
-      right? With James around, you know you are covered.</p>
+      <p><b>James - The Legal Eagle: </b>A lawyer by trade, James might change his mind now and then, but when he's
+        committed, he's all in. Occasionally slow on deliverables, but hey - that's what legal thoroughness is all
+        about,
+        right? With James around, you know you are covered.</p>
 
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isNavigateTedderfieldRulesExpanded = !isNavigateTedderfieldRulesExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
 </div>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <h2 class="text-size-24 mb-3">Navigating Tedderfield Rules</h2>
+    <mat-expansion-panel hideToggle [expanded]="isNavigateTedderfieldRulesExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Navigating Tedderfield Rules</p>
+      </mat-expansion-panel-header>
 
-    <p><b>Friendly Warning on Tailgating: </b>We take security seriously, so don't try sneaking in behind someone else.
-      There's a reason our WAR Security team is so well-named.</p>
+      <p><b>Friendly Warning on Tailgating: </b>We take security seriously, so don't try sneaking in behind someone
+        else.
+        There's a reason our WAR Security team is so well-named.</p>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isTraditionAndEventsExpanded = !isTraditionAndEventsExpanded" [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <h2 class="text-size-24 mb-3">Aviation Traditions and Events</h2>
+    <mat-expansion-panel hideToggle [expanded]="isTraditionAndEventsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Aviation Traditions and Events</p>
+      </mat-expansion-panel-header>
 
     <p><b>The Famous Fly-Ins:</b> Our fly-ins have reached legendary status, from pancake breakfast fly-ins to the epic
       lemon meringue bake-off. Keep an eye on the events calendar on our web site and bring your best competitive
@@ -122,10 +154,13 @@
       pilots and share a few stories over a cold one. (Pro tip: the club's unofficial motto is "The more, the merrier!")
     </p>
 
-    <p><b>Clubhouse Booking and Event Enquiries:</b> [email - <a class="no-underline red-text" href="mailto:grounds@tedderfield.co.za">grounds&#64;tedderfield.co.za</a>]</p>
+    <p><b>Clubhouse Booking and Event Enquiries:</b> [email - <a class="no-underline red-text"
+        href="mailto:grounds@tedderfield.co.za">grounds&#64;tedderfield.co.za</a>]</p>
 
     <p>Tedderfield Airpark welcomes you with open skies, clear runways, and a friendly reminder to leave only your
       prop-wash behind. See you up there!</p>
+
+    </mat-expansion-panel>
   </div>
 
 </div>

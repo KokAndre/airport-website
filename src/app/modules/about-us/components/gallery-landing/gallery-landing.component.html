@@ -5,21 +5,32 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="togglePannel(0)" [isLightToDark]="true"></app-arrow-divider>
+
 <div *ngFor="let section of galleryData; let last = last; let index = index"
   [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
   <div class="col-10 mx-auto pb-4">
-    <div class="row mx-0 align-items-center pt-3">
+    <mat-expansion-panel hideToggle [expanded]="section.isExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="row mx-0 align-items-center pt-3">
+          <p class="text-size-30 mb-0 width-fit-content" [innerHTML]="section.title"></p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <!-- <div class="row mx-0 align-items-center pt-3">
       <p class="text-size-30 mb-0 width-fit-content" [innerHTML]="section.title"></p>
-    </div>
-    <div class="row mx-0 align-items-center">
-      <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
-    </div>
-    <div class="row mx-n2 mt-3">
-      <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center" *ngFor="let img of section.images">
-        <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height"/>
+      </div> -->
+
+      <div class="row mx-0 align-items-center">
+        <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
       </div>
-    </div>
+      <div class="row mx-n2 mt-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center" *ngFor="let img of section.images">
+          <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height" />
+        </div>
+      </div>
+    </mat-expansion-panel>
+
   </div>
-  <app-arrow-divider *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
 </div>

@@ -5,86 +5,96 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isFormExpanded = !isFormExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
-  <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Stay Connected with Tedderfield Airpark</p>
-    <p class="">Thank you for your interest in Tedderfield Airpark! Whether you're looking to purchase a hangar, stand,
-      or participate in our vibrant aviation community, we're excited to keep you updated on our latest news and
-      offerings.</p>
-    <p>Please fill out the form below, and we will follow up with the information you need!</p>
-  </div>
-
-  <div class="mb-3 form-background-image py-4" [formGroup]="followUsFormGroup">
-    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto follow-us-form-background">
-      <div class="row mx-0 justify-content-center mt-4">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Name</mat-label>
-          <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
-          <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+  <mat-expansion-panel hideToggle [expanded]="isFormExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Stay Connected with Tedderfield Airpark</p>
       </div>
-
-      <div class="row mx-0 justify-content-center mt-2">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Email</mat-label>
-          <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
-          <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-      </div>
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Phone Number</mat-label>
-          <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
-            (input)="numberControlInput()">
-          <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
-          <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-      </div>
-
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Are you interested in</mat-label>
-          <mat-select formControlName="interestsSelectControl">
-            <mat-option *ngFor="let item of interestsData" [value]="item.value">{{ item.displayValue }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="interestsSelectControl?.hasError('required')">Interests is required</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-      </div>
-
-      <div *ngIf="interestsSelectControl?.value === 'other'" class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Other</mat-label>
-          <input style="color: black;" matInput required maxlength="100" formControlName="otherInterestsControl">
-          <mat-error *ngIf="otherInterestsControl?.hasError('required')">Other is required</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-      </div>
-
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Comments or Questions</mat-label>
-          <textarea style="color: black;" matInput maxlength="500" formControlName="commentsControl"></textarea>
-        </mat-form-field>
-      </div>
+    </mat-expansion-panel-header>
 
 
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Thank you for your interest in Tedderfield Airpark! Whether you're looking to purchase a hangar,
+        stand,
+        or participate in our vibrant aviation community, we're excited to keep you updated on our latest news and
+        offerings.</p>
+      <p>Please fill out the form below, and we will follow up with the information you need!</p>
+    </div>
 
-      <div class="row mx-0 justify-content-center">
-        <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitButtonDisabled()}"
-          (click)="submitClicked()">
-          <p class="mb-0">Submit</p>
-          <span class="red-button-icon"></span>
+    <div class="mb-3 form-background-image py-4" [formGroup]="followUsFormGroup">
+      <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto follow-us-form-background">
+        <div class="row mx-0 justify-content-center mt-4">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Name</mat-label>
+            <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
+            <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Email</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+            <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+        <div class="row mx-0 justify-content-center">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Phone Number</mat-label>
+            <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
+              (input)="numberControlInput()">
+            <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+            <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Are you interested in</mat-label>
+            <mat-select formControlName="interestsSelectControl">
+              <mat-option *ngFor="let item of interestsData" [value]="item.value">{{ item.displayValue }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="interestsSelectControl?.hasError('required')">Interests is required</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div *ngIf="interestsSelectControl?.value === 'other'" class="row mx-0 justify-content-center">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Other</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="otherInterestsControl">
+            <mat-error *ngIf="otherInterestsControl?.hasError('required')">Other is required</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Comments or Questions</mat-label>
+            <textarea style="color: black;" matInput maxlength="500" formControlName="commentsControl"></textarea>
+          </mat-form-field>
+        </div>
+
+
+
+        <div class="row mx-0 justify-content-center">
+          <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitButtonDisabled()}"
+            (click)="submitClicked()">
+            <p class="mb-0">Submit</p>
+            <span class="red-button-icon"></span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </mat-expansion-panel>
 
 
   <!-- <div class="col-10 mx-auto pb-4">
@@ -102,31 +112,37 @@
     </ul>
   </div> -->
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isStayConnectedExpanded = !isStayConnectedExpanded" [isLightToDark]="false"></app-arrow-divider>
 
 </div>
 
 <div class="col-10 mx-auto pb-4">
-  <p class="text-size-24 mb-3">Follow Us and Stay Connected with Tedderfield Airpark!</p>
-  <p class="">At Tedderfield Airpark, we're more than just a runway—we're a community of passionate aviators and
-    enthusiasts. Stay in the loop with all the latest airpark news, events, and opportunities by following us on our
-    social media platforms!</p>
+  <mat-expansion-panel hideToggle [expanded]="isStayConnectedExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <p class="text-size-24 mb-3">Follow Us and Stay Connected with Tedderfield Airpark!</p>
+    </mat-expansion-panel-header>
 
-  <p><b>Connect with us to:</b></p>
+    <p class="">At Tedderfield Airpark, we're more than just a runway—we're a community of passionate aviators and
+      enthusiasts. Stay in the loop with all the latest airpark news, events, and opportunities by following us on our
+      social media platforms!</p>
 
-  <ul>
-    <li>Be the first to know about <b>available hangars</b> and <b>stands for sale.</b></li>
-    <li>Stay updated on <b>fly-ins, aviation events,</b> and <b>community activities.</b></li>
-    <li>Learn about new <b>aviation services</b> offered at the airpark.</li>
-  </ul>
+    <p><b>Connect with us to:</b></p>
 
-  <p><b>Follow Us On Social Media:</b></p>
+    <ul>
+      <li>Be the first to know about <b>available hangars</b> and <b>stands for sale.</b></li>
+      <li>Stay updated on <b>fly-ins, aviation events,</b> and <b>community activities.</b></li>
+      <li>Learn about new <b>aviation services</b> offered at the airpark.</li>
+    </ul>
 
-  <ul>
-    <li><a class="mb-0 no-underline red-text" target="_blank"
-        href="https://www.facebook.com/groups/1485616671675820/">Facebook</a> <br />
-      <span class="text-italic">Join our Facebook community and engage with fellow pilots and aviation enthusiasts. We
-        post regular updates on events, property listings, and community highlights.</span>
-    </li>
-  </ul>
+    <p><b>Follow Us On Social Media:</b></p>
+
+    <ul>
+      <li><a class="mb-0 no-underline red-text" target="_blank"
+          href="https://www.facebook.com/groups/1485616671675820/">Facebook</a> <br />
+        <span class="text-italic">Join our Facebook community and engage with fellow pilots and aviation enthusiasts. We
+          post regular updates on events, property listings, and community highlights.</span>
+      </li>
+    </ul>
+
+  </mat-expansion-panel>
 </div>

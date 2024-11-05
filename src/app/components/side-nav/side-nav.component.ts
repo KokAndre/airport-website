@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { AppRoutes, ModalTypes, SessionStorageKeys } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { AppModalComponent } from '../app-modal/app-modal.component';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import * as moment from 'moment';
+import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-side-nav',
@@ -31,7 +32,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
     public loginService: LoginService,
     public appModalService: AppModalService,
     private modalDialog: MatDialog,
-    private gtmService: GoogleTagManagerService) { }
+    private gtmService: GoogleTagManagerService) {
+      console.log('IN cont!!!!!');
+      SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
+    }
 
   ngOnInit() {
     this.initializeIsLoggedInCheck();
@@ -55,6 +59,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.checkIsAuthInterval = null;
     this.loginService.logoutUser();
+
+    console.log('IN DESTROY!!!!!');
+    SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
 
     if (this.modal$) {
       this.modal$.unsubscribe();

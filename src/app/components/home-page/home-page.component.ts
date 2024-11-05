@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalTypes } from 'src/app/enums/app.enums';
+import { ModalTypes, SessionStorageKeys } from 'src/app/enums/app.enums';
+import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { GetHomePageBannerResponse } from 'src/app/models/get-home-page-banner-response.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -13,7 +14,11 @@ export class HomePageComponent implements OnInit {
   public backgroundVideo: any;
 
   constructor(public loginService: LoginService, public modalService: AppModalService) {
-    this.getHomePageBanner();
+    const hasViewedBannerItem = SessionStorageHelper.getItem(SessionStorageKeys.HasViewedBanner);
+
+    if (!hasViewedBannerItem) {
+      this.getHomePageBanner();
+    }
   }
 
   ngOnInit() {
@@ -24,6 +29,7 @@ export class HomePageComponent implements OnInit {
       if (results.status === 200 && results.documentData) {
         const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
         this.modalService.ShowConfirmationModal(ModalTypes.PDFModal, results.documentData.name, urlForModal, null);
+        SessionStorageHelper.storeItem(SessionStorageKeys.HasViewedBanner, 'true');
       }
     });
   }
