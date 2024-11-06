@@ -13,7 +13,8 @@ enum DocumentsToDisplayEnum {
   ParamotorPilots = 'aramotorPilots',
   GroundOperations = 'groundOperations',
   NOTAMSNewTab = 'notamsnewTab',
-  CircuitProcedures = 'circuitProcedures'
+  CircuitProcedures = 'circuitProcedures',
+  JoiningAndLanding = 'joiningAndLanding'
 }
 
 @Component({
@@ -270,7 +271,7 @@ export class NavBarComponent implements OnInit {
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20240429-TedderfieldSalesBrochure.pdf', null);
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark-V4.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Flying_the_Circuit_at_Tedderfield_Airpark_Paramotor-V3.pdf', null);
         break;
       case DocumentsToDisplayEnum.GroundOperations:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028-TedderfieldAirpark-GroundOperations.pdf', null);
@@ -279,8 +280,11 @@ export class NavBarComponent implements OnInit {
         AppHelperFunction.openDocumentInNewTab('https://www.b4flight.co.za/');
         break;
       case DocumentsToDisplayEnum.CircuitProcedures:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Circuit Procedures', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark_MAP_ONLY-V4.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Circuit Procedures', '../../../assets/documents/circuit-procedures-document.pdf', null);
         break;
+        case DocumentsToDisplayEnum.JoiningAndLanding:
+          AppHelperFunction.openDocumentInNewTab('https://wiki.ivao.aero/en/home/training/documentation/Joining_an_aerodrome_circuit');
+          break;
     }
 
   }
