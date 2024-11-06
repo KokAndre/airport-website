@@ -279,7 +279,7 @@ export class NavBarComponent implements OnInit {
         AppHelperFunction.openDocumentInNewTab('https://www.b4flight.co.za/');
         break;
       case DocumentsToDisplayEnum.CircuitProcedures:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark_MAP_ONLY-V4.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Circuit Procedures', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark_MAP_ONLY-V4.pdf', null);
         break;
     }
 
