@@ -111,7 +111,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       switch (modalDetails.type) {
         case ModalTypes.PDFModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, height: 'fit-content', width: '90vw'
+            data: modalDetails, disableClose: false, height: 'fit-content', panelClass: 'pdf-modal-class', maxWidth: '90vw'
           });
           break;
 
@@ -120,7 +120,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal: 
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, minWidth: '400px'
+            data: modalDetails, disableClose: false, minWidth: '400px', maxWidth: '90vw'
           });
           break;
 
