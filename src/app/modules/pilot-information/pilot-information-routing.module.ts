@@ -5,7 +5,6 @@ import { JoiningAndLandingComponent } from './components/joining-and-landing/joi
 import { OtherAirfieldsComponent } from './components/other-airfields/other-airfields.component';
 import { ReportingHazardsComponent } from './components/reporting-hazards/reporting-hazards.component';
 import { SurroundingAirfieldsComponent } from './components/surrounding-airfields/surrounding-airfields.component';
-import { CircuitProceduresComponent } from './components/circuit-procedures/circuit-procedures.component';
 
 const routes: Routes = [
   {
@@ -22,9 +21,6 @@ const routes: Routes = [
   },
   {
     path: 'surrounding-airfields', component: SurroundingAirfieldsComponent
-  },
-  {
-    path: 'circuit-procedures', component: CircuitProceduresComponent
   },
 ];
 
