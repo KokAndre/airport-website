@@ -11,6 +11,7 @@ export namespace GetGalleryDataResponse {
         title: string
         description: string
         images?: Image[]
+        isExpanded: boolean;
       }
       
       export class Image {

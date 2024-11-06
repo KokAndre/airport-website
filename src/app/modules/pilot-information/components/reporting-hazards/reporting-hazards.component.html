@@ -1,41 +1,123 @@
-<div
-  style="width: 100%; height: 500px; background-image: url('assets/sample-image.webp'); background-repeat: no-repeat; background-position: bottom; background-size: cover;">
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Reporting Hazards</p>
+    <p class="mb-0 text-size-14">Pilot Information / <span class="child-path-text">Reporting Hazards</span></p>
+  </div>
 </div>
 
-<div class="col-12">
-  <h1 class="mt-3 mx-auto text-center">Reporting Hazards Page</h1>
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
 
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nisl in nisi tempor sollicitudin eget et
-    dolor. Quisque posuere scelerisque tortor, vitae tempor nunc tempus id. Nam dui nunc, finibus in tincidunt non,
-    malesuada vitae neque. Suspendisse ac ligula risus. Suspendisse eleifend, augue eget finibus facilisis, lacus nibh
-    tempor turpis, eu rhoncus magna dolor quis sem. Phasellus imperdiet euismod nulla ac interdum. Mauris congue turpis
-    nisi. Integer in fermentum purus. Sed non finibus orci. Nam dapibus ullamcorper diam, at congue arcu pellentesque
-    ac. Nunc ut luctus lectus. Fusce quis ex dui. Aenean eget libero tincidunt, facilisis urna vitae, faucibus lacus.
-    Maecenas eget risus id justo dapibus ultrices. Nunc ac porta mauris. Duis tempus, urna eget dapibus rutrum, urna
-    ante tempus lacus, accumsan semper eros lacus eu ligula.
-    <br><br>
-    Cras mattis feugiat justo, at accumsan sem congue quis. Etiam turpis magna, tempus ac elit sit amet, eleifend
-    aliquet augue. Aliquam tempor commodo magna non congue. Mauris ultrices posuere ligula vitae ullamcorper. Maecenas
-    at condimentum orci. Phasellus eget ultrices mi, a pretium diam. Fusce suscipit auctor efficitur. Suspendisse luctus
-    eget libero id dapibus. Ut eu venenatis libero. Etiam malesuada est a quam condimentum, eu lacinia augue
-    consectetur.
-    <br><br>
-    Integer nunc augue, ultrices rhoncus mattis et, scelerisque sit amet turpis. Ut suscipit metus justo, ac iaculis
-    sapien iaculis rhoncus. Sed gravida luctus sem, iaculis condimentum nibh laoreet vitae. Proin condimentum est et
-    quam ultricies porta. Suspendisse vel augue ante. Donec vel lacus a ex consectetur auctor. Pellentesque eget felis
-    at elit faucibus maximus sed sed ex. Vestibulum blandit, nulla in fermentum dapibus, est orci imperdiet justo, nec
-    blandit nisl turpis vel lorem. Praesent consequat eros at ultrices imperdiet. Suspendisse congue a dolor egestas
-    cursus. Curabitur eget eleifend eros. Cras maximus magna ac augue fringilla, vel porttitor quam egestas.
-    <br><br>
-    Morbi vitae viverra est. Donec eleifend est quam, eget dapibus mauris ornare vel. Curabitur mauris nisl, hendrerit
-    ac mauris sit amet, suscipit dictum sem. Suspendisse potenti. Nullam vitae scelerisque ex, nec sodales ipsum. Nunc
-    consequat cursus tincidunt. Pellentesque venenatis luctus congue. Quisque commodo et enim vitae aliquam.
-    <br><br>
-    Cras gravida diam lectus, eu varius nisi vehicula accumsan. Sed arcu quam, tempus id ipsum quis, fringilla bibendum
-    nulla. Sed eget odio a risus gravida cursus. Donec scelerisque porttitor tincidunt. Donec dictum, dolor id maximus
-    posuere, enim diam malesuada est, nec faucibus diam massa ac nulla. Nulla interdum urna a mauris finibus, ac aliquam
-    arcu lobortis. Suspendisse egestas semper euismod. Fusce id lacus lectus. Vivamus egestas tortor pellentesque enim
-    ornare scelerisque.
-  </p>
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+</div> -->
+
+<app-arrow-divider class="pointer" (click)="isTopHazardsExpanded = !isTopHazardsExpanded" [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+
+    <mat-expansion-panel hideToggle [expanded]="isTopHazardsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Tedderfield's Top "Hazards" - Pilots Beware!</p>
+      </mat-expansion-panel-header>
+
+
+
+
+      <p class="text-size-20 mb-0"><b>Peach Phantom Pastures 🍑</b></p>
+      <p>The ghostly remains of the peach orchards create phantom scents. If only!</p>
+
+      <p class="text-size-20 mb-0"><b>Marauding Mowers 🚜</b></p>
+      <p>Local tractors occasionally decide to take a scenic spin, so a random mower on the edge of the Threshold or
+        Runway isn't unheard of!</p>
+
+      <p class="text-size-20 mb-0"><b>Cattle Conga Line 🐄</b></p>
+      <p>These cattle to the North of the airfield know how to line up across the fields, giving “moo-ve over” a whole
+        new
+        meaning.</p>
+
+      <p class="text-size-20 mb-0"><b>Invasion of the Wattle Warriors 🌳🌿</b></p>
+      <p>These invasive trees are constantly sneaking closer to the airfield. In fact there is a whole contingent of
+        them
+        on the airfield itself. Watch out for an ambush of green along the edge of the runway.</p>
+
+      <p class="text-size-20 mb-0"><b>Windy Whispers from the South 🌬️</b></p>
+      <p>Known to sweep through from the south on weekends, this breeze loves to test your approach skills to 29.</p>
+
+      <p class="text-size-20 mb-0"><b>Klip Rivier's Funky Fresh Fragrance 🌊💨</b></p>
+      <p>Just north, the once clear and crisp Klip Rivier, was home to otters, now it offers up a bold fragrance -
+        perfect
+        for keeping you alert on the descent! No really, you have to be very low to participate in what the “Klip” has
+        to
+        offer!</p>
+
+      <p class="text-size-20 mb-0"><b>The Stinky Four Dams of the Northwest 🐟</b></p>
+      <p>Known for a potent aroma, these dams provide the kind of ambiance that makes you appreciate a tightly sealed
+        cockpit. Sorry microlights and open gyros!</p>
+
+      <p class="text-size-20 mb-0"><b>Helicopter Hoverland 🚁</b></p>
+      <p>Choppers to the east of Tedderfield practice swooping and hovering, always ready to surprise you with a bit of
+        impromptu airspace sharing. Keep a look out!</p>
+
+      <p class="text-size-20 mb-0"><b>The Hidden Antenna Anomaly 📡</b></p>
+      <p>Barely visible until you're almost on top of it, this Vodacom antenna is here to keep you on your toes. There
+        is
+        a beacon at night, so keep a look out.</p>
+
+      <p class="text-size-20 mb-0"><b>Notorious Dust Devil Zone 🌪️</b></p>
+      <p>Spotted in the open fields, these mini-twisters will give you an unrequested dusting - keep those wingtips
+        steady!</p>
+
+      <p class="text-size-20 mb-0"><b>The Powerline Gauntlet ⚡</b></p>
+      <p>Powerlines thread through the area like sneaky tripwires. Stay alert - you don't want to brush up against this
+        particular hazard especially if you are dragging in on finals for 29.</p>
+
+      <p class="text-size-20 mb-0"><b>Barbecue Breeze Blast 🍖💨</b></p>
+      <p>Saturday's FLY IN braais fill the air with irresistible scents of grilled boerewors and sometimes bacon and egg
+        rolls, making every descent an exercise in focus.</p>
+    </mat-expansion-panel>
+  </div>
 </div>
+
+
+<!-- <div class="">
+  <div class="col-10 mx-auto pb-4">
+    <h2 class="text-size-24 mb-3">Meet the Trustees</h2>
+
+    <p><b>Fred - Chairman Extraordinaire: </b>He's our official meeting wrangler but may occasionally let conversations
+      drift off course (especially if there's an interesting aviation topic involved).</p>
+
+    <p><b>Ian - The Treasurer with a Passion for Rules: </b>A stickler for the books and a firm believer in the
+      Sectional Title Act, Ian's got the numbers handled.</p>
+
+    <p><b>Nic - The Green Minded Secretary: </b>Nic's all about greening up Tedderfield and is passionate about a
+      well-kept airfield.</p>
+
+    <p><b>Alan - Organiser Extraordinaire: </b>Need help with an event? Alan's your guy - efficient, organised, and
+      always
+      ready to roll up his sleeves.</p>
+
+    <p><b>Manfred - The Veteran with a Heart for Maintenance: </b>Manfred has been here long enough to know every bolt
+      and runway stripe at Tedderfield. He may be old-school - just don't mention his aircraft maintenance organization,
+      where things are always "interesting."</p>
+
+    <p><b>Cathy - The Voice of Reason: </b>Cathy's sharp, practical, and can spot a problem before it even hits the
+      agenda. Known for keeping discussions balanced and on track, she's often the voice of reason when the debates get
+      heated. Her knack for diplomacy keeps the trustee meetings on an even keel.</p>
+
+    <p><b>James - The Legal Eagle: </b>A lawyer by trade, James might change his mind now and then, but when he's
+      committed, he's all in. Occasionally slow on deliverables, but hey - that's what legal thoroughness is all about,
+      right? With James around, you know you are covered.</p>
+
+  </div>
+
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+</div> -->

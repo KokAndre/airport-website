@@ -430,3 +430,20 @@ h6,
   // max-width: 90vw;
   width: 90vw;
 }
+
+.page-section-expansion-pannel {
+  box-shadow: none !important;
+  background-color: transparent !important;
+
+  .mat-expansion-panel-header {
+    padding: 0px !important;
+  }
+
+  .mat-expansion-panel-header:hover {
+    background: transparent !important;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0px !important;
+  }
+}

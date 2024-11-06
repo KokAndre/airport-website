@@ -27,15 +27,23 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="togglePannel(0)" [isLightToDark]="true"></app-arrow-divider>
 
 <div *ngFor="let section of historyData; let first = first let last = last; let index = index"
   [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3" [ngClass]="{'text-size-30': first}" [innerHTML]="section.heading"></p>
-    <p class="" *ngFor="let paragraph of section.paragraphs" [innerHTML]="paragraph"></p>
+
+    <mat-expansion-panel hideToggle [expanded]="section.isExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3" [innerHTML]="section.heading"></p>
+      </mat-expansion-panel-header>
+      <p class="" *ngFor="let paragraph of section.paragraphs" [innerHTML]="paragraph"></p>
+    </mat-expansion-panel>
+
+    <!-- <p class="text-size-24 mb-3" [ngClass]="{'text-size-30': first}" [innerHTML]="section.heading"></p> -->
+    <!-- <p class="" *ngFor="let paragraph of section.paragraphs" [innerHTML]="paragraph"></p> -->
   </div>
 
-  <app-arrow-divider *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
 
 </div>

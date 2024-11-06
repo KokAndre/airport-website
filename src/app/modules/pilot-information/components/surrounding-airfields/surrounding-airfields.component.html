@@ -27,181 +27,248 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isRandAirportExpanded = !isRandAirportExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Rand Airport (FAGM)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Approximately 30 km northeast.</li>
-      <li><b>Overview:</b> : Rand Airport is a well-established, historic airport serving general aviation. It offers aircraft maintenance, flight training, and private hangar space. Known for its aviation heritage, Rand hosts regular airshows.</li>
-      
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Full-service airport with maintenance, fueling, and flight training.</li>
-          <li>Home to the South African Airways Museum.</li>
-        </ul>
-      </li>
+    <mat-expansion-panel hideToggle [expanded]="isRandAirportExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Rand Airport (FAGM)</p>
+      </mat-expansion-panel-header>
 
-      <li><b>Runway:</b> 1,712 meters, asphalt.</li>
-    </ul>
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Approximately 30 km northeast.</li>
+        <li><b>Overview:</b> : Rand Airport is a well-established, historic airport serving general aviation. It offers
+          aircraft maintenance, flight training, and private hangar space. Known for its aviation heritage, Rand hosts
+          regular airshows.</li>
+
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Full-service airport with maintenance, fueling, and flight training.</li>
+            <li>Home to the South African Airways Museum.</li>
+          </ul>
+        </li>
+
+        <li><b>Runway:</b> 1,712 meters, asphalt.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isGrandCentralExpanded = !isGrandCentralExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Grand Central Airport (FAGC)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> About 50 km north, near Midrand.</li>
-      <li><b>Overview:</b> Grand Central is a smaller, privately-owned airport catering to business and private aviation. It offers hangarage, fueling, and flight training, and is a hub for corporate and private flights near Johannesburg's business districts.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Full-service FBO (Fixed Base Operator).</li>
-          <li>Charter services, flight training, and aircraft maintenance.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> 1,836 meters, asphalt.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isGrandCentralExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Grand Central Airport (FAGC)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> About 50 km north, near Midrand.</li>
+        <li><b>Overview:</b> Grand Central is a smaller, privately-owned airport catering to business and private
+          aviation. It offers hangarage, fueling, and flight training, and is a hub for corporate and private flights
+          near
+          Johannesburg's business districts.</li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Full-service FBO (Fixed Base Operator).</li>
+            <li>Charter services, flight training, and aircraft maintenance.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> 1,836 meters, asphalt.</li>
+      </ul>
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isLanseriaExpanded = !isLanseriaExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
 </div>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Lanseria International Airport (FALA)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Approximately 60 km northwest.</li>
-      <li><b>Overview:</b> Lanseria is one of South Africa's largest privately-owned airports. It handles both commercial and private flights, with full customs and immigration services for international flights. It's a major hub for business aviation.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Full-service international airport.</li>
-          <li>Flight schools, maintenance, fueling, and luxury FBO services.</li>
-          <li>Charter and helicopter services.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> 3,180 meters, asphalt.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isLanseriaExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Lanseria International Airport (FALA)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Approximately 60 km northwest.</li>
+        <li><b>Overview:</b> Lanseria is one of South Africa's largest privately-owned airports. It handles both
+          commercial and private flights, with full customs and immigration services for international flights. It's a
+          major hub for business aviation.</li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Full-service international airport.</li>
+            <li>Flight schools, maintenance, fueling, and luxury FBO services.</li>
+            <li>Charter and helicopter services.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> 3,180 meters, asphalt.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isPanoramaExpanded = !isPanoramaExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Panorama Airfield (FAPR)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Approximately 15 km northeast.</li>
-      <li><b>Overview:</b> Panorama Airfield is a popular airstrip among general aviation enthusiasts and serves as a base for recreational flying, microlight aircraft, and flight training. Its close proximity to Tedderfield makes it a convenient stop for local pilots.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Hangar space and aircraft parking.</li>
-          <li>Flight training and microlight flying.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> 1,000 meters, grass.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isPanoramaExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Panorama Airfield (FAPR)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Approximately 15 km northeast.</li>
+        <li><b>Overview:</b> Panorama Airfield is a popular airstrip among general aviation enthusiasts and serves as a
+          base for recreational flying, microlight aircraft, and flight training. Its close proximity to Tedderfield
+          makes
+          it a convenient stop for local pilots.</li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Hangar space and aircraft parking.</li>
+            <li>Flight training and microlight flying.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> 1,000 meters, grass.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isKliprivierExpanded = !isKliprivierExpanded" [isLightToDark]="true"></app-arrow-divider>
 </div>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Kliprivier Airfield</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Around 18 km southeast.</li>
-      <li><b>Overview:</b> Kliprivier Airfield is known for its quiet, rural location and serves mainly private pilots and recreational aviators. It's a small airfield with basic facilities, ideal for leisurely weekend flying or flight training.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Basic hangar space and parking.</li>
-          <li>Private recreational flying.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> Grass runway, approximately 800 meters.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isKliprivierExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Kliprivier Airfield</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Around 18 km southeast.</li>
+        <li><b>Overview:</b> Kliprivier Airfield is known for its quiet, rural location and serves mainly private pilots
+          and recreational aviators. It's a small airfield with basic facilities, ideal for leisurely weekend flying or
+          flight training.</li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Basic hangar space and parking.</li>
+            <li>Private recreational flying.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> Grass runway, approximately 800 meters.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isBaragwanathExpanded = !isBaragwanathExpanded" [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Baragwanath Airfield (FASY)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> About 20 km west.</li>
-      <li><b>Overview:</b> Baragwanath Airfield is home to the Johannesburg Light Plane Club and is popular for recreational flying. It offers a laid-back atmosphere and is ideal for weekend flying and gliding activities.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Hangar space available.</li>
-          <li>Grass runways.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> Grass runway, 900 meters.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isBaragwanathExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Baragwanath Airfield (FASY)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> About 20 km west.</li>
+        <li><b>Overview:</b> Baragwanath Airfield is home to the Johannesburg Light Plane Club and is popular for
+          recreational flying. It offers a laid-back atmosphere and is ideal for weekend flying and gliding activities.
+        </li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Hangar space available.</li>
+            <li>Grass runways.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> Grass runway, 900 meters.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isVereenigingExpanded = !isVereenigingExpanded" [isLightToDark]="true"></app-arrow-divider>
 </div>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Vereeniging Airport (FAVV)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Approximately 40 km south.</li>
-      <li><b>Overview:</b> Vereeniging Airport is a smaller airfield, focused on general aviation. It offers basic services and is a quiet airfield that's suitable for training and recreational flying.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Basic hangarage and parking.</li>
-          <li>Fueling services.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> 1,200 meters, grass.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isVereenigingExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Vereeniging Airport (FAVV)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Approximately 40 km south.</li>
+        <li><b>Overview:</b> Vereeniging Airport is a smaller airfield, focused on general aviation. It offers basic
+          services and is a quiet airfield that's suitable for training and recreational flying.</li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Basic hangarage and parking.</li>
+            <li>Fueling services.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> 1,200 meters, grass.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isSpringsExpanded = !isSpringsExpanded" [isLightToDark]="false"></app-arrow-divider>
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Springs Airfield (FASI)</p>
-    <ul>
-      <li><b>Distance from Tedderfield Airpark:</b> Roughly 70 km east.</li>
-      <li><b>Overview:</b> Springs Airfield is a key hub for flight training and general aviation in the area. Known for its aviation events, the airfield provides a community feel and is well-equipped for pilots of all skill levels.</li>
-      <li><b>Facilities:</b>
-        <ul>
-          <li>Flight schools, maintenance, and fueling.</li>
-          <li>Hangarage available.</li>
-        </ul>
-      </li>
-      <li><b>Runway:</b> 1,600 meters, asphalt.</li>
-    </ul>
+    <mat-expansion-panel hideToggle [expanded]="isSpringsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Springs Airfield (FASI)</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Distance from Tedderfield Airpark:</b> Roughly 70 km east.</li>
+        <li><b>Overview:</b> Springs Airfield is a key hub for flight training and general aviation in the area. Known
+          for
+          its aviation events, the airfield provides a community feel and is well-equipped for pilots of all skill
+          levels.
+        </li>
+        <li><b>Facilities:</b>
+          <ul>
+            <li>Flight schools, maintenance, and fueling.</li>
+            <li>Hangarage available.</li>
+          </ul>
+        </li>
+        <li><b>Runway:</b> 1,600 meters, asphalt.</li>
+      </ul>
+
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isConclusionExpanded = !isConclusionExpanded" [isLightToDark]="true"></app-arrow-divider>
 </div>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Conclusion</p>
-    <p>These airfields in proximity to Tedderfield Airpark cater to a wide range of aviation needs, from recreational flying at smaller airstrips like Panorama and Kliprivier to larger facilities like Lanseria and Rand Airport, which offer commercial and corporate aviation services. Each airfield adds to the rich aviation culture of the Johannesburg area, providing a variety of options for general aviation enthusiasts, private pilots, and businesses.</p>
+    <mat-expansion-panel hideToggle [expanded]="isConclusionExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Conclusion</p>
+      </mat-expansion-panel-header>
+
+      <p>These airfields in proximity to Tedderfield Airpark cater to a wide range of aviation needs, from recreational
+        flying at smaller airstrips like Panorama and Kliprivier to larger facilities like Lanseria and Rand Airport,
+        which offer commercial and corporate aviation services. Each airfield adds to the rich aviation culture of the
+        Johannesburg area, providing a variety of options for general aviation enthusiasts, private pilots, and
+        businesses.</p>
+
+    </mat-expansion-panel>
   </div>
 
   <!-- <app-arrow-divider [isLightToDark]="true"></app-arrow-divider> -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-

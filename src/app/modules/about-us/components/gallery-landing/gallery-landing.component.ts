@@ -20,6 +20,7 @@ export class GalleryLandingComponent implements OnInit {
       if (results.status === 200) {
         this.galleryData = results.sections;
         this.galleryData.forEach(section => {
+          section.isExpanded = true;
           section.images?.forEach(image => {
             image.imageSource = Endpoints.GalleryImagesBaseURL + image.name;
           });
@@ -36,6 +37,10 @@ export class GalleryLandingComponent implements OnInit {
 
   public navigateToEditGalleryPage() {
     this.router.navigateByUrl(AppRoutes.GalleryAdmin);
+  }
+
+  public togglePannel(indexToToggle: number) {
+      this.galleryData[indexToToggle].isExpanded = !this.galleryData[indexToToggle].isExpanded;
   }
 
 }
