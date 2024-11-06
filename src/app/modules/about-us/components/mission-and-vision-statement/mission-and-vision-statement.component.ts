@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mission-and-vision-statement.component.scss']
 })
 export class MissionAndVisionStatementComponent implements OnInit {
-  public isMissionExpanded = true;
-  public isVisionExpanded = true;
+  public isMissionExpanded = false;
+  public isVisionExpanded = false;
 
   constructor() { }
 

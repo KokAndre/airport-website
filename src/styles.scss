@@ -437,6 +437,7 @@ h6,
 
   .mat-expansion-panel-header {
     padding: 0px !important;
+    user-select: none !important;
   }
 
   .mat-expansion-panel-header:hover {
