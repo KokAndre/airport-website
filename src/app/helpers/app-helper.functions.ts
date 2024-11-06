@@ -100,4 +100,8 @@ export class AppHelperFunction {
         value = value.toString().replace(/[^0-9]*/g, '');
         return value;
     }
+
+    static openDocumentInNewTab(urlToOpen: string) {
+        window.open(urlToOpen, '_blank');
+    }
 }

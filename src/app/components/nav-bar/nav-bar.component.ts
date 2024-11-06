@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 import { NavBarItems } from 'src/app/models/nav-bar-items.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -10,7 +11,8 @@ enum DocumentsToDisplayEnum {
   EmergencyContacts = 'emergencyContacts',
   SalesBrochure = 'salesBrochure',
   ParamotorPilots = 'aramotorPilots',
-  GroundOperations = 'groundOperations'
+  GroundOperations = 'groundOperations',
+  NOTAMSNewTab = 'notamsnewTab'
 }
 
 @Component({
@@ -272,6 +274,9 @@ export class NavBarComponent implements OnInit {
       case DocumentsToDisplayEnum.GroundOperations:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028-TedderfieldAirpark-GroundOperations.pdf', null);
         break;
+        case DocumentsToDisplayEnum.NOTAMSNewTab:
+          AppHelperFunction.openDocumentInNewTab('https://www.b4flight.co.za/');
+          break;
     }
 
   }
