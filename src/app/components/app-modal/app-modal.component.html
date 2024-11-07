@@ -44,7 +44,7 @@
   <div *ngIf="data.details">
     <div class="my-2 justify-content-center file-viewer-container">
       <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false"
-        [render-text]="true">
+        [render-text]="false">
       </pdf-viewer>
     </div>
 

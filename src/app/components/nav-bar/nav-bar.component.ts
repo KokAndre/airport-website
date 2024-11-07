@@ -14,7 +14,8 @@ enum DocumentsToDisplayEnum {
   GroundOperations = 'groundOperations',
   NOTAMSNewTab = 'notamsnewTab',
   CircuitProcedures = 'circuitProcedures',
-  JoiningAndLanding = 'joiningAndLanding'
+  JoiningAndLanding = 'joiningAndLanding',
+  DensityAltitude = 'densityAltitude'
 }
 
 @Component({
@@ -282,9 +283,12 @@ export class NavBarComponent implements OnInit {
       case DocumentsToDisplayEnum.CircuitProcedures:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Circuit Procedures', '../../../assets/documents/circuit-procedures-document.pdf', null);
         break;
-        case DocumentsToDisplayEnum.JoiningAndLanding:
-          AppHelperFunction.openDocumentInNewTab('https://wiki.ivao.aero/en/home/training/documentation/Joining_an_aerodrome_circuit');
-          break;
+      case DocumentsToDisplayEnum.JoiningAndLanding:
+        AppHelperFunction.openDocumentInNewTab('https://wiki.ivao.aero/en/home/training/documentation/Joining_an_aerodrome_circuit');
+        break;
+      case DocumentsToDisplayEnum.DensityAltitude:
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Density Altitude', '../../../assets/documents/20241103-Density_Altitude_Poster_for_FATA.pdf', null);
+        break;
     }
 
   }

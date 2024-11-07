@@ -59,6 +59,9 @@
         <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.NOTAMSNewTab)">
           NOTAMS</div>
         <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="displayDocument(documentsToDisplayEnum.DensityAltitude)">
+          Density Altitude</div>
+        <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
           Reporting Hazards</div>
         <mat-divider></mat-divider>
@@ -301,6 +304,9 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="displayDocument(documentsToDisplayEnum.NOTAMSNewTab)">
       NOTAMS</div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="displayDocument(documentsToDisplayEnum.DensityAltitude)">
+      Density Altitude</div>
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportingHazards)">
       Reporting Hazards</div>
