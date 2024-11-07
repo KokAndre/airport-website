@@ -19,12 +19,12 @@ export class AdminService {
 
   constructor(public appModalService: AppModalService, public loginService: LoginService) { }
 
-  public uploadNewImage(sectionId: string, imageSrc: string, imageName: string) {
-    const requestData = new UploadImageRequest.RootObject();
+  public uploadNewImages(sectionId: string, imageData: UploadImageRequest.FileData[]) {
+    const requestData = new UploadImageRequest.RootObject;
     requestData.sectionId = sectionId;
-    requestData.imageName = imageName;
-    requestData.imageData = imageSrc;
     requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.filesArray = new Array<UploadImageRequest.FileData>();
+    requestData.filesArray = imageData; 
 
     return fetch(Endpoints.BaseURL + Endpoints.UploadImage, {
       method: 'post',
