@@ -121,8 +121,8 @@ export class GalleryAdminPageComponent implements OnInit {
 
   public uploadImage(section: GetGalleryDataResponse.Section, imageDataArray: UploadImageRequest.FileData[]) {
     console.log('SECTION: ', section);
-    console.log('FILES ARRAY: ', imageDataArray);
-    console.log('FILES ARRAY LENGTH: ', imageDataArray.length);
+    console.log('IMAGE DATA ARRAY: ', imageDataArray);
+    console.log('IMAGE DATA ARRAY LENGTH: ', imageDataArray.length);
     if (!section?.id || !imageDataArray?.length) {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading image', 'No section ID is present in request. Please contact administrator', null);
     } else {

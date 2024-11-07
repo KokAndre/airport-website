@@ -11,7 +11,6 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 })
 export class ImageUploaderComponent implements OnInit {
   @Output() public imageUploadedEmit = new EventEmitter();
-
   @ViewChild('imageUploader', { static: true }) imageUploader: ElementRef;
 
   constructor(public appModalService: AppModalService, private imageCompress: NgxImageCompressService) { }
@@ -32,47 +31,56 @@ export class ImageUploaderComponent implements OnInit {
       // console.log('FILES TYPE: ', typeof(files));
       // console.log('FILES LENGTH: ', files.length);
 
-      for (let index = 0; index < files.length; index++) {
-        const file = files[index];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const imageSrc = reader.result || '';
-          const fileDataToAdd = new UploadImageRequest.FileData();
-          fileDataToAdd.imageName = file.name;
-  
-          if (file.size > 500000) {
-            const imageToCompress = {
-              image: imageSrc as string,
-              orientation: 1,
-              fileName: file.name
+      let setImageDataResolver = new Promise((resolve, reject) => {
+
+        for (let index = 0; index < files.length; index++) {
+          const file = files[index];
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const imageSrc = reader.result || '';
+            const fileDataToAdd = new UploadImageRequest.FileData();
+            fileDataToAdd.imageName = file.name;
+
+            console.log('FILE: ', file);
+            if (file.size > 500000 && !fileDataToAdd.imageName.includes('.NEF') && !fileDataToAdd.imageName.includes('.nef')) {
+              console.log('IN IF!!!!');
+              const imageToCompress = {
+                image: imageSrc as string,
+                orientation: 1,
+                fileName: file.name
+              }
+              console.log('IMAGE TO COMPRESS: ', imageToCompress);
+              this.imageCompress
+                .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+                .then(
+                  (result) => {
+                    console.log('SUCCESS RESULTS: ', result);
+                    fileDataToAdd.imageData = result.image;
+                  },
+                  (result: string) => {
+                    console.log('ERROR RESULTS: ', result);
+                    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
+                  }
+                );
+            } else {
+              console.log('IN ELSE FOR SIZE AND NEF CHECK');
+              fileDataToAdd.imageData = imageSrc;
             }
-            this.imageCompress
-              .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
-              .then(
-                (result) => {
-                  fileDataToAdd.imageData = result.image;
-                  // this.imageUploadedEmit.emit(fileDataToAdd);
-                },
-                (result: string) => {
-                  this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
-                }
-              );
-          } else {
-            fileDataToAdd.imageData = imageSrc;
-            // this.imageUploadedEmit.emit(fileDataToAdd);
+
+            filesToEmit.push(fileDataToAdd);
+
+            if (index === files.length - 1) {
+              resolve('');
+            }
           }
-
-          filesToEmit.push(fileDataToAdd);
         }
-      }
+      });
 
-      console.log('FILES TO EMIT: ', filesToEmit);
-      console.log('FILES TO EMIT TYPE: ', typeof(filesToEmit));
-      console.log('FILES TO EMIT LENGTH: ', filesToEmit.length);
-      this.imageUploadedEmit.emit(filesToEmit);
-      
-   
+      setImageDataResolver.then(() => {
+        this.imageUploadedEmit.emit(filesToEmit);
+      });
+
     } else {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading image', 'No file was selected.', null);
     }
