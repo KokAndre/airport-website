@@ -91,7 +91,8 @@ export enum ModalTypes {
     PDFModal = 'pdfModal',
     ConfirmationModal = 'confirmationModal',
     CaptureGallerySectionTitle = 'captureGallerySectionTitle',
-    SearchAndSecueModal = 'searchAndSecueModal'
+    SearchAndSecueModal = 'searchAndSecueModal',
+    BannerModal = 'bannerModal'
 }
 
 export enum ModalOutcomeOptions {

@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit {
     this.loginService.getHomePageBanner().then((results: GetHomePageBannerResponse.RootObject) => {
       if (results.status === 200 && results.documentData) {
         const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-        this.modalService.ShowConfirmationModal(ModalTypes.PDFModal, results.documentData.name, urlForModal, null);
+        this.modalService.ShowConfirmationModal(ModalTypes.BannerModal, results.documentData.name, urlForModal, null);
         SessionStorageHelper.storeItem(SessionStorageKeys.HasViewedBanner, 'true');
       }
     });

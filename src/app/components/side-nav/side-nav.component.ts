@@ -33,9 +33,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
     public appModalService: AppModalService,
     private modalDialog: MatDialog,
     private gtmService: GoogleTagManagerService) {
-      console.log('IN cont!!!!!');
-      SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
-    }
+    SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
+  }
 
   ngOnInit() {
     this.initializeIsLoggedInCheck();
@@ -60,7 +59,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.checkIsAuthInterval = null;
     this.loginService.logoutUser();
 
-    console.log('IN DESTROY!!!!!');
     SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
 
     if (this.modal$) {
@@ -103,7 +101,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   public initializeModal() {
     this.modal$ = this.appModalService.onEmmitModal.subscribe((modalDetails: ModalDetails) => {
-      console.log('MODAL DETAILS IN SIDE NAV SUBSCRIPTION: ', modalDetails);
       if (!modalDetails) {
         this.modalDialog.closeAll();
         return;
@@ -117,17 +114,18 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
       switch (modalDetails.type) {
         case ModalTypes.PDFModal:
+        case ModalTypes.BannerModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, height: 'fit-content', panelClass: 'pdf-modal-class', maxWidth: '90vw'
-          });
+          data: modalDetails, disableClose: false, height: 'fit-content', panelClass: 'pdf-modal-class', maxWidth: '91vw'
+        });
           break;
 
         case ModalTypes.InformationModal:
         case ModalTypes.ConfirmationModal:
         case ModalTypes.CaptureGallerySectionTitle:
-        case ModalTypes.SearchAndSecueModal: 
+        case ModalTypes.SearchAndSecueModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, minWidth: '400px', maxWidth: '90vw'
+            data: modalDetails, disableClose: false, minWidth: '300px', maxWidth: '90vw', width: 'fit-content'
           });
           break;
 
@@ -165,7 +163,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.isMobileView = false;
       }
 
-      if (widthToCheck < 400) {
+      if (widthToCheck < 465) {
         this.isFooterMobileView = true;
       } else {
         this.isFooterMobileView = false;

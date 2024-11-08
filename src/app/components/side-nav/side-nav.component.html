@@ -1,6 +1,5 @@
 <!-- Header -->
 <div class="main-container">
-  <!-- <div class="col-12 px-0"> -->
   <div class="header-container">
     <div class="header row mx-0" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
       <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 pointer center-align-vertical header-white-background"
@@ -28,12 +27,21 @@
   <!-- Footer -->
   <div class="footer-container align-content-center">
     <div class="col-12 col-sm-12 col-md-10 col-lg-10 pr-0 pl-0 mx-auto" [ngClass]="{'pl-2': isMobileView}">
-      <div class="row mx-0 py-2">
-        <div class="col-7 col-sm-7 col-md-6 col-lg-6 px-0 align-content-center">
+      <div class="row mx-0" [ngClass]="{'py-2': !isFooterMobileView}">
+        <div class="col-5 col-sm-5 col-md-6 col-lg-6 px-0 align-content-center">
 
-          <p class="mb-0">
+          <p *ngIf="!isFooterMobileView" class="mb-0">
             <a class="text-size-12 white-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
               Policy</a> | <a class="text-size-12 white-text no-underline pointer"
+              (click)="displayTermsAndConditions()">Terms &
+              Conditions</a>
+          </p>
+          <p *ngIf="isFooterMobileView" class="mb-0">
+            <a class="text-size-12 white-text no-underline pointer" (click)="displayPrivacyPolicy()">Privacy
+              Policy</a>
+          </p>
+          <p *ngIf="isFooterMobileView" class="mb-0">
+            <a class="text-size-12 white-text no-underline pointer"
               (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
@@ -46,10 +54,10 @@
               info&#64;tedderfield.co.za</a>
           </p>
         </div>
-        <div class="col-4 col-sm-4 col-md-5 col-lg-5 p-0 align-content-center" [ngClass]="{'pr-3': isMobileView}">
-          <div class="row mx-0 justify-content-end">
+        <div class="col-6 col-sm-6 col-md-5 col-lg-5 p-0 " [ngClass]="{'pr-3': isMobileView, 'align-content-center': !isFooterMobileView}">
+          <div class="row mx-0 justify-content-end" [ngClass]="{'mt-2': isFooterMobileView}">
             <div class="red-button" [ngClass]="{'px-1 mb-2': isFooterMobileView}" (click)="openSearchAndRescue()">
-              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-10': isFooterMobileView}">Search & Rescue</p>
+              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">Search & Rescue</p>
               <span
                 [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
             </div>
