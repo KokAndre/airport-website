@@ -18,7 +18,7 @@ export class ImageUploaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  public uploadImage(event: any) {
+  public async uploadImage(event: any) {
     let status = false;
     const files = event.target.files;
     status = event.target.files.length > 0 ? true : false;
@@ -37,7 +37,7 @@ export class ImageUploaderComponent implements OnInit {
           const file = files[index];
           const reader = new FileReader();
           reader.readAsDataURL(file);
-          reader.onload = () => {
+          reader.onload = async () => {
             const imageSrc = reader.result || '';
             const fileDataToAdd = new UploadImageRequest.FileData();
             fileDataToAdd.imageName = file.name;
@@ -51,7 +51,7 @@ export class ImageUploaderComponent implements OnInit {
                 fileName: file.name
               }
               console.log('IMAGE TO COMPRESS: ', imageToCompress);
-              this.imageCompress
+              await this.imageCompress
                 .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
                 .then(
                   (result) => {

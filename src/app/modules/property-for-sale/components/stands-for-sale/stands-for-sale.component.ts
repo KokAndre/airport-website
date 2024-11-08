@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stands-for-sale.component.scss']
 })
 export class StandsForSaleComponent implements OnInit {
-  public isBuildYourDreamsExpanded = false;
-  public isWhyChooseTedderfieldExpanded = false;
-  public isStandsAreLimitedExpanded = false;
+  public isBuildYourDreamsExpanded = true;
+  public isWhyChooseTedderfieldExpanded = true;
+  public isStandsAreLimitedExpanded = true;
 
   constructor() { }
 

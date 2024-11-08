@@ -14,8 +14,8 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 export class FollowUsComponent implements OnInit {
   public followUsFormGroup: FormGroup;
   public appHelperFunctions = AppHelperFunction;
-  public isFormExpanded = false;
-  public isStayConnectedExpanded = false;
+  public isFormExpanded = true;
+  public isStayConnectedExpanded = true;
 
   public interestsData = [
     {

@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./airfield-information.component.scss']
 })
 export class AirfieldInformationComponent implements OnInit {
-  public isHighlightsExpanded = false;
-  public isMeetTheTrusteesExpanded = false;
-  public isNavigateTedderfieldRulesExpanded = false;
-  public isTraditionAndEventsExpanded = false;
+  public isHighlightsExpanded = true;
+  public isMeetTheTrusteesExpanded = true;
+  public isNavigateTedderfieldRulesExpanded = true;
+  public isTraditionAndEventsExpanded = true;
 
   constructor() { }
 

@@ -20,7 +20,7 @@ export class GalleryLandingComponent implements OnInit {
       if (results.status === 200) {
         this.galleryData = results.sections;
         this.galleryData.forEach(section => {
-          section.isExpanded = false;
+          section.isExpanded = true;
           section.images?.forEach(image => {
             image.imageSource = Endpoints.GalleryImagesBaseURL + image.name;
           });

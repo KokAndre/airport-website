@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reporting-hazards.component.scss']
 })
 export class ReportingHazardsComponent implements OnInit {
-  public isTopHazardsExpanded = false;
+  public isTopHazardsExpanded = true;
 
   constructor() { }
 

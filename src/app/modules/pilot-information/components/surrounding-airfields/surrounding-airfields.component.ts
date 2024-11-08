@@ -6,15 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./surrounding-airfields.component.scss']
 })
 export class SurroundingAirfieldsComponent implements OnInit {
-  public isRandAirportExpanded = false;
-  public isGrandCentralExpanded = false;
-  public isLanseriaExpanded = false;
-  public isPanoramaExpanded = false;
-  public isKliprivierExpanded = false;
-  public isBaragwanathExpanded = false;
-  public isVereenigingExpanded = false;
-  public isSpringsExpanded = false;
-  public isConclusionExpanded = false;
+  public isRandAirportExpanded = true;
+  public isGrandCentralExpanded = true;
+  public isLanseriaExpanded = true;
+  public isPanoramaExpanded = true;
+  public isKliprivierExpanded = true;
+  public isBaragwanathExpanded = true;
+  public isVereenigingExpanded = true;
+  public isSpringsExpanded = true;
+  public isConclusionExpanded = true;
 
   constructor() { }
 

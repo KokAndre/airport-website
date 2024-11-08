@@ -15,7 +15,7 @@ export class ClubHouseComponent implements OnInit {
       paragraphs: [
         'This cozy thatch-and-brick gem started its journey thanks to the proceeds from an honesty bar at our old Solitude airfield—so yes, it\'s got history and heart. Built right after the runway, it was one of the first places to rise from the old peach farm that used to call Tedderfield home.'
       ],
-      isExpanded: false
+      isExpanded: true
     },
     {
       heading: 'What can you expect?',
@@ -24,7 +24,7 @@ export class ClubHouseComponent implements OnInit {
         'Need to impress with your presentation? We\'ve got you covered with a snazzy overhead projector and an automatic projection screen that will make your slides look like Hollywood magic.',
         'Grab a seat at one of the tables, pour yourself a drink, and enjoy the relaxed vibe.'
       ],
-      isExpanded: false
+      isExpanded: true
     },
     {
       heading: 'The best part?',
@@ -32,19 +32,19 @@ export class ClubHouseComponent implements OnInit {
         'You can rent it for a nominal fee!',
         'Just remember—cleaning up is your responsibility.'
       ],
-      isExpanded: false
+      isExpanded: true
     },
     {
       heading: 'Want to book it?',
       paragraphs: [
         'Shoot an enquiry over to our friendly administration office, and you\'re all set to enjoy a slice of Tedderfield paradise.',
       ],
-      isExpanded: false
+      isExpanded: true
     },
     {
       heading: 'Fun, functional, and ready for your next gathering — just like Tedderfield itself!',
       isRedText: true,
-      isExpanded: false
+      isExpanded: true
     }
   ]
 
