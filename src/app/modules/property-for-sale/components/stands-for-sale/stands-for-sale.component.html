@@ -1,41 +1,96 @@
-<div
-  style="width: 100%; height: 500px; background-image: url('assets/sample-image.webp'); background-repeat: no-repeat; background-position: bottom; background-size: cover;">
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Stands For Sale</p>
+    <p class="mb-0 text-size-14">Property For Sale / <span class="child-path-text">Stands For Sale</span></p>
+  </div>
 </div>
 
-<div class="col-12">
-  <h1 class="mt-3 mx-auto text-center">Stands for Sale Page</h1>
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image4"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image5"></div>
+  </div>
+</div> -->
 
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nisl in nisi tempor sollicitudin eget et
-    dolor. Quisque posuere scelerisque tortor, vitae tempor nunc tempus id. Nam dui nunc, finibus in tincidunt non,
-    malesuada vitae neque. Suspendisse ac ligula risus. Suspendisse eleifend, augue eget finibus facilisis, lacus nibh
-    tempor turpis, eu rhoncus magna dolor quis sem. Phasellus imperdiet euismod nulla ac interdum. Mauris congue turpis
-    nisi. Integer in fermentum purus. Sed non finibus orci. Nam dapibus ullamcorper diam, at congue arcu pellentesque
-    ac. Nunc ut luctus lectus. Fusce quis ex dui. Aenean eget libero tincidunt, facilisis urna vitae, faucibus lacus.
-    Maecenas eget risus id justo dapibus ultrices. Nunc ac porta mauris. Duis tempus, urna eget dapibus rutrum, urna
-    ante tempus lacus, accumsan semper eros lacus eu ligula.
-    <br><br>
-    Cras mattis feugiat justo, at accumsan sem congue quis. Etiam turpis magna, tempus ac elit sit amet, eleifend
-    aliquet augue. Aliquam tempor commodo magna non congue. Mauris ultrices posuere ligula vitae ullamcorper. Maecenas
-    at condimentum orci. Phasellus eget ultrices mi, a pretium diam. Fusce suscipit auctor efficitur. Suspendisse luctus
-    eget libero id dapibus. Ut eu venenatis libero. Etiam malesuada est a quam condimentum, eu lacinia augue
-    consectetur.
-    <br><br>
-    Integer nunc augue, ultrices rhoncus mattis et, scelerisque sit amet turpis. Ut suscipit metus justo, ac iaculis
-    sapien iaculis rhoncus. Sed gravida luctus sem, iaculis condimentum nibh laoreet vitae. Proin condimentum est et
-    quam ultricies porta. Suspendisse vel augue ante. Donec vel lacus a ex consectetur auctor. Pellentesque eget felis
-    at elit faucibus maximus sed sed ex. Vestibulum blandit, nulla in fermentum dapibus, est orci imperdiet justo, nec
-    blandit nisl turpis vel lorem. Praesent consequat eros at ultrices imperdiet. Suspendisse congue a dolor egestas
-    cursus. Curabitur eget eleifend eros. Cras maximus magna ac augue fringilla, vel porttitor quam egestas.
-    <br><br>
-    Morbi vitae viverra est. Donec eleifend est quam, eget dapibus mauris ornare vel. Curabitur mauris nisl, hendrerit
-    ac mauris sit amet, suscipit dictum sem. Suspendisse potenti. Nullam vitae scelerisque ex, nec sodales ipsum. Nunc
-    consequat cursus tincidunt. Pellentesque venenatis luctus congue. Quisque commodo et enim vitae aliquam.
-    <br><br>
-    Cras gravida diam lectus, eu varius nisi vehicula accumsan. Sed arcu quam, tempus id ipsum quis, fringilla bibendum
-    nulla. Sed eget odio a risus gravida cursus. Donec scelerisque porttitor tincidunt. Donec dictum, dolor id maximus
-    posuere, enim diam malesuada est, nec faucibus diam massa ac nulla. Nulla interdum urna a mauris finibus, ac aliquam
-    arcu lobortis. Suspendisse egestas semper euismod. Fusce id lacus lectus. Vivamus egestas tortor pellentesque enim
-    ornare scelerisque.
-  </p>
+<app-arrow-divider class="pointer" (click)="isBuildYourDreamsExpanded = !isBuildYourDreamsExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isBuildYourDreamsExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Build Your Dream on a Private Airfield</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Imagine waking up with open clear skies, your good mood erupts and you drive through to Tedderfield
+        Airpark.</p>
+      <p class="">Tedderfield Airpark offers a unique position where aviation enthusiasts and adventurers unite to enjoy
+        unparalleled access to a world-class private airfield.</p>
+      <p class="">Our exclusive stands for sale provide the perfect canvas for those looking to build a custom home with
+        an aviation twist.</p>
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isWhyChooseTedderfieldExpanded = !isWhyChooseTedderfieldExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isWhyChooseTedderfieldExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+      <p class="text-size-24 mb-3">Why Choose Tedderfield?</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Located within close proximity to Johannesburg, Tedderfield Airpark offers a balance of peace and
+        convenience.</p>
+      <p class="">With a close-knit community who share a passion for aviation, you'll find camaraderie and shared
+        values that go beyond the average.</p>
+      <p class="">Each stand enjoys access to all airpark amenities, from well-maintained taxiways to events, social
+        gatherings, and more.</p>
+    </div>
+
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isStandsAreLimitedExpanded = !isStandsAreLimitedExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isStandsAreLimitedExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Stands are Limited - Don't Miss Ou</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Our available stands are in demand among aviation lovers, families, and investors alike.</p>
+      <p class="">If you're ready to claim your piece of Tedderfield and design a life around the skies, reach out to us today.</p>
+      <p class="">Our team is here to guide you through the process and help make your vision a reality.</p>
+    </div>
+  </mat-expansion-panel>
+
 </div>

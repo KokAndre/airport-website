@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hangars-for-sale.component.scss']
 })
 export class HangarsForSaleComponent implements OnInit {
+  public isAviationMeetsCommunityExpanded = false;
+  public isWhyInvestInAHangerExpanded = false;
+  public isDontMissOutOnLimitedHangersExpanded = false;
 
   constructor() { }
 

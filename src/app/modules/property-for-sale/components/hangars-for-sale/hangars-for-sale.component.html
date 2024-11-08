@@ -1,41 +1,89 @@
-<div
-  style="width: 100%; height: 500px; background-image: url('assets/sample-image.webp'); background-repeat: no-repeat; background-position: bottom; background-size: cover;">
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Hangers For Sale</p>
+    <p class="mb-0 text-size-14">Property For Sale / <span class="child-path-text">Hangers For Sale</span></p>
+  </div>
 </div>
 
-<div class="col-12">
-  <h1 class="mt-3 mx-auto text-center">Hanger for Sale Page</h1>
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image4"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image5"></div>
+  </div>
+</div> -->
 
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nisl in nisi tempor sollicitudin eget et
-    dolor. Quisque posuere scelerisque tortor, vitae tempor nunc tempus id. Nam dui nunc, finibus in tincidunt non,
-    malesuada vitae neque. Suspendisse ac ligula risus. Suspendisse eleifend, augue eget finibus facilisis, lacus nibh
-    tempor turpis, eu rhoncus magna dolor quis sem. Phasellus imperdiet euismod nulla ac interdum. Mauris congue turpis
-    nisi. Integer in fermentum purus. Sed non finibus orci. Nam dapibus ullamcorper diam, at congue arcu pellentesque
-    ac. Nunc ut luctus lectus. Fusce quis ex dui. Aenean eget libero tincidunt, facilisis urna vitae, faucibus lacus.
-    Maecenas eget risus id justo dapibus ultrices. Nunc ac porta mauris. Duis tempus, urna eget dapibus rutrum, urna
-    ante tempus lacus, accumsan semper eros lacus eu ligula.
-    <br><br>
-    Cras mattis feugiat justo, at accumsan sem congue quis. Etiam turpis magna, tempus ac elit sit amet, eleifend
-    aliquet augue. Aliquam tempor commodo magna non congue. Mauris ultrices posuere ligula vitae ullamcorper. Maecenas
-    at condimentum orci. Phasellus eget ultrices mi, a pretium diam. Fusce suscipit auctor efficitur. Suspendisse luctus
-    eget libero id dapibus. Ut eu venenatis libero. Etiam malesuada est a quam condimentum, eu lacinia augue
-    consectetur.
-    <br><br>
-    Integer nunc augue, ultrices rhoncus mattis et, scelerisque sit amet turpis. Ut suscipit metus justo, ac iaculis
-    sapien iaculis rhoncus. Sed gravida luctus sem, iaculis condimentum nibh laoreet vitae. Proin condimentum est et
-    quam ultricies porta. Suspendisse vel augue ante. Donec vel lacus a ex consectetur auctor. Pellentesque eget felis
-    at elit faucibus maximus sed sed ex. Vestibulum blandit, nulla in fermentum dapibus, est orci imperdiet justo, nec
-    blandit nisl turpis vel lorem. Praesent consequat eros at ultrices imperdiet. Suspendisse congue a dolor egestas
-    cursus. Curabitur eget eleifend eros. Cras maximus magna ac augue fringilla, vel porttitor quam egestas.
-    <br><br>
-    Morbi vitae viverra est. Donec eleifend est quam, eget dapibus mauris ornare vel. Curabitur mauris nisl, hendrerit
-    ac mauris sit amet, suscipit dictum sem. Suspendisse potenti. Nullam vitae scelerisque ex, nec sodales ipsum. Nunc
-    consequat cursus tincidunt. Pellentesque venenatis luctus congue. Quisque commodo et enim vitae aliquam.
-    <br><br>
-    Cras gravida diam lectus, eu varius nisi vehicula accumsan. Sed arcu quam, tempus id ipsum quis, fringilla bibendum
-    nulla. Sed eget odio a risus gravida cursus. Donec scelerisque porttitor tincidunt. Donec dictum, dolor id maximus
-    posuere, enim diam malesuada est, nec faucibus diam massa ac nulla. Nulla interdum urna a mauris finibus, ac aliquam
-    arcu lobortis. Suspendisse egestas semper euismod. Fusce id lacus lectus. Vivamus egestas tortor pellentesque enim
-    ornare scelerisque.
-  </p>
+<app-arrow-divider class="pointer" (click)="isAviationMeetsCommunityExpanded = !isAviationMeetsCommunityExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isAviationMeetsCommunityExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Aviation Meets Community at Tedderfield Airpark</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Tedderfield Airpark offers a limited number of exclusive hangar spaces for sale, providing private pilots and aviation professionals the opportunity to base themselves in a vibrant, aviation-centered community.</p>
+      <p class="">Our hangars aren't just spaces - they're access points to a full aviation lifestyle.</p>
+      <p class="">From early-morning takeoffs to the camaraderie shared over evening landings, Tedderfield is where your aviation dreams come to life.</p>
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isWhyInvestInAHangerExpanded = !isWhyInvestInAHangerExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isWhyInvestInAHangerExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+      <p class="text-size-24 mb-3">Why Invest in a Hangar at Tedderfield?</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Located at one of South Africa's premier private airfields, Tedderfield Airpark provides safe, secure, and spacious hangars designed for both private and commercial aviation needs.</p>
+      <p class="">As a hangar owner, you'll join a community of passionate aviators, enjoy access to fly-ins, fly-aways, and other social events.</p>
+      <p class="">Tedderfield also offers maintenance facilities, an active social calendar, and a host of amenities that make your aviation life smooth and enjoyable.</p>
+    </div>
+
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isDontMissOutOnLimitedHangersExpanded = !isDontMissOutOnLimitedHangersExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isDontMissOutOnLimitedHangersExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Don't Miss Out on Limited Hangar Opportunities</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Our hangar spaces are in high demand, attracting everyone from seasoned pilots to aviation enthusiasts who want a home for their aircraft.</p>
+      <p class="">Contact us to learn more about our available hangars for sale and secure your own hangar at Tedderfield Airpark, where adventure takes flight daily.</p>
+    </div>
+  </mat-expansion-panel>
+
 </div>
