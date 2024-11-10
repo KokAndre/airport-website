@@ -4,6 +4,8 @@ import { MembersLandingComponent } from './components/members-landing/members-la
 import { FaqsComponent } from './components/faqs/faqs.component';
 import { ReportAnIssueComponent } from './components/report-an-issue/report-an-issue.component';
 import { GreenTedderfieldComponent } from './components/green-tedderfield/green-tedderfield.component';
+import { GettingToKnowYouComponent } from './components/getting-to-know-you/getting-to-know-you.component';
+import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hanger.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'greening-tedderfield', component: GreenTedderfieldComponent
+  },
+  {
+    path: 'getting-to-know-you', component: GettingToKnowYouComponent
+  },
+  {
+    path: 'sell-my-hanger', component: SellMyHangerComponent
   },
 ];
 

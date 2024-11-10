@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 export class GreenTedderfieldComponent implements OnInit {
   public greeningTedderfieldFormGroup: FormGroup;
   public loggedInUserDetails = new LoginToken();
+  public isHelpUsExpanded = true;
+  public isGeeningFormExpanded = true;
   public amountSelectControlData = [
     {
       value: "300",

@@ -5,24 +5,37 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isWereHereToHelpExpanded = !isWereHereToHelpExpanded" [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Report an Issue - We're Here to Help!</p>
+    <mat-expansion-panel hideToggle [expanded]="isWereHereToHelpExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Report an Issue - We're Here to Help!</p>
+      </mat-expansion-panel-header>
 
-    <p class="">At Tedderfield Airpark, we take pride in making sure everything runs smoothly for our community. Whether
-      you're an owner, renter, or renting pilot, we've made it super easy for you to report any issues that need
-      attention — from maintenance requests to airfield concerns. Just log your issue here, and we'll get it sorted!</p>
+      <p class="">At Tedderfield Airpark, we take pride in making sure everything runs smoothly for our community.
+        Whether
+        you're an owner, renter, or renting pilot, we've made it super easy for you to report any issues that need
+        attention — from maintenance requests to airfield concerns. Just log your issue here, and we'll get it sorted!
+      </p>
+    </mat-expansion-panel>
+
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+
+  <app-arrow-divider class="pointer" (click)="isHowItWorksExpanded = !isHowItWorksExpanded" [isLightToDark]="false"></app-arrow-divider>
 
 </div>
 
 <div class="">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">How It Works:</p>
+
+    <mat-expansion-panel hideToggle [expanded]="isHowItWorksExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">How It Works:</p>
+      </mat-expansion-panel-header>
+
 
     <ol>
       <li>Fill out a quick form describing the issue.</li>
@@ -33,15 +46,23 @@
     <p>Your input helps us keep Tedderfield running like a well-oiled machine, so don't hesitate to let us know how we
       can help!</p>
 
+      </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isReportFormExpanded = !isReportFormExpanded" [isLightToDark]="true"></app-arrow-divider>
 
 </div>
 
 
 <div class="dark-background">
   <!-- <p class="text-size-24 mb-3">Follow Us and Stay Connected with Tedderfield Airpark!</p> -->
+
+  <mat-expansion-panel hideToggle [expanded]="isReportFormExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Report an Issue</p>
+      </div>      
+    </mat-expansion-panel-header>
 
 
   <div class="mb-3 py-4" [formGroup]="reportIssueFormGroup">
@@ -63,7 +84,7 @@
         </mat-form-field>
       </div>
 
-      <div class="row mx-0 justify-content-center mt-4">
+      <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-10 px-0">
           <mat-label>Hangar or Section Number</mat-label>
           <input style="color: black;" matInput required maxlength="50" formControlName="hangerOrsectionNumberControl">
@@ -72,7 +93,7 @@
         </mat-form-field>
       </div>
 
-      <div class="row mx-0 justify-content-center">
+      <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-10 px-0">
           <mat-label>Please describe your issue here</mat-label>
           <textarea style="color: black;" required="" matInput maxlength="500"
@@ -93,4 +114,5 @@
     </div>
   </div>
 
+  </mat-expansion-panel>
 </div>

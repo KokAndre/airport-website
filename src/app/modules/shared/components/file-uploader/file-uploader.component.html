@@ -1,3 +1,4 @@
-<p>
-  file-uploader works!
-</p>
+<div class="col-12 px-0 pointer upload-file-background" (click)="handleClick()">
+  <mat-icon class="upload-file-icon">upload</mat-icon>
+  <input type="file" [multiple]="numOfFilesAllowed > 1 ? true : false" [max]="numOfFilesAllowed" size="" hidden #fileUploaded (click)="$event.stopPropagation()" (change)="uploadItem($event)" [accept]="allowSelectImages ? imageUploadTypes : fileUploadTypes" />
+</div>

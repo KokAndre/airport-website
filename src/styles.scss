@@ -438,6 +438,7 @@ h6,
   .mat-expansion-panel-header {
     padding: 0px !important;
     user-select: none !important;
+    height: fit-content !important;
   }
 
   .mat-expansion-panel-header:hover {
@@ -447,4 +448,33 @@ h6,
   .mat-expansion-panel-body {
     padding: 0px !important;
   }
+}
+
+.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
+  background: #ee202e !important;
+}
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-focus-icon-color: #ee202e !important;
+  --mdc-checkbox-selected-hover-icon-color: #ee202e !important;
+  --mdc-checkbox-selected-icon-color: #ee202e !important;
+  --mdc-checkbox-selected-pressed-icon-color: #ee202e !important;
+}
+
+.mat-mdc-radio-button .mdc-form-field {
+  padding: 0px !important;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-selected-focus-icon-color: #ee202e !important;
+  --mdc-radio-selected-hover-icon-color: #ee202e !important;
+  --mdc-radio-selected-icon-color: #ee202e !important;
+  --mdc-radio-selected-pressed-icon-color: #ee202e !important;
+  --mat-mdc-radio-checked-ripple-color: #ee202e !important;
+}
+
+.min-width-modal-class {
+  min-width: 300px;
+  width: fit-content;
+
 }

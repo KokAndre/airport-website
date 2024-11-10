@@ -34,14 +34,14 @@ export class LoginComponent implements OnInit {
   public passwordStrengthText: string;
   public strengthMeterClass: string;
   public passwordIsStrong = false;
-  // public disableSaveButton = true;
-  // public isLoginButtonFocused = false;
-  // public isRegisterButtonFocused = false;
   public isUserRegistered = false;
+  private resizeObserver: ResizeObserver;
+  public isMobileView = false;
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router, public appModalService: AppModalService) { }
 
   ngOnInit() {
+    this.initializeScreenSizeCheck();
 
     if (!this.userData) {
       this.errorFetchingDataEmit.emit();
@@ -54,6 +54,21 @@ export class LoginComponent implements OnInit {
     } else {
       this.initializeRegisterControls();
     }
+  }
+
+  public initializeScreenSizeCheck() {
+    const body = document.getElementsByTagName("body")[0];
+    this.resizeObserver = new ResizeObserver(() => {
+      const widthToCheck = window.innerWidth;
+      if (widthToCheck < 350) {
+        this.isMobileView = true;
+      } else {
+        this.isMobileView = false;
+      }
+    });
+
+    // Add a listener to body
+    this.resizeObserver.observe(body);
   }
 
   public initializeLoginControls() {

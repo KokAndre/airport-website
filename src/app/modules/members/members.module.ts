@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FaqsComponent } from './components/faqs/faqs.component';
 import { ReportAnIssueComponent } from './components/report-an-issue/report-an-issue.component';
 import { GreenTedderfieldComponent } from './components/green-tedderfield/green-tedderfield.component';
+import { GettingToKnowYouComponent } from './components/getting-to-know-you/getting-to-know-you.component';
+import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hanger.component';
 
 
 
@@ -14,7 +16,9 @@ import { GreenTedderfieldComponent } from './components/green-tedderfield/green-
     MembersLandingComponent,
     FaqsComponent,
     ReportAnIssueComponent,
-    GreenTedderfieldComponent
+    GreenTedderfieldComponent,
+    GettingToKnowYouComponent,
+    SellMyHangerComponent
   ],
   imports: [
     CommonModule,

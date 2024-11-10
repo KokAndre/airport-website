@@ -10,6 +10,7 @@ export class FaqsComponent implements OnInit {
   public faqSections = [
     {
       sectionTitle: 'Facilities & Clubhouse',
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: 'What facilities are available at Tedderfield Airpark?',
@@ -35,6 +36,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: 'Security & Access',
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "How is security managed at Tedderfield Airpark?",
@@ -75,6 +77,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Maintenance & Upgrades",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "How do I report a maintenance issue at the airpark?",
@@ -100,6 +103,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Events & Activities",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "What type of events are held at Tedderfield Airpark?",
@@ -120,6 +124,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Business & Classifieds",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "How do I access the Tedderfield Airpark online classifieds to list or browse aviation items?",
@@ -140,6 +145,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Development & Future Projects",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "What are the future development plans for Tedderfield Airpark?",
@@ -155,6 +161,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Communication & Protocols",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "What is the procedure for radio communication at Tedderfield Airpark?",
@@ -185,6 +192,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "Purchasing & Renting",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "Can pilots who are not residents rent space at Tedderfield Airpark?",
@@ -205,6 +213,7 @@ export class FaqsComponent implements OnInit {
     },
     {
       sectionTitle: "General Information",
+      isSectionExpanded: true,
       questions: [
         {
           questionTitle: "Can I list items for sale at Tedderfield Airpark? ",
@@ -253,6 +262,13 @@ export class FaqsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public togglePannel(indexToToggle: number) {
+    // console.log('IN TOGGLE PANNEL!!!!!!');
+    // if (indexToToggle < (this.faqSections.length - 1)) {
+      this.faqSections[indexToToggle].isSectionExpanded = !this.faqSections[indexToToggle].isSectionExpanded;
+    // }
   }
 
 }

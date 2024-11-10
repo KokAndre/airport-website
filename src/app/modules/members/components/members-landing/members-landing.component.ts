@@ -15,6 +15,9 @@ export class MembersLandingComponent implements OnInit {
   public loginFormGroup: FormGroup;
   public userData: GetUserDataResponse.Data;
   public displayLoginScreen = false;
+  public isWelcomeExpanded = true;
+  public isWhySignInExpanded = true;
+  public isHowToAccessYourAccountExpanded = true;
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public appModalService: AppModalService) { }
 

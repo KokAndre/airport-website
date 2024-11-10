@@ -16,6 +16,9 @@ import { MembersService } from '../../services/members.service';
 export class ReportAnIssueComponent implements OnInit {
   public reportIssueFormGroup: FormGroup;
   public appHelperFunctions = AppHelperFunction;
+  public isWereHereToHelpExpanded = true;
+  public isHowItWorksExpanded = true;
+  public isReportFormExpanded = true;
 
   constructor(private formBuilder: FormBuilder, private membersService: MembersService, public appModalService: AppModalService) { }
 

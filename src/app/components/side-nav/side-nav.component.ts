@@ -125,7 +125,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-            data: modalDetails, disableClose: false, minWidth: '300px', maxWidth: '90vw', width: 'fit-content'
+            data: modalDetails, disableClose: false, maxWidth: '90vw', panelClass: 'min-width-modal-class'
           });
           break;
 

@@ -190,8 +190,6 @@ export class LoginService {
       const currentDate = new Date();
       const tokenExpiryDate = new Date(token.logoutDateTime);
 
-      console.log('TOKEN:  ', token)
-
       if (currentDate < tokenExpiryDate) {
         const userdetails = new LoginToken();
         userdetails.id = token.id;

@@ -5,98 +5,101 @@
   </div>
 </div>
 
-<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isHelpUsExpanded = !isHelpUsExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">Help Us Green Tedderfield - One Tree at a Time! 🌳</p>
+    <mat-expansion-panel hideToggle [expanded]="isHelpUsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Help Us Green Tedderfield - One Tree at a Time! 🌳</p>
+      </mat-expansion-panel-header>
 
-    <p class="">Let's face it - pilots are known for keeping a tight hold on their wallets! 😄 But we're calling on you to loosen the purse strings for something that will benefit all of us: <b>greening Tedderfield Airpark</b> with indigenous trees and shrubs!</p>
-  
-    <p>For just <b>R300 per tree</b>, you can make a lasting impact on our airpark's environment. Not only will you be contributing to the long-term beauty of our airfield, but you'll also be part of a sustainable plan to green our surroundings.</p>
-  
-    <p>It's simple: <b>donate a tree</b> and we'll add it to your next invoice - no hassle, no fuss! Plus, we'll <b>acknowledge your generous donation</b> with a shout-out to the community.</p>
-  
-    <p>😉 Let's make Tedderfield a greener, better place for all of us. <b>R300 for one tree, or even more if you feel inspired.</b> Every little bit helps, and together, we can make a big difference.  Most folk have donated 10 trees for R3,000.</p>
+      <p class="">Let's face it - pilots are known for keeping a tight hold on their wallets! 😄 But we're calling on
+        you to loosen the purse strings for something that will benefit all of us: <b>greening Tedderfield Airpark</b>
+        with indigenous trees and shrubs!</p>
 
-    <p>Thanks for your support!</p>
-    
+      <p>For just <b>R300 per tree</b>, you can make a lasting impact on our airpark's environment. Not only will you be
+        contributing to the long-term beauty of our airfield, but you'll also be part of a sustainable plan to green our
+        surroundings.</p>
+
+      <p>It's simple: <b>donate a tree</b> and we'll add it to your next invoice - no hassle, no fuss! Plus, we'll
+        <b>acknowledge your generous donation</b> with a shout-out to the community.</p>
+
+      <p>😉 Let's make Tedderfield a greener, better place for all of us. <b>R300 for one tree, or even more if you feel
+          inspired.</b> Every little bit helps, and together, we can make a big difference. Most folk have donated 10
+        trees for R3,000.</p>
+
+      <p>Thanks for your support!</p>
+
+    </mat-expansion-panel>
+
   </div>
 
-  <app-arrow-divider [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isGeeningFormExpanded = !isGeeningFormExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
 
 </div>
 
-<!-- <div class="">
-  <div class="col-10 mx-auto pb-4">
-    <p class="text-size-24 mb-3">How It Works:</p>
-
-    <ol>
-      <li>Fill out a quick form describing the issue.</li>
-      <li>Submit your request.</li>
-      <li>Our team will review it and get to work on a solution.</li>
-    </ol>
-
-    <p>Your input helps us keep Tedderfield running like a well-oiled machine, so don't hesitate to let us know how we
-      can help!</p>
-
-  </div>
-
-  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
-
-</div> -->
-
-
 <div class="">
-  <div class="mb-3 py-4" [formGroup]="greeningTedderfieldFormGroup">
-    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto greening-form-background">
-      <div class="row mx-0 justify-content-center mt-4">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Name</mat-label>
-          <input style="color: black;" matInput required maxlength="100" formControlName="nameControl">
-          <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
-        </mat-form-field>
+  <mat-expansion-panel hideToggle [expanded]="isGeeningFormExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Greening Tedderfield</p>
       </div>
+    </mat-expansion-panel-header>
 
-      <div class="row mx-0 justify-content-center mt-2">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Email</mat-label>
-          <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
-          <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
-        </mat-form-field>
-      </div>
+    <div class="mb-3 pb-4" [formGroup]="greeningTedderfieldFormGroup">
+      <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto greening-form-background">
+        <div class="row mx-0 justify-content-center mt-4">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Name</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="nameControl">
+            <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>I would like to donate via the monthly invoice cycle. Please select an amount.</mat-label>
-          <mat-select formControlName="donateAmountSelectControl">
-            <mat-option *ngFor="let item of amountSelectControlData" [value]="item.value">{{ item.displayValue }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="donateAmountSelectControl?.hasError('required')">Amount is required</mat-error>
-        </mat-form-field>
-        <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
-      </div>
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Email</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+            <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>I have another idea on how I could contribute towards this greening initiative.</mat-label>
-          <textarea style="color: black;" matInput maxlength="500"
-            formControlName="otherIdeasControl"></textarea>
-          <!-- <mat-error *ngIf="otherIdeasControl?.hasError('required')">Issue description is required</mat-error> -->
-        </mat-form-field>
-      </div>
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>I would like to donate via the monthly invoice cycle. Please select an amount.</mat-label>
+            <mat-select formControlName="donateAmountSelectControl">
+              <mat-option *ngFor="let item of amountSelectControlData" [value]="item.value">{{ item.displayValue
+                }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="donateAmountSelectControl?.hasError('required')">Amount is required</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>I have another idea on how I could contribute towards this greening initiative.</mat-label>
+            <textarea style="color: black;" matInput maxlength="500" formControlName="otherIdeasControl"></textarea>
+            <!-- <mat-error *ngIf="otherIdeasControl?.hasError('required')">Issue description is required</mat-error> -->
+          </mat-form-field>
+        </div>
 
 
 
-      <div class="row mx-0 justify-content-center">
-        <div class="red-button mb-4" [ngClass]="{'disable-user-click': greeningTedderfieldFormGroup.invalid}"
-          (click)="submitClicked()">
-          <p class="mb-0">Submit</p>
-          <span class="red-button-icon"></span>
+        <div class="row mx-0 justify-content-center">
+          <div class="red-button mb-4" [ngClass]="{'disable-user-click': greeningTedderfieldFormGroup.invalid}"
+            (click)="submitClicked()">
+            <p class="mb-0">Submit</p>
+            <span class="red-button-icon"></span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+  </mat-expansion-panel>
 
 </div>
