@@ -8,6 +8,7 @@ import { ReportAnIssueComponent } from './components/report-an-issue/report-an-i
 import { GreenTedderfieldComponent } from './components/green-tedderfield/green-tedderfield.component';
 import { GettingToKnowYouComponent } from './components/getting-to-know-you/getting-to-know-you.component';
 import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hanger.component';
+import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.component';
 
 
 
@@ -18,7 +19,8 @@ import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hange
     ReportAnIssueComponent,
     GreenTedderfieldComponent,
     GettingToKnowYouComponent,
-    SellMyHangerComponent
+    SellMyHangerComponent,
+    SellMyStandComponent
   ],
   imports: [
     CommonModule,

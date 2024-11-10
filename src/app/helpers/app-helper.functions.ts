@@ -104,4 +104,82 @@ export class AppHelperFunction {
     static openDocumentInNewTab(urlToOpen: string) {
         window.open(urlToOpen, '_blank');
     }
+
+    public static thousandSeporatorWithComma(value: string) {
+        if (value) {
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return value;
+        }
+    }
+
+    public static includeDecimalsOnInputValue(value: string, formControl?: any) {
+        // Make sure the value comming through is a string
+        value = value.toString();
+
+        let valueBeforeDeciaml = '';
+        let decimalValue = '';
+
+        const includesDecimal = value.includes('.');
+        if (includesDecimal) {
+            valueBeforeDeciaml = this.removeNonNumericCharacters(value.split('.')[0]);
+            const decimalVal = this.removeNonNumericCharacters(value.split('.')[1] ? value.split('.')[1] : '');
+            if (decimalVal?.length > 2) {
+                decimalValue = decimalVal.substr(0, 2);
+            } else if (decimalVal?.length === 1) {
+                decimalValue = `${decimalVal}0`;
+            } else if (decimalVal?.length === 0) {
+                decimalValue = '00';
+            } else {
+                decimalValue = decimalVal;
+            }
+        } else {
+            valueBeforeDeciaml = this.removeNonNumericCharacters(value);
+            decimalValue = '00';
+        }
+
+        value = `${this.thousandSeporatorWithComma(valueBeforeDeciaml ? valueBeforeDeciaml : '0')}.${decimalValue}`;
+
+        // Update the value on the form
+        if (formControl) {
+            formControl.setValue(value);
+        } else {
+            return value;
+        }
+    }
+
+    public static inputBoxSeparatorWithDecimalsAndCommas(value: string, formControl?: any) {
+        // Make sure the value comming through is a string
+        value = value.toString();
+
+        let valueBeforeDeciaml = '';
+        let decimalValue = '';
+
+        const includesDecimal = value.includes('.');
+        if (includesDecimal) {
+            valueBeforeDeciaml = this.removeNonNumericCharacters(value.split('.')[0]);
+            const decimalVal = this.removeNonNumericCharacters(value.split('.')[1] ? value.split('.')[1] : '');
+            if (decimalVal?.length > 2) {
+                decimalValue = decimalVal.substr(0, 2);
+            } else {
+                decimalValue = decimalVal;
+            }
+        } else {
+            valueBeforeDeciaml = this.removeNonNumericCharacters(value);
+        }
+
+        if (includesDecimal) {
+            value = `${this.thousandSeporatorWithComma(valueBeforeDeciaml)}.${decimalValue}`;
+        } else {
+            value = this.thousandSeporatorWithComma(valueBeforeDeciaml);
+        }
+
+        if (formControl) {
+            // Update the value on the form
+            formControl.setValue(value);
+        } else {
+            return value;
+        }
+
+    }
+
 }

@@ -31,6 +31,7 @@ export enum AppRoutes {
     GettingToKnowYou = '/members/getting-to-know-you',
     GreeningTedderfield = '/members/greening-tedderfield',
     SellMyHanger = '/members/sell-my-hanger',
+    SellMyStand = '/members/sell-my-stand',
     PropertyForSaleBase = '/property-for-sale/',
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',

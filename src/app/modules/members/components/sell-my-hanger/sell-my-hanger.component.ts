@@ -71,10 +71,62 @@ export class SellMyHangerComponent implements OnInit {
     formControl?.setValue(valueToSet);
   }
 
+  public numberControlInputWithDecimal(formControl?: AbstractControl) {
+    const valueToSet = AppHelperFunction.inputBoxSeparatorWithDecimalsAndCommas(formControl?.value);
+    formControl?.setValue(valueToSet);
+  }
+
   public thousandSeparatorControlInput(formControl?: AbstractControl) {
-    // TODO: 
-    // const valueToSet = AppHelperFunction.removeNonNumericCharacters(formControl?.value);
-    // formControl?.setValue(valueToSet);
+    const valueToSet = AppHelperFunction.includeDecimalsOnInputValue(formControl?.value);
+    formControl?.setValue(valueToSet);
+  }
+
+  public fucusOnBulletPointControl(formControl?: AbstractControl) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+  }
+
+  public inputOnBulletPointControl(formControl: AbstractControl, keyPressed: any) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+
+    const numOfLines = formControl.value?.split('\n')?.length;
+
+    if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
+      if (numOfLines <= 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf('\n');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+    if (keyPressed.key === ',') {
+      if (numOfLines < 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue = formCotrolValue.replace(',', "\n")
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf(',');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+  }
+
+  public blurOnBulletPointControl(formControl: AbstractControl) {
+    if (formControl?.value === '• ' || formControl?.value === '•') {
+      formControl.setValue('');
+    }
   }
 
   public updateTitleDocumentation(uploadedDocuments: SellMyHangerRequest.FileData[]) {
@@ -166,7 +218,7 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.additionalInfrastructure = this.hangerAdditionalInfrastucture.value;
     this.submitHangerForSaleRequestData.price = this.askingPriceControl.value;
     this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
-    
+
     this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
 
     if (this.pilotLevyCheckboxControl.value) {

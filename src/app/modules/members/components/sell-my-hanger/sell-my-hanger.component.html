@@ -79,7 +79,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">Please upload your title or real right notarial deed.</P>
-            <p class="text-size-12 child-path-text">Upload 1 supported file: PDF, Max 10MB</p>
+            <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
 
             <div
               *ngIf="submitHangerForSaleRequestData.titleDocument?.fileName && submitHangerForSaleRequestData.titleDocument?.fileData">
@@ -106,14 +106,14 @@
             <div class="row justify-content-between">
               <mat-form-field class="col-6 pr-2 pl-0">
                 <mat-label>Width (Meter)</mat-label>
-                <input style="color: black;" (input)="numberControlInput(hangerDimentionsWidthControl)" matInput
-                  maxlength="10" formControlName="hangerDimentionsWidthControl" placeholder="Width (Meter)">
+                <input style="color: black;" (input)="numberControlInputWithDecimal(hangerDimentionsWidthControl)"
+                  matInput maxlength="10" formControlName="hangerDimentionsWidthControl" placeholder="Width (Meter)">
                 <!-- <mat-error *ngIf="hangerDimentionsWidthControl?.hasError('required')">Width is required</mat-error> -->
               </mat-form-field>
               <mat-form-field class="col-6 pr-0 pl-2">
                 <mat-label>Length (Meter)</mat-label>
-                <input style="color: black;" (input)="numberControlInput(hangerDimentionsLengthControl)" matInput
-                  maxlength="10" formControlName="hangerDimentionsLengthControl" placeholder="Length (Meter)">
+                <input style="color: black;" (input)="numberControlInputWithDecimal(hangerDimentionsLengthControl)"
+                  matInput maxlength="10" formControlName="hangerDimentionsLengthControl" placeholder="Length (Meter)">
                 <!-- <mat-error *ngIf="hangerDimentionsLengthControl?.hasError('required')">Length is required</mat-error> -->
               </mat-form-field>
             </div>
@@ -148,19 +148,21 @@
               <mat-form-field class="col-4 pl-0 pr-1">
                 <mat-label>Width (Meter)</mat-label>
                 <input style="color: black;" matInput maxlength="10" formControlName="hangerDoorDimensionsWidthControl"
-                  (input)="numberControlInput(hangerDoorDimensionsWidthControl)" placeholder="Width (Meter)">
+                  (input)="numberControlInputWithDecimal(hangerDoorDimensionsWidthControl)" placeholder="Width (Meter)">
                 <!-- <mat-error *ngIf="hangerDoorDimensionsWidthControl?.hasError('required')">Width is required</mat-error> -->
               </mat-form-field>
               <mat-form-field class="col-4 pl-1 pr-1">
                 <mat-label>Length (Meter)</mat-label>
                 <input style="color: black;" matInput maxlength="10" formControlName="hangerDoorDimensionsLengthControl"
-                  (input)="numberControlInput(hangerDoorDimensionsLengthControl)" placeholder="Length (Meter)">
+                  (input)="numberControlInputWithDecimal(hangerDoorDimensionsLengthControl)"
+                  placeholder="Length (Meter)">
                 <!-- <mat-error *ngIf="hangerDoorDimensionsLengthControl?.hasError('required')">Length is required</mat-error> -->
               </mat-form-field>
               <mat-form-field class="col-4 pl-1 pr-0">
                 <mat-label>Height (Meter)</mat-label>
                 <input style="color: black;" matInput maxlength="10" formControlName="hangerDoorDimensionsHeightControl"
-                  (input)="numberControlInput(hangerDoorDimensionsHeightControl)" placeholder="Height (Meter)">
+                  (input)="numberControlInputWithDecimal(hangerDoorDimensionsHeightControl)"
+                  placeholder="Height (Meter)">
                 <!-- <mat-error *ngIf="hangerDoorDimensionsHeightControl?.hasError('required')">Height is required</mat-error> -->
               </mat-form-field>
             </div>
@@ -170,8 +172,13 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Building Material</mat-label>
-            <input style="color: black;" matInput maxlength="500" formControlName="hangerBuildingMaterialControl"
-              placeholder="Construction material (e.g. steel frame, brick, etc)">
+            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerBuildingMaterialControl)"
+              (keyup)="inputOnBulletPointControl(hangerBuildingMaterialControl, $event)"
+              (blur)="blurOnBulletPointControl(hangerBuildingMaterialControl)" style="color: black;" matInput required
+              maxlength="500" formControlName="hangerBuildingMaterialControl"
+              placeholder="Construction material (e.g. steel frame, brick, etc)"></textarea>
+            <!-- <input style="color: black;" matInput maxlength="500" formControlName="hangerBuildingMaterialControl"
+              placeholder="Construction material (e.g. steel frame, brick, etc)"> -->
             <!-- <mat-error *ngIf="hangerBuildingMaterialControl?.hasError('required')">Hangar Building Material is required</mat-error> -->
           </mat-form-field>
         </div>
@@ -186,11 +193,24 @@
           </mat-form-field>
         </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
+        <!-- <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Customisations</mat-label>
             <input style="color: black;" matInput required maxlength="500" formControlName="hangerCustomisationsControl"
               placeholder="Any unique features, such as mezzanine levels, insulation, reinforced doors, etc">
+            <mat-error *ngIf="hangerCustomisationsControl?.hasError('required')">Hangar Customisations is
+              required</mat-error>
+          </mat-form-field>
+        </div> -->
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Hangar Customisations</mat-label>
+            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerCustomisationsControl)"
+              (keyup)="inputOnBulletPointControl(hangerCustomisationsControl, $event)"
+              (blur)="blurOnBulletPointControl(hangerCustomisationsControl)" style="color: black;" matInput required
+              maxlength="500" formControlName="hangerCustomisationsControl"
+              placeholder="Any unique features, such as mezzanine levels, insulation, reinforced doors, etc"></textarea>
             <mat-error *ngIf="hangerCustomisationsControl?.hasError('required')">Hangar Customisations is
               required</mat-error>
           </mat-form-field>
@@ -199,8 +219,13 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Features and Benefits</mat-label>
-            <input style="color: black;" matInput maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
-              placeholder="I am selling my hangar with the following items [included in the price]">
+            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerFeaturesAndBenefitsControl)"
+              (keyup)="inputOnBulletPointControl(hangerFeaturesAndBenefitsControl, $event)"
+              (blur)="blurOnBulletPointControl(hangerFeaturesAndBenefitsControl)" style="color: black;" matInput required
+              maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
+              placeholder="I am selling my hangar with the following items (included in the price)"></textarea>
+            <!-- <input style="color: black;" matInput maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
+              placeholder="I am selling my hangar with the following items [included in the price]"> -->
             <!-- <mat-error *ngIf="hangerFeaturesAndBenefitsControl?.hasError('required')">Hangar Features and Benefits is required</mat-error> -->
           </mat-form-field>
         </div>
@@ -208,8 +233,13 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Security</mat-label>
-            <input style="color: black;" matInput required maxlength="500" formControlName="hangerSecurityControl"
-              placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc.">
+            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerSecurityControl)"
+            (keyup)="inputOnBulletPointControl(hangerSecurityControl, $event)"
+            (blur)="blurOnBulletPointControl(hangerSecurityControl)" style="color: black;" matInput required
+            maxlength="500" formControlName="hangerSecurityControl"
+            placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."></textarea>
+            <!-- <input style="color: black;" matInput required maxlength="500" formControlName="hangerSecurityControl"
+              placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."> -->
             <mat-error *ngIf="hangerSecurityControl?.hasError('required')">Hangar Security is required</mat-error>
           </mat-form-field>
         </div>
@@ -217,8 +247,13 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Additional Infrastructure</mat-label>
-            <input style="color: black;" matInput maxlength="100" formControlName="hangerAdditionalInfrastucture"
-              placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc.">
+            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerAdditionalInfrastucture)"
+            (keyup)="inputOnBulletPointControl(hangerAdditionalInfrastucture, $event)"
+            (blur)="blurOnBulletPointControl(hangerAdditionalInfrastucture)" style="color: black;" matInput required
+            maxlength="500" formControlName="hangerAdditionalInfrastucture"
+            placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc."></textarea>
+            <!-- <input style="color: black;" matInput maxlength="100" formControlName="hangerAdditionalInfrastucture"
+              placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc."> -->
             <!-- <mat-error *ngIf="hangerAdditionalInfrastucture?.hasError('required')">Hangar Additional Infrastructure is required</mat-error> -->
           </mat-form-field>
         </div>
@@ -226,19 +261,23 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Asking Price</mat-label>
-            <input style="color: black;" (input)="thousandSeparatorControlInput(askingPriceControl || undefined)"
-              matInput required maxlength="100" formControlName="askingPriceControl"
-              placeholder="Price in South African Rand(ZAR)">
-            <mat-error *ngIf="askingPriceControl?.hasError('required')">Hangar - Year Built is required</mat-error>
+            <div class="d-flex">
+              <span *ngIf="askingPriceControl.value" class="currency-input-prefix">ZAR</span>
+              <input style="color: black;" (blur)="thousandSeparatorControlInput(askingPriceControl || undefined)"
+                (input)="numberControlInputWithDecimal(askingPriceControl || undefined)" matInput required
+                maxlength="100" formControlName="askingPriceControl" placeholder="Price in South African Rand(ZAR)">
+            </div>
+            <mat-error *ngIf="askingPriceControl?.hasError('required')">Asking price Built is required</mat-error>
           </mat-form-field>
         </div>
+
 
         <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">Levies Applicable: [Tick all applicable items]</P>
             <mat-checkbox class="col-12 px-0" formControlName="pilotLevyCheckboxControl">Pilot Levy ZAR770 per
               month</mat-checkbox>
-            <mat-checkbox class="col-12 px-0" formControlName="sectionLevyCheckboxControl">Section Levey ZAR1075 per
+            <mat-checkbox class="col-12 px-0" formControlName="sectionLevyCheckboxControl">Section Levy ZAR1075 per
               month</mat-checkbox>
             <mat-checkbox class="col-12 px-0" formControlName="securityLevyCheckboxControl">Security Levy ZAR110 per
               month</mat-checkbox>
@@ -253,7 +292,9 @@
             <P class="mb-1">High-quality images of the interior and exterior of the hangar, showing key features like
               doors,
               workshops areas, and proximity of the runway or other facilities. </P>
-            <p class="text-size-12 child-path-text">Upload up to 5 supported files: image. Max 50MB per file.</p>
+            <p class="text-size-12 child-path-text">Upload up to 5 supported files. File types: PNG, JPG, JPEG, SVG. Max
+              50MB per file.
+            </p>
 
             <div *ngIf="submitHangerForSaleRequestData.hangerImages?.length">
               <div class="row mb-2 mx-0" *ngFor="let image of submitHangerForSaleRequestData.hangerImages">
@@ -279,7 +320,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">If available, a detailed floor plan of the hangar.</P>
-            <p class="text-size-12 child-path-text">Upload 1 supported file: PDF, Max 10MB</p>
+            <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
 
             <div
               *ngIf="submitHangerForSaleRequestData.detailedFloorPlan?.fileName && submitHangerForSaleRequestData.detailedFloorPlan?.fileData">

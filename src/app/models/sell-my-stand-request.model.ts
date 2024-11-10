@@ -1,22 +1,20 @@
-export namespace SellMyHangerRequest {
+export namespace SellMyStandRequest {
     export class RootObject {
         name: string;
         email: string;
         phoneNumber: string;
-        hangerNumber: string;
+        standNumber: string;
         titleDocument: FileData;
-        hangerDimensions: HangerDimensions;
-        doorType: string;
-        doorDimensions: HangerDimensions
-        buildingMaterial: string;
-        yearBuilt: number;
-        hangerCustomisations: string;
+        standDimensions: StandDimensions;
+
+
+        standCustomisations: string;
         featuresAndBenefits: string;
         securty: string;
         additionalInfrastructure: string;
         price: number;
         leviesApplicable: string[];
-        hangerImages: FileData[];
+        standImages: FileData[];
         detailedFloorPlan: FileData;
         reasonsForSelling: string;
     }
@@ -26,7 +24,7 @@ export namespace SellMyHangerRequest {
         fileData: any;
     }
 
-    export class HangerDimensions {
+    export class StandDimensions {
         width: number;
         length: number;
         height: number;

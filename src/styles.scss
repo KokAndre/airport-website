@@ -476,5 +476,13 @@ h6,
 .min-width-modal-class {
   min-width: 300px;
   width: fit-content;
+}
 
+.currency-input-prefix {
+  margin-right: 7px;
+  width: fit-content;
+}
+
+.with-prefix span.mat-form-field-label-wrapper {
+  margin-left: unset !important;
 }
