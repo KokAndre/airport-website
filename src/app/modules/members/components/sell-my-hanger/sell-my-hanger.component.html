@@ -94,7 +94,7 @@
             </div>
 
             <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1"
+              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1" [returnAsFile]="true"
                 (emitFileData)="updateTitleDocumentation($event)"></app-file-uploader>
             </div>
           </div>
@@ -172,7 +172,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Building Material</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerBuildingMaterialControl)"
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(hangerBuildingMaterialControl)"
               (keyup)="inputOnBulletPointControl(hangerBuildingMaterialControl, $event)"
               (blur)="blurOnBulletPointControl(hangerBuildingMaterialControl)" style="color: black;" matInput required
               maxlength="500" formControlName="hangerBuildingMaterialControl"
@@ -206,7 +206,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Customisations</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerCustomisationsControl)"
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(hangerCustomisationsControl)"
               (keyup)="inputOnBulletPointControl(hangerCustomisationsControl, $event)"
               (blur)="blurOnBulletPointControl(hangerCustomisationsControl)" style="color: black;" matInput required
               maxlength="500" formControlName="hangerCustomisationsControl"
@@ -219,10 +219,10 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Features and Benefits</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerFeaturesAndBenefitsControl)"
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(hangerFeaturesAndBenefitsControl)"
               (keyup)="inputOnBulletPointControl(hangerFeaturesAndBenefitsControl, $event)"
-              (blur)="blurOnBulletPointControl(hangerFeaturesAndBenefitsControl)" style="color: black;" matInput required
-              maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
+              (blur)="blurOnBulletPointControl(hangerFeaturesAndBenefitsControl)" style="color: black;" matInput
+              required maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
               placeholder="I am selling my hangar with the following items (included in the price)"></textarea>
             <!-- <input style="color: black;" matInput maxlength="500" formControlName="hangerFeaturesAndBenefitsControl"
               placeholder="I am selling my hangar with the following items [included in the price]"> -->
@@ -233,11 +233,11 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Security</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerSecurityControl)"
-            (keyup)="inputOnBulletPointControl(hangerSecurityControl, $event)"
-            (blur)="blurOnBulletPointControl(hangerSecurityControl)" style="color: black;" matInput required
-            maxlength="500" formControlName="hangerSecurityControl"
-            placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."></textarea>
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(hangerSecurityControl)"
+              (keyup)="inputOnBulletPointControl(hangerSecurityControl, $event)"
+              (blur)="blurOnBulletPointControl(hangerSecurityControl)" style="color: black;" matInput required
+              maxlength="500" formControlName="hangerSecurityControl"
+              placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."></textarea>
             <!-- <input style="color: black;" matInput required maxlength="500" formControlName="hangerSecurityControl"
               placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."> -->
             <mat-error *ngIf="hangerSecurityControl?.hasError('required')">Hangar Security is required</mat-error>
@@ -247,11 +247,11 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Hangar Additional Infrastructure</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(hangerAdditionalInfrastucture)"
-            (keyup)="inputOnBulletPointControl(hangerAdditionalInfrastucture, $event)"
-            (blur)="blurOnBulletPointControl(hangerAdditionalInfrastucture)" style="color: black;" matInput required
-            maxlength="500" formControlName="hangerAdditionalInfrastucture"
-            placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc."></textarea>
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(hangerAdditionalInfrastucture)"
+              (keyup)="inputOnBulletPointControl(hangerAdditionalInfrastucture, $event)"
+              (blur)="blurOnBulletPointControl(hangerAdditionalInfrastucture)" style="color: black;" matInput required
+              maxlength="500" formControlName="hangerAdditionalInfrastucture"
+              placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc."></textarea>
             <!-- <input style="color: black;" matInput maxlength="100" formControlName="hangerAdditionalInfrastucture"
               placeholder="If the hangar includes extras like workshop space, offices, bathrooms, or a kitchen, etc."> -->
             <!-- <mat-error *ngIf="hangerAdditionalInfrastucture?.hasError('required')">Hangar Additional Infrastructure is required</mat-error> -->
@@ -311,7 +311,7 @@
             </div>
 
             <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000"
+              <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000" [returnAsFile]="true"
                 (emitFileData)="updateHangerImages($event)"></app-file-uploader>
             </div>
           </div>
@@ -338,7 +338,7 @@
             </div>
 
             <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1"
+              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1" [returnAsFile]="true"
                 (emitFileData)="updateFloorDocumentation($event)"></app-file-uploader>
             </div>
           </div>
@@ -352,34 +352,6 @@
             <mat-error *ngIf="reasonForSellingControl?.hasError('required')">Reason for selling is required</mat-error>
           </mat-form-field>
         </div>
-
-
-
-
-
-
-        <!-- <div class="row mx-0 justify-content-center">
-
-        placeholder="Ex. pat@example.com"
-
-        <mat-form-field class="col-10 px-0">
-          <mat-label>I would like to donate via the monthly invoice cycle. Please select an amount.</mat-label>
-          <mat-select formControlName="donateAmountSelectControl">
-            <mat-option *ngFor="let item of amountSelectControlData" [value]="item.value">{{ item.displayValue
-              }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="donateAmountSelectControl?.hasError('required')">Amount is required</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div class="row mx-0 justify-content-center">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>I have another idea on how I could contribute towards this greening initiative.</mat-label>
-          <textarea style="color: black;" matInput maxlength="500" formControlName="otherIdeasControl"></textarea>
-        </mat-form-field>
-      </div> -->
-
-
 
         <div class="row mx-0 justify-content-center">
           <div class="red-button mb-4"

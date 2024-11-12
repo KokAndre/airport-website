@@ -62,12 +62,18 @@ export class GreenTedderfieldComponent implements OnInit {
       otherIdeasControl: new FormControl(''),
     });
 
-    if (this.loggedInUserDetails.name && this.loggedInUserDetails.surname) {
-      this.nameControl?.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
+    this.prePopulateData();
+  }
+
+  public prePopulateData() {
+    if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
+      this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
+      this.nameControl.disable();
     }
 
-    if (this.loggedInUserDetails.email) {
-      this.emailControl?.setValue(this.loggedInUserDetails.email);
+    if (this.loggedInUserDetails?.email) {
+      this.emailControl.setValue(this.loggedInUserDetails.email);
+      this.emailControl.disable();
     }
   }
 

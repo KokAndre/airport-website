@@ -4,6 +4,9 @@ import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 import { LoginToken } from 'src/app/models/login-token.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
+import { MembersService } from '../../services/members.service';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { ModalTypes } from 'src/app/enums/app.enums';
 
 @Component({
   selector: 'app-sell-my-hanger',
@@ -16,8 +19,9 @@ export class SellMyHangerComponent implements OnInit {
   public sellMyHangerFormGroup: FormGroup;
   public submitHangerForSaleRequestData: SellMyHangerRequest.RootObject;
   public loggedInUserDetails: LoginToken;
+  public submitAdSucessId: number;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService) { }
+  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public membersService: MembersService, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.getUserData();
@@ -55,12 +59,16 @@ export class SellMyHangerComponent implements OnInit {
       reasonForSellingControl: new FormControl('', [Validators.required]),
     });
 
-    if (this.loggedInUserDetails.name && this.loggedInUserDetails.surname) {
+    this.prePopulateData();
+  }
+
+  public prePopulateData() {
+    if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
       this.nameControl.disable();
     }
 
-    if (this.loggedInUserDetails.email) {
+    if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
       this.emailControl.disable();
     }
@@ -81,17 +89,13 @@ export class SellMyHangerComponent implements OnInit {
     formControl?.setValue(valueToSet);
   }
 
-  public fucusOnBulletPointControl(formControl?: AbstractControl) {
+  public keydownOnBulletPointControl(formControl?: AbstractControl) {
     if (!formControl.value) {
       formControl.setValue('• ');
     }
   }
 
   public inputOnBulletPointControl(formControl: AbstractControl, keyPressed: any) {
-    if (!formControl.value) {
-      formControl.setValue('• ');
-    }
-
     const numOfLines = formControl.value?.split('\n')?.length;
 
     if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
@@ -138,8 +142,11 @@ export class SellMyHangerComponent implements OnInit {
         this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
       }
 
-      this.submitHangerForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
-      this.submitHangerForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
+      if (uploadedDocument.fileName && uploadedDocument.fileData) {
+        this.submitHangerForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
+        this.submitHangerForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
+      }
+
     }
   }
 
@@ -158,7 +165,10 @@ export class SellMyHangerComponent implements OnInit {
       }
 
       uploadedImages.forEach(image => {
-        this.submitHangerForSaleRequestData.hangerImages.push(image);
+
+        if (image.fileName && image.fileData) {
+          this.submitHangerForSaleRequestData.hangerImages.push(image);
+        }
       });
 
       if (this.submitHangerForSaleRequestData.hangerImages.length > 5) {
@@ -180,8 +190,11 @@ export class SellMyHangerComponent implements OnInit {
         this.submitHangerForSaleRequestData.detailedFloorPlan = new SellMyHangerRequest.FileData();
       }
 
-      this.submitHangerForSaleRequestData.detailedFloorPlan.fileName = uploadedDocument.fileName;
-      this.submitHangerForSaleRequestData.detailedFloorPlan.fileData = uploadedDocument.fileData;
+
+      if (uploadedDocument.fileName && uploadedDocument.fileData) {
+        this.submitHangerForSaleRequestData.detailedFloorPlan.fileName = uploadedDocument.fileName;
+        this.submitHangerForSaleRequestData.detailedFloorPlan.fileData = uploadedDocument.fileData;
+      }
     }
   }
 
@@ -189,7 +202,20 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.detailedFloorPlan = new SellMyHangerRequest.FileData();
   }
 
+  public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
+    let arrayOfInputValue = valueToFormat.split('\n');
+    arrayOfInputValue = arrayOfInputValue.map(line => {
+      line = line.replace('•', '');
+      line = line.trim();
+      return line;
+    });
+    arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
+
+    return arrayOfInputValue;
+  }
+
   public submitClicked() {
+    this.submitAdSucessId = 0;
     if (!this.submitHangerForSaleRequestData) {
       this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
     }
@@ -210,12 +236,13 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.doorDimensions.length = this.hangerDoorDimensionsLengthControl.value;
     this.submitHangerForSaleRequestData.doorDimensions.height = this.hangerDoorDimensionsHeightControl.value;
 
-    this.submitHangerForSaleRequestData.buildingMaterial = this.hangerBuildingMaterialControl.value;
+    this.submitHangerForSaleRequestData.buildingMaterial = this.formatBulletPointInputValuesToSubmit(this.hangerBuildingMaterialControl.value);
+
     this.submitHangerForSaleRequestData.yearBuilt = this.hangerYearBuiltControl.value;
-    this.submitHangerForSaleRequestData.hangerCustomisations = this.hangerCustomisationsControl.value;
-    this.submitHangerForSaleRequestData.featuresAndBenefits = this.hangerFeaturesAndBenefitsControl.value;
-    this.submitHangerForSaleRequestData.securty = this.hangerSecurityControl.value;
-    this.submitHangerForSaleRequestData.additionalInfrastructure = this.hangerAdditionalInfrastucture.value;
+    this.submitHangerForSaleRequestData.hangerCustomisations = this.formatBulletPointInputValuesToSubmit(this.hangerCustomisationsControl.value);
+    this.submitHangerForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.hangerFeaturesAndBenefitsControl.value);
+    this.submitHangerForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.hangerSecurityControl.value);
+    this.submitHangerForSaleRequestData.additionalInfrastructure = this.formatBulletPointInputValuesToSubmit(this.hangerAdditionalInfrastucture.value);
     this.submitHangerForSaleRequestData.price = this.askingPriceControl.value;
     this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
 
@@ -234,9 +261,66 @@ export class SellMyHangerComponent implements OnInit {
       this.submitHangerForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
     }
 
+    this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
+      if (results.status === 200) {
+        this.submitAdSucessId = results.id;
+        this.uploadDocuments();
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', 'Your request has been captured successfully.', null);
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', results.message, null);
+      }
+    });
+  }
 
-    console.log('DATA TO SUBMIT: ', this.submitHangerForSaleRequestData);
+  public async uploadDocuments() {
+    if (this.submitHangerForSaleRequestData.titleDocument?.fileData && this.submitHangerForSaleRequestData.titleDocument?.fileName) {
+      await this.uploadTitleDocument();
+    }
+    if (this.submitHangerForSaleRequestData.detailedFloorPlan?.fileData && this.submitHangerForSaleRequestData.detailedFloorPlan?.fileName) {
+      await this.uploadFloorPlanDocument();
+    }
+    if (this.submitHangerForSaleRequestData.hangerImages?.length) {
+      await this.uploadHangerImages();
+    }
 
+    this.clearFormData();
+  }
+
+  public async uploadTitleDocument() {
+    await this.membersService.uploadSellMyHangerTitleDocument(this.submitAdSucessId, this.submitHangerForSaleRequestData.titleDocument.fileData).then(results => {
+      if (results.status === 200) {
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
+      }
+    });
+  }
+
+  public async uploadFloorPlanDocument() {
+    await this.membersService.uploadSellMyHangerFloorPlanDocument(this.submitAdSucessId, this.submitHangerForSaleRequestData.detailedFloorPlan.fileData).then(results => {
+      if (results.status === 200) {
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Document', results.message, null);
+      }
+    });
+  }
+
+  public async uploadHangerImages() {
+    this.submitHangerForSaleRequestData.hangerImages.forEach(async (image) => {
+      if (image.fileName && image.fileData) {
+        await this.membersService.uploadSellMyHangerImages(this.submitAdSucessId, image.fileData).then(results => {
+          if (results.status === 200) {
+          } else {
+            this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Document', results.message, null);
+          }
+        });
+      }
+    })
+  }
+
+  public clearFormData() {
+    this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
+    this.sellMyHangerFormGroup.reset();
+    this.prePopulateData();
   }
 
   public get nameControl() {

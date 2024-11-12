@@ -7,6 +7,8 @@ import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
 import { AboutUsService } from 'src/app/modules/about-us/services/about-us.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { MembersService } from '../../services/members.service';
+import { LoginToken } from 'src/app/models/login-token.model';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-report-an-issue',
@@ -19,11 +21,20 @@ export class ReportAnIssueComponent implements OnInit {
   public isWereHereToHelpExpanded = true;
   public isHowItWorksExpanded = true;
   public isReportFormExpanded = true;
+  public loggedInUserDetails: LoginToken;
 
-  constructor(private formBuilder: FormBuilder, private membersService: MembersService, public appModalService: AppModalService) { }
+  constructor(private formBuilder: FormBuilder,
+    private membersService: MembersService,
+    public appModalService: AppModalService,
+  public loginService: LoginService) { }
 
   ngOnInit() {
+    this.getUserData();
     this.initializeFollowUsControls();
+  }
+
+  public getUserData() {
+    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
   }
 
   public initializeFollowUsControls() {
@@ -33,6 +44,19 @@ export class ReportAnIssueComponent implements OnInit {
       hangerOrsectionNumberControl: new FormControl('', [Validators.required]),
       descriptionControl: new FormControl('', [Validators.required]),
     });
+    this.prePopulateData();
+  }
+
+  public prePopulateData() {
+    if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
+      this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
+      this.nameControl.disable();
+    }
+
+    if (this.loggedInUserDetails?.email) {
+      this.emailControl.setValue(this.loggedInUserDetails.email);
+      this.emailControl.disable();
+    }
   }
 
   public submitClicked() {

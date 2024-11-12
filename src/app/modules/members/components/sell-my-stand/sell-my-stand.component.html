@@ -71,8 +71,8 @@
           <mat-form-field class="col-10 px-0">
             <mat-label>Stand Number</mat-label>
             <input style="color: black;" matInput required maxlength="10" formControlName="standNumberControl"
-              placeholder="Please enter your hanger number">
-            <mat-error *ngIf="standNumberControl?.hasError('required')">Hanger Number is required</mat-error>
+              placeholder="Please enter your stand number">
+            <mat-error *ngIf="standNumberControl?.hasError('required')">Stand Number is required</mat-error>
           </mat-form-field>
         </div>
 
@@ -94,7 +94,7 @@
             </div>
 
             <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1"
+              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1" [returnAsFile]="true"
                 (emitFileData)="updateTitleDocumentation($event)"></app-file-uploader>
             </div>
           </div>
@@ -123,7 +123,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Stand Features and Benefits</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(standFeaturesAndBenefitsControl)"
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(standFeaturesAndBenefitsControl)"
               (keyup)="inputOnBulletPointControl(standFeaturesAndBenefitsControl, $event)"
               (blur)="blurOnBulletPointControl(standFeaturesAndBenefitsControl)" style="color: black;" matInput required
               maxlength="500" formControlName="standFeaturesAndBenefitsControl"
@@ -137,7 +137,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Stand Security</mat-label>
-            <textarea cdkTextareaAutosize (focus)="fucusOnBulletPointControl(standSecurityControl)"
+            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(standSecurityControl)"
             (keyup)="inputOnBulletPointControl(standSecurityControl, $event)"
             (blur)="blurOnBulletPointControl(standSecurityControl)" style="color: black;" matInput required
             maxlength="500" formControlName="standSecurityControl"
@@ -189,7 +189,7 @@
 
                 <div class="col-1 px-0 align-content-center">
                   <mat-icon class="pointer delete-icon align-bottom"
-                    (click)="deleteHangerImage(image.fileName)">delete</mat-icon>
+                    (click)="deleteStandImage(image.fileName)">delete</mat-icon>
                 </div>
                 <div class="col-11 pr-0 align-content-center">
                   <p class="mb-0 text-size-14">{{ image.fileName }}</p>
@@ -199,35 +199,8 @@
             </div>
 
             <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000"
-                (emitFileData)="updateHangerImages($event)"></app-file-uploader>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mx-0 justify-content-center mt-2">
-          <div class="col-10 px-0">
-            <P class="mb-1">If available, a detailed floor plan of the stand.</P>
-            <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
-
-            <div
-              *ngIf="submitStandForSaleRequestData.detailedFloorPlan?.fileName && submitStandForSaleRequestData.detailedFloorPlan?.fileData">
-              <div class="row mb-2 mx-0">
-
-                <div class="col-1 px-0 align-content-center">
-                  <mat-icon class="pointer delete-icon align-bottom"
-                    (click)="deleteFloorPlanDocument()">delete</mat-icon>
-                </div>
-                <div class="col-11 pr-0 align-content-center">
-                  <p class="mb-0 text-size-14">{{ submitStandForSaleRequestData.detailedFloorPlan.fileName }}</p>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1"
-                (emitFileData)="updateFloorDocumentation($event)"></app-file-uploader>
+              <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000" [returnAsFile]="true"
+                (emitFileData)="updateStandImages($event)"></app-file-uploader>
             </div>
           </div>
         </div>

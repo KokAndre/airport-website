@@ -8,12 +8,12 @@ export namespace SellMyHangerRequest {
         hangerDimensions: HangerDimensions;
         doorType: string;
         doorDimensions: HangerDimensions
-        buildingMaterial: string;
+        buildingMaterial: string[];
         yearBuilt: number;
-        hangerCustomisations: string;
-        featuresAndBenefits: string;
-        securty: string;
-        additionalInfrastructure: string;
+        hangerCustomisations: string[];
+        featuresAndBenefits: string[];
+        securty: string[];
+        additionalInfrastructure: string[];
         price: number;
         leviesApplicable: string[];
         hangerImages: FileData[];

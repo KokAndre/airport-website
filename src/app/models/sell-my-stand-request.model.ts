@@ -6,16 +6,11 @@ export namespace SellMyStandRequest {
         standNumber: string;
         titleDocument: FileData;
         standDimensions: StandDimensions;
-
-
-        standCustomisations: string;
-        featuresAndBenefits: string;
-        securty: string;
-        additionalInfrastructure: string;
+        featuresAndBenefits: string[];
+        securty: string[];
         price: number;
         leviesApplicable: string[];
         standImages: FileData[];
-        detailedFloorPlan: FileData;
         reasonsForSelling: string;
     }
 

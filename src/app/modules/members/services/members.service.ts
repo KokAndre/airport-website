@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Endpoints } from 'src/app/enums/app.enums';
 import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
+import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
+import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
 import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
 
 @Injectable({
@@ -8,7 +11,7 @@ import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening
 })
 export class MembersService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
   public submitReportIssue(reportIssueData: ReportIssueRequest.RootObject) {
     return fetch(Endpoints.BaseURL + Endpoints.ReportIssue, {
@@ -31,5 +34,123 @@ export class MembersService {
         return data;
       });
   }
+
+  public submitSellMyHanger(sellMyHangerRequestData: SellMyHangerRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(sellMyHangerRequestData))
+    requestData.titleDocument.fileData = '';
+    requestData.detailedFloorPlan.fileData = '';
+    requestData.hangerImages.forEach(x => {
+      x.fileData = '';
+    });
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitSellMyHanger, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadSellMyHangerTitleDocument(sellMyHangerId: number, fileData: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', fileData);
+    testData.append('name', fileData.name);
+    testData.append('sellMyHangerId', `${sellMyHangerId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.UploadSellMyHangerTitleDocument, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadSellMyHangerFloorPlanDocument(sellMyHangerId: number, fileData: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', fileData);
+    testData.append('name', fileData.name);
+    testData.append('sellMyHangerId', `${sellMyHangerId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.uploadSellMyHangerFloorPlanDocument, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadSellMyHangerImages(sellMyHangerId: number, fileData: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', fileData);
+    testData.append('name', fileData.name);
+    testData.append('sellMyHangerId', `${sellMyHangerId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.uploadSellMyHangerImages, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public submitSellMyStand(dellMyStandRequestData: SellMyStandRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(dellMyStandRequestData))
+    requestData.titleDocument.fileData = '';
+    requestData.standImages.forEach(x => {
+      x.fileData = '';
+    });
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitSellMyStand, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadSellMyStandTitleDocument(sellMyStandId: number, doc: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', doc);
+    testData.append('name', doc.name);
+    testData.append('sellMyStandId', `${sellMyStandId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.UploadSellMyStandTitleDocument, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadSellMyStandImages(sellMyStandId: number, doc: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', doc);
+    testData.append('name', doc.name);
+    testData.append('sellMyStandId', `${sellMyStandId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.uploadSellMyStandImages, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 
 }

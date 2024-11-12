@@ -72,7 +72,18 @@ export enum Endpoints {
 
     GetHomePageBanner = '/home/get-home-page-banner.php',
     DeleteHomePageBanner = '/home/delete-home-page-banner.php',
-    AddNewHomeScreenBanner = '/home/add-home-page-banner.php'
+    AddNewHomeScreenBanner = '/home/add-home-page-banner.php',
+
+    GetHangersForSales = '/hangers-for-sale/get-hangers-for-sale.php',
+    SubmitSellMyHanger = '/hangers-for-sale/submit-hanger-for-sale.php',
+    UploadSellMyHangerTitleDocument = '/hangers-for-sale/upload-title-document.php',
+    uploadSellMyHangerFloorPlanDocument = '/hangers-for-sale/upload-floor-plan-document.php',
+    uploadSellMyHangerImages = '/hangers-for-sale/upload-hanger-for-sale-image.php',
+    
+    GetStandsForSales = '/stands-for-sale/get-stands-for-sale.php',
+    SubmitSellMyStand = '/stands-for-sale/submit-stand-for-sale.php',
+    UploadSellMyStandTitleDocument = '/stands-for-sale/upload-title-document.php',
+    uploadSellMyStandImages = '/stands-for-sale/upload-stand-for-sale-image.php',
 }
 
 export enum EncryptionKeys {

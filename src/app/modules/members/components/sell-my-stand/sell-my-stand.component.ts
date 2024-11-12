@@ -4,6 +4,9 @@ import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 import { LoginToken } from 'src/app/models/login-token.model';
 import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
+import { MembersService } from '../../services/members.service';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { ModalTypes } from 'src/app/enums/app.enums';
 
 @Component({
   selector: 'app-sell-my-stand',
@@ -16,8 +19,12 @@ export class SellMyStandComponent implements OnInit {
   public sellMyStandFormGroup: FormGroup;
   public submitStandForSaleRequestData: SellMyStandRequest.RootObject;
   public loggedInUserDetails: LoginToken;
+  public submitAdSucessId: number;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService) { }
+  constructor(public formBuilder: FormBuilder,
+    public loginService: LoginService,
+    public membersService: MembersService,
+    public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.getUserData();
@@ -47,12 +54,16 @@ export class SellMyStandComponent implements OnInit {
       reasonForSellingControl: new FormControl('', [Validators.required]),
     });
 
-    if (this.loggedInUserDetails.name && this.loggedInUserDetails.surname) {
+    this.prePopulateData();
+  }
+
+  public prePopulateData() {
+    if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
       this.nameControl.disable();
     }
 
-    if (this.loggedInUserDetails.email) {
+    if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
       this.emailControl.disable();
     }
@@ -73,7 +84,7 @@ export class SellMyStandComponent implements OnInit {
     formControl?.setValue(valueToSet);
   }
 
-  public fucusOnBulletPointControl(formControl?: AbstractControl) {
+  public keydownOnBulletPointControl(formControl?: AbstractControl) {
     if (!formControl.value) {
       formControl.setValue('• ');
     }
@@ -139,7 +150,7 @@ export class SellMyStandComponent implements OnInit {
     this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
   }
 
-  public updateHangerImages(uploadedImages: SellMyStandRequest.FileData[]) {
+  public updateStandImages(uploadedImages: SellMyStandRequest.FileData[]) {
     if (uploadedImages?.length > 0) {
       if (uploadedImages.length > 5) {
         uploadedImages.splice(5);
@@ -159,29 +170,24 @@ export class SellMyStandComponent implements OnInit {
     }
   }
 
-  public deleteHangerImage(fileName: string) {
+  public deleteStandImage(fileName: string) {
     this.submitStandForSaleRequestData.standImages = this.submitStandForSaleRequestData.standImages.filter(x => x.fileName !== fileName);
   }
 
-  public updateFloorDocumentation(uploadedDocuments: SellMyStandRequest.FileData[]) {
-    // Only allow one documents
-    if (uploadedDocuments?.length > 0) {
-      const uploadedDocument = uploadedDocuments[0];
+  public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
+    let arrayOfInputValue = valueToFormat.split('\n');
+    arrayOfInputValue = arrayOfInputValue.map(line => {
+      line = line.replace('•', '');
+      line = line.trim();
+      return line;
+    });
+    arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
 
-      if (!this.submitStandForSaleRequestData.detailedFloorPlan) {
-        this.submitStandForSaleRequestData.detailedFloorPlan = new SellMyStandRequest.FileData();
-      }
-
-      this.submitStandForSaleRequestData.detailedFloorPlan.fileName = uploadedDocument.fileName;
-      this.submitStandForSaleRequestData.detailedFloorPlan.fileData = uploadedDocument.fileData;
-    }
-  }
-
-  public deleteFloorPlanDocument() {
-    this.submitStandForSaleRequestData.detailedFloorPlan = new SellMyStandRequest.FileData();
+    return arrayOfInputValue;
   }
 
   public submitClicked() {
+    this.submitAdSucessId = 0;
     if (!this.submitStandForSaleRequestData) {
       this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
     }
@@ -195,9 +201,8 @@ export class SellMyStandComponent implements OnInit {
     this.submitStandForSaleRequestData.standDimensions.width = this.standDimentionsWidthControl.value;
     this.submitStandForSaleRequestData.standDimensions.length = this.standDimentionsLengthControl.value;
 
-
-    this.submitStandForSaleRequestData.featuresAndBenefits = this.standFeaturesAndBenefitsControl.value;
-    this.submitStandForSaleRequestData.securty = this.standSecurityControl.value;
+    this.submitStandForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.standFeaturesAndBenefitsControl.value);
+    this.submitStandForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.standSecurityControl.value);
     this.submitStandForSaleRequestData.price = this.askingPriceControl.value;
     this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
 
@@ -218,7 +223,55 @@ export class SellMyStandComponent implements OnInit {
 
 
     console.log('DATA TO SUBMIT: ', this.submitStandForSaleRequestData);
+    this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
+      if (results.status === 200) {
+        this.submitAdSucessId = results.id;
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', 'Your request has been captured successfully.', null);
+        this.uploadDocuments();
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', results.message, null);
+      }
+    });
 
+  }
+
+  public async uploadDocuments() {
+    if (this.submitStandForSaleRequestData.titleDocument?.fileData && this.submitStandForSaleRequestData.titleDocument?.fileName) {
+      await this.uploadTitleDocument();
+    }
+    if (this.submitStandForSaleRequestData.standImages?.length) {
+      await this.uploadStandImages();
+    }
+
+    this.clearFormData();
+  }
+
+  public async uploadTitleDocument() {
+    await this.membersService.uploadSellMyStandTitleDocument(this.submitAdSucessId, this.submitStandForSaleRequestData.titleDocument.fileData).then(results => {
+      if (results.status === 200) {
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
+      }
+    });
+  }
+
+  public async uploadStandImages() {
+    this.submitStandForSaleRequestData.standImages.forEach(async (image) => {
+      if (image.fileName && image.fileData) {
+        await this.membersService.uploadSellMyStandImages(this.submitAdSucessId, image.fileData).then(results => {
+          if (results.status === 200) {
+          } else {
+            this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Docuemtn', results.message, null);
+          }
+        });
+      }
+    })
+  }
+
+  public clearFormData() {
+    this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
+    this.sellMyStandFormGroup.reset();
+    this.prePopulateData();
   }
 
   public get nameControl() {
