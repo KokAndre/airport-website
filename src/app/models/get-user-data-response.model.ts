@@ -14,5 +14,6 @@ export namespace GetUserDataResponse {
         email: string;
         password: string;
         isRegistered: string;
+        hasCompletedGettingToKnowYou: string;
     }
 }

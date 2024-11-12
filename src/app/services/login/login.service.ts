@@ -47,6 +47,7 @@ export class LoginService {
           tokenToStore.surname = data.data.surname;
           tokenToStore.id = data.data.id;
           tokenToStore.isAdmin = data.data.isAdmin;
+          tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
           tokenToStore.loginDateTime = new Date().toISOString();
           tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
 
@@ -72,6 +73,7 @@ export class LoginService {
           tokenToStore.id = data.data.id;
           tokenToStore.email = data.data.email;
           tokenToStore.isAdmin = data.data.isAdmin;
+          tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
           tokenToStore.loginDateTime = new Date().toISOString();
           tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
 

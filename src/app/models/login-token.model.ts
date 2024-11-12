@@ -6,4 +6,5 @@ export class LoginToken {
     id: number;
     isAdmin: number;
     email: string
+    hasCompletedGettingToKnowYou: string;
 }
