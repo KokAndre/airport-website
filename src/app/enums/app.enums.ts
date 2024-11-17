@@ -45,6 +45,10 @@ export enum Endpoints {
     // BaseURL = 'http://localhost/teddefield-airfield',
     HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
+
+    HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
+    StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
+
     // GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
     Register = '/members/register.php',
     Login = '/members/login.php',
@@ -79,11 +83,16 @@ export enum Endpoints {
     UploadSellMyHangerTitleDocument = '/hangers-for-sale/upload-title-document.php',
     uploadSellMyHangerFloorPlanDocument = '/hangers-for-sale/upload-floor-plan-document.php',
     uploadSellMyHangerImages = '/hangers-for-sale/upload-hanger-for-sale-image.php',
+    GetHangerTitleDocument = '/hangers-for-sale/get-title-document.php',
+    GetHangerFloorPlanDocument = '/hangers-for-sale/get-floor-plan-document.php',
+    SubmitInterestedInHanger = '/hangers-for-sale/submit-interested-in-hanger.php',
     
     GetStandsForSales = '/stands-for-sale/get-stands-for-sale.php',
     SubmitSellMyStand = '/stands-for-sale/submit-stand-for-sale.php',
     UploadSellMyStandTitleDocument = '/stands-for-sale/upload-title-document.php',
     uploadSellMyStandImages = '/stands-for-sale/upload-stand-for-sale-image.php',
+    GetStandTitleDocument = '/stands-for-sale/get-title-document.php',
+    SubmitInterestedInStand = '/stands-for-sale/submit-interested-in-stand.php',
 }
 
 export enum EncryptionKeys {
@@ -106,7 +115,8 @@ export enum ModalTypes {
     ConfirmationModal = 'confirmationModal',
     CaptureGallerySectionTitle = 'captureGallerySectionTitle',
     SearchAndSecueModal = 'searchAndSecueModal',
-    BannerModal = 'bannerModal'
+    BannerModal = 'bannerModal',
+    InterestedInPropertyModal = 'interestedInPropertyModal',
 }
 
 export enum ModalOutcomeOptions {

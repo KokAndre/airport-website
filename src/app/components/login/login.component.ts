@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
     this.registerFormGroup = this.formBuilder.group({
       registerNameControl: new FormControl(this.userData.name || '', [Validators.required]),
       registerSurnameControl: new FormControl(this.userData.surname || '', [Validators.required]),
+      registerPhoneNumberControl: new FormControl(this.userData.phoneNumber || '', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       registerEmailControl: new FormControl(this.userData.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       registerPasswordControl: new FormControl('', [Validators.required]),
       registerConfirmPasswordControl: new FormControl('', [Validators.required]),
@@ -172,6 +173,7 @@ export class LoginComponent implements OnInit {
     requestData.name = this.registerNameControl?.value;
     requestData.surname = this.registerSurnameControl?.value;
     requestData.email = this.registerEmailControl?.value;
+    requestData.phoneNumber = this.registerPhoneNumberControl?.value;
     requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
 
     this.loginService.registerNewUser(requestData).then(results => {
@@ -219,6 +221,9 @@ export class LoginComponent implements OnInit {
   }
   public get registerEmailControl() {
     return this.registerFormGroup.get('registerEmailControl');
+  }
+  public get registerPhoneNumberControl() {
+    return this.registerFormGroup.get('registerPhoneNumberControl');
   }
   public get registerPasswordControl() {
     return this.registerFormGroup.get('registerPasswordControl');

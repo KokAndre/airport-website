@@ -67,11 +67,13 @@ export class LoginService {
       .then(response => response.json())
       .then(data => {
         if (data.status === 200) {
+          console.log('USER DATA FOR LoGIN TOKEN: ', data.data);
           const tokenToStore = new LoginToken();
           tokenToStore.name = data.data.name;
           tokenToStore.surname = data.data.surname;
           tokenToStore.id = data.data.id;
           tokenToStore.email = data.data.email;
+          tokenToStore.phoneNumber = data.data.phoneNumber;
           tokenToStore.isAdmin = data.data.isAdmin;
           tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
           tokenToStore.loginDateTime = new Date().toISOString();
@@ -177,11 +179,15 @@ export class LoginService {
     }
   }
 
-  public getLoggedInUserDetails() {
+  public getLoggedInUserDetails(skipNavigateToHomeWhenNotLoggedIn?: boolean) {
     const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
     if (!stringToken) {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
-      this.router.navigateByUrl(AppRoutes.Home);
+      if (!skipNavigateToHomeWhenNotLoggedIn) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
+        this.router.navigateByUrl(AppRoutes.Home);
+      } else {
+        return null;
+      }
     } else {
       const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
       const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
@@ -197,12 +203,17 @@ export class LoginService {
         userdetails.id = token.id;
         userdetails.name = token.name;
         userdetails.surname = token.surname;
+        userdetails.phoneNumber = token.phoneNumber;
         userdetails.email = token.email;
         return userdetails;
       } else {
         this.logoutUser();
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
-        this.router.navigateByUrl(AppRoutes.Home);
+        if (!skipNavigateToHomeWhenNotLoggedIn) {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
+          this.router.navigateByUrl(AppRoutes.Home);
+        } else {
+          return null;
+        }
       }
     }
   }

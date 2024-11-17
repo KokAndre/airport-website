@@ -116,24 +116,24 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.PDFModal:
         case ModalTypes.BannerModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-          data: modalDetails, disableClose: false, height: 'fit-content', panelClass: 'pdf-modal-class', maxWidth: '91vw'
-        });
+            data: modalDetails, disableClose: false, height: 'fit-content', panelClass: 'pdf-modal-class', maxWidth: '91vw'
+          });
           break;
 
         case ModalTypes.InformationModal:
         case ModalTypes.ConfirmationModal:
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal:
+        case ModalTypes.InterestedInPropertyModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: false, maxWidth: '90vw', panelClass: 'min-width-modal-class'
           });
           break;
 
-        // case ModalTypes.ConfirmationModal:
-        //   this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-        //     data: modalDetails, disableClose: false, minWidth: '400px'
-        //   });
-        //   break;
+        // this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+        //   data: modalDetails, disableClose: true, maxWidth
+        // });
+        // break;
 
         default:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {

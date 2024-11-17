@@ -5,85 +5,341 @@
   </div>
 </div>
 
-<!-- <div class="row mx-0 mb-4 justify-content-center">
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image1"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image2"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image3"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image4"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image5"></div>
-  </div>
-</div> -->
+<div [hidden]="displayHangerDetails">
 
-<app-arrow-divider class="pointer" (click)="isAviationMeetsCommunityExpanded = !isAviationMeetsCommunityExpanded"
-  [isLightToDark]="true"></app-arrow-divider>
-
-<div class="dark-background">
-  <mat-expansion-panel hideToggle [expanded]="isAviationMeetsCommunityExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-        <p class="text-size-24 mb-3">Aviation Meets Community at Tedderfield Airpark</p>
-      </div>
-    </mat-expansion-panel-header>
-
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Tedderfield Airpark offers a limited number of exclusive hangar spaces for sale, providing private pilots and aviation professionals the opportunity to base themselves in a vibrant, aviation-centered community.</p>
-      <p class="">Our hangars aren't just spaces - they're access points to a full aviation lifestyle.</p>
-      <p class="">From early-morning takeoffs to the camaraderie shared over evening landings, Tedderfield is where your aviation dreams come to life.</p>
+  <!-- <div class="row mx-0 mb-4 justify-content-center">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image1"></div>
     </div>
-  </mat-expansion-panel>
-
-  <app-arrow-divider class="pointer" (click)="isWhyInvestInAHangerExpanded = !isWhyInvestInAHangerExpanded"
-    [isLightToDark]="false"></app-arrow-divider>
-
-</div>
-
-<div class="">
-  <mat-expansion-panel hideToggle [expanded]="isWhyInvestInAHangerExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-      <p class="text-size-24 mb-3">Why Invest in a Hangar at Tedderfield?</p>
-      </div>
-    </mat-expansion-panel-header>
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Located at one of South Africa's premier private airfields, Tedderfield Airpark provides safe, secure, and spacious hangars designed for both private and commercial aviation needs.</p>
-      <p class="">As a hangar owner, you'll join a community of passionate aviators, enjoy access to fly-ins, fly-aways, and other social events.</p>
-      <p class="">Tedderfield also offers maintenance facilities, an active social calendar, and a host of amenities that make your aviation life smooth and enjoyable.</p>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image2"></div>
     </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image3"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image4"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image5"></div>
+    </div>
+  </div> -->
 
-  </mat-expansion-panel>
-
-  <app-arrow-divider class="pointer" (click)="isDontMissOutOnLimitedHangersExpanded = !isDontMissOutOnLimitedHangersExpanded"
+  <app-arrow-divider class="pointer" (click)="isAviationMeetsCommunityExpanded = !isAviationMeetsCommunityExpanded"
     [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isAviationMeetsCommunityExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Aviation Meets Community at Tedderfield Airpark</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Tedderfield Airpark offers a limited number of exclusive hangar spaces for sale, providing private
+          pilots and aviation professionals the opportunity to base themselves in a vibrant, aviation-centered
+          community.
+        </p>
+        <p class="">Our hangars aren't just spaces - they're access points to a full aviation lifestyle.</p>
+        <p class="">From early-morning takeoffs to the camaraderie shared over evening landings, Tedderfield is where
+          your
+          aviation dreams come to life.</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isWhyInvestInAHangerExpanded = !isWhyInvestInAHangerExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+  </div>
+
+  <div class="">
+    <mat-expansion-panel hideToggle [expanded]="isWhyInvestInAHangerExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Why Invest in a Hangar at Tedderfield?</p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Located at one of South Africa's premier private airfields, Tedderfield Airpark provides safe,
+          secure,
+          and spacious hangars designed for both private and commercial aviation needs.</p>
+        <p class="">As a hangar owner, you'll join a community of passionate aviators, enjoy access to fly-ins,
+          fly-aways,
+          and other social events.</p>
+        <p class="">Tedderfield also offers maintenance facilities, an active social calendar, and a host of amenities
+          that make your aviation life smooth and enjoyable.</p>
+      </div>
+
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer"
+      (click)="isDontMissOutOnLimitedHangersExpanded = !isDontMissOutOnLimitedHangersExpanded"
+      [isLightToDark]="true"></app-arrow-divider>
+  </div>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isDontMissOutOnLimitedHangersExpanded"
+      class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Don't Miss Out on Limited Hangar Opportunities</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Our hangar spaces are in high demand, attracting everyone from seasoned pilots to aviation
+          enthusiasts
+          who want a home for their aircraft.</p>
+        <p class="">Contact us to learn more about our available hangars for sale and secure your own hangar at
+          Tedderfield Airpark, where adventure takes flight daily.</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider *ngIf="!hangersForSaleData?.length" class="pointer"
+      (click)="isHangersForSaleAdvertsExpanded = !isHangersForSaleAdvertsExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+    <app-arrow-divider *ngIf="hangersForSaleData?.length" class="pointer" (click)="togglePannel(0)"
+      [isLightToDark]="false"></app-arrow-divider>
+  </div>
+
+  <div class="" *ngIf="!hangersForSaleData?.length">
+    <mat-expansion-panel hideToggle [expanded]="isHangersForSaleAdvertsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">No Available Hangers for sale</p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="col-10 mx-auto">
+        <p>Unfortunately, there are currently no hangers available for sale. Kindly check back periodically in case a
+          new
+          listing is submitted.</p>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+
+  <div class="" *ngIf="hangersForSaleData?.length">
+    <div *ngFor="let hangerItem of hangersForSaleData; let last = last; let index = index" [ngClass]="{'dark-background': ((index + 1) % 2 ? false : true)}">
+      <mat-expansion-panel hideToggle [expanded]="hangerItem.isExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <div class="col-10 mx-auto">
+            <p class="text-size-24 mb-3">Hanger Number: {{ hangerItem.hangerNumber }} - R{{ hangerItem.price }}</p>
+          </div>
+        </mat-expansion-panel-header>
+
+        <!-- <div *ngIf="hangersForSaleData?.length"> -->
+          <div class="col-10 mx-auto">
+            <div class="row mx-n2">
+              <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3"
+                *ngFor="let img of hangerItem.hangerImages">
+                <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="hanger-images" />
+              </div>
+
+              <div *ngIf="hangerItem.titleDocument?.fileName && hangerItem.titleDocument?.fileData"
+                class="row mx-0 align-items-center pt-3">
+                <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
+                <p class="mb-0 width-fit-content">A Title document is available</p>
+              </div>
+
+              <div *ngIf="hangerItem.detailedFloorPlan?.fileName && hangerItem.detailedFloorPlan?.fileData"
+                class="row mx-0 align-items-center pt-3">
+                <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
+                <p class="mb-0 width-fit-content">A Detailed floor plan is available</p>
+              </div>
+
+              <div *ngIf="hangerItem.hangerDimensions" class="mt-3">
+                <p class="mb-0">Hanger Size:</p>
+                <ul class="mb-0">
+                  <li><b>Width:</b> {{ hangerItem.hangerDimensions.width }}</li>
+                  <li><b>Length:</b> {{ hangerItem.hangerDimensions.length }}</li>
+                </ul>
+              </div>
+
+              <div class="row mx-0 justify-content-center">
+                <div class="red-button mb-4" (click)="viewHangerDetails(hangerItem.id)">
+                  <p class="mb-0">View Details</p>
+                  <span class="red-button-icon"></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <!-- </div> -->
+      </mat-expansion-panel>
+
+
+      <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+        [isLightToDark]="((index + 1) % 2 ? true : false)"></app-arrow-divider>
+
+    </div>
+  </div>
 </div>
 
-<div class="dark-background">
-  <mat-expansion-panel hideToggle [expanded]="isDontMissOutOnLimitedHangersExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-        <p class="text-size-24 mb-3">Don't Miss Out on Limited Hangar Opportunities</p>
+<div *ngIf="displayHangerDetails">
+
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <div class="col-10 mx-auto">
+      <p class="text-size-24 mb-3">Details for Hanger: {{ hangerDetailsToDisplay.hangerNumber }}</p>
+
+      <div class="row mx-n2">
+
+        <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3"
+          *ngFor="let img of hangerDetailsToDisplay.hangerImages">
+          <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="hanger-images" />
+        </div>
+
+        <table class="hanger-details-table">
+          <tr>
+            <th></th>
+            <th><b>Details</b></th>
+          </tr>
+
+          <tr>
+            <td>Seller Name</td>
+            <td>{{ hangerDetailsToDisplay.name }}</td>
+          </tr>
+
+          <tr>
+            <td>Seller Email</td>
+            <td>{{ hangerDetailsToDisplay.email }}</td>
+          </tr>
+
+          <tr>
+            <td>Seller Phone Number</td>
+            <td>{{ hangerDetailsToDisplay.phoneNumber }}</td>
+          </tr>
+
+          <tr>
+            <td>Hanger Number</td>
+            <td>{{ hangerDetailsToDisplay.hangerNumber }}</td>
+          </tr>
+
+          <tr>
+            <td>Hanger Price</td>
+            <td>R{{ hangerDetailsToDisplay.price }}</td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.titleDocument?.fileName && hangerDetailsToDisplay.titleDocument?.fileData">
+            <td>Title Document</td>
+            <td class="pointer red-text" (click)="openTitleDocument('Title Document', hangerDetailsToDisplay.id)">{{
+              hangerDetailsToDisplay.titleDocument.fileName }}</td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.hangerDimensions?.width && hangerDetailsToDisplay.hangerDimensions?.length">
+            <td>Hanger Dimensions</td>
+            <td>
+              <li><b>Width:</b> {{ hangerDetailsToDisplay.hangerDimensions.width }}</li>
+              <li><b>Length:</b> {{ hangerDetailsToDisplay.hangerDimensions.length }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.doorType">
+            <td>Hanger Door Type</td>
+            <td>{{ hangerDetailsToDisplay.doorType }}</td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.doorDimensions">
+            <td>Hanger Door Dimensions</td>
+            <td>
+              <li *ngIf="hangerDetailsToDisplay.doorDimensions.width"><b>Width:</b> {{
+                hangerDetailsToDisplay.doorDimensions.width }}</li>
+              <li *ngIf="hangerDetailsToDisplay.doorDimensions.length"><b>Length:</b> {{
+                hangerDetailsToDisplay.doorDimensions.length }}</li>
+              <li *ngIf="hangerDetailsToDisplay.doorDimensions.height"><b>Height:</b> {{
+                hangerDetailsToDisplay.doorDimensions.height }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.buildingMaterial">
+            <td>Hanger Building Material</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.buildingMaterial">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Hanger - Year Built</td>
+            <td>{{ hangerDetailsToDisplay.yearBuilt }}</td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.hangerCustomisations">
+            <td>Hanger Customisations</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.hangerCustomisations">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.featuresAndBenefits">
+            <td>Hanger Features and Benefits</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.featuresAndBenefits">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.securty">
+            <td>Hanger Security</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.securty">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.additionalInfrastructure">
+            <td>Additional Infrastructure</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.additionalInfrastructure">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="hangerDetailsToDisplay.leviesApplicable">
+            <td>Levies Applicable</td>
+            <td>
+              <li *ngFor="let item of hangerDetailsToDisplay.leviesApplicable">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr
+            *ngIf="hangerDetailsToDisplay.detailedFloorPlan?.fileName && hangerDetailsToDisplay.detailedFloorPlan?.fileData">
+            <td>Detailed Floor Plan</td>
+            <td class="pointer red-text"
+              (click)="openFloorPlanDocument('Detailed Floor Plane', hangerDetailsToDisplay.id)">{{
+              hangerDetailsToDisplay.detailedFloorPlan.fileName }}</td>
+          </tr>
+
+          <tr>
+            <td>Reason For Selling</td>
+            <td>{{ hangerDetailsToDisplay.reasonsForSelling }}</td>
+          </tr>
+
+
+        </table>
+
+
+        <div class="row mx-0 justify-content-center mt-3 mb-4">
+          <div class="white-button mr-3" (click)="backClicked()">
+            <p class="mb-0">Back</p>
+            <span class="white-button-icon"></span>
+          </div>
+
+          <div class="red-button" (click)="displayInterestedInHangerModal()">
+            <p class="mb-0">I am interested</p>
+            <span class="red-button-icon"></span>
+          </div>
+        </div>
+
       </div>
-    </mat-expansion-panel-header>
-
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Our hangar spaces are in high demand, attracting everyone from seasoned pilots to aviation enthusiasts who want a home for their aircraft.</p>
-      <p class="">Contact us to learn more about our available hangars for sale and secure your own hangar at Tedderfield Airpark, where adventure takes flight daily.</p>
     </div>
-  </mat-expansion-panel>
+  </div>
 
 </div>

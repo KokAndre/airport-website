@@ -24,7 +24,7 @@
       <div class="row mx-0 align-items-center">
         <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
       </div>
-      <div class="row mx-n2 mt-3">
+      <div class="row mt-3">
         <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center" *ngFor="let img of section.images">
           <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height" />
         </div>

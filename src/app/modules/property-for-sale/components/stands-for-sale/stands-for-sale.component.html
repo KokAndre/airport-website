@@ -5,92 +5,300 @@
   </div>
 </div>
 
-<!-- <div class="row mx-0 mb-4 justify-content-center">
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image1"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image2"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image3"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image4"></div>
-  </div>
-  
-  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
-    <div class="page-top-images image5"></div>
-  </div>
-</div> -->
+<div [hidden]="displayStandDetails">
 
-<app-arrow-divider class="pointer" (click)="isBuildYourDreamsExpanded = !isBuildYourDreamsExpanded"
-  [isLightToDark]="true"></app-arrow-divider>
-
-<div class="dark-background">
-  <mat-expansion-panel hideToggle [expanded]="isBuildYourDreamsExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-        <p class="text-size-24 mb-3">Build Your Dream on a Private Airfield</p>
-      </div>
-    </mat-expansion-panel-header>
-
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Imagine waking up with open clear skies, your good mood erupts and you drive through to Tedderfield
-        Airpark.</p>
-      <p class="">Tedderfield Airpark offers a unique position where aviation enthusiasts and adventurers unite to enjoy
-        unparalleled access to a world-class private airfield.</p>
-      <p class="">Our exclusive stands for sale provide the perfect canvas for those looking to build a custom home with
-        an aviation twist.</p>
+  <!-- <div class="row mx-0 mb-4 justify-content-center">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image1"></div>
     </div>
-  </mat-expansion-panel>
-
-  <app-arrow-divider class="pointer" (click)="isWhyChooseTedderfieldExpanded = !isWhyChooseTedderfieldExpanded"
-    [isLightToDark]="false"></app-arrow-divider>
-
-</div>
-
-<div class="">
-  <mat-expansion-panel hideToggle [expanded]="isWhyChooseTedderfieldExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-      <p class="text-size-24 mb-3">Why Choose Tedderfield?</p>
-      </div>
-    </mat-expansion-panel-header>
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Located within close proximity to Johannesburg, Tedderfield Airpark offers a balance of peace and
-        convenience.</p>
-      <p class="">With a close-knit community who share a passion for aviation, you'll find camaraderie and shared
-        values that go beyond the average.</p>
-      <p class="">Each stand enjoys access to all airpark amenities, from well-maintained taxiways to events, social
-        gatherings, and more.</p>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image2"></div>
     </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image3"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image4"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image5"></div>
+    </div>
+  </div> --> 
 
-  </mat-expansion-panel>
-
-  <app-arrow-divider class="pointer" (click)="isStandsAreLimitedExpanded = !isStandsAreLimitedExpanded"
+  <app-arrow-divider class="pointer" (click)="isBuildYourDreamsExpanded = !isBuildYourDreamsExpanded"
     [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isBuildYourDreamsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Build Your Dream on a Private Airfield</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Imagine waking up with open clear skies, your good mood erupts and you drive through to Tedderfield
+          Airpark.</p>
+        <p class="">Tedderfield Airpark offers a unique position where aviation enthusiasts and adventurers unite to
+          enjoy
+          unparalleled access to a world-class private airfield.</p>
+        <p class="">Our exclusive stands for sale provide the perfect canvas for those looking to build a custom home
+          with
+          an aviation twist.</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isWhyChooseTedderfieldExpanded = !isWhyChooseTedderfieldExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+  </div>
+
+  <div class="">
+    <mat-expansion-panel hideToggle [expanded]="isWhyChooseTedderfieldExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Why Choose Tedderfield?</p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Located within close proximity to Johannesburg, Tedderfield Airpark offers a balance of peace and
+          convenience.</p>
+        <p class="">With a close-knit community who share a passion for aviation, you'll find camaraderie and shared
+          values that go beyond the average.</p>
+        <p class="">Each stand enjoys access to all airpark amenities, from well-maintained taxiways to events, social
+          gatherings, and more.</p>
+      </div>
+
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isStandsAreLimitedExpanded = !isStandsAreLimitedExpanded"
+      [isLightToDark]="true"></app-arrow-divider>
+  </div>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isStandsAreLimitedExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Stands are Limited - Don't Miss Out</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Our available stands are in demand among aviation lovers, families, and investors alike.</p>
+        <p class="">If you're ready to claim your piece of Tedderfield and design a life around the skies, reach out to
+          us today.</p>
+        <p class="">Our team is here to guide you through the process and help make your vision a reality.</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider *ngIf="!standsForSaleData?.length" class="pointer"
+      (click)="isStandsForSaleAdvertsExpanded = !isStandsForSaleAdvertsExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+    <app-arrow-divider *ngIf="standsForSaleData?.length" class="pointer" (click)="togglePannel(0)"
+      [isLightToDark]="false"></app-arrow-divider>
+
+  </div>
+
+  <div class="" *ngIf="!standsForSaleData?.length">
+    <mat-expansion-panel hideToggle [expanded]="isStandsForSaleAdvertsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">No Available Stands for sale</p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="col-10 mx-auto">
+        <p>Unfortunately, there are currently no stands available for sale. Kindly check back periodically in case a
+          new
+          listing is submitted.</p>
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+
+  <div class="" *ngIf="standsForSaleData?.length">
+    <div *ngFor="let standItem of standsForSaleData; let last = last; let index = index"
+      [ngClass]="{'dark-background': ((index + 1) % 2 ? false : true)}">
+      <mat-expansion-panel hideToggle [expanded]="standItem.isExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <div class="col-10 mx-auto">
+            <p class="text-size-24 mb-3">Stand Number: {{ standItem.standNumber }} - R{{ standItem.price }}</p>
+          </div>
+        </mat-expansion-panel-header>
+
+        <div class="col-10 mx-auto">
+          <div class="row mx-n2">
+            <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3"
+              *ngFor="let img of standItem.standImages">
+              <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="stand-images" />
+            </div>
+
+            <div *ngIf="standItem.titleDocument?.fileName && standItem.titleDocument?.fileData"
+              class="row mx-0 align-items-center pt-3">
+              <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
+              <p class="mb-0 width-fit-content">A Title document is available</p>
+            </div>
+
+            <!-- <div *ngIf="standItem.detailedFloorPlan?.fileName && standItem.detailedFloorPlan?.fileData"
+              class="row mx-0 align-items-center pt-3">
+              <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
+              <p class="mb-0 width-fit-content">A Detailed floor plan is available</p>
+            </div> -->
+
+            <div *ngIf="standItem.standDimensions" class="mt-3">
+              <p class="mb-0">Stand Size:</p>
+              <ul class="mb-0">
+                <li><b>Width:</b> {{ standItem.standDimensions.width }}</li>
+                <li><b>Length:</b> {{ standItem.standDimensions.length }}</li>
+              </ul>
+            </div>
+
+            <div class="row mx-0 justify-content-center">
+              <div class="red-button mb-4" (click)="viewStandDetails(standItem.id)">
+                <p class="mb-0">View Details</p>
+                <span class="red-button-icon"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+
+      <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+        [isLightToDark]="((index + 1) % 2 ? true : false)"></app-arrow-divider>
+
+    </div>
+  </div>
 </div>
 
-<div class="dark-background">
-  <mat-expansion-panel hideToggle [expanded]="isStandsAreLimitedExpanded" class="page-section-expansion-pannel">
-    <mat-expansion-panel-header>
-      <div class="col-10 mx-auto">
-        <p class="text-size-24 mb-3">Stands are Limited - Don't Miss Out</p>
+<div *ngIf="displayStandDetails">
+
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <div class="col-10 mx-auto">
+      <p class="text-size-24 mb-3">Details for Stand: {{ standDetailsToDisplay.standNumber }}</p>
+
+      <div class="row mx-n2">
+
+        <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3"
+          *ngFor="let img of standDetailsToDisplay.standImages">
+          <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="stand-images" />
+        </div>
+
+        <table class="stand-details-table">
+          <tr>
+            <th></th>
+            <th><b>Details</b></th>
+          </tr>
+
+          <tr>
+            <td>Seller Name</td>
+            <td>{{ standDetailsToDisplay.name }}</td>
+          </tr>
+
+          <tr>
+            <td>Seller Email</td>
+            <td>{{ standDetailsToDisplay.email }}</td>
+          </tr>
+
+          <tr>
+            <td>Seller Phone Number</td>
+            <td>{{ standDetailsToDisplay.phoneNumber }}</td>
+          </tr>
+
+          <tr>
+            <td>Stand Number</td>
+            <td>{{ standDetailsToDisplay.standNumber }}</td>
+          </tr>
+
+          <tr>
+            <td>Stand Price</td>
+            <td>R{{ standDetailsToDisplay.price }}</td>
+          </tr>
+
+          <tr *ngIf="standDetailsToDisplay.titleDocument?.fileName && standDetailsToDisplay.titleDocument?.fileData">
+            <td>Title Document</td>
+            <td class="pointer red-text" (click)="openTitleDocument('Title Document', standDetailsToDisplay.id)">{{
+              standDetailsToDisplay.titleDocument.fileName }}</td>
+          </tr>
+
+          <tr *ngIf="standDetailsToDisplay.standDimensions?.width && standDetailsToDisplay.standDimensions?.length">
+            <td>Stand Dimensions</td>
+            <td>
+              <li><b>Width:</b> {{ standDetailsToDisplay.standDimensions.width }}</li>
+              <li><b>Length:</b> {{ standDetailsToDisplay.standDimensions.length }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="standDetailsToDisplay.featuresAndBenefits">
+            <td>Stand Features and Benefits</td>
+            <td>
+              <li *ngFor="let item of standDetailsToDisplay.featuresAndBenefits">{{ item }}</li>
+            </td>
+          </tr>
+
+          <tr *ngIf="standDetailsToDisplay.securty">
+            <td>Stand Security</td>
+            <td>
+              <li *ngFor="let item of standDetailsToDisplay.securty">{{ item }}</li>
+            </td>
+          </tr>
+
+          <!-- <tr *ngIf="standDetailsToDisplay.additionalInfrastructure">
+            <td>Additional Infrastructure</td>
+            <td>
+              <li *ngFor="let item of standDetailsToDisplay.additionalInfrastructure">{{ item }}</li>
+            </td>
+          </tr> -->
+
+          <tr *ngIf="standDetailsToDisplay.leviesApplicable">
+            <td>Levies Applicable</td>
+            <td>
+              <li *ngFor="let item of standDetailsToDisplay.leviesApplicable">{{ item }}</li>
+            </td>
+          </tr>
+<!-- 
+          <tr
+            *ngIf="standDetailsToDisplay.detailedFloorPlan?.fileName && standDetailsToDisplay.detailedFloorPlan?.fileData">
+            <td>Detailed Floor Plan</td>
+            <td class="pointer red-text"
+              (click)="openFloorPlanDocument('Detailed Floor Plane', standDetailsToDisplay.id)">{{
+              standDetailsToDisplay.detailedFloorPlan.fileName }}</td>
+          </tr> -->
+
+          <tr>
+            <td>Reason For Selling</td>
+            <td>{{ standDetailsToDisplay.reasonsForSelling }}</td>
+          </tr>
+
+
+        </table>
+
+
+        <div class="row mx-0 justify-content-center mt-3 mb-4">
+          <div class="white-button mr-3" (click)="backClicked()">
+            <p class="mb-0">Back</p>
+            <span class="white-button-icon"></span>
+          </div>
+
+          <div class="red-button" (click)="displayInterestedInStandModal()">
+            <p class="mb-0">I am interested</p>
+            <span class="red-button-icon"></span>
+          </div>
+        </div>
+
       </div>
-    </mat-expansion-panel-header>
-
-
-    <div class="col-10 mx-auto pb-4">
-      <p class="">Our available stands are in demand among aviation lovers, families, and investors alike.</p>
-      <p class="">If you're ready to claim your piece of Tedderfield and design a life around the skies, reach out to us today.</p>
-      <p class="">Our team is here to guide you through the process and help make your vision a reality.</p>
     </div>
-  </mat-expansion-panel>
+  </div>
 
 </div>

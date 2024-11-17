@@ -27,7 +27,7 @@
       <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
     </div>
 
-    <div class="row mx-n2 mt-3">
+    <div class="row mt-3">
       <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center image-container" *ngFor="let img of section.images">
         <mat-icon class="pointer delete-image-icon"
           (click)="deleteImageClicked(img.name, img.id)">delete</mat-icon>

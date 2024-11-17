@@ -104,6 +104,16 @@
 
         <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-12 px-0">
+            <mat-label>Phone Number</mat-label>
+            <input style="color: black;" matInput required maxlength="10" formControlName="registerPhoneNumberControl">
+            <mat-error *ngIf="registerPhoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+            <mat-error *ngIf="registerPhoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+          </mat-form-field>
+          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
             <mat-label>Email</mat-label>
             <input style="color: black;" matInput required maxlength="100" formControlName="registerEmailControl">
             <mat-error *ngIf="registerEmailControl?.hasError('required')">Email is required</mat-error>
