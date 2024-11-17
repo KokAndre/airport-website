@@ -7,6 +7,8 @@ import { FollowUsRequestsComponent } from './components/follow-us-requests/follo
 import { ReportIssueRequestsComponent } from './components/report-issue-requests/report-issue-requests.component';
 import { GreeningTedderfieldRequestsComponent } from './components/greening-tedderfield-requests/greening-tedderfield-requests.component';
 import { ManageHomeScreenBannerComponent } from './components/manage-home-screen-banner/manage-home-screen-banner.component';
+import { ManageHangersForSaleComponent } from './components/manage-hangers-for-sale/manage-hangers-for-sale.component';
+import { ManageStandsForSaleComponent } from './components/manage-stands-for-sale/manage-stands-for-sale.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { ManageHomeScreenBannerComponent } from './components/manage-home-screen
     FollowUsRequestsComponent,
     ReportIssueRequestsComponent,
     GreeningTedderfieldRequestsComponent,
-    ManageHomeScreenBannerComponent
+    ManageHomeScreenBannerComponent,
+    ManageHangersForSaleComponent,
+    ManageStandsForSaleComponent
   ]
 })
 export class AdminModule { }

@@ -30,7 +30,7 @@ export class StandsForSaleComponent implements OnInit {
       if (results.status === 200) {
         this.formatData(results.stands);
       } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Stands for Saler', results.message, null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Stands for Sale', results.message, null);
       }
     });
   }

@@ -28,6 +28,7 @@ export namespace GetHangersForSaleReponse {
         hangerImages: FileData[];
         detailedFloorPlan: FileData;
         reasonsForSelling: string;
+        dateAdded: string;
         isExpanded: boolean;
     }
 

@@ -1,28 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { PropertyForSaleService } from '../../services/property-for-sale.service';
+import { AdminService } from '../../services/admin.service';
+import { PropertyForSaleService } from 'src/app/modules/property-for-sale/services/property-for-sale.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { Endpoints, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
-import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 
 @Component({
-  selector: 'app-hangars-for-sale',
-  templateUrl: './hangars-for-sale.component.html',
-  styleUrls: ['./hangars-for-sale.component.scss']
+  selector: 'app-manage-hangers-for-sale',
+  templateUrl: './manage-hangers-for-sale.component.html',
+  styleUrls: ['./manage-hangers-for-sale.component.scss']
 })
-export class HangarsForSaleComponent implements OnInit {
-  public isAviationMeetsCommunityExpanded = true;
-  public isWhyInvestInAHangerExpanded = true;
-  public isDontMissOutOnLimitedHangersExpanded = true;
-  public isHangersForSaleAdvertsExpanded = true;
+export class ManageHangersForSaleComponent implements OnInit {
   public hangersForSaleData = new Array<GetHangersForSaleReponse.Hanger>();
-  public displayHangerDetails = false;
-  public hangerDetailsToDisplay: GetHangersForSaleReponse.Hanger;
 
-  constructor(public propertyForSaleService: PropertyForSaleService, public appModalService: AppModalService) { }
+  constructor(public adminService: AdminService,
+    public propertyForSaleService: PropertyForSaleService,
+    public appModalService: AppModalService) { }
 
   ngOnInit() {
-    this.getHangerForSaleData();
+    this.getHangerForSaleData()
   }
 
   public getHangerForSaleData() {
@@ -33,7 +29,7 @@ export class HangarsForSaleComponent implements OnInit {
           this.formatData(results.hangers);
         }
       } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Hangers for Sale', results.message, null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Hangers for Sale Data', results.message, null);
       }
     });
   }
@@ -51,6 +47,7 @@ export class HangarsForSaleComponent implements OnInit {
       itemToPush.reasonsForSelling = hangerItem.reasonsForSelling;
       itemToPush.doorType = hangerItem.doorType;
       itemToPush.yearBuilt = hangerItem.yearBuilt;
+      itemToPush.dateAdded = hangerItem.dateAdded;
 
       itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
       itemToPush.titleDocument.fileName = hangerItem.titleDocument;
@@ -84,64 +81,17 @@ export class HangarsForSaleComponent implements OnInit {
     console.log('FORMATTED DATA: ', this.hangersForSaleData);
   }
 
-  public togglePannel(indexToToggle: number) {
-    this.hangersForSaleData[indexToToggle].isExpanded = !this.hangersForSaleData[indexToToggle].isExpanded;
+  public deleteHangerForSaleClicked(hangerData: GetHangersForSaleReponse.Hanger) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Delete Hanager for Sale item', `Are you sure you want to delete the data for sale for hanger: ${hangerData.hangerNumber}?`, null, this.deleteHangerForSale.bind(this, hangerData));
   }
 
-  public viewHangerDetails(hangerItemId: number) {
-    console.log('HANGER ID: ', hangerItemId);
-    // this.hangerDetailsToDisplay = null;
-    this.hangerDetailsToDisplay = this.hangersForSaleData.find(x => x.id === hangerItemId);
-    console.log("Hanger to dislay: ", this.hangerDetailsToDisplay);
-    if (this.hangerDetailsToDisplay) {
-      document.getElementById('content-container').scroll({ 
-        top: 0, 
-        left: 0, 
-        behavior: 'smooth'
- });
-      this.displayHangerDetails = true;
-    }
-  }
-
-  public backClicked() {
-    this.displayHangerDetails = false;
-    this.hangerDetailsToDisplay = null;
-  }
-
-  public openTitleDocument(fileDisplayName: string, handerId: number) {
-    this.propertyForSaleService.getHangerForSaleTitleDocument(handerId).then((results: any) => {
-      if (results.status === 200 && results.documentData) {
-        const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
-      }
-    });
-
-  }
-
-  public openFloorPlanDocument(fileDisplayName: string, handerId: number) {
-    this.propertyForSaleService.getHangerForSaleFloorPlanDocument(handerId).then((results: any) => {
-      if (results.status === 200 && results.documentData) {
-        const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
-      }
-    });
-  }
-
-  public displayInterestedInHangerModal() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.InterestedInPropertyModal, 'Capture your details', '', null, this.submitInterestedInBuyingHanger.bind(this))
-  }
-
-  public submitInterestedInBuyingHanger(modalOutcome: string, requestData: SubmitInterestedInPropertyRequest) {
-    console.log('REQUEST DATA: ', requestData);
-    console.log('MODAL OUTCOME: ', modalOutcome)
+  public deleteHangerForSale(hangerData: GetHangersForSaleReponse.Hanger, modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
-      console.log('REQUEST DATA 2: ', requestData);
-      requestData.propertyId = this.hangerDetailsToDisplay.id;
-      this.propertyForSaleService.submitInterestedInHangerData(requestData).then((results: any) => {
-        // if (results.status === 200 && results.documentData) {
-        this.appModalService.CloseModal();
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Submit interest in hanger', results.message, null);
-        // }
+      this.adminService.deleteHangerForSaleItem(hangerData.id).then(results => {
+        if (results.status === 200) {
+          this.getHangerForSaleData();
+        }
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Hanger for Sale Data', results.message, null);
       });
     }
   }

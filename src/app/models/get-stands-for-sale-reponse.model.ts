@@ -22,6 +22,7 @@ export namespace GetStandsForSaleReponse {
         standImages: FileData[];
         reasonsForSelling: string;
         isExpanded: boolean;
+        dateAdded: string;
     }
 
     export class FileData {

@@ -5,6 +5,8 @@ import { GalleryAdminPageComponent } from './components/gallery-admin-page/galle
 import { GreeningTedderfieldRequestsComponent } from './components/greening-tedderfield-requests/greening-tedderfield-requests.component';
 import { ReportIssueRequestsComponent } from './components/report-issue-requests/report-issue-requests.component';
 import { ManageHomeScreenBannerComponent } from './components/manage-home-screen-banner/manage-home-screen-banner.component';
+import { ManageHangersForSaleComponent } from './components/manage-hangers-for-sale/manage-hangers-for-sale.component';
+import { ManageStandsForSaleComponent } from './components/manage-stands-for-sale/manage-stands-for-sale.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,12 @@ const routes: Routes = [
   },
   {
     path: 'manage-home-screen-banner', component: ManageHomeScreenBannerComponent
+  },
+  {
+    path: 'manage-hangers-for-sale', component: ManageHangersForSaleComponent
+  },
+  {
+    path: 'manage-stands-for-sale', component: ManageStandsForSaleComponent
   }
 ];
 

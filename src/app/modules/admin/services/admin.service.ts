@@ -282,4 +282,25 @@ export class AdminService {
       });
   }
 
+  public deleteHangerForSaleItem(hangerId: number) {
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteHangerForSaleItem, {
+      method: 'post',
+      body: JSON.stringify({ id: hangerId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteStandForSaleItem(standId: number) {
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteStandForSaleItem, {
+      method: 'post',
+      body: JSON.stringify({ id: standId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 }

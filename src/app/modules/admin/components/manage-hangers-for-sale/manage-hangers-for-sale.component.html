@@ -1,0 +1,65 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Manage Hangers For Sale
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Manage Hangers For Sale</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="hangersForSaleData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-12 py-4">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Hanger Number</th>
+        <th>Title Document</th>
+        <th>Hanger Dimensions</th>
+        <th>Year Built</th>
+        <th>Price</th>
+        <th>Hanger Images</th>
+        <th>Detailed Floor Plan</th>
+        <th>Reasons For Selling</th>
+        <th>dateAdded</th>
+        <th>Delete</th>
+      </tr>
+
+      <tr *ngFor="let item of hangersForSaleData">
+        <td [innerHTML]="item.name"></td>
+        <td [innerHTML]="item.email"></td>
+        <td [innerHTML]="item.phoneNumber"></td>
+        <td [innerHTML]="item.hangerNumber"></td>
+
+        <td class="text-center"><mat-icon *ngIf="item.titleDocument?.fileName" class="green-text text-bold"
+          fontIcon="check"></mat-icon><mat-icon *ngIf="!item.titleDocument?.fileName" class="red-text text-bold"
+          fontIcon="close"></mat-icon></td>
+
+        <td>Width: {{ item.hangerDimensions.width }}, Length: {{ item.hangerDimensions.length }}</td>
+        <td [innerHTML]="item.yearBuilt"></td>
+        <td>R {{ item.price }}</td>
+
+        <td [innerHTML]="item.phoneNumber">Number of Images: {{ item.hangerImages?.length }}</td>
+
+        <td class="text-center"><mat-icon *ngIf="item.detailedFloorPlan?.fileName" class="green-text text-bold"
+          fontIcon="check"></mat-icon><mat-icon *ngIf="!item.detailedFloorPlan?.fileName" class="red-text text-bold"
+          fontIcon="close"></mat-icon></td>
+
+        <td [innerHTML]="item.reasonsForSelling"></td>
+        <td [innerHTML]="item.dateAdded"></td>
+        <td ><mat-icon class="red-text pointer" fontIcon="delete" (click)="deleteHangerForSaleClicked(item)"></mat-icon></td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf="!hangersForSaleData?.length" class="col-10 mx-auto">
+  <p class="text-size-24">There are currently no hangers for sale.</p>
+</div>

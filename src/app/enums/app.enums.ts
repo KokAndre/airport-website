@@ -32,12 +32,14 @@ export enum AppRoutes {
     GreeningTedderfield = '/members/greening-tedderfield',
     SellMyHanger = '/members/sell-my-hanger',
     SellMyStand = '/members/sell-my-stand',
-    PropertyForSaleBase = '/property-for-sale/',
+
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
     ReportIssueRequests = '/admin/report-issue-requests',
     GreeningTedderfieldRequests = '/admin/greening-tedderfield-requests',
-    ManageHomeScreenBanner = '/admin/manage-home-screen-banner'
+    ManageHomeScreenBanner = '/admin/manage-home-screen-banner',
+    ManageHangersForSale = '/admin/manage-hangers-for-sale',
+    ManageStandsForSale = '/admin/manage-stands-for-sale'
 }
 
 export enum Endpoints {
@@ -86,6 +88,7 @@ export enum Endpoints {
     GetHangerTitleDocument = '/hangers-for-sale/get-title-document.php',
     GetHangerFloorPlanDocument = '/hangers-for-sale/get-floor-plan-document.php',
     SubmitInterestedInHanger = '/hangers-for-sale/submit-interested-in-hanger.php',
+    DeleteHangerForSaleItem = '/hangers-for-sale/delete-hanger-for-sale-item.php',
     
     GetStandsForSales = '/stands-for-sale/get-stands-for-sale.php',
     SubmitSellMyStand = '/stands-for-sale/submit-stand-for-sale.php',
@@ -93,6 +96,7 @@ export enum Endpoints {
     uploadSellMyStandImages = '/stands-for-sale/upload-stand-for-sale-image.php',
     GetStandTitleDocument = '/stands-for-sale/get-title-document.php',
     SubmitInterestedInStand = '/stands-for-sale/submit-interested-in-stand.php',
+    DeleteStandForSaleItem = '/stands-for-sale/delete-stand-for-sale-item.php',
 }
 
 export enum EncryptionKeys {
