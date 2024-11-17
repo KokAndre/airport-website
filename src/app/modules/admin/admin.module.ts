@@ -9,6 +9,8 @@ import { GreeningTedderfieldRequestsComponent } from './components/greening-tedd
 import { ManageHomeScreenBannerComponent } from './components/manage-home-screen-banner/manage-home-screen-banner.component';
 import { ManageHangersForSaleComponent } from './components/manage-hangers-for-sale/manage-hangers-for-sale.component';
 import { ManageStandsForSaleComponent } from './components/manage-stands-for-sale/manage-stands-for-sale.component';
+import { ManageHangersForSaleInterestComponent } from './components/manage-hangers-for-sale-interest/manage-hangers-for-sale-interest.component';
+import { ManageStandsForSaleInterestComponent } from './components/manage-stands-for-sale-interest/manage-stands-for-sale-interest.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { ManageStandsForSaleComponent } from './components/manage-stands-for-sal
     GreeningTedderfieldRequestsComponent,
     ManageHomeScreenBannerComponent,
     ManageHangersForSaleComponent,
-    ManageStandsForSaleComponent
+    ManageStandsForSaleComponent,
+    ManageHangersForSaleInterestComponent,
+    ManageStandsForSaleInterestComponent
   ]
 })
 export class AdminModule { }

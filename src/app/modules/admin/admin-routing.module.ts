@@ -7,6 +7,8 @@ import { ReportIssueRequestsComponent } from './components/report-issue-requests
 import { ManageHomeScreenBannerComponent } from './components/manage-home-screen-banner/manage-home-screen-banner.component';
 import { ManageHangersForSaleComponent } from './components/manage-hangers-for-sale/manage-hangers-for-sale.component';
 import { ManageStandsForSaleComponent } from './components/manage-stands-for-sale/manage-stands-for-sale.component';
+import { ManageHangersForSaleInterestComponent } from './components/manage-hangers-for-sale-interest/manage-hangers-for-sale-interest.component';
+import { ManageStandsForSaleInterestComponent } from './components/manage-stands-for-sale-interest/manage-stands-for-sale-interest.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,12 @@ const routes: Routes = [
   },
   {
     path: 'manage-stands-for-sale', component: ManageStandsForSaleComponent
+  },
+  {
+    path: 'manage-interest-in-hanger-for-sale', component: ManageHangersForSaleInterestComponent
+  },
+  {
+    path: 'manage-interest-in-stand-for-sale', component: ManageStandsForSaleInterestComponent
   }
 ];
 

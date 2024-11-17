@@ -11,6 +11,7 @@ import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-
 import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
 import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
 import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-request.model';
+import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AdminService {
     requestData.sectionId = sectionId;
     requestData.userId = this.loginService.getLoggedInUserId();
     requestData.filesArray = new Array<UploadImageRequest.FileData>();
-    requestData.filesArray = imageData; 
+    requestData.filesArray = imageData;
 
     return fetch(Endpoints.BaseURL + Endpoints.UploadImage, {
       method: 'post',
@@ -303,4 +304,106 @@ export class AdminService {
         return data;
       });
   }
+
+  public getInterestedInHangerData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetInterestedInHangerData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editInterestedInHangerData(interestedInHangerRequestId: number) {
+    const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.propertyItemId = interestedInHangerRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInHangerAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteInterestedInHangerData(interestedInHangerRequestId: number) {
+    const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.propertyItemId = interestedInHangerRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInHangerItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public getInterestedInStandData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetInterestedInStandData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editInterestedInStandData(interestedInStandRequestId: number) {
+    const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.propertyItemId = interestedInStandRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInStandAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteInterestedInStandData(interestedInStandRequestId: number) {
+    const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.propertyItemId = interestedInStandRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInStandItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 }
