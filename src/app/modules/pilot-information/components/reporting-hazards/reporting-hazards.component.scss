@@ -1,6 +1,7 @@
 .page-top-images {
     background-size: cover;
-    background-position: center;
+    background-position-x: left;
+    background-position-y: bottom;
     background-repeat: no-repeat;
     width: 100%;
     height: 300px;
@@ -8,14 +9,15 @@
 }
 
 .image1 {
-    background-image: url("../../../../../assets/pilot-information/reporting-hazards/reporting-hazards-1.jpg");
+    background-image: url("../../../../../assets/pilot-information/reporting-hazards/report_harard_1.jfif");
+    background-size: contain;
 }
 .image2 {
-    background-image: url("../../../../../assets/pilot-information/reporting-hazards/reporting-hazards-2.png");
+    background-image: url("../../../../../assets/pilot-information/reporting-hazards/report_harard_2.jfif");
 }
 .image3 {
-    background-image: url("../../../../../assets/pilot-information/reporting-hazards/reporting-hazards-3.jpg");
+    background-image: url("../../../../../assets/pilot-information/reporting-hazards/report_harard_4.jfif");
 }
-.image4 {
-    background-image: url("../../../../../assets/pilot-information/reporting-hazards/reporting-hazards-4.jpg");
-}
+// .image4 {
+//     background-image: url("../../../../../assets/pilot-information/reporting-hazards/reporting-hazards-4.jpg");
+// }

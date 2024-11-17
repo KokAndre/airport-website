@@ -263,19 +263,19 @@ export class NavBarComponent implements OnInit {
   public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
     switch (documentToDisplay) {
       case DocumentsToDisplayEnum.RunwayInfo:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20241028-TedderfielfAirpark-RunwayInformation.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/Runway_Info_v1.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241014 -FATA Emergency Contacts - FATA -011.pdf', null);
         break;
       case DocumentsToDisplayEnum.SalesBrochure:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20240429-TedderfieldSalesBrochure.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241114-Tedderfield_Sales_Brochure_v3.pdf', null);
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Flying_the_Circuit_at_Tedderfield_Airpark_Paramotor-V3.pdf', null);
         break;
       case DocumentsToDisplayEnum.GroundOperations:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028-TedderfieldAirpark-GroundOperations.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/Ground_Operations.pdf', null);
         break;
       case DocumentsToDisplayEnum.NOTAMSNewTab:
         AppHelperFunction.openDocumentInNewTab('https://www.b4flight.co.za/');
