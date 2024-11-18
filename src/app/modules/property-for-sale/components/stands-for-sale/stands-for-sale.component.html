@@ -144,7 +144,7 @@
             <div *ngIf="standItem.titleDocument?.fileName && standItem.titleDocument?.fileData"
               class="row mx-0 align-items-center pt-3">
               <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
-              <p class="mb-0 width-fit-content">A Title document is available</p>
+              <p class="mb-0 width-fit-content">A Title Document / Notarial Real Right is available</p>
             </div>
 
             <!-- <div *ngIf="standItem.detailedFloorPlan?.fileName && standItem.detailedFloorPlan?.fileData"
@@ -227,8 +227,8 @@
           </tr>
 
           <tr *ngIf="standDetailsToDisplay.titleDocument?.fileName && standDetailsToDisplay.titleDocument?.fileData">
-            <td>Title Document</td>
-            <td class="pointer red-text" (click)="openTitleDocument('Title Document', standDetailsToDisplay.id)">{{
+            <td>Title Document / Notarial Real Right</td>
+            <td class="pointer red-text" (click)="openTitleDocument('Title Document / Notarial Real Right', standDetailsToDisplay.id)">{{
               standDetailsToDisplay.titleDocument.fileName }}</td>
           </tr>
 
@@ -240,12 +240,12 @@
             </td>
           </tr>
 
-          <tr *ngIf="standDetailsToDisplay.featuresAndBenefits">
+          <!-- <tr *ngIf="standDetailsToDisplay.featuresAndBenefits">
             <td>Stand Features and Benefits</td>
             <td>
               <li *ngFor="let item of standDetailsToDisplay.featuresAndBenefits">{{ item }}</li>
             </td>
-          </tr>
+          </tr> -->
 
           <tr *ngIf="standDetailsToDisplay.securty">
             <td>Stand Security</td>

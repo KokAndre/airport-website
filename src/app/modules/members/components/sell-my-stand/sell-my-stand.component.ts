@@ -44,7 +44,7 @@ export class SellMyStandComponent implements OnInit {
       standNumberControl: new FormControl('', [Validators.required]),
       standDimentionsWidthControl: new FormControl(''),
       standDimentionsLengthControl: new FormControl(''),
-      standFeaturesAndBenefitsControl: new FormControl(''),
+      // standFeaturesAndBenefitsControl: new FormControl(''),
       standSecurityControl: new FormControl('', [Validators.required]),
       askingPriceControl: new FormControl('', [Validators.required]),
       pilotLevyCheckboxControl: new FormControl(''),
@@ -201,7 +201,7 @@ export class SellMyStandComponent implements OnInit {
     this.submitStandForSaleRequestData.standDimensions.width = this.standDimentionsWidthControl.value;
     this.submitStandForSaleRequestData.standDimensions.length = this.standDimentionsLengthControl.value;
 
-    this.submitStandForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.standFeaturesAndBenefitsControl.value);
+    // this.submitStandForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.standFeaturesAndBenefitsControl.value);
     this.submitStandForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.standSecurityControl.value);
     this.submitStandForSaleRequestData.price = this.askingPriceControl.value;
     this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
@@ -292,9 +292,9 @@ export class SellMyStandComponent implements OnInit {
   public get standDimentionsLengthControl() {
     return this.sellMyStandFormGroup.get('standDimentionsLengthControl');
   }
-  public get standFeaturesAndBenefitsControl() {
-    return this.sellMyStandFormGroup.get('standFeaturesAndBenefitsControl');
-  }
+  // public get standFeaturesAndBenefitsControl() {
+  //   return this.sellMyStandFormGroup.get('standFeaturesAndBenefitsControl');
+  // }
   public get standSecurityControl() {
     return this.sellMyStandFormGroup.get('standSecurityControl');
   }

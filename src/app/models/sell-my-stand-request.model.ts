@@ -6,7 +6,7 @@ export namespace SellMyStandRequest {
         standNumber: string;
         titleDocument: FileData;
         standDimensions: StandDimensions;
-        featuresAndBenefits: string[];
+        // featuresAndBenefits: string[];
         securty: string[];
         price: number;
         leviesApplicable: string[];

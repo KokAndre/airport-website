@@ -272,7 +272,7 @@ export class NavBarComponent implements OnInit {
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241114-Tedderfield_Sales_Brochure_v3.pdf', null);
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Flying_the_Circuit_at_Tedderfield_Airpark_Paramotor-V3.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark_Paramotors-V4-1-2.pdf', null);
         break;
       case DocumentsToDisplayEnum.GroundOperations:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/Ground_Operations.pdf', null);
