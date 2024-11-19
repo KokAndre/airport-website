@@ -119,21 +119,31 @@ export class GalleryAdminPageComponent implements OnInit {
     }
   }
 
-  public uploadImage(section: GetGalleryDataResponse.Section, imageDataArray: UploadImageRequest.FileData[]) {
-    console.log('SECTION: ', section);
-    console.log('IMAGE DATA ARRAY: ', imageDataArray);
-    console.log('IMAGE DATA ARRAY LENGTH: ', imageDataArray.length);
+  public async uploadImage(section: GetGalleryDataResponse.Section, imageDataArray: UploadImageRequest.FileData[]) {
     if (!section?.id || !imageDataArray?.length) {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading image', 'No section ID is present in request. Please contact administrator', null);
     } else {
-      this.adminService.uploadNewImages(section.id, imageDataArray).then(results => {
-        if (results.status === 200) {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', results.message, null);
-          this.getGalleryData();
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', results.message, null);
-        }
-      });
+      let isAllImagesUploaded = true;
+
+      for (let index = 0; index < imageDataArray.length; index++) {
+        const imageFile = imageDataArray[index];
+        await this.adminService.uploadNewImageAsFile(section.id, imageFile.imageData).then(results => {
+          if (results.status !== 200) {
+            isAllImagesUploaded = false;
+          }
+
+          if (index === imageDataArray.length - 1) {
+            if (isAllImagesUploaded) {
+              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'All images uploaded successfully.', null);
+
+              this.getGalleryData();
+            } else {
+              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'There was an issue uploading all of the images.', null);
+            }
+          }
+
+        });
+      }
     }
   }
 

@@ -10,6 +10,7 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
   styleUrls: ['./image-uploader.component.scss']
 })
 export class ImageUploaderComponent implements OnInit {
+  @Input() public returnAsFile = false;
   @Output() public imageUploadedEmit = new EventEmitter();
   @ViewChild('imageUploader', { static: true }) imageUploader: ElementRef;
 
@@ -42,30 +43,32 @@ export class ImageUploaderComponent implements OnInit {
             const fileDataToAdd = new UploadImageRequest.FileData();
             fileDataToAdd.imageName = file.name;
 
-            console.log('FILE: ', file);
-            if (file.size > 500000 && !fileDataToAdd.imageName.includes('.NEF') && !fileDataToAdd.imageName.includes('.nef')) {
-              console.log('IN IF!!!!');
-              const imageToCompress = {
-                image: imageSrc as string,
-                orientation: 1,
-                fileName: file.name
-              }
-              console.log('IMAGE TO COMPRESS: ', imageToCompress);
-              await this.imageCompress
-                .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
-                .then(
-                  (result) => {
-                    console.log('SUCCESS RESULTS: ', result);
-                    fileDataToAdd.imageData = result.image;
-                  },
-                  (result: string) => {
-                    console.log('ERROR RESULTS: ', result);
-                    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
-                  }
-                );
+            if (this.returnAsFile) {
+              fileDataToAdd.imageData = file;
             } else {
-              console.log('IN ELSE FOR SIZE AND NEF CHECK');
-              fileDataToAdd.imageData = imageSrc;
+              if (file.size > 500000 && !fileDataToAdd.imageName.includes('.NEF') && !fileDataToAdd.imageName.includes('.nef')) {
+                const imageToCompress = {
+                  image: imageSrc as string,
+                  orientation: 1,
+                  fileName: file.name
+                }
+                console.log('IMAGE TO COMPRESS: ', imageToCompress);
+                await this.imageCompress
+                  .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+                  .then(
+                    (result) => {
+                      console.log('SUCCESS RESULTS: ', result);
+                      fileDataToAdd.imageData = result.image;
+                    },
+                    (result: string) => {
+                      console.log('ERROR RESULTS: ', result);
+                      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
+                    }
+                  );
+              } else {
+                console.log('IN ELSE FOR SIZE AND NEF CHECK');
+                fileDataToAdd.imageData = imageSrc;
+              }
             }
 
             filesToEmit.push(fileDataToAdd);

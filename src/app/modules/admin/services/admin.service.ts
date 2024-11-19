@@ -38,6 +38,25 @@ export class AdminService {
       });
   }
 
+  public uploadNewImageAsFile(sectionId: string, fileData: any) {
+    const userId = this.loginService.getLoggedInUserId();
+    let fileDataToUpload: FormData = new FormData();
+    fileDataToUpload.append('file', fileData);
+    fileDataToUpload.append('name', fileData.name);
+    fileDataToUpload.append('userId', `${userId}`);
+    fileDataToUpload.append('sectionId', `${sectionId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.UploadImageAsFile, {
+      method: 'post',
+      body: fileDataToUpload
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+
   public createSection(title: string, description: string) {
     const requestData = new CreateSectionRequest.RootObject();
     requestData.title = title;

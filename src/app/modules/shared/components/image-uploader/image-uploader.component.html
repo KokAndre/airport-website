@@ -1,4 +1,4 @@
 <div class="add-image-section pointer" (click)="handleClick()">
   <mat-icon class="add-image-icon">add_photo_alternate</mat-icon>
-  <input type="file" multiple="true" hidden #imageUploader (click)="$event.stopPropagation()" (change)="uploadImage($event)" accept=".PNG, .JPG, .JPEG, .SVG" />
+  <input type="file" multiple="true" hidden #imageUploader (click)="$event.stopPropagation()" (change)="uploadImage($event)" accept=".PNG, .JPG, .JPEG, .SVG, .jfif" />
 </div>

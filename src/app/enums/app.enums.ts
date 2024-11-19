@@ -56,6 +56,7 @@ export enum Endpoints {
     CheckWhitelisting = '/members/get-member.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',
     UploadImage = '/gallery/upload-images.php',
+    UploadImageAsFile = '/gallery/upload-image-file.php',
     CreateGallerySection = '/gallery/create-section.php',
     GetGalleryData = '/gallery/get-gallery-data.php',
     DeleteImage = '/gallery/delete-image.php',

@@ -35,7 +35,7 @@
       </div>
 
       <div class="col-lg-3 col-md-6 col-sm-12 p-2">
-        <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)"></app-image-uploader>
+        <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)" [returnAsFile]="true"></app-image-uploader>
       </div>
     </div>
   </div>
