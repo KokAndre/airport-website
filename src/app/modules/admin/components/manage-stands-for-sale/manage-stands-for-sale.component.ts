@@ -28,6 +28,7 @@ export class ManageStandsForSaleComponent implements OnInit {
       }
     });
   }
+
   public formatData(results: any) {
     this.standsForSaleData = new Array<GetStandsForSaleReponse.Stands>();
     results?.forEach(standItem => {

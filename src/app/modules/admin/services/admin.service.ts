@@ -12,6 +12,7 @@ import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue
 import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
 import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-request.model';
 import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
+import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -345,27 +346,6 @@ export class AdminService {
       });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   public getInterestedInStandData() {
     return fetch(Endpoints.BaseURL + Endpoints.GetInterestedInStandData, {
       method: 'get',
@@ -406,4 +386,46 @@ export class AdminService {
       });
   }
 
+  public getLeviesData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetLeviesData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public addLieviesItem(leviesItem: GetLeviesResponse.Levie) {
+    return fetch(Endpoints.BaseURL + Endpoints.AddLeviItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: leviesItem })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public updateLieviesItem(levieItems: GetLeviesResponse.Levie) {
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateLeviesData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: levieItems })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteLieviesItem(id: number) {
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteLevieItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: { id: id } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 }

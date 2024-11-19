@@ -11,6 +11,7 @@ import { ManageHangersForSaleComponent } from './components/manage-hangers-for-s
 import { ManageStandsForSaleComponent } from './components/manage-stands-for-sale/manage-stands-for-sale.component';
 import { ManageHangersForSaleInterestComponent } from './components/manage-hangers-for-sale-interest/manage-hangers-for-sale-interest.component';
 import { ManageStandsForSaleInterestComponent } from './components/manage-stands-for-sale-interest/manage-stands-for-sale-interest.component';
+import { ManageLeviesComponent } from './components/manage-levies/manage-levies.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ManageStandsForSaleInterestComponent } from './components/manage-stands
     ManageHangersForSaleComponent,
     ManageStandsForSaleComponent,
     ManageHangersForSaleInterestComponent,
-    ManageStandsForSaleInterestComponent
+    ManageStandsForSaleInterestComponent,
+    ManageLeviesComponent
   ]
 })
 export class AdminModule { }

@@ -182,4 +182,20 @@ export class AppHelperFunction {
 
     }
 
+    public static inputBoxSeparatorWithoutDecimals(value: string, formControl?: any) {
+        // Make sure the value comming through is a string
+        value = value.toString();
+
+        let formattedValue = this.removeNonNumericCharacters(value);
+
+        formattedValue = this.thousandSeporatorWithComma(formattedValue);
+
+        if (formControl) {
+            // Update the value on the form
+            formControl.setValue(value);
+        } else {
+            return formattedValue;
+        }
+    }
+
 }

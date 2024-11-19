@@ -41,19 +41,16 @@ export enum AppRoutes {
     ManageHangersForSale = '/admin/manage-hangers-for-sale',
     ManageStandsForSale = '/admin/manage-stands-for-sale',
     ManageInterestInHangersForSale = '/admin/manage-interest-in-hanger-for-sale',
-    ManageInterestInStandsForSale = '/admin/manage-interest-in-stand-for-sale'
+    ManageInterestInStandsForSale = '/admin/manage-interest-in-stand-for-sale',
+    ManageLevies = '/admin/manage-levies'
 }
 
 export enum Endpoints {
     BaseURL = 'https://www.tedderfield.co.za/api',
-    // BaseURL = 'http://localhost/teddefield-airfield',
     HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
-
     HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
     StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
-
-    // GalleryImagesBaseURL = 'http://localhost/teddefield-airfield/gallery/images/',
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
@@ -72,16 +69,13 @@ export enum Endpoints {
     GetReportIssueData = '/report-issue/get-report-issue-data.php',
     MarkReportIssueAsFollowedUp = '/report-issue/update-report-issue-item.php',
     DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
-
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
     GetGreeningTedderfieldData = '/greening-tedderfield/get-greening-tedderfield-data.php',
     MarkGreeningTedderfieldAsFollowedUp = '/greening-tedderfield/update-greening-tedderfield-item.php',
     DeleteGreeningTedderfieldItem = '/greening-tedderfield/delete-greening-tedderfield-item.php',
-
     GetHomePageBanner = '/home/get-home-page-banner.php',
     DeleteHomePageBanner = '/home/delete-home-page-banner.php',
     AddNewHomeScreenBanner = '/home/add-home-page-banner.php',
-
     GetHangersForSales = '/hangers-for-sale/get-hangers-for-sale.php',
     SubmitSellMyHanger = '/hangers-for-sale/submit-hanger-for-sale.php',
     UploadSellMyHangerTitleDocument = '/hangers-for-sale/upload-title-document.php',
@@ -91,11 +85,9 @@ export enum Endpoints {
     GetHangerFloorPlanDocument = '/hangers-for-sale/get-floor-plan-document.php',
     SubmitInterestedInHanger = '/hangers-for-sale/submit-interested-in-hanger.php',
     DeleteHangerForSaleItem = '/hangers-for-sale/delete-hanger-for-sale-item.php',
-    //
     GetInterestedInHangerData = '/hangers-for-sale/get-interested-in-hanger-data.php',
     MarkInterestedInHangerAsFollowedUp = '/hangers-for-sale/update-interested-in-hanger-item.php',
     DeleteInterestedInHangerItem = '/hangers-for-sale/delete-interested-in-hanger-item.php',
-
     GetStandsForSales = '/stands-for-sale/get-stands-for-sale.php',
     SubmitSellMyStand = '/stands-for-sale/submit-stand-for-sale.php',
     UploadSellMyStandTitleDocument = '/stands-for-sale/upload-title-document.php',
@@ -103,10 +95,15 @@ export enum Endpoints {
     GetStandTitleDocument = '/stands-for-sale/get-title-document.php',
     SubmitInterestedInStand = '/stands-for-sale/submit-interested-in-stand.php',
     DeleteStandForSaleItem = '/stands-for-sale/delete-stand-for-sale-item.php',
-    //
     GetInterestedInStandData = '/stands-for-sale/get-interested-in-stand-data.php',
     MarkInterestedInStandAsFollowedUp = '/stands-for-sale/update-interested-in-stand-item.php',
     DeleteInterestedInStandItem = '/stands-for-sale/delete-interested-in-stand-item.php',
+
+    // Levies
+    GetLeviesData = '/levies/get-levies.php',
+    AddLeviItem = '/levies/add-levie-item.php',
+    UpdateLeviesData = '/levies/update-levies.php',
+    DeleteLevieItem = '/levies/delete-levie-item.php'
 }
 
 export enum EncryptionKeys {
