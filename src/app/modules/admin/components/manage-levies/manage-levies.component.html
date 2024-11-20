@@ -22,33 +22,33 @@
 
       <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-12 px-0">
-          <mat-label>Levie Name</mat-label>
+          <mat-label>Levy Name</mat-label>
           <input style="color: black;" matInput required maxlength="100" [(ngModel)]="levieItem.levieName">
-          <mat-error *ngIf="!levieItem.levieName">Levie Name is required</mat-error>
+          <mat-error *ngIf="!levieItem.levieName">Levy Name is required</mat-error>
         </mat-form-field>
       </div>
 
       <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-12 px-0">
-          <mat-label>Levie Price</mat-label>
+          <mat-label>Levy Price</mat-label>
           <div class="d-flex">
             <span *ngIf="levieItem.leviePrice" class="currency-input-prefix">ZAR</span>
             <input style="color: black;" (input)="numberControlInput(levieItem.id, levieItem.leviePrice)" matInput
               required maxlength="20" [(ngModel)]="levieItem.leviePrice">
           </div>
-          <mat-error *ngIf="!levieItem.leviePrice">Levie Name is required</mat-error>
+          <mat-error *ngIf="!levieItem.leviePrice">Levy Name is required</mat-error>
         </mat-form-field>
       </div>
 
       <div class="row mx-0 justify-content-center mt-2">
         <div class="col-12 px-0">
-          <mat-label>Levie Frequency</mat-label>
+          <mat-label>Levy Frequency</mat-label>
           <mat-radio-group [(ngModel)]="levieItem.levieFrequency">
             <mat-radio-button class="row mx-0" value='week'>Weekly</mat-radio-button>
             <mat-radio-button class="row mx-0" value='month'>Monthly</mat-radio-button>
             <mat-radio-button class="row mx-0" value='year'>Yearly</mat-radio-button>
           </mat-radio-group>
-          <mat-error *ngIf="!levieItem.levieFrequency">Levie Frequency is required</mat-error>
+          <mat-error *ngIf="!levieItem.levieFrequency">Levy Frequency is required</mat-error>
         </div>
       </div>
 
@@ -79,40 +79,40 @@
 
   <div class="pt-3">
     <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto levie-item-background p-3">
-      <p class="text-bold text-size-20 text-center">Add new Levies Item</p>
+      <p class="text-bold text-size-20 text-center">Add new Levy Item</p>
 
       <p><b>Display value:</b> {{ newLevieItem.levieName || 'NAME' }} ZAR{{ newLevieItem.leviePrice || '0' }} per {{
         newLevieItem.levieFrequency || 'FREQUENCY'}}</p>
 
       <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-12 px-0">
-          <mat-label>Levie Name</mat-label>
+          <mat-label>Levy Name</mat-label>
           <input style="color: black;" matInput required maxlength="100" [(ngModel)]="newLevieItem.levieName">
-          <mat-error *ngIf="!newLevieItem.levieName">Levie Name is required</mat-error>
+          <mat-error *ngIf="!newLevieItem.levieName">Levy Name is required</mat-error>
         </mat-form-field>
       </div>
 
       <div class="row mx-0 justify-content-center mt-2">
         <mat-form-field class="col-12 px-0">
-          <mat-label>Levie Price</mat-label>
+          <mat-label>Levy Price</mat-label>
           <div class="d-flex">
             <span *ngIf="newLevieItem.leviePrice" class="currency-input-prefix">ZAR</span>
             <input style="color: black;" (input)="newLevieNumberControlInput(newLevieItem.leviePrice)" matInput required
               maxlength="20" [(ngModel)]="newLevieItem.leviePrice">
           </div>
-          <mat-error *ngIf="!newLevieItem.leviePrice">Levie Name is required</mat-error>
+          <mat-error *ngIf="!newLevieItem.leviePrice">Levy Name is required</mat-error>
         </mat-form-field>
       </div>
 
       <div class="row mx-0 justify-content-center mt-2">
         <div class="col-12 px-0">
-          <mat-label>Levie Frequency</mat-label>
+          <mat-label>Levy Frequency</mat-label>
           <mat-radio-group [(ngModel)]="newLevieItem.levieFrequency">
             <mat-radio-button class="row mx-0" value='week'>Weekly</mat-radio-button>
             <mat-radio-button class="row mx-0" value='month'>Monthly</mat-radio-button>
             <mat-radio-button class="row mx-0" value='year'>Yearly</mat-radio-button>
           </mat-radio-group>
-          <mat-error *ngIf="!newLevieItem.levieFrequency">Levie Frequency is required</mat-error>
+          <mat-error *ngIf="!newLevieItem.levieFrequency">Levy Frequency is required</mat-error>
         </div>
       </div>
 

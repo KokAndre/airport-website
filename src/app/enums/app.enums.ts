@@ -32,6 +32,7 @@ export enum AppRoutes {
     GreeningTedderfield = '/members/greening-tedderfield',
     SellMyHanger = '/members/sell-my-hanger',
     SellMyStand = '/members/sell-my-stand',
+    YourTrusteed = '/members/your-trustees',
 
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
