@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalTypes } from 'src/app/enums/app.enums';
+import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
 @Component({
   selector: 'app-sell-my-stand',
@@ -20,6 +21,7 @@ export class SellMyStandComponent implements OnInit {
   public submitStandForSaleRequestData: SellMyStandRequest.RootObject;
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
+  public leviesData = new Array<GetLeviesResponse.Levie>();
 
   constructor(public formBuilder: FormBuilder,
     public loginService: LoginService,
@@ -28,12 +30,38 @@ export class SellMyStandComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
+    this.getLeviesData();
     this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
     this.initializeFormControls();
   }
 
   public getUserData() {
     this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+  }
+
+  public getLeviesData() {
+    this.membersService.getLeviesData().then(results => {
+      if (results.status === 200) {
+        this.leviesData = results.levies;
+        this.leviesData?.forEach(levie => {
+          // levie.isForHangars = levie.isForHangars === '1' ? true : false;
+          levie.isSelected = false;
+        });
+      } else {
+        // Add one levie by default:
+        const defaultLevieToAdd = new GetLeviesResponse.Levie();
+        defaultLevieToAdd.levieName = 'Security Levy';
+        defaultLevieToAdd.leviePrice = '110'
+        defaultLevieToAdd.levieFrequency = 'month'
+        defaultLevieToAdd.isForHangars = '1';
+        defaultLevieToAdd.isForStands = '1';
+        defaultLevieToAdd.isSelected = false;
+        defaultLevieToAdd.id = 1
+
+        this.leviesData = new Array<GetLeviesResponse.Levie>();
+        this.leviesData.push(defaultLevieToAdd);
+      }
+    });
   }
 
   public initializeFormControls() {
@@ -47,10 +75,10 @@ export class SellMyStandComponent implements OnInit {
       // standFeaturesAndBenefitsControl: new FormControl(''),
       standSecurityControl: new FormControl('', [Validators.required]),
       askingPriceControl: new FormControl('', [Validators.required]),
-      pilotLevyCheckboxControl: new FormControl(''),
-      sectionLevyCheckboxControl: new FormControl(''),
-      securityLevyCheckboxControl: new FormControl(''),
-      voluntaryUseLevyCheckboxControl: new FormControl(''),
+      // pilotLevyCheckboxControl: new FormControl(''),
+      // sectionLevyCheckboxControl: new FormControl(''),
+      // securityLevyCheckboxControl: new FormControl(''),
+      // voluntaryUseLevyCheckboxControl: new FormControl(''),
       reasonForSellingControl: new FormControl('', [Validators.required]),
     });
 
@@ -186,6 +214,19 @@ export class SellMyStandComponent implements OnInit {
     return arrayOfInputValue;
   }
 
+  public isSubmitDisabled() {
+    if (this.sellMyStandFormGroup.invalid || !this.submitStandForSaleRequestData.standImages?.length) {
+      return true;
+    }
+
+    const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
+    if (!isLeviesItemSelected?.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public submitClicked() {
     this.submitAdSucessId = 0;
     if (!this.submitStandForSaleRequestData) {
@@ -208,18 +249,25 @@ export class SellMyStandComponent implements OnInit {
 
     this.submitStandForSaleRequestData.leviesApplicable = new Array<string>();
 
-    if (this.pilotLevyCheckboxControl.value) {
-      this.submitStandForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
-    }
-    if (this.sectionLevyCheckboxControl.value) {
-      this.submitStandForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
-    }
-    if (this.securityLevyCheckboxControl.value) {
-      this.submitStandForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
-    }
-    if (this.voluntaryUseLevyCheckboxControl.value) {
-      this.submitStandForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
-    }
+    
+    this.leviesData.forEach(levieItem => {
+      if (levieItem.isSelected) {
+        const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
+        this.submitStandForSaleRequestData.leviesApplicable.push(levieItemToPush);
+      }
+    });
+    // if (this.pilotLevyCheckboxControl.value) {
+    //   this.submitStandForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
+    // }
+    // if (this.sectionLevyCheckboxControl.value) {
+    //   this.submitStandForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
+    // }
+    // if (this.securityLevyCheckboxControl.value) {
+    //   this.submitStandForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
+    // }
+    // if (this.voluntaryUseLevyCheckboxControl.value) {
+    //   this.submitStandForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
+    // }
 
 
     console.log('DATA TO SUBMIT: ', this.submitStandForSaleRequestData);
@@ -301,18 +349,18 @@ export class SellMyStandComponent implements OnInit {
   public get askingPriceControl() {
     return this.sellMyStandFormGroup.get('askingPriceControl');
   }
-  public get pilotLevyCheckboxControl() {
-    return this.sellMyStandFormGroup.get('pilotLevyCheckboxControl');
-  }
-  public get sectionLevyCheckboxControl() {
-    return this.sellMyStandFormGroup.get('sectionLevyCheckboxControl');
-  }
-  public get securityLevyCheckboxControl() {
-    return this.sellMyStandFormGroup.get('securityLevyCheckboxControl');
-  }
-  public get voluntaryUseLevyCheckboxControl() {
-    return this.sellMyStandFormGroup.get('voluntaryUseLevyCheckboxControl');
-  }
+  // public get pilotLevyCheckboxControl() {
+  //   return this.sellMyStandFormGroup.get('pilotLevyCheckboxControl');
+  // }
+  // public get sectionLevyCheckboxControl() {
+  //   return this.sellMyStandFormGroup.get('sectionLevyCheckboxControl');
+  // }
+  // public get securityLevyCheckboxControl() {
+  //   return this.sellMyStandFormGroup.get('securityLevyCheckboxControl');
+  // }
+  // public get voluntaryUseLevyCheckboxControl() {
+  //   return this.sellMyStandFormGroup.get('voluntaryUseLevyCheckboxControl');
+  // }
   public get reasonForSellingControl() {
     return this.sellMyStandFormGroup.get('reasonForSellingControl');
   }

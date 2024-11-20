@@ -415,10 +415,14 @@ export class AdminService {
       });
   }
 
-  public addLieviesItem(leviesItem: GetLeviesResponse.Levie) {
+  public addLieviesItem(levieItems: GetLeviesResponse.Levie) {
+    const levieItemRequestData = JSON.parse(JSON.stringify(levieItems));
+    levieItemRequestData.userId = this.loginService.getLoggedInUserId();
+    levieItemRequestData.isForHangars = levieItemRequestData.isForHangars ? '1' : '0';
+    levieItemRequestData.isForStands = levieItemRequestData.isForStands ? '1' : '0';
     return fetch(Endpoints.BaseURL + Endpoints.AddLeviItem, {
       method: 'post',
-      body: JSON.stringify({ requestData: leviesItem })
+      body: JSON.stringify({ requestData: levieItemRequestData })
     })
       .then(response => response.json())
       .then(data => {
@@ -427,9 +431,13 @@ export class AdminService {
   }
 
   public updateLieviesItem(levieItems: GetLeviesResponse.Levie) {
+    const levieItemRequestData = JSON.parse(JSON.stringify(levieItems));
+    levieItemRequestData.userId = this.loginService.getLoggedInUserId();
+    levieItemRequestData.isForHangars = levieItemRequestData.isForHangars ? '1' : '0';
+    levieItemRequestData.isForStands = levieItemRequestData.isForStands ? '1' : '0';
     return fetch(Endpoints.BaseURL + Endpoints.UpdateLeviesData, {
       method: 'post',
-      body: JSON.stringify({ requestData: levieItems })
+      body: JSON.stringify({ requestData: levieItemRequestData })
     })
       .then(response => response.json())
       .then(data => {
@@ -438,9 +446,10 @@ export class AdminService {
   }
 
   public deleteLieviesItem(id: number) {
+    const userId = this.loginService.getLoggedInUserId();
     return fetch(Endpoints.BaseURL + Endpoints.DeleteLevieItem, {
       method: 'post',
-      body: JSON.stringify({ requestData: { id: id } })
+      body: JSON.stringify({ requestData: { id: id, userId: userId } })
     })
       .then(response => response.json())
       .then(data => {

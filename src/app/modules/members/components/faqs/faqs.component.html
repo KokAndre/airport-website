@@ -26,53 +26,53 @@
 <app-arrow-divider class="pointer" (click)="togglePannel(0)" [isLightToDark]="true"></app-arrow-divider>
 
 <!-- <mat-accordion> -->
-  <div *ngFor="let section of faqSections; let first = first let last = last; let index = index"
-    [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
+<div *ngFor="let section of faqSections; let first = first let last = last; let index = index"
+  [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
 
 
-    <div class="col-10 mx-auto pb-4">
+  <div class="col-10 mx-auto pb-4">
 
-      <mat-expansion-panel hideToggle [expanded]="section.isSectionExpanded" class="page-section-expansion-pannel">
-        <mat-expansion-panel-header>
-          <p class="text-size-24 mb-3" [innerHTML]="section.sectionTitle"></p>
-        </mat-expansion-panel-header>
-
-
+    <mat-expansion-panel hideToggle [expanded]="section.isSectionExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3" [innerHTML]="section.sectionTitle"></p>
+      </mat-expansion-panel-header>
 
 
 
-        <!-- <p class="text-size-24 mb-3" [innerHTML]="section.sectionTitle"></p> -->
-        <!-- <p class="" *ngFor="let paragraph of section.paragraphs" [innerHTML]="paragraph"></p> -->
 
-        <mat-accordion>
 
-        <div *ngFor="let question of section.questions" class="pb-3">
+      <!-- <p class="text-size-24 mb-3" [innerHTML]="section.sectionTitle"></p> -->
+      <!-- <p class="" *ngFor="let paragraph of section.paragraphs" [innerHTML]="paragraph"></p> -->
 
-          <mat-expansion-panel hideToggle [expanded]="question.isPanelExpanded" (opened)="question.isPanelExpanded= true"
-            (closed)="question.isPanelExpanded= false" class="px-3"
-            [ngClass]="{'dark-expansion-pannel': ((index + 1) % 2 ? false : true)}">
-            <mat-expansion-panel-header class="px-3">
-              <div class="row expansion-panel-header-row">
-                <div class="col-11 my-auto">
-                  <p class="mb-0 text-size-20">{{ question.questionTitle }}</p>
-                </div>
-                <div class="col-1 px-0 text-end">
-                  <mat-icon [ngClass]="{'rotate-expansion-panel-icon': question.isPanelExpanded}"
-                    class="expansion-panel-icon" aria-hidden="false" fontIcon="expand_more"></mat-icon>
-                </div>
+      <!-- <mat-accordion> -->
+
+      <div *ngFor="let question of section.questions" class="pb-3">
+
+        <mat-expansion-panel hideToggle [expanded]="question.isPanelExpanded" (opened)="question.isPanelExpanded= true"
+          (closed)="question.isPanelExpanded= false" class="px-3"
+          [ngClass]="{'dark-expansion-pannel': ((index + 1) % 2 ? false : true)}">
+          <mat-expansion-panel-header class="px-3">
+            <div class="row expansion-panel-header-row">
+              <div class="col-11 my-auto">
+                <p class="mb-0 text-size-20">{{ question.questionTitle }}</p>
               </div>
-            </mat-expansion-panel-header>
-            <p class="text-size-16 mb-3">{{ question.questionAnswer }}</p>
-          </mat-expansion-panel>
+              <div class="col-1 px-0 text-end">
+                <mat-icon [ngClass]="{'rotate-expansion-panel-icon': question.isPanelExpanded}"
+                  class="expansion-panel-icon" aria-hidden="false" fontIcon="expand_more"></mat-icon>
+              </div>
+            </div>
+          </mat-expansion-panel-header>
+          <p class="text-size-16 mb-3">{{ question.questionAnswer }}</p>
+        </mat-expansion-panel>
 
-        </div>
-      </mat-accordion>
+      </div>
+      <!-- </mat-accordion> -->
 
-      </mat-expansion-panel>
-    </div>
-
-    <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)"
-      *ngIf="!last" [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
-
+    </mat-expansion-panel>
   </div>
+
+  <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+    [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+
+</div>
 <!-- </mat-accordion> -->

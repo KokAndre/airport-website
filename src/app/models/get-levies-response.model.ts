@@ -11,7 +11,9 @@ export namespace GetLeviesResponse {
         levieName: string;
         leviePrice: string;
         levieFrequency: string;
-        isForHangars: boolean;
-        isForStands: boolean;
+        isForHangars: any;
+        isForStands: any;
+        userId: string;
+        isSelected: boolean;
     }
 }

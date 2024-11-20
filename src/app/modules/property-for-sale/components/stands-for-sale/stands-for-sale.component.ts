@@ -69,7 +69,6 @@ export class StandsForSaleComponent implements OnInit {
       this.standsForSaleData.push(itemToPush);
     });
 
-    console.log('FORMATTED DATA: ', this.standsForSaleData);
   }
 
   public togglePannel(indexToToggle: number) {
@@ -78,7 +77,6 @@ export class StandsForSaleComponent implements OnInit {
 
   public viewStandDetails(standItemId: number) {
     this.standDetailsToDisplay = this.standsForSaleData.find(x => x.id === standItemId);
-    console.log("Stand to dislay: ", this.standDetailsToDisplay);
     if (this.standDetailsToDisplay) {
       document.getElementById('content-container').scroll({
         top: 0,
@@ -108,10 +106,7 @@ export class StandsForSaleComponent implements OnInit {
   }
 
   public submitInterestedInBuyingStand(modalOutcome: string, requestData: SubmitInterestedInPropertyRequest) {
-    console.log('REQUEST DATA: ', requestData);
-    console.log('MODAL OUTCOME: ', modalOutcome)
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
-      console.log('REQUEST DATA 2: ', requestData);
       requestData.propertyId = this.standDetailsToDisplay.id;
       this.propertyForSaleService.submitInterestedInStandData(requestData).then((results: any) => {
         // if (results.status === 200 && results.documentData) {

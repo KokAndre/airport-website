@@ -38,8 +38,18 @@ export class MembersService {
   public submitSellMyHanger(sellMyHangerRequestData: SellMyHangerRequest.RootObject) {
     // Remove files to ensure request is not to big.
     const requestData = JSON.parse(JSON.stringify(sellMyHangerRequestData))
-    requestData.titleDocument.fileData = '';
-    requestData.detailedFloorPlan.fileData = '';
+    if (requestData.titleDocument){
+      requestData.titleDocument.fileData = '';
+    } else {
+      requestData.titleDocument = new SellMyHangerRequest.FileData
+    }
+
+    if (requestData.detailedFloorPlan){
+      requestData.detailedFloorPlan.fileData = '';
+    } else {
+      requestData.detailedFloorPlan = new SellMyHangerRequest.FileData
+    }
+
     requestData.hangerImages.forEach(x => {
       x.fileData = '';
     });
@@ -152,5 +162,14 @@ export class MembersService {
       });
   }
 
+  public getLeviesData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetLeviesData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 
 }

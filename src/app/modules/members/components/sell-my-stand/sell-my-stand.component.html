@@ -162,7 +162,7 @@
         <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">Levies Applicable: [Tick all applicable items]</P>
-            <mat-checkbox class="col-12 px-0" formControlName="pilotLevyCheckboxControl">Pilot Levy ZAR770 per
+            <!-- <mat-checkbox class="col-12 px-0" formControlName="pilotLevyCheckboxControl">Pilot Levy ZAR770 per
               month</mat-checkbox>
             <mat-checkbox class="col-12 px-0" formControlName="sectionLevyCheckboxControl">Section Levy ZAR1075 per
               month</mat-checkbox>
@@ -170,7 +170,10 @@
               month</mat-checkbox>
             <mat-checkbox class="col-12 px-0" formControlName="voluntaryUseLevyCheckboxControl">Voluntary Use Levy
               ZAR1000 per
-              month</mat-checkbox>
+              month</mat-checkbox> -->
+              <div *ngFor="let levieItem of leviesData">
+                <mat-checkbox *ngIf="levieItem.isForStands === '1'" class="col-12 px-0" [checked]="levieItem.isSelected" (change)="levieItem.isSelected = $event.checked">{{ levieItem.levieName }} ZAR{{ levieItem.leviePrice }} per {{ levieItem.levieFrequency}}</mat-checkbox>
+              </div>
           </div>
         </div>
 
@@ -213,7 +216,7 @@
 
         <div class="row mx-0 justify-content-center">
           <div class="red-button mb-4"
-            [ngClass]="{'disable-user-click': sellMyStandFormGroup.invalid || !submitStandForSaleRequestData.standImages?.length}"
+            [ngClass]="{'disable-user-click': isSubmitDisabled()}"
             (click)="submitClicked()">
             <p class="mb-0">Submit</p>
             <span class="red-button-icon"></span>

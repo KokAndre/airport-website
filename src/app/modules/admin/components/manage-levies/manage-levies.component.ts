@@ -13,6 +13,7 @@ import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 export class ManageLeviesComponent implements OnInit {
   public leviesOriginalData = new Array<GetLeviesResponse.Levie>();
   public leviesData = new Array<GetLeviesResponse.Levie>();
+  public newLevieItem = new GetLeviesResponse.Levie();
 
   constructor(public adminService: AdminService, public appModalService: AppModalService) { }
 
@@ -23,7 +24,6 @@ export class ManageLeviesComponent implements OnInit {
   public getLeviesData() {
     this.adminService.getLeviesData().then(results => {
       if (results.status === 200) {
-        console.log('LEVIES DATA: ', this.leviesData);
         this.setLeviesData(results.levies);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Levies Data', results.message, null);
@@ -32,6 +32,8 @@ export class ManageLeviesComponent implements OnInit {
   }
 
   public setLeviesData(leviesResponseData: any) {
+    this.newLevieItem = new GetLeviesResponse.Levie();
+
     this.leviesOriginalData = new Array<GetLeviesResponse.Levie>();
     this.leviesData = new Array<GetLeviesResponse.Levie>();
 
@@ -44,7 +46,7 @@ export class ManageLeviesComponent implements OnInit {
       itemToPush.isForHangars = item.isForHangars === '1' ? true : false;
       itemToPush.isForStands = item.isForStands === '1' ? true : false;
 
-      this.leviesOriginalData.push(itemToPush);
+      this.leviesOriginalData.push(JSON.parse(JSON.stringify(itemToPush)));
       this.leviesData.push(itemToPush);
     });
   }
@@ -54,30 +56,39 @@ export class ManageLeviesComponent implements OnInit {
     this.leviesData.find(x => x.id === levieItemId).leviePrice = valueToSet;
   }
 
+  public newLevieNumberControlInput(leviePrice: string) {
+    const valueToSet = AppHelperFunction.inputBoxSeparatorWithoutDecimals(leviePrice);
+    this.newLevieItem.leviePrice = valueToSet;
+  }
+
   public isLevieUpdateButtonDisabled(levieItem: GetLeviesResponse.Levie) {
     if (!levieItem.levieName || !levieItem.leviePrice || !levieItem.levieFrequency || (!levieItem.isForHangars && !levieItem.isForStands)) {
       return true;
     }
 
-    const originalLevieItem = this.leviesOriginalData.find(x => x.id === levieItem.id);
-    let hasItemChanged = false;
-    if (levieItem.levieName !== originalLevieItem.levieName) {
-      hasItemChanged = true;
-    }
-    if (levieItem.leviePrice !== originalLevieItem.leviePrice) {
-      hasItemChanged = true;
-    }
-    if (levieItem.levieFrequency !== originalLevieItem.levieFrequency) {
-      hasItemChanged = true;
-    }
-    if (levieItem.isForHangars !== originalLevieItem.isForHangars) {
-      hasItemChanged = true;
-    }
-    if (levieItem.isForStands !== originalLevieItem.isForStands) {
-      hasItemChanged = true;
-    }
+    if (levieItem.id) {
+      const originalLevieItem = this.leviesOriginalData.find(x => x.id === levieItem.id);
+      let hasItemChanged = false;
+      if (levieItem.levieName !== originalLevieItem.levieName) {
+        hasItemChanged = true;
+      }
+      if (levieItem.leviePrice !== originalLevieItem.leviePrice) {
+        hasItemChanged = true;
+      }
+      if (levieItem.levieFrequency !== originalLevieItem.levieFrequency) {
+        hasItemChanged = true;
+      }
+      if (levieItem.isForHangars !== originalLevieItem.isForHangars) {
+        hasItemChanged = true;
+      }
+      if (levieItem.isForStands !== originalLevieItem.isForStands) {
+        hasItemChanged = true;
+      }
 
-    return !hasItemChanged;
+      return !hasItemChanged;
+    } else {
+      return false;
+    }
   }
 
   public deleteLevieClicked(levieId: number) {
@@ -86,6 +97,7 @@ export class ManageLeviesComponent implements OnInit {
 
   public deleteLevie(levieId: number, modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      console.log('LEVIE ID: ', levieId);
       this.adminService.deleteLieviesItem(levieId).then(results => {
         if (results.status === 200) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete levie item', results.message, null);
@@ -108,5 +120,25 @@ export class ManageLeviesComponent implements OnInit {
     });
   }
 
+  public cancelClicked() {
+    this.newLevieItem = new GetLeviesResponse.Levie();
+  }
+
+  public addNewLevieItemClicked() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Add levie item', `Are you sure you want to add the following levie item: <br> ${this.newLevieItem.levieName} ZAR${this.newLevieItem.leviePrice} per ${this.newLevieItem.levieFrequency}`, null, this.addNewLevieItem.bind(this));
+  }
+
+  public addNewLevieItem(modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.adminService.addLieviesItem(this.newLevieItem).then(results => {
+        if (results.status === 200) {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add levie item', results.message, null);
+          this.getLeviesData();
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add levie item', results.message, null);
+        }
+      });
+    }
+  }
 
 }

@@ -67,7 +67,6 @@ export class LoginService {
       .then(response => response.json())
       .then(data => {
         if (data.status === 200) {
-          console.log('USER DATA FOR LoGIN TOKEN: ', data.data);
           const tokenToStore = new LoginToken();
           tokenToStore.name = data.data.name;
           tokenToStore.surname = data.data.surname;

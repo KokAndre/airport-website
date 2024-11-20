@@ -51,6 +51,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
           dateTime: moment(new Date()).format('YYYY-MM-DD - HH:mm:ss:SSS')
         };
         this.gtmService.pushTag(gtmTag);
+
+        // Always scroll every page to the top
+        document.getElementById('content-container').scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'auto'
+   });
       }
     });
   }

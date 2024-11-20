@@ -14,68 +14,132 @@
 
 <div class="col-12 col-sm-12 col-md 12 col-lg-12 pb-3 dark-background">
 
-  <div class="pt-3"*ngFor="let levieItem of leviesData">
-<div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto levie-item-background p-3">
-    <p><b>Display value:</b> {{ levieItem.levieName }} ZAR{{ levieItem.leviePrice }} per {{ levieItem.levieFrequency }}
-    </p>
+  <div class="pt-3" *ngFor="let levieItem of leviesData">
+    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto levie-item-background p-3">
+      <p><b>Display value:</b> {{ levieItem.levieName }} ZAR{{ levieItem.leviePrice }} per {{ levieItem.levieFrequency
+        }}
+      </p>
 
-    <div class="row mx-0 justify-content-center mt-2">
-      <mat-form-field class="col-12 px-0">
-        <mat-label>Levie Name</mat-label>
-        <input style="color: black;" matInput required maxlength="100" [(ngModel)]="levieItem.levieName">
-        <mat-error *ngIf="!levieItem.levieName">Levie Name is required</mat-error>
-      </mat-form-field>
-    </div>
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Levie Name</mat-label>
+          <input style="color: black;" matInput required maxlength="100" [(ngModel)]="levieItem.levieName">
+          <mat-error *ngIf="!levieItem.levieName">Levie Name is required</mat-error>
+        </mat-form-field>
+      </div>
 
-    <div class="row mx-0 justify-content-center mt-2">
-      <mat-form-field class="col-12 px-0">
-        <mat-label>Levie Price</mat-label>
-        <div class="d-flex">
-          <span *ngIf="levieItem.leviePrice" class="currency-input-prefix">ZAR</span>
-          <input style="color: black;"
-            (input)="numberControlInput(levieItem.id, levieItem.leviePrice)" matInput required
-            maxlength="20" [(ngModel)]="levieItem.leviePrice">
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Levie Price</mat-label>
+          <div class="d-flex">
+            <span *ngIf="levieItem.leviePrice" class="currency-input-prefix">ZAR</span>
+            <input style="color: black;" (input)="numberControlInput(levieItem.id, levieItem.leviePrice)" matInput
+              required maxlength="20" [(ngModel)]="levieItem.leviePrice">
+          </div>
+          <mat-error *ngIf="!levieItem.leviePrice">Levie Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <div class="col-12 px-0">
+          <mat-label>Levie Frequency</mat-label>
+          <mat-radio-group [(ngModel)]="levieItem.levieFrequency">
+            <mat-radio-button class="row mx-0" value='week'>Weekly</mat-radio-button>
+            <mat-radio-button class="row mx-0" value='month'>Monthly</mat-radio-button>
+            <mat-radio-button class="row mx-0" value='year'>Yearly</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="!levieItem.levieFrequency">Levie Frequency is required</mat-error>
         </div>
-        <mat-error *ngIf="!levieItem.leviePrice">Levie Name is required</mat-error>
-      </mat-form-field>
-    </div>
-    
-
-    <div class="row mx-0 justify-content-center mt-2">
-      <mat-form-field class="col-12 px-0">
-        <mat-label>Levie Frequency</mat-label>
-        <mat-select required [(ngModel)]="levieItem.levieFrequency">
-          <mat-option value='week'>Weekly</mat-option>
-          <mat-option value='month'>Monthly</mat-option>
-          <mat-option value='year'>Yearly</mat-option>
-        </mat-select>
-        <mat-error *ngIf="!levieItem.levieFrequency">Levie Frequency is required</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="row mx-0 justify-content-center mt-2">
-      <div class="col-12 px-0">
-        <mat-checkbox class="col-12 px-0" [(ngModel)]="levieItem.isForHangars">Is applicable for Hangars</mat-checkbox>
-        <mat-checkbox class="col-12 px-0" [(ngModel)]="levieItem.isForStands">Is applicable for Stands</mat-checkbox>
-      </div>
-    </div>
-
-    
-    <div class="row mx-0 justify-content-center mt-3 mb-4">
-      <div class="white-button mr-3" (click)="deleteLevieClicked(levieItem.id)">
-        <p class="mb-0">Delete</p>
-        <span class="white-button-icon"></span>
       </div>
 
-      <div class="red-button" [ngClass]="{'disable-user-click': isLevieUpdateButtonDisabled(levieItem)}"
-      (click)="updateLevieItemClicked(levieItem)">
-        <p class="mb-0">Update</p>
-        <span class="red-button-icon"></span>
+      <div class="row mx-0 justify-content-center mt-2">
+        <div class="col-12 px-0">
+          <mat-checkbox class="col-12 px-0" [(ngModel)]="levieItem.isForHangars">Is applicable for
+            Hangars</mat-checkbox>
+          <mat-checkbox class="col-12 px-0" [(ngModel)]="levieItem.isForStands">Is applicable for Stands</mat-checkbox>
+        </div>
       </div>
-    </div>
 
+
+      <div class="row mx-0 justify-content-center mt-3">
+        <div class="white-button mr-3" (click)="deleteLevieClicked(levieItem.id)">
+          <p class="mb-0">Delete</p>
+          <span class="white-button-icon"></span>
+        </div>
+
+        <div class="red-button" [ngClass]="{'disable-user-click': isLevieUpdateButtonDisabled(levieItem)}"
+          (click)="updateLevieItemClicked(levieItem)">
+          <p class="mb-0">Update</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <div class="pt-3">
+    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto levie-item-background p-3">
+      <p class="text-bold text-size-20 text-center">Add new Levies Item</p>
+
+      <p><b>Display value:</b> {{ newLevieItem.levieName || 'NAME' }} ZAR{{ newLevieItem.leviePrice || '0' }} per {{
+        newLevieItem.levieFrequency || 'FREQUENCY'}}</p>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Levie Name</mat-label>
+          <input style="color: black;" matInput required maxlength="100" [(ngModel)]="newLevieItem.levieName">
+          <mat-error *ngIf="!newLevieItem.levieName">Levie Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Levie Price</mat-label>
+          <div class="d-flex">
+            <span *ngIf="newLevieItem.leviePrice" class="currency-input-prefix">ZAR</span>
+            <input style="color: black;" (input)="newLevieNumberControlInput(newLevieItem.leviePrice)" matInput required
+              maxlength="20" [(ngModel)]="newLevieItem.leviePrice">
+          </div>
+          <mat-error *ngIf="!newLevieItem.leviePrice">Levie Name is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <div class="col-12 px-0">
+          <mat-label>Levie Frequency</mat-label>
+          <mat-radio-group [(ngModel)]="newLevieItem.levieFrequency">
+            <mat-radio-button class="row mx-0" value='week'>Weekly</mat-radio-button>
+            <mat-radio-button class="row mx-0" value='month'>Monthly</mat-radio-button>
+            <mat-radio-button class="row mx-0" value='year'>Yearly</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="!newLevieItem.levieFrequency">Levie Frequency is required</mat-error>
+        </div>
+      </div>
+
+      <div class="row mx-0 justify-content-center mt-2">
+        <div class="col-12 px-0">
+          <mat-checkbox class="col-12 px-0" [(ngModel)]="newLevieItem.isForHangars">Is applicable for
+            Hangars</mat-checkbox>
+          <mat-checkbox class="col-12 px-0" [(ngModel)]="newLevieItem.isForStands">Is applicable for
+            Stands</mat-checkbox>
+        </div>
+      </div>
+
+
+      <div class="row mx-0 justify-content-center mt-3">
+        <div class="white-button mr-3" (click)="cancelClicked()">
+          <p class="mb-0">Cancel</p>
+          <span class="white-button-icon"></span>
+        </div>
+
+        <div class="red-button" [ngClass]="{'disable-user-click': isLevieUpdateButtonDisabled(newLevieItem)}"
+          (click)="addNewLevieItemClicked()">
+          <p class="mb-0">Add</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+
+    </div>
   </div>
-  
 
 </div>

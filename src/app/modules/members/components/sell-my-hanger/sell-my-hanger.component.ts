@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalTypes } from 'src/app/enums/app.enums';
+import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
 @Component({
   selector: 'app-sell-my-hanger',
@@ -20,11 +21,13 @@ export class SellMyHangerComponent implements OnInit {
   public submitHangerForSaleRequestData: SellMyHangerRequest.RootObject;
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
+  public leviesData = new Array<GetLeviesResponse.Levie>();
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public membersService: MembersService, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.getUserData();
+    this.getLeviesData();
     this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
     this.initializeFormControls();
   }
@@ -33,6 +36,30 @@ export class SellMyHangerComponent implements OnInit {
     this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
   }
 
+  public getLeviesData() {
+    this.membersService.getLeviesData().then(results => {
+      if (results.status === 200) {
+        this.leviesData = results.levies;
+        this.leviesData?.forEach(levie => {
+          // levie.isForHangars = levie.isForHangars === '1' ? true : false;
+          levie.isSelected = false;
+        });
+      } else {
+        // Add one levie by default:
+        const defaultLevieToAdd = new GetLeviesResponse.Levie();
+        defaultLevieToAdd.levieName = 'Security Levy';
+        defaultLevieToAdd.leviePrice = '110'
+        defaultLevieToAdd.levieFrequency = 'month'
+        defaultLevieToAdd.isForHangars = '1';
+        defaultLevieToAdd.isForStands = '1';
+        defaultLevieToAdd.isSelected = false;
+        defaultLevieToAdd.id = 1
+
+        this.leviesData = new Array<GetLeviesResponse.Levie>();
+        this.leviesData.push(defaultLevieToAdd);
+      }
+    });
+  }
   public initializeFormControls() {
     this.sellMyHangerFormGroup = this.formBuilder.group({
       nameControl: new FormControl('', [Validators.required]),
@@ -52,10 +79,10 @@ export class SellMyHangerComponent implements OnInit {
       hangerSecurityControl: new FormControl('', [Validators.required]),
       hangerAdditionalInfrastucture: new FormControl(''),
       askingPriceControl: new FormControl('', [Validators.required]),
-      pilotLevyCheckboxControl: new FormControl(''),
-      sectionLevyCheckboxControl: new FormControl(''),
-      securityLevyCheckboxControl: new FormControl(''),
-      voluntaryUseLevyCheckboxControl: new FormControl(''),
+      // pilotLevyCheckboxControl: new FormControl(''),
+      // sectionLevyCheckboxControl: new FormControl(''),
+      // securityLevyCheckboxControl: new FormControl(''),
+      // voluntaryUseLevyCheckboxControl: new FormControl(''),
       reasonForSellingControl: new FormControl('', [Validators.required]),
     });
 
@@ -71,6 +98,11 @@ export class SellMyHangerComponent implements OnInit {
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
       this.emailControl.disable();
+    }
+
+    if (this.loggedInUserDetails?.phoneNumber) {
+      this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
+      this.phoneNumberControl.disable();
     }
   }
 
@@ -214,6 +246,19 @@ export class SellMyHangerComponent implements OnInit {
     return arrayOfInputValue;
   }
 
+  public isSubmitDisabled() {
+    if (this.sellMyHangerFormGroup.invalid || !this.submitHangerForSaleRequestData.hangerImages?.length) {
+      return true;
+    }
+
+    const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
+    if (!isLeviesItemSelected?.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public submitClicked() {
     this.submitAdSucessId = 0;
     if (!this.submitHangerForSaleRequestData) {
@@ -248,18 +293,25 @@ export class SellMyHangerComponent implements OnInit {
 
     this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
 
-    if (this.pilotLevyCheckboxControl.value) {
-      this.submitHangerForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
-    }
-    if (this.sectionLevyCheckboxControl.value) {
-      this.submitHangerForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
-    }
-    if (this.securityLevyCheckboxControl.value) {
-      this.submitHangerForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
-    }
-    if (this.voluntaryUseLevyCheckboxControl.value) {
-      this.submitHangerForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
-    }
+    this.leviesData.forEach(levieItem => {
+      if (levieItem.isSelected) {
+        const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
+        this.submitHangerForSaleRequestData.leviesApplicable.push(levieItemToPush);
+      }
+    });
+
+    // if (this.pilotLevyCheckboxControl.value) {
+    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
+    // }
+    // if (this.sectionLevyCheckboxControl.value) {
+    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
+    // }
+    // if (this.securityLevyCheckboxControl.value) {
+    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
+    // }
+    // if (this.voluntaryUseLevyCheckboxControl.value) {
+    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
+    // }
 
     this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
       if (results.status === 200) {
@@ -374,18 +426,18 @@ export class SellMyHangerComponent implements OnInit {
   public get askingPriceControl() {
     return this.sellMyHangerFormGroup.get('askingPriceControl');
   }
-  public get pilotLevyCheckboxControl() {
-    return this.sellMyHangerFormGroup.get('pilotLevyCheckboxControl');
-  }
-  public get sectionLevyCheckboxControl() {
-    return this.sellMyHangerFormGroup.get('sectionLevyCheckboxControl');
-  }
-  public get securityLevyCheckboxControl() {
-    return this.sellMyHangerFormGroup.get('securityLevyCheckboxControl');
-  }
-  public get voluntaryUseLevyCheckboxControl() {
-    return this.sellMyHangerFormGroup.get('voluntaryUseLevyCheckboxControl');
-  }
+  // public get pilotLevyCheckboxControl() {
+  //   return this.sellMyHangerFormGroup.get('pilotLevyCheckboxControl');
+  // }
+  // public get sectionLevyCheckboxControl() {
+  //   return this.sellMyHangerFormGroup.get('sectionLevyCheckboxControl');
+  // }
+  // public get securityLevyCheckboxControl() {
+  //   return this.sellMyHangerFormGroup.get('securityLevyCheckboxControl');
+  // }
+  // public get voluntaryUseLevyCheckboxControl() {
+  //   return this.sellMyHangerFormGroup.get('voluntaryUseLevyCheckboxControl');
+  // }
   public get reasonForSellingControl() {
     return this.sellMyHangerFormGroup.get('reasonForSellingControl');
   }

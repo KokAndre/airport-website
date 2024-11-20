@@ -80,8 +80,6 @@ export class HangarsForSaleComponent implements OnInit {
 
       this.hangersForSaleData.push(itemToPush);
     });
-
-    console.log('FORMATTED DATA: ', this.hangersForSaleData);
   }
 
   public togglePannel(indexToToggle: number) {
@@ -89,10 +87,8 @@ export class HangarsForSaleComponent implements OnInit {
   }
 
   public viewHangerDetails(hangerItemId: number) {
-    console.log('HANGER ID: ', hangerItemId);
     // this.hangerDetailsToDisplay = null;
     this.hangerDetailsToDisplay = this.hangersForSaleData.find(x => x.id === hangerItemId);
-    console.log("Hanger to dislay: ", this.hangerDetailsToDisplay);
     if (this.hangerDetailsToDisplay) {
       document.getElementById('content-container').scroll({ 
         top: 0, 
@@ -132,10 +128,7 @@ export class HangarsForSaleComponent implements OnInit {
   }
 
   public submitInterestedInBuyingHanger(modalOutcome: string, requestData: SubmitInterestedInPropertyRequest) {
-    console.log('REQUEST DATA: ', requestData);
-    console.log('MODAL OUTCOME: ', modalOutcome)
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
-      console.log('REQUEST DATA 2: ', requestData);
       requestData.propertyId = this.hangerDetailsToDisplay.id;
       this.propertyForSaleService.submitInterestedInHangerData(requestData).then((results: any) => {
         // if (results.status === 200 && results.documentData) {
