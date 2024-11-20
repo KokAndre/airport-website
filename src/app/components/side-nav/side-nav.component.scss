@@ -88,6 +88,16 @@
     color: white;
 }
 
+.instagram-icon {
+    background-image: url("../../../assets/instagram-icon.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+}
+
+
 .facebook-icon {
     background-image: url("../../../assets/facebook-icon.svg");
     background-repeat: no-repeat;
@@ -100,7 +110,7 @@
 .facebook-icon-size {
     width: 25px;
     height: 25px;
-    margin-right: 29px;
+    // margin-right: 29px;
 }
 
 .facebook-icon-size-small {
@@ -121,4 +131,9 @@
 
 .header-red-text {
     color: #bc2325;
+}
+
+.email-mobile-text {
+    display: ruby-text;
+    margin-top: 5px;
 }

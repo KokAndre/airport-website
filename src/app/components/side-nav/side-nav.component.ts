@@ -10,6 +10,7 @@ import { AppModalComponent } from '../app-modal/app-modal.component';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import * as moment from 'moment';
 import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
+import { GetHomePageBannerResponse } from 'src/app/models/get-home-page-banner-response.model';
 
 @Component({
   selector: 'app-side-nav',
@@ -27,19 +28,26 @@ export class SideNavComponent implements OnInit, OnDestroy {
   private resizeObserver: ResizeObserver;
   public isMobileView = false;
   public isFooterMobileView = false;
+  public displayFooterButtonBottomMargin = false;
+  public displaySocialMediaLogoBottomMargin = false;
+  public hasViewedBanner = false;
 
   constructor(public router: Router,
     public loginService: LoginService,
     public appModalService: AppModalService,
     private modalDialog: MatDialog,
     private gtmService: GoogleTagManagerService) {
-    SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
   }
 
   ngOnInit() {
     this.initializeIsLoggedInCheck();
     this.initializeModal();
     this.initializeScreenSizeCheck();
+
+    console.log('CURRENT ROUTE: ', this.router.url);
+    if (this.router.url?.includes('home')) {
+      this.getHomePageBanner();
+    }
 
     this.router.events.forEach(item => {
       if (item instanceof NavigationEnd) {
@@ -53,11 +61,16 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.gtmService.pushTag(gtmTag);
 
         // Always scroll every page to the top
-        document.getElementById('content-container').scroll({ 
-          top: 0, 
-          left: 0, 
+        document.getElementById('content-container').scroll({
+          top: 0,
+          left: 0,
           behavior: 'auto'
-   });
+        });
+
+        console.log('CURRENT ROUTE: ', this.router.url);
+        if (this.router.url?.includes('home')) {
+          this.getHomePageBanner();
+        }
       }
     });
   }
@@ -65,8 +78,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.checkIsAuthInterval = null;
     this.loginService.logoutUser();
-
-    SessionStorageHelper.removeItem(SessionStorageKeys.HasViewedBanner);
 
     if (this.modal$) {
       this.modal$.unsubscribe();
@@ -170,6 +181,19 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.isMobileView = false;
       }
 
+      if (widthToCheck < 748) {
+        this.displayFooterButtonBottomMargin = true;
+      } else {
+        this.displayFooterButtonBottomMargin = false;
+      }
+
+
+      if (widthToCheck < 377) {
+        this.displaySocialMediaLogoBottomMargin = true;
+      } else {
+        this.displaySocialMediaLogoBottomMargin = false;
+      }
+
       if (widthToCheck < 465) {
         this.isFooterMobileView = true;
       } else {
@@ -179,6 +203,19 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
     // Add a listener to body
     this.resizeObserver.observe(body);
+  }
+
+  public getHomePageBanner() {
+    if (!this.hasViewedBanner) {
+      this.loginService.getHomePageBanner().then((results: GetHomePageBannerResponse.RootObject) => {
+        if (results.status === 200 && results.documentData) {
+          const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
+          this.appModalService.ShowConfirmationModal(ModalTypes.BannerModal, results.documentData.name, urlForModal, null);
+          this.hasViewedBanner = true;
+        }
+      });
+    }
+
   }
 
   public displayTermsAndConditions() {

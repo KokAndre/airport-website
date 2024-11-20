@@ -26,7 +26,7 @@
 
   <!-- Footer -->
   <div class="footer-container align-content-center">
-    <div class="col-12 col-sm-12 col-md-10 col-lg-10 pr-0 pl-0 mx-auto" [ngClass]="{'pl-2': isMobileView}">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10 px-0 mx-auto" [ngClass]="{'px-2': isMobileView}">
       <div class="row mx-0" [ngClass]="{'py-2': !isFooterMobileView}">
         <div class="col-5 col-sm-5 col-md-6 col-lg-6 px-0 align-content-center">
 
@@ -50,13 +50,13 @@
               href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 white-text no-underline" href="mailto:info@tedderfield.co.za">Email:
+            <a class="text-size-12 white-text no-underline email-mobile-text" href="mailto:info@tedderfield.co.za">Email:
               info&#64;tedderfield.co.za</a>
           </p>
         </div>
-        <div class="col-6 col-sm-6 col-md-5 col-lg-5 p-0 " [ngClass]="{'pr-3': isMobileView, 'align-content-center': !isFooterMobileView}">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 p-0 " [ngClass]="{'pr-3': isMobileView, 'align-content-center': !isFooterMobileView}">
           <div class="row mx-0 justify-content-end" [ngClass]="{'mt-2': isFooterMobileView}">
-            <div class="red-button" [ngClass]="{'px-1 mb-2': isFooterMobileView}" (click)="openSearchAndRescue()">
+            <div class="red-button" [ngClass]="{'px-1 mb-2': isFooterMobileView, 'mb-1': displayFooterButtonBottomMargin}" (click)="openSearchAndRescue()">
               <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">Search & Rescue</p>
               <span
                 [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
@@ -70,12 +70,17 @@
             </div>
           </div>
         </div>
-        <div class="col-1 col-sm-1 col-md-1 col-lg-1 px-0 align-content-center">
+        <div class="col-2 col-sm-2 col-md-1 col-lg-1 px-0 align-content-center">
           <div class="row mx-0 justify-content-end">
-            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView}"
-              target="_blank" href="https://www.facebook.com/groups/1485616671675820/">
+            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mb-1': displaySocialMediaLogoBottomMargin}"
+              target="_blank" href="https://www.facebook.com/share/1H1dRfWEPY/?mibextid=LQQJ4d">
               <div class="facebook-icon"></div>
             </a>
+
+            <a class="p-0" [ngClass]="{'facebook-icon-size pl-2': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mt-1': displaySocialMediaLogoBottomMargin}"
+            target="_blank" href="https://www.instagram.com/tedderfieldairpark/profilecard/?igsh=cmt4dWNkYmozNW0w">
+            <div class="instagram-icon"></div>
+          </a>
           </div>
         </div>
       </div>

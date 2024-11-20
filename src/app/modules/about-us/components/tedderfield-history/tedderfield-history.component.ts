@@ -42,7 +42,7 @@ export class TedderfieldHistoryComponent implements OnInit {
     {
       heading: 'Sling Cycles',
       paragraphs: [
-        'Sling Aircraft has also diversified into Sling Cycles, producing high-quality cycles. The e-bikes reflect Sling\'s innovative spirit and its dedication to building products that, much like their aircraft, are built for adventure. Afterall the Wright brothers began their lives, also building bicycles.'
+        'Sling Aircraft has also diversified into Sling Cycles, producing high-quality cycles. The gravel bikes reflect Sling\'s innovative spirit and its dedication to building products that, much like their aircraft, are built for adventure. After all the Wright brothers began their lives, also building bicycles.'
       ],
       isExpanded: true
     },
@@ -52,14 +52,15 @@ export class TedderfieldHistoryComponent implements OnInit {
         'Tedderfield Airpark features a tarred runway (29/11 - 5164 feet) and a well maintained emergency grass runway (31/13 - 5135 feet) are suitable for various light aircraft.',
         'The clubhouse serves as a central hub for social events, management meetings, and aviation gatherings, bringing together our community of pilots for events that celebrate their shared passion for aviation.',
         'A major advantage of Tedderfield are the two boreholes, currently delivering over 750 000 litres per month whilst we also have 24/7 power supply, with a substantial diesel generator, ensuring no blackouts—more reliable than your morning coffee!',
-        'A full-time maintenance manager and administrative personnel live on-site, ensuring the airpark runs smoothly and efficiently on a daily basis. This commitment to operational excellence ensures that the airpark remains a well-maintained and desirable place to be parto of.'
+        'A full-time maintenance manager and administrative personnel live on-site, ensuring the airpark runs smoothly and efficiently on a daily basis. This commitment to operational excellence ensures that the airpark remains a well-maintained and desirable place to be part of.'
       ],
       isExpanded: true
     },
     {
       heading: 'Estates and Surrounding Area',
       paragraphs: [
-        'Tedderfield Airpark is surrounded by residential estates.'
+        'Tedderfield Airpark is surrounded by residential estates, farms, and small holdings. This setting gives the airfield a charming country atmosphere, contributing to its expansive "big sky" feel. We are a hop, skip and flip away from the Vaal and Parys, yet conveniently close to shopping centres and urban amenities.',
+        'Tedderfield falls under the Midvaal municipality, one of the few municipalities to have achieved a clean audit for ten consecutive years. In 2021, Ratings Afrika rated it the most financially sustainable municipality in the country and recently, the South African Local Government Association awarded Midvaal winning status for an unqualified audit, improved records and document management, effective consequence management (financial misconduct) and timely payment to service providers.'
       ],
       isExpanded: true
     },
@@ -96,8 +97,7 @@ export class TedderfieldHistoryComponent implements OnInit {
     {
       heading: 'Marketing and Community Engagement',
       paragraphs: [
-        'The airpark\'s marketing emphasises the fun, secure, and community-oriented lifestyle that it offers. Tedderfield is portrayed not just an airpark but a way of life where planes and pilots are',
-        'loved and cared for. The message is clear: “Come for the flying, stay for the humour and camaraderie amongst kindred spirits.”'
+        'The airpark\'s marketing emphasises the fun, secure, and community-oriented lifestyle that it offers. Tedderfield is portrayed not just an airpark but a way of life where planes and pilots are loved and cared for. The message is clear: “Come for the flying, stay for the humour and camaraderie amongst kindred spirits.”'
       ],
       isExpanded: true
     },

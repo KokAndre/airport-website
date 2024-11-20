@@ -15,7 +15,8 @@ enum DocumentsToDisplayEnum {
   NOTAMSNewTab = 'notamsnewTab',
   CircuitProcedures = 'circuitProcedures',
   JoiningAndLanding = 'joiningAndLanding',
-  DensityAltitude = 'densityAltitude'
+  DensityAltitude = 'densityAltitude',
+  TrackMeNewTab = 'trackMeNewTab'
 }
 
 @Component({
@@ -266,13 +267,13 @@ export class NavBarComponent implements OnInit {
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/Runway_Info_v1.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241014 -FATA Emergency Contacts - FATA -011.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241120-FATA_Emergency_Contacts.pdf', null);
         break;
       case DocumentsToDisplayEnum.SalesBrochure:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241114-Tedderfield_Sales_Brochure_v3.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241120-Tedderfield_Sales_Brochure_v2.pdf', null);
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/20241028-Flying_the_Circuit_at_Tedderfield_Airpark_Paramotors_V4.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Paramotor-V3-1-2.pdf', null);
         break;
       case DocumentsToDisplayEnum.GroundOperations:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/Ground_Operations.pdf', null);
@@ -288,6 +289,9 @@ export class NavBarComponent implements OnInit {
         break;
       case DocumentsToDisplayEnum.DensityAltitude:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Density Altitude', '../../../assets/documents/20241103-Density_Altitude_Poster_for_FATA.pdf', null);
+        break;
+      case DocumentsToDisplayEnum.TrackMeNewTab:
+        AppHelperFunction.openDocumentInNewTab('https://www.safelytrack.me/');
         break;
     }
 

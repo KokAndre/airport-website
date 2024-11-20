@@ -114,7 +114,7 @@ export enum EncryptionKeys {
 
 export enum SessionStorageKeys {
     Token = 'token',
-    HasViewedBanner = 'hasViewedBanner'
+    // HasViewedBanner = 'hasViewedBanner'
 }
 
 export enum LocalStorageKeys {

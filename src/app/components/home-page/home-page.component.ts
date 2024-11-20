@@ -14,24 +14,24 @@ export class HomePageComponent implements OnInit {
   public backgroundVideo: any;
 
   constructor(public loginService: LoginService, public modalService: AppModalService) {
-    const hasViewedBannerItem = SessionStorageHelper.getItem(SessionStorageKeys.HasViewedBanner);
+    // const hasViewedBannerItem = SessionStorageHelper.getItem(SessionStorageKeys.HasViewedBanner);
 
-    if (!hasViewedBannerItem) {
-      this.getHomePageBanner();
-    }
+    // if (!hasViewedBannerItem) {
+    //   this.getHomePageBanner();
+    // }
   }
 
   ngOnInit() {
   }
 
-  public getHomePageBanner() {
-    this.loginService.getHomePageBanner().then((results: GetHomePageBannerResponse.RootObject) => {
-      if (results.status === 200 && results.documentData) {
-        const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-        this.modalService.ShowConfirmationModal(ModalTypes.BannerModal, results.documentData.name, urlForModal, null);
-        SessionStorageHelper.storeItem(SessionStorageKeys.HasViewedBanner, 'true');
-      }
-    });
-  }
+  // public getHomePageBanner() {
+  //   this.loginService.getHomePageBanner().then((results: GetHomePageBannerResponse.RootObject) => {
+  //     if (results.status === 200 && results.documentData) {
+  //       const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
+  //       this.modalService.ShowConfirmationModal(ModalTypes.BannerModal, results.documentData.name, urlForModal, null);
+  //       SessionStorageHelper.storeItem(SessionStorageKeys.HasViewedBanner, 'true');
+  //     }
+  //   });
+  // }
 
 }
