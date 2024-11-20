@@ -44,7 +44,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.initializeModal();
     this.initializeScreenSizeCheck();
 
-    console.log('CURRENT ROUTE: ', this.router.url);
     if (this.router.url?.includes('home')) {
       this.getHomePageBanner();
     }
@@ -67,7 +66,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
           behavior: 'auto'
         });
 
-        console.log('CURRENT ROUTE: ', this.router.url);
         if (this.router.url?.includes('home')) {
           this.getHomePageBanner();
         }
@@ -89,7 +87,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   public setHeaderColour(event: any) {
-    // console.log('Scroll Event: ', event.srcElement.scrollTop);
 
     if (event?.srcElement?.scrollTop > 10) {
       this.displayHeaderAsSolid = true;

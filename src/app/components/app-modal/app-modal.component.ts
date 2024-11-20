@@ -50,7 +50,6 @@ export class AppModalComponent implements OnInit {
 
   public confirmGallerySectionChanges() {
     if (this.gallerySectionToEditData.title) {
-      console.log('TRYING TO DO CALLBACK!!')
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.gallerySectionToEditData);
     }
   }
@@ -69,7 +68,6 @@ export class AppModalComponent implements OnInit {
 
   public checkIfUserIsLoggedIn() {
     const userDetails = this.loginService.getLoggedInUserDetails(true);
-    console.log('USER DETAIL: ', userDetails);
     if (userDetails) {
       if (userDetails.name && userDetails.surname) {
         this.interestedInPropertyNameControl.setValue(`${userDetails.name} ${userDetails.surname}`);

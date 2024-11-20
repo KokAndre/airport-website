@@ -22,7 +22,6 @@ export class GreeningTedderfieldRequestsComponent implements OnInit {
     this.adminService.getGreeningTedderfieldData().then((results: GetGreeningTedderfieldDataResponse.RootObject) => {
       if (results.status === 200) {
         this.greeningTeddderfieldRequests = results.requests;
-        console.log('Follow Us data: ', this.greeningTeddderfieldRequests);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Greening Tedderfield Data', results.message, null);
       }

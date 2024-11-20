@@ -64,8 +64,6 @@ export class ManageStandsForSaleComponent implements OnInit {
 
       this.standsForSaleData.push(itemToPush);
     });
-
-    console.log('FORMATTED DATA: ', this.standsForSaleData);
   }
 
   public deleteStandForSaleClicked(standData: GetStandsForSaleReponse.Stands) {

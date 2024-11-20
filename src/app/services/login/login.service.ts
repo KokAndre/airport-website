@@ -76,7 +76,7 @@ export class LoginService {
           tokenToStore.isAdmin = data.data.isAdmin;
           tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
           tokenToStore.loginDateTime = new Date().toISOString();
-          tokenToStore.logoutDateTime = moment(new Date()).add(30, 'm').toISOString();
+          tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
 
           const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
 

@@ -97,7 +97,6 @@ export class ManageLeviesComponent implements OnInit {
 
   public deleteLevie(levieId: number, modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
-      console.log('LEVIE ID: ', levieId);
       this.adminService.deleteLieviesItem(levieId).then(results => {
         if (results.status === 200) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete levie item', results.message, null);

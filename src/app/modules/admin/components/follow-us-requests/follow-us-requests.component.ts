@@ -22,7 +22,6 @@ export class FollowUsRequestsComponent implements OnInit {
     this.adminService.getFollowUsData().then((results: GetFollowUsDataResponse.RootObject) => {
       if (results.status === 200) {
         this.followUsRequests = results.requests;
-        console.log('Follow Us data: ', this.followUsRequests);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Follow Us Data', results.message, null);
       }

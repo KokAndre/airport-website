@@ -24,7 +24,6 @@ export class ManageHangersForSaleComponent implements OnInit {
   public getHangerForSaleData() {
     this.propertyForSaleService.getHangerForSaleData().then(results => {
       if (results.status === 200) {
-        console.log('RESULTS: ', results);
         if (results.hangers) {
           this.formatData(results.hangers);
         }
@@ -77,8 +76,6 @@ export class ManageHangersForSaleComponent implements OnInit {
 
       this.hangersForSaleData.push(itemToPush);
     });
-
-    console.log('FORMATTED DATA: ', this.hangersForSaleData);
   }
 
   public deleteHangerForSaleClicked(hangerData: GetHangersForSaleReponse.Hanger) {

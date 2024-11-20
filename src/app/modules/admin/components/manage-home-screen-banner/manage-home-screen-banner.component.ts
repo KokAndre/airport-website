@@ -42,7 +42,6 @@ export class ManageHomeScreenBannerComponent implements OnInit {
   private deleteBannerModalOutcome(modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
       this.adminService.deleteHomeScreenBanner().then(results => {
-        console.log('RESULTS: ', results);
         if (results.status === 200) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Banner', results.message, null);
           this.getHomePageBanner();
@@ -99,7 +98,6 @@ export class ManageHomeScreenBannerComponent implements OnInit {
 
   public addNewBanner(documentName: string, documentData: any) {
     this.adminService.addHomeScreenBanner(documentName, documentData).then(results => {
-      console.log('RESULTS: ', results);
       if (results.status === 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Banner', results.message, null);
         this.getHomePageBanner();

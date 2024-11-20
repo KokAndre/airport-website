@@ -177,7 +177,6 @@ export class LoginComponent implements OnInit {
     requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
 
     this.loginService.registerNewUser(requestData).then(results => {
-      console.log('Register Results: ', results);
       if (results.status === 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Register', 'You have successfully registered.', null);
         this.navigateToMembersPoliciesPage();
@@ -192,10 +191,7 @@ export class LoginComponent implements OnInit {
     requestData.email = this.loginEmailControl?.value;
     requestData.password = AppHelperFunction.encryptPassword(this.loginPasswordControl?.value);
 
-    console.log('Request for Login: ', requestData);
-
     this.loginService.loginUser(requestData).then(results => {
-      console.log('Login Results: ', results);
       if (results.status === 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', 'You have successfully logged in.', null);
         this.navigateToMembersPoliciesPage();
