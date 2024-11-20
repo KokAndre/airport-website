@@ -1,3 +1,81 @@
-<p>
-  your-trustees works!
-</p>
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Your Trustees</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Your Trustees</span></p>
+  </div>
+</div>
+
+<app-arrow-divider class="pointer" (click)="togglePannel(0)" [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngFor="let trustee of trusteeData; let first = first let last = last; let index = index"
+  [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
+  <div class="col-10 mx-auto pb-4">
+
+
+    <mat-expansion-panel hideToggle [expanded]="trustee.isExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3" [innerHTML]="trustee.name"></p>
+      </mat-expansion-panel-header>
+
+      <div class="mx-0 justify-content-center" [ngClass]="((index + 1) % 2 ? 'row' : 'reverse-row')">
+        <div class="col-10 col-sm-10 col-md-4 col-lg-4">
+          <img [src]="trustee.imageName" [alt]="trustee.name" width="100%" class="image-max-height" />
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+
+          <div *ngIf="trustee.born">
+            <p class="text-bold text-size-20 mb-1">Born</p>
+            <p [innerHTML]="trustee.born"></p>
+          </div>
+          
+          <div *ngIf="trustee.iFly">
+            <p class="text-bold text-size-20 mb-1">I fly</p>
+            <p [innerHTML]="trustee.iFly"></p>
+          </div>
+          
+          <div *ngIf="trustee.loveTedderfieldBecause">
+            <p class="text-bold text-size-20 mb-1">I love Tedderfield because </p>
+            <p [innerHTML]="trustee.loveTedderfieldBecause"></p>
+          </div>
+          
+          <div *ngIf="trustee.keepMyselfBusyWith">
+            <p class="text-bold text-size-20 mb-1">When I am not flying I keep myself busy by</p>
+            <p [innerHTML]="trustee.keepMyselfBusyWith"></p>
+          </div>
+          
+          <div *ngIf="trustee.inspiresYou">
+            <p class="text-bold text-size-20 mb-1">Who inspires you? </p>
+            <p [innerHTML]="trustee.inspiresYou"></p>
+          </div>
+          
+          <div *ngIf="trustee.stressesMostAboutTedderfield">
+            <p class="text-bold text-size-20 mb-1">What stresses you most about Tedderfield Airpark?</p>
+            <p [innerHTML]="trustee.stressesMostAboutTedderfield"></p>
+          </div>
+          
+          <div *ngIf="trustee.mustUsefullTalent">
+            <p class="text-bold text-size-20 mb-1">What is the most useful talent you have?</p>
+            <p [innerHTML]="trustee.mustUsefullTalent"></p>
+          </div>
+          
+          <div *ngIf="trustee.distanceDriveFromTedderfield">
+            <p class="text-bold text-size-20 mb-1">How far do you drive from home to get to Tedderfield Airpark?</p>
+            <p [innerHTML]="trustee.distanceDriveFromTedderfield"></p>
+          </div>
+          
+          <div *ngIf="trustee.immediateFamily">
+            <p class="text-bold text-size-20 mb-1">Tell us about your immediate family - share a little about yourself and your closest……</p>
+            <p [innerHTML]="trustee.immediateFamily"></p>
+          </div>
+
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+    [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
+
+</div>

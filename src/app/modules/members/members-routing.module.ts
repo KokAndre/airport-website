@@ -7,6 +7,7 @@ import { GreenTedderfieldComponent } from './components/green-tedderfield/green-
 import { GettingToKnowYouComponent } from './components/getting-to-know-you/getting-to-know-you.component';
 import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hanger.component';
 import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.component';
+import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,9 @@ const routes: Routes = [
   {
     path: 'sell-my-stand', component: SellMyStandComponent
   },
+  {
+    path: 'your-trustees', component: YourTrusteesComponent
+  }
 ];
 
 @NgModule({

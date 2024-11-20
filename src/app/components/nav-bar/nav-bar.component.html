@@ -136,12 +136,9 @@
       <div class="nav-link-text">Members<mat-icon class="dropdown-icon ml-1" fontIcon="keyboard_arrow_down"></mat-icon>
       </div>
     </div>
-
-
     <div class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
-
         <div *ngIf="!isAuthorised">
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersWelcome)">Welcome</div>
         </div>
@@ -162,6 +159,8 @@
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SellMyHanger)">Sell My Hangar</div>
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SellMyStand)">Sell My Stand</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.YourTrusteed)">Your Trustees</div>
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
@@ -396,6 +395,8 @@
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.SellMyStand)">Sell My Stand
       </div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.YourTrusteed)">Your Trustees</div>
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>
