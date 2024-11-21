@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'other-airfields', component: OtherAirfieldsComponent
   },
   {
-    path: 'reporting-hazards', component: ReportingHazardsComponent
+    path: 'airfield-hazards', component: ReportingHazardsComponent
   },
   {
     path: 'surrounding-airfields', component: SurroundingAirfieldsComponent

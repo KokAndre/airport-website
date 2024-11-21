@@ -18,7 +18,7 @@ export enum AppRoutes {
     JoiningAndLanding = '/pilot-information/joining-and-landing',
     LiveWeatherUpdates = '/pilot-information/live-weather-updates',
     OtherAirfields = '/pilot-information/other-airfields',
-    ReportingHazards = '/pilot-information/reporting-hazards',
+    AirfieldHazards = '/pilot-information/airfield-hazards',
     SurroundingAirfields = '/pilot-information/surrounding-airfields',
     CircuitProcedures = '/pilot-information/circuit-procedures',
     Projects = '/projects',

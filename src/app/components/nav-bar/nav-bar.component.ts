@@ -135,7 +135,7 @@ export class NavBarComponent implements OnInit {
 
     const pilotInformationReportingHazardsSubItem = new NavBarItems.NavBarSubItems();
     pilotInformationReportingHazardsSubItem.title = 'Reporting Hazards';
-    pilotInformationReportingHazardsSubItem.linkToNavigateTo = this.navigationRoutes.ReportingHazards;
+    pilotInformationReportingHazardsSubItem.linkToNavigateTo = this.navigationRoutes.AirfieldHazards;
     pilotInformationReportingHazardsSubItem.displayForAdminOnly = false;
     pilotInformationToAdd.subItems.push(pilotInformationReportingHazardsSubItem);
 
