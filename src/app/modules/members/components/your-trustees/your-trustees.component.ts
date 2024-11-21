@@ -36,7 +36,7 @@ export class YourTrusteesComponent implements OnInit {
       mustUsefullTalent: 'Foresight and an entrepreneurial spirit.',
       distanceDriveFromTedderfield: '29km',
       immediateFamily: 'I went to school at Florida Hoërskool (ala Wahl Bartm ann, Harry Viljoen & Elton Jantjies). I then did two years of military service in the Signals Corps and 34 Batallion, whereafter I studied Financial Accounting (Hons) at University of Stellenbosch.<br><br>In 1995, I completed my MBA at Wits and I completed AMP at Harvard Business School in 2007.<br><br>I have worked at Stellenbosch University (1997), the Small Business Development Corporation (now Business Partners) (1998-1996) and Nedbank 1996 to present), where I am the Chie f Information Officer and a member of the Executive Committee.<br><br>I am married to Colette, who shares and enjoys all my interests. I also have two boys Jacques (25) and Brendan (22) from a previous marriage.<br><br>Jacques is working in South Korea and Brendan is studying at Stellenbosch University.',
-      imageName: '../../../../../assets/members/your-trustess/Fred Swanepoel - Photograph.JPG',
+      imageName: '../../../../../assets/members/your-trustess/Fred Swanepoel - Photograph.jpeg',
       isExpanded: true
     },
     {
