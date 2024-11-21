@@ -124,22 +124,29 @@ export class GalleryAdminPageComponent implements OnInit {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading image', 'No section ID is present in request. Please contact administrator', null);
     } else {
       let isAllImagesUploaded = true;
+      let errorMessage = '';
 
       for (let index = 0; index < imageDataArray.length; index++) {
         const imageFile = imageDataArray[index];
         await this.adminService.uploadNewImageAsFile(section.id, imageFile.imageData).then(results => {
           if (results.status !== 200) {
             isAllImagesUploaded = false;
+            if (results.status === 403) {
+              if (!errorMessage) {
+                errorMessage = results.message + `<br> <br> ${imageFile.imageName}`;
+              } else {
+                errorMessage += `<br> <br> ${imageFile.imageName}`;
+              }
+            }
           }
 
           if (index === imageDataArray.length - 1) {
             if (isAllImagesUploaded) {
               this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'All images uploaded successfully.', null);
-
-              this.getGalleryData();
             } else {
-              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'There was an issue uploading all of the images.', null);
+              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', errorMessage ? errorMessage : 'There was an issue uploading all of the images.', null);
             }
+            this.getGalleryData();
           }
 
         });
