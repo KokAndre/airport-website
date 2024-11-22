@@ -13,7 +13,16 @@
 <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
 <div *ngIf="reportIssueRequests?.length" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
-  <div class="col-12 py-4">
+
+  <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4"
+      (click)="exportToExcel()">
+      <p class="mb-0">Export To Excel</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
     <table>
       <tr>
         <th>Name</th>

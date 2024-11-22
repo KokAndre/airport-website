@@ -62,4 +62,8 @@ export class ManageStandsForSaleInterestComponent implements OnInit {
     }
   }
 
+  public exportToExcel() {
+    this.adminService.exportAsExcelFile(this.interestedInStandForSaleData, 'Interest In Stands For Sale');
+  }
+
 }

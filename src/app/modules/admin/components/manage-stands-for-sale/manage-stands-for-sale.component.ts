@@ -80,4 +80,45 @@ export class ManageStandsForSaleComponent implements OnInit {
       });
     }
   }
+
+  public exportToExcel() {
+    const standsForSaleExcelData = new Array<any>();
+    this.standsForSaleData.forEach(item => {
+      let itemToPush: any = {};
+      itemToPush.ID = item.id;
+      itemToPush.Name = item.name;
+      itemToPush.Email = item.email;
+      itemToPush.PhoneNumber = item.phoneNumber;
+      itemToPush.Price = item.price;
+      itemToPush.ReasonsForSelling = item.reasonsForSelling;
+      itemToPush.StandDimensions = `Width: ${item.standDimensions?.width || 'N/A'}, Length: ${item.standDimensions?.length || 'N/A'}`;
+      itemToPush.TitleDocument = item.titleDocument?.fileName;
+
+      itemToPush.StandImages = '';
+      item.standImages.forEach(image => {
+        itemToPush.StandImages += `${image.fileName}; `;
+      });
+
+      itemToPush.FeaturesAndBenefits = '';
+      item.featuresAndBenefits?.forEach(item => {
+        itemToPush.FeaturesAndBenefits += `${item}; `;
+      });
+
+      itemToPush.Securty = '';
+      item.securty?.forEach(item => {
+        itemToPush.Securty += `${item}; `;
+      });
+
+      itemToPush.LeviesApplicable = '';
+      item.leviesApplicable?.forEach(item => {
+        itemToPush.LeviesApplicable += `${item}; `;
+      });
+
+      itemToPush.DateAdded = item.dateAdded;
+
+      standsForSaleExcelData.push(itemToPush);
+    });
+
+    this.adminService.exportAsExcelFile(standsForSaleExcelData, 'Stands For Sale');
+  }
 }

@@ -62,12 +62,8 @@ export class FollowUsRequestsComponent implements OnInit {
     }
   }
 
-  public testDownload() {
-    const data = [
-      { Name: 'John Doe', Age: 30, City: 'New York' },
-      { Name: 'Jane Smith', Age: 25, City: 'San Francisco' },
-    ];
-    this.adminService.generateExcel(data, 'user_data');
+  public exportToExcel() {
+    this.adminService.exportAsExcelFile(this.followUsRequests, 'Follow Us Requests');
   }
 
 }

@@ -62,4 +62,7 @@ export class ManageHangersForSaleInterestComponent implements OnInit {
     }
   }
 
+  public exportToExcel() {
+    this.adminService.exportAsExcelFile(this.interestedInHangerForSaleData, 'Interest In Hangars For Sale');
+  }
 }

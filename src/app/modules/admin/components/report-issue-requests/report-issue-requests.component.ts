@@ -62,4 +62,8 @@ export class ReportIssueRequestsComponent implements OnInit {
     }
   }
 
+  public exportToExcel() {
+    this.adminService.exportAsExcelFile(this.reportIssueRequests, 'Report Issue Requests');
+  }
+
 }

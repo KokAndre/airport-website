@@ -14,8 +14,17 @@ import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-re
 import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
-import * as ExcelJS from 'exceljs';
-// import { saveAs } from 'file-saver';
+
+
+
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import * as moment from 'moment';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -460,27 +469,18 @@ export class AdminService {
       });
   }
 
-  public generateExcel(data: any[], fileName: string): void {
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Sheet 1');
-    // Add headers
-    const headers = Object.keys(data[0]);
-    worksheet.addRow(headers);
-    // Add data
-    data.forEach((item) => {
-      const row = [];
-      headers.forEach((header) => {
-        row.push(item[header]);
-      });
-      worksheet.addRow(row);
+  public exportAsExcelFile(json: any, excelFileName: string): void {
+    const downloadName = `${excelFileName} as at ${moment(new Date()).format('DD-MM-yyyy - HH:mm')}`;
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    this.saveAsExcelFile(excelBuffer, downloadName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
     });
-    // Save the workbook to a blob
-    workbook.xlsx.writeBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      // TODO: Implement the save
-      // saveAs(blob, `${fileName}.xlsx`);
-      const url= window.URL.createObjectURL(blob);
-      window.open(url);
-    });
+    FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
   }
 }

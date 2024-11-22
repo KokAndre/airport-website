@@ -93,4 +93,67 @@ export class ManageHangersForSaleComponent implements OnInit {
     }
   }
 
+  public exportToExcel() {
+    const hangersForSaleExcelData = new Array<any>();
+    this.hangersForSaleData.forEach(item => {
+      let itemToPush: any = {};
+      itemToPush.ID= item.id;
+      itemToPush.Name = item.name;
+      itemToPush.Email = item.email;
+      itemToPush.PhoneNumber = item.phoneNumber;
+      itemToPush.HangerNumber = item.hangerNumber;
+      itemToPush.Price = item.price;
+      itemToPush.ReasonsForSelling = item.reasonsForSelling;
+      itemToPush.DoorType = item.doorType;
+      itemToPush.HangerDimensions = `Width: ${item.hangerDimensions?.width || 'N/A'}, Length: ${item.hangerDimensions?.length || 'N/A'}`;
+      itemToPush.DoorDimensions = `Width: ${item.doorDimensions?.width || 'N/A'}, Length: ${item.doorDimensions?.length || 'N/A'}, Height: ${item.doorDimensions?.height || 'N/A'}`;
+      itemToPush.YearBuilt = item.yearBuilt;
+      itemToPush.TitleDocument = item.titleDocument?.fileName;
+      itemToPush.DetailedFloorPlan = item.detailedFloorPlan?.fileName;
+
+      itemToPush.HangerImages = '';
+      item.hangerImages.forEach(image => {
+        itemToPush.HangerImages += `${image.fileName}; `;
+      });
+
+      itemToPush.BuildingMaterial = '';
+      item.buildingMaterial.forEach(item => {
+        itemToPush.BuildingMaterial += `${item}; `;
+      });
+
+      itemToPush.HangerCustomisations = '';
+      item.hangerCustomisations.forEach(item => {
+        itemToPush.HangerCustomisations += `${item}; `;
+      });
+
+      itemToPush.FeaturesAndBenefits = '';
+      item.featuresAndBenefits.forEach(item => {
+        itemToPush.FeaturesAndBenefits += `${item}; `;
+      });
+
+      itemToPush.Securty = '';
+      item.securty.forEach(item => {
+        itemToPush.Securty += `${item}; `;
+      });
+
+      itemToPush.AdditionalInfrastructure = '';
+      item.additionalInfrastructure.forEach(item => {
+        itemToPush.AdditionalInfrastructure += `${item}; `;
+      });
+
+      itemToPush.LeviesApplicable = '';
+      item.leviesApplicable.forEach(item => {
+        itemToPush.LeviesApplicable += `${item}; `;
+      });
+
+
+
+      itemToPush.DateAdded = item.dateAdded;
+
+      hangersForSaleExcelData.push(itemToPush);
+    });
+
+    this.adminService.exportAsExcelFile(hangersForSaleExcelData, 'Hangars For Sale');
+  }
+
 }

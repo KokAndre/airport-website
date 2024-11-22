@@ -62,4 +62,8 @@ export class GreeningTedderfieldRequestsComponent implements OnInit {
     }
   }
 
+  public exportToExcel() {
+    this.adminService.exportAsExcelFile(this.greeningTeddderfieldRequests, 'Greening Tedderfield Requests');
+  }
+
 }
