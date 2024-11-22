@@ -14,6 +14,9 @@ import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-re
 import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
+import * as ExcelJS from 'exceljs';
+// import { saveAs } from 'file-saver';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -455,5 +458,29 @@ export class AdminService {
       .then(data => {
         return data;
       });
+  }
+
+  public generateExcel(data: any[], fileName: string): void {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Sheet 1');
+    // Add headers
+    const headers = Object.keys(data[0]);
+    worksheet.addRow(headers);
+    // Add data
+    data.forEach((item) => {
+      const row = [];
+      headers.forEach((header) => {
+        row.push(item[header]);
+      });
+      worksheet.addRow(row);
+    });
+    // Save the workbook to a blob
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      // TODO: Implement the save
+      // saveAs(blob, `${fileName}.xlsx`);
+      const url= window.URL.createObjectURL(blob);
+      window.open(url);
+    });
   }
 }
