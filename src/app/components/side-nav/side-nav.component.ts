@@ -99,6 +99,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
       if (this.isAuthorised) {
+        console.log('ADMIN CHECK RESULTS: ', this.loginService.isLogedInUserAdmin());
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
       } else {
         this.isUserAdmin = false;

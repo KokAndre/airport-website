@@ -1,18 +1,18 @@
 import { inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { LoginService } from '../services/login/login.service';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AppRoutes } from '../enums/app.enums';
+import { LoginGuardService } from './login-guard.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuardService {
+export class AdminGuardService {
 
   constructor(private router: Router, private loginService: LoginService) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const isLoggedIn = this.loginService.isAuthorised();
+    const isLoggedIn = this.loginService.isLogedInUserAdmin(true);
 
     if (isLoggedIn) {
       return true;

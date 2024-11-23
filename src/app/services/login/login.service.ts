@@ -153,11 +153,15 @@ export class LoginService {
     }
   }
 
-  public isLogedInUserAdmin() {
+  public isLogedInUserAdmin(skipNavAway?: boolean) {
     const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
     if (!stringToken) {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
-      this.router.navigateByUrl(AppRoutes.Home);
+      if (skipNavAway) {
+        return false;
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
+        this.router.navigateByUrl(AppRoutes.Home);
+      }
     } else {
       const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
       const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
@@ -169,11 +173,16 @@ export class LoginService {
       const tokenExpiryDate = new Date(token.logoutDateTime);
 
       if (currentDate < tokenExpiryDate) {
-        return token.isAdmin;
+        return token.isAdmin === '1';
       } else {
-        this.logoutUser();
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
-        this.router.navigateByUrl(AppRoutes.Home);
+        if (skipNavAway) {
+          this.logoutUser();
+          return false;
+        } else {
+          this.logoutUser();
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
+          this.router.navigateByUrl(AppRoutes.Home);
+        }
       }
     }
   }
