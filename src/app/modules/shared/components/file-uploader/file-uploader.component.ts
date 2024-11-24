@@ -14,6 +14,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() public allowSelectImages = false;
   @Input() public maxFileSize = 10000000; // This defaults to 10MB
   @Input() public returnAsFile = false;
+  @Input() public isFromMembersDocumentsAddFile = false;
   @Output() public emitFileData: EventEmitter<SellMyHangerRequest.FileData[]> = new EventEmitter<SellMyHangerRequest.FileData[]>();
   // @Output() public emitFileDataAsFile = new EventEmitter<any>();
   @ViewChild('fileUploaded', { static: true }) fileUploaded: ElementRef;

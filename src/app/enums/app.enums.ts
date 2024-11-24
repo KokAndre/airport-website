@@ -33,6 +33,7 @@ export enum AppRoutes {
     SellMyHanger = '/members/sell-my-hanger',
     SellMyStand = '/members/sell-my-stand',
     YourTrusteed = '/members/your-trustees',
+    MembersDocuments = '/members/documents',
 
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
@@ -43,7 +44,8 @@ export enum AppRoutes {
     ManageStandsForSale = '/admin/manage-stands-for-sale',
     ManageInterestInHangersForSale = '/admin/manage-interest-in-hanger-for-sale',
     ManageInterestInStandsForSale = '/admin/manage-interest-in-stand-for-sale',
-    ManageLevies = '/admin/manage-levies'
+    ManageLevies = '/admin/manage-levies',
+    ManageMembersDocuments = '/admin/manage-members-documents'
 }
 
 export enum Endpoints {
@@ -52,6 +54,7 @@ export enum Endpoints {
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
     HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
     StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
+    // MembersDocumentsBaseEndpoint = 'https://www.tedderfield.co.za/api/file-system/',
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
@@ -105,7 +108,14 @@ export enum Endpoints {
     GetLeviesData = '/levies/get-levies.php',
     AddLeviItem = '/levies/add-levie-item.php',
     UpdateLeviesData = '/levies/update-levies.php',
-    DeleteLevieItem = '/levies/delete-levie-item.php'
+    DeleteLevieItem = '/levies/delete-levie-item.php',
+
+    // Members Files
+    GetMemebersDocuments = '/file-system/get-folders.php',
+    GetMemebersDocumentBase64 = '/file-system/get-document.php',
+    UploadMembersDocument = '/file-system/upload-document.php',
+    CreateMembersDocumentsFolder = '/file-system/add-folder.php',
+    DeletMembersDocumentsFile = '/file-system/delete-file.php'
 }
 
 export enum EncryptionKeys {
@@ -130,6 +140,7 @@ export enum ModalTypes {
     SearchAndSecueModal = 'searchAndSecueModal',
     BannerModal = 'bannerModal',
     InterestedInPropertyModal = 'interestedInPropertyModal',
+    AddFolderModal = 'addFolderModal'
 }
 
 export enum ModalOutcomeOptions {

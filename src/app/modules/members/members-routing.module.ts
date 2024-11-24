@@ -9,6 +9,7 @@ import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hange
 import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.component';
 import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
 import { LoginGuardService } from 'src/app/route-guards/login-guard.service';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
   },
   {
     path: 'your-trustees', canActivate: [LoginGuardService], component: YourTrusteesComponent
+  },
+  {
+    path: 'documents', canActivate: [LoginGuardService], component: DocumentsComponent
   }
 ];
 

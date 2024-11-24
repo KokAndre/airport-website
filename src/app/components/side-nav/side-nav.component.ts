@@ -99,7 +99,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
       if (this.isAuthorised) {
-        console.log('ADMIN CHECK RESULTS: ', this.loginService.isLogedInUserAdmin());
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
       } else {
         this.isUserAdmin = false;
@@ -141,6 +140,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal:
         case ModalTypes.InterestedInPropertyModal:
+        case ModalTypes.AddFolderModal:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: false, maxWidth: '90vw', panelClass: 'min-width-modal-class'
           });

@@ -171,5 +171,29 @@ export class MembersService {
         return data;
       });
   }
+  
+  public getMemebersDocuments() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetMemebersDocuments, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getMembersDocumentBase64(documentRoute: string) {
+    const requestData = {filePath: documentRoute};
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetMemebersDocumentBase64, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 
 }

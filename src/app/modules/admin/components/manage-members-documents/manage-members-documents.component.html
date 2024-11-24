@@ -1,0 +1,22 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Manage Members Documents</p>
+    <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Manage Members Documents</span></p>
+  </div>
+</div>
+
+<app-arrow-divider class="pointer" (click)="isDocumentsPanelExpanded = !isDocumentsPanelExpanded" [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4" *ngIf="!isLoading">
+    <mat-expansion-panel *ngIf="documentsData" hideToggle [expanded]="isDocumentsPanelExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Members Documents</p>
+      </mat-expansion-panel-header>
+
+      <app-documets-row (fileClickedEmit)="openFile($event)" (fileUploadedEmit)="fileUploaded($event)"  (createFolderEmit)="createFOlder($event)" (deleteFileEmit)="deleteFile($event)" [isFromAdmin]="true" [currentLevelFileData]="documentsData"></app-documets-row>
+
+    </mat-expansion-panel>
+  </div>
+
+</div>

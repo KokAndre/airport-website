@@ -10,6 +10,7 @@ import { LoginComponent } from 'src/app/components/login/login.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FormsModule } from '@angular/forms';
+import { DocumetsRowComponent } from './components/documets-row/documets-row.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     FileUploaderComponent,
     ImageUploaderComponent,
     OnEnterDirective,
-    LoginComponent
+    LoginComponent,
+    DocumetsRowComponent
   ],
   exports: [
     ArrowDividerComponent,
@@ -35,7 +37,8 @@ import { FormsModule } from '@angular/forms';
     OnEnterDirective,
     LoginComponent,
     PdfViewerModule,
-    FormsModule
+    FormsModule,
+    DocumetsRowComponent
   ],
   providers: [NgxImageCompressService]
 })

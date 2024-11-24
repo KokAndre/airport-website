@@ -1,0 +1,61 @@
+<div class="col-12">
+  <mat-expansion-panel [(expanded)]="currentLevelFileData.isExpanded" hideToggle class="folder-expansion-pannel">
+    <mat-expansion-panel-header class="">
+      <div class="row mx-0 hover-bottom-border expansion-panel-header-row">
+        <div class="col-1 px-0 align-content-center">
+          <span [ngClass]="currentLevelFileData.isExpanded ? 'folder-open-icon' : 'folder-closed-icon'"></span>
+        </div>
+        <div class="col-10 px-0 align-content-center">
+          <p class="mb-0 width-fit-content" [innerHTML]="currentLevelFileData.name"></p>
+        </div>
+        <div class="col-1 px-0 text-end align-content-center">
+          <!-- <mat-icon [ngClass]="{'rotate-expansion-panel-icon': currentLevelFileData.isExpanded}"
+            class="expansion-panel-icon" aria-hidden="false" fontIcon="expand_more"></mat-icon> -->
+
+          <span class="chevron-down"
+            [ngClass]="{'rotate-expansion-panel-icon': currentLevelFileData.isExpanded}"></span>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let folder of currentLevelFileData.folders" class="ml-3">
+      <app-documets-row (fileClickedEmit)="fileClicked($event)" (fileUploadedEmit)="emitFileUploaded($event)"
+        (createFolderEmit)="emitFolderUploaded($event)" (deleteFileEmit)="emitFileToDelete($event)"
+        [isFromAdmin]="isFromAdmin" [currentLevelFileData]="folder"></app-documets-row>
+    </div>
+
+    <div class="ml-3">
+      <div class="row mx-0 hover-bottom-border expansion-panel-header-row pointer" (click)="addFolderClicked()">
+        <div class="col-1 px-0 align-content-center">
+          <span class="create-folder-icon"></span>
+        </div>
+        <div class="col-10 px-0 align-content-center">
+          <p class="mb-0 width-fit-content">Add Folder</p>
+        </div>
+        <div class="col-1 px-0 text-end align-content-center">
+          <!-- <mat-icon [ngClass]="{'rotate-expansion-panel-icon': currentLevelFileData.isExpanded}"
+            class="expansion-panel-icon" aria-hidden="false" fontIcon="expand_more"></mat-icon> -->
+
+          <!-- <span class="chevron-down" [ngClass]="{'rotate-expansion-panel-icon': currentLevelFileData.isExpanded}"></span> -->
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let files of currentLevelFileData.files" class="ml-3">
+      <div class="row mx-0 my-1 pointer hover-bottom-border align-items-center" (click)="fileClicked(files.name)">
+        <!-- <mat-icon class="file-icon p-0 mr-3">description</mat-icon> -->
+        <mat-icon (click)="$event.stopPropagation(); deleteFileClicked(files.name)"
+          class="pointer delete-icon">delete</mat-icon>
+        <span class="file-icon p-0 mr-3"></span>
+        <p class="mb-0 p-0 width-fit-content" [innerHTML]="files.name"></p>
+      </div>
+    </div>
+
+    <div class="ml-3">
+      <app-file-uploader [isFromMembersDocumentsAddFile]="true" [returnAsFile]="true" [numOfFilesAllowed]="10"
+        (emitFileData)="setUploadedDocumentData($event, currentLevelFileData.name)"></app-file-uploader>
+    </div>
+
+  </mat-expansion-panel>
+
+</div>

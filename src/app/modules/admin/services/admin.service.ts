@@ -20,6 +20,8 @@ import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import * as moment from 'moment';
+import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
+import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -482,5 +484,46 @@ export class AdminService {
       type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+  }
+
+  public uploadMembersDocuments(uploadedMembersDocuments: UploadMembersDocumentsRequest.FileData, fileRoute: string) {
+    let documentToUploadData: FormData = new FormData();
+    documentToUploadData.append('file', uploadedMembersDocuments.fileData);
+    documentToUploadData.append('name', uploadedMembersDocuments.fileName);
+    documentToUploadData.append('fileRoute', fileRoute);
+    documentToUploadData.append('userId', this.loginService.getLoggedInUserId());
+
+    return fetch(Endpoints.BaseURL + Endpoints.UploadMembersDocument, {
+      method: 'post',
+      body: documentToUploadData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public createMembersDocumentsFolder(folderData: CreateMembersDocumentsFolderRequest.RootObject) {
+    folderData.userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.CreateMembersDocumentsFolder, {
+      method: 'post',
+      body: JSON.stringify({ requestData: folderData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteMembersDocumentsFile(filePath: string) {
+    const userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.DeletMembersDocumentsFile, {
+      method: 'post',
+      body: JSON.stringify({ requestData: { userId: userId, filePath: filePath } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
   }
 }

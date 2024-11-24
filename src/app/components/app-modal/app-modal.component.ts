@@ -19,6 +19,7 @@ export class AppModalComponent implements OnInit {
   public modalOutcomeOptions = ModalOutcomeOptions;
   public gallerySectionToEditData: GetGalleryDataResponse.Section;
   public interestedInPropertyFormGroup: FormGroup;
+  public folderName = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
 
@@ -51,6 +52,12 @@ export class AppModalComponent implements OnInit {
   public confirmGallerySectionChanges() {
     if (this.gallerySectionToEditData.title) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.gallerySectionToEditData);
+    }
+  }
+
+  public addFolderConfirmClicked() {
+    if (this.folderName) {
+      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.folderName);
     }
   }
 

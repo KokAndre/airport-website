@@ -13,3 +13,20 @@
     width: fit-content;
     margin: auto !important;
 }
+
+.add-file-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/add-file.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.hover-bottom-border {
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+        border-bottom: 2px solid #cd2122 !important;
+    }
+}

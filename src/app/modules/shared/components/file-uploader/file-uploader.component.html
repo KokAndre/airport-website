@@ -1,4 +1,27 @@
-<div class="col-12 px-0 pointer upload-file-background" (click)="handleClick()">
-  <mat-icon class="upload-file-icon">upload</mat-icon>
-  <input type="file" [multiple]="numOfFilesAllowed > 1 ? true : false" [max]="numOfFilesAllowed" size="" hidden #fileUploaded (click)="$event.stopPropagation()" (change)="uploadItem($event)" [accept]="allowSelectImages ? imageUploadTypes : fileUploadTypes" />
+<div (click)="handleClick()"
+  [ngClass]="isFromMembersDocumentsAddFile ? 'row mx-0 my-1 pointer hover-bottom-border align-items-center' : 'col-12 px-0 pointer upload-file-background'">
+
+  <div *ngIf="!isFromMembersDocumentsAddFile">
+    <mat-icon class="upload-file-icon">upload</mat-icon>
+  </div>
+
+  <div class="row mx-0 p-0" *ngIf="isFromMembersDocumentsAddFile">
+    <span class="add-file-icon p-0 mr-3"></span>
+    <p class="mb-0 p-0 width-fit-content">Add File</p>
+  </div>
+
+  <input type="file" [multiple]="numOfFilesAllowed > 1 ? true : false" [max]="numOfFilesAllowed" size="" hidden
+    #fileUploaded (click)="$event.stopPropagation()" (change)="uploadItem($event)"
+    [accept]="allowSelectImages ? imageUploadTypes : fileUploadTypes" />
 </div>
+
+
+
+<!-- 
+<div *ngIf="isFromMembersDocumentsAddFile" class="" (click)="handleClick()">
+  <span class="add-file-icon p-0 mr-3"></span>
+  <p class="mb-0 p-0 width-fit-content">Add File</p>
+  <input type="file" [multiple]="numOfFilesAllowed > 1 ? true : false" [max]="numOfFilesAllowed" size="" hidden
+    #fileUploaded (click)="$event.stopPropagation()" (change)="uploadItem($event)"
+    [accept]="allowSelectImages ? imageUploadTypes : fileUploadTypes" />
+</div> -->

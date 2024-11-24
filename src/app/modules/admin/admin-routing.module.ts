@@ -10,6 +10,7 @@ import { ManageStandsForSaleComponent } from './components/manage-stands-for-sal
 import { ManageHangersForSaleInterestComponent } from './components/manage-hangers-for-sale-interest/manage-hangers-for-sale-interest.component';
 import { ManageStandsForSaleInterestComponent } from './components/manage-stands-for-sale-interest/manage-stands-for-sale-interest.component';
 import { ManageLeviesComponent } from './components/manage-levies/manage-levies.component';
+import { ManageMembersDocumentsComponent } from './components/manage-members-documents/manage-members-documents.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-levies', component: ManageLeviesComponent
+  },
+  {
+    path: 'manage-members-documents', component: ManageMembersDocumentsComponent
   }
 ];
 

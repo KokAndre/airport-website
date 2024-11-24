@@ -164,6 +164,9 @@
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersDocuments)">Documents
+          </div>
         </div>
       </div>
     </div>
@@ -210,6 +213,9 @@
           Interests In Stands For Sale</div>
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageLevies)">Manage Levies</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">Manage Members
+          Documents</div>
       </div>
     </div>
   </div>
@@ -401,6 +407,10 @@
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersDocuments)">
+        Documents
+      </div>
     </div>
   </mat-menu>
 
@@ -440,5 +450,8 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageLevies)">Manage Levies
     </div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">
+      Manage Members Documents</div>
   </mat-menu>
 </div>

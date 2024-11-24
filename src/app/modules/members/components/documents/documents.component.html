@@ -1,0 +1,41 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Members Documents</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Members Documents</span></p>
+  </div>
+</div>
+
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image4"></div>
+  </div>
+</div> -->
+
+
+<app-arrow-divider class="pointer" (click)="isDocumentsPanelExpanded = !isDocumentsPanelExpanded" [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4" *ngIf="!isLoading">
+    <mat-expansion-panel *ngIf="documentsData" hideToggle [expanded]="isDocumentsPanelExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Members Documents</p>
+      </mat-expansion-panel-header>
+
+      <app-documets-row (fileClickedEmit)="openFile($event)" [currentLevelFileData]="documentsData"></app-documets-row>
+
+    </mat-expansion-panel>
+  </div>
+
+</div>

@@ -10,6 +10,7 @@ import { GettingToKnowYouComponent } from './components/getting-to-know-you/gett
 import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hanger.component';
 import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.component';
 import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 
 
@@ -22,7 +23,8 @@ import { YourTrusteesComponent } from './components/your-trustees/your-trustees.
     GettingToKnowYouComponent,
     SellMyHangerComponent,
     SellMyStandComponent,
-    YourTrusteesComponent
+    YourTrusteesComponent,
+    DocumentsComponent
   ],
   imports: [
     CommonModule,

@@ -18,7 +18,7 @@ export class ManageLeviesComponent implements OnInit {
   constructor(public adminService: AdminService, public appModalService: AppModalService) { }
 
   ngOnInit() {
-    this, this.getLeviesData();
+    this.getLeviesData();
   }
 
   public getLeviesData() {

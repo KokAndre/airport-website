@@ -1,0 +1,101 @@
+// .folder-heading-text {
+//     padding: 1rem !important;
+// }
+
+.folder-expansion-pannel {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.hover-bottom-border {
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+        border-bottom: 2px solid #cd2122 !important;
+    }
+}
+
+.file-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.expansion-panel-header-row {
+    width: 100%;
+}
+
+.expansion-panel-icon {
+    height: 24px !important;
+    width: 24px !important;
+    font-size: 40px !important;
+    vertical-align: middle;
+    transition: 0.5s;
+}
+
+.folder-closed-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/folder-closed.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.folder-open-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/folder-open.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.file-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/file-icon.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.add-file-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/add-file.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.create-folder-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/create-folder.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.chevron-down {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/chevron-down.svg");
+    background-size: cover;
+    background-position: center;
+    transform: rotate(90deg);
+}
+
+.rotate-expansion-panel-icon {
+    transform: rotate(270deg) !important;
+}
+
+.delete-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: #cd2122;
+    padding: 0px;
+    margin-right: 10px;
+}
