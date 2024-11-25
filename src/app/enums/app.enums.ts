@@ -46,7 +46,8 @@ export enum AppRoutes {
     ManageInterestInHangersForSale = '/admin/manage-interest-in-hanger-for-sale',
     ManageInterestInStandsForSale = '/admin/manage-interest-in-stand-for-sale',
     ManageLevies = '/admin/manage-levies',
-    ManageMembersDocuments = '/admin/manage-members-documents'
+    ManageMembersDocuments = '/admin/manage-members-documents',
+    ManageClassifiedsForSale = '/admin/manage-classifieds-for-sale'
 }
 
 export enum Endpoints {
@@ -124,6 +125,7 @@ export enum Endpoints {
     ClassifiedsUploadImage = '/classifieds/upload-item-for-sale-image.php',
     GetClassifiedsData =  '/classifieds/get-classifieds-data.php',
     SubmitInterestedInClassifiedsItem = '/classifieds/submit-interested-in-item.php',
+    DeleteClassifiedsForSaleItem = '/classifieds/delete-classifieds-for-sale-item.php',
 }
 
 export enum EncryptionKeys {

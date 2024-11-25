@@ -65,9 +65,6 @@ export class ClassifiedsComponent implements OnInit {
 
       this.classifiedsData.push(itemToPush);
     });
-
-    console.log('CLASSIFIEDS DATA: ',  this.classifiedsData);
-
   }
 
   public togglePannel(indexToToggle: number) {

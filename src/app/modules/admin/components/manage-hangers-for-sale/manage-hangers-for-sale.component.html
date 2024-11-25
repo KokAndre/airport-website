@@ -54,7 +54,7 @@
         <td [innerHTML]="item.yearBuilt"></td>
         <td>R {{ item.price }}</td>
 
-        <td [innerHTML]="item.phoneNumber">Number of Images: {{ item.hangerImages?.length }}</td>
+        <td>Number of Images: {{ item.hangerImages?.length }}</td>
 
         <td class="text-center"><mat-icon *ngIf="item.detailedFloorPlan?.fileName" class="green-text text-bold"
           fontIcon="check"></mat-icon><mat-icon *ngIf="!item.detailedFloorPlan?.fileName" class="red-text text-bold"

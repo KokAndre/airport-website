@@ -524,4 +524,25 @@ export class AdminService {
         return data;
       });
   }
+
+  public getClassifiedsData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetClassifiedsData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteClassifiedsForSaleItem(classifiedsId: number) {
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteClassifiedsForSaleItem, {
+      method: 'post',
+      body: JSON.stringify({ id: classifiedsId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 }
