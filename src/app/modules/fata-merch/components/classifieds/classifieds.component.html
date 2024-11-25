@@ -91,10 +91,16 @@
             <p>R{{ classifiedItem.price }}</p>
 
             <p class="mb-0 text-size-18">Description</p>
-            <p [innerHTML]="classifiedItem.description"></p>
+            <ul>
+              <li *ngFor="let item of classifiedItem.description">{{ item }}</li>
+            </ul>
+            <!-- <p [innerHTML]="classifiedItem.description"></p> -->
 
             <p class="mb-0 text-size-18">Special Notes</p>
-            <p [innerHTML]="classifiedItem.specialNotes"></p>
+            <ul>
+              <li *ngFor="let item of classifiedItem.specialNotes">{{ item }}</li>
+            </ul>
+            <!-- <p [innerHTML]="classifiedItem.specialNotes"></p> -->
 
             <div class="row mx-0 justify-content-center">
               <div class="red-button mb-4" (click)="viewClassifiedDetails(classifiedItem.id)">
@@ -142,7 +148,9 @@
           </tr>
           <tr>
             <td>Description</td>
-            <td>{{ clasifiedDetailsToDisplay.description }}</td>
+            <td>
+              <li *ngFor="let item of clasifiedDetailsToDisplay.description">{{ item }}</li>
+            </td>
           </tr>
           <tr>
             <td>Price</td>
@@ -174,7 +182,9 @@
           </tr>
           <tr>
             <td>Special Notes</td>
-            <td>{{ clasifiedDetailsToDisplay.specialNotes }}</td>
+            <td>
+              <li *ngFor="let item of clasifiedDetailsToDisplay.specialNotes">{{ item }}</li>
+            </td>
           </tr>
           <tr>
             <td>Date Added</td>

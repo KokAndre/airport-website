@@ -117,6 +117,66 @@ export class SubmitClassifiedsComponent implements OnInit {
     this.submitClassifiedsRequestData.images = this.submitClassifiedsRequestData.images.filter(x => x.fileName !== fileName);
   }
 
+  public keydownOnBulletPointControl(formControl?: AbstractControl) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+  }
+
+  public inputOnBulletPointControl(formControl: AbstractControl, keyPressed: any) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+
+    const numOfLines = formControl.value?.split('\n')?.length;
+
+    if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
+      if (numOfLines <= 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf('\n');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+    if (keyPressed.key === ',') {
+      if (numOfLines < 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue = formCotrolValue.replace(',', "\n")
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf(',');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+  }
+
+  public blurOnBulletPointControl(formControl: AbstractControl) {
+    if (formControl?.value === '• ' || formControl?.value === '•') {
+      formControl.setValue('');
+    }
+  }
+
+  public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
+    let arrayOfInputValue = valueToFormat.split('\n');
+    arrayOfInputValue = arrayOfInputValue.map(line => {
+      line = line.replace('•', '');
+      line = line.trim();
+      return line;
+    });
+    arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
+
+    return arrayOfInputValue;
+  }
+
   public resetControl(controlToReset: AbstractControl) {
     controlToReset.reset();
     controlToReset.setErrors(null);
@@ -154,13 +214,17 @@ export class SubmitClassifiedsComponent implements OnInit {
 
   public submitClicked() {
     this.submitClassifiedsRequestData.title = this.titleControl.value;
-    this.submitClassifiedsRequestData.description = this.descriptionControl.value;
     this.submitClassifiedsRequestData.price = this.priceControl.value;
     this.submitClassifiedsRequestData.name = this.nameControl.value;
     this.submitClassifiedsRequestData.email = this.emailControl.value;
     this.submitClassifiedsRequestData.phoneNumber = this.phoneNumberControl.value;
     this.submitClassifiedsRequestData.condition = this.conditionSelectControl.value;
-    this.submitClassifiedsRequestData.specialNotes = this.specialNotesControl.value;
+    
+    // this.submitClassifiedsRequestData.description = this.descriptionControl.value;
+    this.submitClassifiedsRequestData.description = this.formatBulletPointInputValuesToSubmit(this.descriptionControl.value);
+
+    // this.submitClassifiedsRequestData.specialNotes = this.specialNotesControl.value;
+    this.submitClassifiedsRequestData.specialNotes = this.formatBulletPointInputValuesToSubmit(this.specialNotesControl.value);
 
 
     if (this.availabilitySelectControl.value === 'Other') {

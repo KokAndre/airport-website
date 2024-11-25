@@ -44,13 +44,17 @@
         <td [innerHTML]="item.email"></td>
         <td [innerHTML]="item.phoneNumber"></td>
         <td [innerHTML]="item.title"></td>
-        <td [innerHTML]="item.description"></td>
+        <td>
+          <li *ngFor="let itemText of item.description">{{ itemText }}</li>
+        </td>
         <td>R{{ item.price }}</td>
         <td [innerHTML]="item.category"></td>
         <td [innerHTML]="item.location"></td>
         <td [innerHTML]="item.itemCondition"></td>
         <td [innerHTML]="item.availability"></td>
-        <td [innerHTML]="item.specialNotes"></td>
+        <td>
+          <li *ngFor="let itemText of item.specialNotes">{{ itemText }}</li>
+        </td>
         <td [innerHTML]="item.dateAdded"></td>
         <td class="text-center"><mat-icon class="red-text pointer" fontIcon="delete"
             (click)="deleteClassifiedsItemClicked(item)"></mat-icon></td>

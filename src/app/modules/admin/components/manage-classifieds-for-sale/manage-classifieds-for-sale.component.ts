@@ -37,7 +37,7 @@ export class ManageClassifiedsForSaleComponent implements OnInit {
       itemToPush.id = classifiedItem.id;
       itemToPush.title = classifiedItem.title;
       itemToPush.category = classifiedItem.category;
-      itemToPush.description = classifiedItem.description;
+      // itemToPush.description = classifiedItem.description;
       itemToPush.price = classifiedItem.price;
       // itemToPush.images = classifiedItem.images;
       itemToPush.location = classifiedItem.location;
@@ -46,8 +46,11 @@ export class ManageClassifiedsForSaleComponent implements OnInit {
       itemToPush.email = classifiedItem.email;
       itemToPush.itemCondition = classifiedItem.itemCondition;
       itemToPush.availability = classifiedItem.availability;
-      itemToPush.specialNotes = classifiedItem.specialNotes;
+      // itemToPush.specialNotes = classifiedItem.specialNotes;
       itemToPush.dateAdded = classifiedItem.dateAdded;
+
+      itemToPush.description = classifiedItem.description?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+      itemToPush.specialNotes = classifiedItem.specialNotes?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
       const imageDataArray = classifiedItem.images.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 

@@ -118,8 +118,11 @@
           <div class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-10 px-0">
               <mat-label>Description</mat-label>
-              <input style="color: black;" matInput required maxlength="200" formControlName="descriptionControl"
-                placeholder="E.G. Well maintained Cessna 172 with 500 hours on the engine. New avionics installed in 2021. Perfect for cross - country flights.">
+              <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="200"
+                formControlName="descriptionControl" (keydown)="keydownOnBulletPointControl(descriptionControl)"
+                (keyup)="inputOnBulletPointControl(descriptionControl, $event)"
+                (blur)="blurOnBulletPointControl(descriptionControl)"
+                placeholder="E.G. Well maintained Cessna 172 with 500 hours on the engine. New avionics installed in 2021. Perfect for cross - country flights."></textarea>
               <mat-error *ngIf="descriptionControl?.hasError('required')">Description is required</mat-error>
             </mat-form-field>
           </div>
@@ -139,14 +142,16 @@
 
           <div class="row mx-0 justify-content-center mt-2">
             <div class="col-10 px-0">
-              <P class="mb-1">Upload high quality images of the item, showing all key aspects such as the overall condition and any unique features</P>
+              <P class="mb-1">Upload high quality images of the item, showing all key aspects such as the overall
+                condition and any unique features</P>
               <P class="mb-1">Tip: include multiple angles</P>
-              <p class="text-size-12 child-path-text">Upload up to 4 supported files. File types: PNG, JPG, JPEG, SVG. Max 50MB per file.
+              <p class="text-size-12 child-path-text">Upload up to 4 supported files. File types: PNG, JPG, JPEG, SVG.
+                Max 50MB per file.
               </p>
-  
+
               <div *ngIf="submitClassifiedsRequestData.images?.length">
                 <div class="row mb-2 mx-0" *ngFor="let image of submitClassifiedsRequestData.images">
-  
+
                   <div class="col-1 px-0 align-content-center">
                     <mat-icon class="pointer delete-icon align-bottom"
                       (click)="deleteItemImage(image.fileName)">delete</mat-icon>
@@ -154,13 +159,13 @@
                   <div class="col-11 pr-0 align-content-center">
                     <p class="mb-0 text-size-14">{{ image.fileName }}</p>
                   </div>
-  
+
                 </div>
               </div>
-  
+
               <div class="col-12 px-0">
-                <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="4" [maxFileSize]="50000000" [returnAsFile]="true"
-                  (emitFileData)="updateItemImages($event)"></app-file-uploader>
+                <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="4" [maxFileSize]="50000000"
+                  [returnAsFile]="true" (emitFileData)="updateItemImages($event)"></app-file-uploader>
               </div>
             </div>
           </div>
@@ -221,7 +226,8 @@
               <mat-label>Condition</mat-label>
               <mat-radio-group formControlName="conditionSelectControl">
                 <mat-radio-button class="row mx-0" value="New">New</mat-radio-button>
-                <mat-radio-button class="row mx-0" value="Used (Good Condition)">Used (Good Condition)</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Used (Good Condition)">Used (Good
+                  Condition)</mat-radio-button>
                 <mat-radio-button class="row mx-0" value="Used (Needs Work)">Used (Needs Work)</mat-radio-button>
               </mat-radio-group>
               <mat-error *ngIf="conditionSelectControl?.hasError('required')">Condition is required</mat-error>
@@ -231,7 +237,8 @@
           <div class="row mx-0 justify-content-center mt-2">
             <div class="col-10 px-0">
               <mat-label>Availability</mat-label>
-              <mat-radio-group formControlName="availabilitySelectControl" (change)="resetControl(availabliliyWaitingPeriodControl)">
+              <mat-radio-group formControlName="availabilitySelectControl"
+                (change)="resetControl(availabliliyWaitingPeriodControl)">
                 <mat-radio-button class="row mx-0" value="Immediately">Immediately</mat-radio-button>
                 <mat-radio-button class="row mx-0" value="Other">Other</mat-radio-button>
               </mat-radio-group>
@@ -242,24 +249,29 @@
           <div *ngIf="availabilitySelectControl?.value === 'Other'" class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-10 px-0">
               <mat-label>Availability Waiting Period</mat-label>
-              <input style="color: black;" matInput required maxlength="200" formControlName="availabliliyWaitingPeriodControl"
+              <input style="color: black;" matInput required maxlength="200"
+                formControlName="availabliliyWaitingPeriodControl"
                 placeholder="Specify the Availability Waiting Period.">
-              <mat-error *ngIf="availabliliyWaitingPeriodControl?.hasError('required')">Availability Waiting Period is required</mat-error>
+              <mat-error *ngIf="availabliliyWaitingPeriodControl?.hasError('required')">Availability Waiting Period is
+                required</mat-error>
             </mat-form-field>
           </div>
 
           <div class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-10 px-0">
               <mat-label>Special Notes</mat-label>
-              <input style="color: black;" matInput required maxlength="200" formControlName="specialNotesControl"
-                placeholder="Any additional details, such as shipping options, warranties, or offers for trade.">
+              <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="900"
+                formControlName="specialNotesControl" (keydown)="keydownOnBulletPointControl(specialNotesControl)"
+                (keyup)="inputOnBulletPointControl(specialNotesControl, $event)"
+                (blur)="blurOnBulletPointControl(specialNotesControl)"
+                placeholder="Any additional details, such as shipping options, warranties, or offers for trade."></textarea>
               <mat-error *ngIf="specialNotesControl?.hasError('required')">Special Notes is required</mat-error>
             </mat-form-field>
           </div>
 
           <div class="row mx-0 justify-content-center">
             <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitDisabled()}"
-            (click)="submitClicked()">
+              (click)="submitClicked()">
               <p class="mb-0">Submit</p>
               <span class="red-button-icon"></span>
             </div>
