@@ -48,7 +48,6 @@ export class DocumetsRowComponent implements OnInit {
 
   public addFolderModalOutcome(modalOutcome: string, folderNmae: string) {
     if (modalOutcome === ModalOutcomeOptions.Update && folderNmae) {
-      console.log('FOLDER NAME: ', folderNmae);
 
       const dataToEmit = new CreateMembersDocumentsFolderRequest.RootObject();
       dataToEmit.folderName = folderNmae;

@@ -27,11 +27,6 @@ export class ImageUploaderComponent implements OnInit {
     const filesToEmit = new Array<UploadImageRequest.FileData>();
 
     if (status == true) {
-
-      // console.log('FILES DATA FROM SELECT: ', files);
-      // console.log('FILES TYPE: ', typeof(files));
-      // console.log('FILES LENGTH: ', files.length);
-
       let setImageDataResolver = new Promise((resolve, reject) => {
 
         for (let index = 0; index < files.length; index++) {
@@ -52,21 +47,17 @@ export class ImageUploaderComponent implements OnInit {
                   orientation: 1,
                   fileName: file.name
                 }
-                console.log('IMAGE TO COMPRESS: ', imageToCompress);
                 await this.imageCompress
                   .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
                   .then(
                     (result) => {
-                      console.log('SUCCESS RESULTS: ', result);
                       fileDataToAdd.imageData = result.image;
                     },
                     (result: string) => {
-                      console.log('ERROR RESULTS: ', result);
                       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
                     }
                   );
               } else {
-                console.log('IN ELSE FOR SIZE AND NEF CHECK');
                 fileDataToAdd.imageData = imageSrc;
               }
             }

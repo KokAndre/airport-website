@@ -77,8 +77,6 @@ export class AdminService {
     requestData.description = description;
     requestData.userId = this.loginService.getLoggedInUserId();
 
-    console.log('REQUEST DATA: ', requestData);
-
     return fetch(Endpoints.BaseURL + Endpoints.CreateGallerySection, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })

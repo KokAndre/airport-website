@@ -265,10 +265,7 @@ export class FaqsComponent implements OnInit {
   }
 
   public togglePannel(indexToToggle: number) {
-    // console.log('IN TOGGLE PANNEL!!!!!!');
-    // if (indexToToggle < (this.faqSections.length - 1)) {
-      this.faqSections[indexToToggle].isSectionExpanded = !this.faqSections[indexToToggle].isSectionExpanded;
-    // }
+    this.faqSections[indexToToggle].isSectionExpanded = !this.faqSections[indexToToggle].isSectionExpanded;
   }
 
 }

@@ -18,9 +18,7 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('LIVE WEATHER WIDGET!!!!!!!!!');
     var DateObj = new Date();
-    console.log('CURRENT DATE TIME', DateObj);
     // DateObj.setFullYear(2024,09, 23, 12, 42, 15);
     var secdelay = 10000;
     var sec = Math.floor(DateObj.getSeconds() * 1000) + DateObj.getMilliseconds();
@@ -29,7 +27,6 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
     // timeoutId = setTimeout( () => {
     //   this.getFeed();
     //   interval = setInterval(this.getFeed, 60000);
-    //   console.log("Time SYNC to Server");
     // }, secdiff);
 
 
@@ -63,7 +60,6 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
 
   // public fetchWidgetData() {
   //   this.aboutUsService.fetchWeatherWidgetData().then(results => {
-  //     console.log('LIVE WX DATA: ', results);
   //   });
   // }
 
@@ -104,9 +100,6 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
     $(".cameast").attr("src", "https://www.slingaircraft.com/live-cam/images/east/" + cd_cameast);
     let wds_array = wd_station.split(',')
     let wdgfx_array = wd_gfx.split(',')
-
-    console.log('WDS ARRAY: ', wds_array);
-
 
     $(".var01").text(wds_array[0]);
     $(".var02").text("Last Updated: " + wds_array[1]);
@@ -190,17 +183,13 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
     //   cache: false,
     //   dataType: "json",
     //   success: function (data) {
-    //     console.log(data);
     //     $(".fade").fadeOut(50, function () {
     //       this.updateFeed(data);
     //     });
     //   }
     // });
 
-    console.log('GET FEED!!!!');
-
     this.aboutUsService.fetchWeatherWidgetData().then(results => {
-      console.log('LIVE WX DATA: ', results);
       this.updateFeed(results);
     });
   }
@@ -341,7 +330,6 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
   //     cache: false,
   //     dataType: "json",
   //     success: function (data) {
-  //       console.log(data);
   //       $(".fade").fadeOut(50, function () {
   //         updateFeed(data);
   //       });
@@ -358,7 +346,6 @@ export class LiveWeatherWidgetComponent implements OnInit, OnDestroy {
   // timeoutId = setTimeout(function () {
   //   getFeed();
   //   interval = setInterval(getFeed, 60000);
-  //   console.log("Time SYNC to Server");
   // }, secdiff);
 
   // $('#tabs-nav li:first-child').addClass('active');

@@ -25,7 +25,6 @@ export class DocumentsComponent implements OnInit {
       if (results.status === 200) {
         this.documentsData = results.documentData;
         this.setLevelExpanded(this.documentsData, true);
-        console.log('DOCUMENT DATA TO DISPLAY: ', this.documentsData);
         this.isLoading = false;
       } else {
         this.isLoading = false;

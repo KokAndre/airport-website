@@ -28,7 +28,6 @@ export class ManageMembersDocumentsComponent implements OnInit {
       if (results.status === 200) {
         this.documentsData = results.documentData;
         this.setLevelExpanded(this.documentsData, true);
-        console.log('DOCUMENT DATA TO DISPLAY: ', this.documentsData);
         this.isLoading = false;
       } else {
         this.isLoading = false;
@@ -61,7 +60,6 @@ export class ManageMembersDocumentsComponent implements OnInit {
   }
 
   public async fileUploaded(uploadedFileData: UploadMembersDocumentsRequest.RootObject) {
-    console.log('UPLOADED DOCUMENTS: ', uploadedFileData);
 
     let isAllDocumentsUploaded = true;
     let errorMessage = 'Error uploading the following documents:'
@@ -87,8 +85,6 @@ export class ManageMembersDocumentsComponent implements OnInit {
   }
 
   public createFOlder(folderData: CreateMembersDocumentsFolderRequest.RootObject) {
-    console.log('DATA TO SUBMIT FOLDER CREATE: ', folderData);
-
     this.adminService.createMembersDocumentsFolder(folderData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Create Folder', results.message, null);
       if (results.status === 200) {

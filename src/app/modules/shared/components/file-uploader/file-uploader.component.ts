@@ -101,10 +101,7 @@ export class FileUploaderComponent implements OnInit {
     });
 
     setImageDataResolver.then(() => {
-      // if (!this.returnAsFile) {
-      console.log('FILES TO EMIT: ', filesToEmit);
       this.emitFileData.emit(filesToEmit);
-      // }
     });
   }
 

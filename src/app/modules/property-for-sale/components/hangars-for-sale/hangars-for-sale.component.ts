@@ -28,7 +28,6 @@ export class HangarsForSaleComponent implements OnInit {
   public getHangerForSaleData() {
     this.propertyForSaleService.getHangerForSaleData().then(results => {
       if (results.status === 200) {
-        console.log('RESULTS: ', results);
         if (results.hangers) {
           this.formatData(results.hangers);
         }
