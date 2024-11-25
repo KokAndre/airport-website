@@ -12,6 +12,7 @@ import { ManageStandsForSaleInterestComponent } from './components/manage-stands
 import { ManageLeviesComponent } from './components/manage-levies/manage-levies.component';
 import { ManageMembersDocumentsComponent } from './components/manage-members-documents/manage-members-documents.component';
 import { ManageClassifiedsForSaleComponent } from './components/manage-classifieds-for-sale/manage-classifieds-for-sale.component';
+import { ManageClassifiedsForSaleInterestComponent } from './components/manage-classifieds-for-sale-interest/manage-classifieds-for-sale-interest.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-classifieds-for-sale', component: ManageClassifiedsForSaleComponent
+  },
+  {
+    path: 'manage-interest-in-classifieds-for-sale', component: ManageClassifiedsForSaleInterestComponent
   }
 ];
 

@@ -22,6 +22,7 @@ import * as XLSX from 'xlsx';
 import * as moment from 'moment';
 import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
+import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -539,6 +540,46 @@ export class AdminService {
     return fetch(Endpoints.BaseURL + Endpoints.DeleteClassifiedsForSaleItem, {
       method: 'post',
       body: JSON.stringify({ id: classifiedsId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getInterestedInClassifiedsData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetInterestedInClassifiedsData, {
+      method: 'get',
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public editInterestedInClassifiedsData(interestedInClassifiedsRequestId: number) {
+    const requestData = new UpdateInterestedInClassifiedsItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.classifiedsItemId = interestedInClassifiedsRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInClassifiedsAsFollowedUp, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteInterestedInClassifiedsData(interestedInHangerRequestId: number) {
+    const requestData = new UpdateInterestedInClassifiedsItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.classifiedsItemId = interestedInHangerRequestId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInClassifiedsItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
     })
       .then(response => response.json())
       .then(data => {

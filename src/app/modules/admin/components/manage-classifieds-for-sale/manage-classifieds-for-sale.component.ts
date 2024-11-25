@@ -76,16 +76,6 @@ export class ManageClassifiedsForSaleComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
   public exportToExcel() {
     const standsForSaleExcelData = new Array<any>();
     this.classifiedsData.forEach(item => {

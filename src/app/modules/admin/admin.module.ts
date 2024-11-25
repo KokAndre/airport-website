@@ -14,6 +14,7 @@ import { ManageStandsForSaleInterestComponent } from './components/manage-stands
 import { ManageLeviesComponent } from './components/manage-levies/manage-levies.component';
 import { ManageMembersDocumentsComponent } from './components/manage-members-documents/manage-members-documents.component';
 import { ManageClassifiedsForSaleComponent } from './components/manage-classifieds-for-sale/manage-classifieds-for-sale.component';
+import { ManageClassifiedsForSaleInterestComponent } from './components/manage-classifieds-for-sale-interest/manage-classifieds-for-sale-interest.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ManageClassifiedsForSaleComponent } from './components/manage-classifie
     ManageStandsForSaleInterestComponent,
     ManageLeviesComponent,
     ManageMembersDocumentsComponent,
-    ManageClassifiedsForSaleComponent
+    ManageClassifiedsForSaleComponent,
+    ManageClassifiedsForSaleInterestComponent
   ]
 })
 export class AdminModule { }
