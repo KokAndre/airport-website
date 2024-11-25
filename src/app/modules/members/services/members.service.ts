@@ -4,6 +4,7 @@ import { Endpoints } from 'src/app/enums/app.enums';
 import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
 import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
+import { SubmitClassifiedsRequest } from 'src/app/models/submit-classifieds-request.model';
 import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
 
 @Injectable({
@@ -188,6 +189,39 @@ export class MembersService {
     return fetch(Endpoints.BaseURL + Endpoints.GetMemebersDocumentBase64, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public submitClassifiedsItem(classifiedsItemRequestData: SubmitClassifiedsRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(classifiedsItemRequestData));
+    requestData.images.forEach(x => {
+      x.fileData = '';
+    });
+
+    return fetch(Endpoints.BaseURL + Endpoints.ClassifiedsSubmitItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadClassifiedsItemImages(submitAdSucessId: number, image: SubmitClassifiedsRequest.Image) {
+    let formData: FormData = new FormData();
+    formData.append('file', image.fileData);
+    formData.append('name', image.fileName);
+    formData.append('classifiedsId', `${submitAdSucessId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.ClassifiedsUploadImage, {
+      method: 'post',
+      body: formData
     })
       .then(response => response.json())
       .then(data => {

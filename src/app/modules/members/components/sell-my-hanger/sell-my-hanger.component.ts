@@ -189,7 +189,7 @@ export class SellMyHangerComponent implements OnInit {
   public updateHangerImages(uploadedImages: SellMyHangerRequest.FileData[]) {
     if (uploadedImages?.length > 0) {
       if (uploadedImages.length > 5) {
-        uploadedImages.splice(5);
+        uploadedImages = uploadedImages.splice(4);
       }
 
       if (!this.submitHangerForSaleRequestData.hangerImages) {
@@ -366,7 +366,7 @@ export class SellMyHangerComponent implements OnInit {
           }
         });
       }
-    })
+    });
   }
 
   public clearFormData() {

@@ -181,7 +181,7 @@ export class SellMyStandComponent implements OnInit {
   public updateStandImages(uploadedImages: SellMyStandRequest.FileData[]) {
     if (uploadedImages?.length > 0) {
       if (uploadedImages.length > 5) {
-        uploadedImages.splice(5);
+        uploadedImages = uploadedImages.splice(4);
       }
 
       if (!this.submitStandForSaleRequestData.standImages) {
@@ -249,28 +249,14 @@ export class SellMyStandComponent implements OnInit {
 
     this.submitStandForSaleRequestData.leviesApplicable = new Array<string>();
 
-    
+
     this.leviesData.forEach(levieItem => {
       if (levieItem.isSelected) {
         const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
         this.submitStandForSaleRequestData.leviesApplicable.push(levieItemToPush);
       }
     });
-    // if (this.pilotLevyCheckboxControl.value) {
-    //   this.submitStandForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
-    // }
-    // if (this.sectionLevyCheckboxControl.value) {
-    //   this.submitStandForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
-    // }
-    // if (this.securityLevyCheckboxControl.value) {
-    //   this.submitStandForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
-    // }
-    // if (this.voluntaryUseLevyCheckboxControl.value) {
-    //   this.submitStandForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
-    // }
 
-
-    console.log('DATA TO SUBMIT: ', this.submitStandForSaleRequestData);
     this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
       if (results.status === 200) {
         this.submitAdSucessId = results.id;

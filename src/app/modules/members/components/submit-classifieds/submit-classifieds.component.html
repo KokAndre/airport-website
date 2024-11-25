@@ -1,0 +1,293 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Classifieds</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Classifieds</span></p>
+  </div>
+</div>
+
+<div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image4"></div>
+  </div>
+</div>
+
+<app-arrow-divider class="pointer" (click)="isWelcomeExpanded = !isWelcomeExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Welcome to the Tedderfield Airpark Classifieds!</p>
+      </mat-expansion-panel-header>
+
+      <p>Looking to sell your aircraft, tools, or aviation - related equipment? The Tedderfield Airpark Classifieds is
+        the perfect platform for our community to buy and sell items - from airplanes and propellers to toolsets and
+        avionics.</p>
+
+      <p>Whether you're upgrading or simply clearing out space in your hangar, this is your space to connect with fellow
+        owners and aviation enthusiasts.</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isHowToAdvertideExpanded = !isHowToAdvertideExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isHowToAdvertideExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">How to Advertise</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="col-10 mx-auto">
+      <p>If you're an owner and wish to post an item for sale, simply fill out the form below with all the relevant
+        details. Our classifieds will automatically present themselves in a separate page, in the classifieds section.
+      </p>
+    </div>
+
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isFormExpanded = !isFormExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isFormExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Advertising Details</p>
+      </mat-expansion-panel-header>
+
+      <div class="mb-3 py-4" [formGroup]="submitClassifiedsFormGroup">
+        <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto report-issue-form-background">
+
+          <div class="row mx-0 justify-content-center mt-4">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Title</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="titleControl"
+                placeholder="E.G. Cessna 172 for Sale or Propeller - Hartzell 3 - Blade">
+              <mat-error *ngIf="titleControl?.hasError('required')">Title is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <mat-label>Category</mat-label>
+              <mat-radio-group formControlName="categorySelectControl" (change)="resetControl(otherCategoryControl)">
+                <mat-radio-button class="row mx-0" value="Aircraft">Aircraft</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Engine">Engine</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Propeller">Propeller</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Avionics">Avionics</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Tools and Equipment">Tools and Equipment</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Spare Parts">Spare Parts</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Accessories">Accessories</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Other">Other</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="categorySelectControl?.hasError('required')">Category is required</mat-error>
+            </div>
+          </div>
+
+          <div *ngIf="categorySelectControl?.value === 'Other'" class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Specify Other Category</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="otherCategoryControl"
+                placeholder="Please specify the category">
+              <mat-error *ngIf="otherCategoryControl?.hasError('required')">Specify Other Category is
+                required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Description</mat-label>
+              <input style="color: black;" matInput required maxlength="200" formControlName="descriptionControl"
+                placeholder="E.G. Well maintained Cessna 172 with 500 hours on the engine. New avionics installed in 2021. Perfect for cross - country flights.">
+              <mat-error *ngIf="descriptionControl?.hasError('required')">Description is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Price</mat-label>
+              <div class="d-flex">
+                <span *ngIf="priceControl.value" class="currency-input-prefix">ZAR</span>
+                <input style="color: black;" (blur)="thousandSeparatorControlInput(priceControl)"
+                  (input)="numberControlInputWithDecimal(priceControl)" matInput required maxlength="50"
+                  formControlName="priceControl" placeholder="Price in South African Rand(ZAR)">
+              </div>
+              <mat-error *ngIf="priceControl?.hasError('required')">Price is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <P class="mb-1">Upload high quality images of the item, showing all key aspects such as the overall condition and any unique features</P>
+              <P class="mb-1">Tip: include multiple angles</P>
+              <p class="text-size-12 child-path-text">Upload up to 4 supported files. File types: PNG, JPG, JPEG, SVG. Max 50MB per file.
+              </p>
+  
+              <div *ngIf="submitClassifiedsRequestData.images?.length">
+                <div class="row mb-2 mx-0" *ngFor="let image of submitClassifiedsRequestData.images">
+  
+                  <div class="col-1 px-0 align-content-center">
+                    <mat-icon class="pointer delete-icon align-bottom"
+                      (click)="deleteItemImage(image.fileName)">delete</mat-icon>
+                  </div>
+                  <div class="col-11 pr-0 align-content-center">
+                    <p class="mb-0 text-size-14">{{ image.fileName }}</p>
+                  </div>
+  
+                </div>
+              </div>
+  
+              <div class="col-12 px-0">
+                <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="4" [maxFileSize]="50000000" [returnAsFile]="true"
+                  (emitFileData)="updateItemImages($event)"></app-file-uploader>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <mat-label>Location</mat-label>
+              <mat-radio-group formControlName="locationSelectControl" (change)="resetControl(locationOtherControl)">
+                <mat-radio-button class="row mx-0" value="Tedderfield Airpark">Tedderfield Airpark</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Other">Other</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="locationSelectControl?.hasError('required')">Location is required</mat-error>
+            </div>
+          </div>
+
+          <div *ngIf="locationSelectControl?.value === 'Other'" class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Specify Other Location</mat-label>
+              <input style="color: black;" matInput required maxlength="200" formControlName="locationOtherControl"
+                placeholder="Specify the locatoin of the item.">
+              <mat-error *ngIf="locationOtherControl?.hasError('required')">Specify Other Location is
+                required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Name</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="nameControl"
+                placeholder="Please enter your name">
+              <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Email</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="emailControl"
+                placeholder="Please capture a valid email address">
+              <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Phone Number</mat-label>
+              <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
+                placeholder="Please enter a valid phone number"
+                (input)="numberControlInput(phoneNumberControl || undefined)">
+              <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+              <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <mat-label>Condition</mat-label>
+              <mat-radio-group formControlName="conditionSelectControl">
+                <mat-radio-button class="row mx-0" value="New">New</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Used (Good Condition)">Used (Good Condition)</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Used (Needs Work)">Used (Needs Work)</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="conditionSelectControl?.hasError('required')">Condition is required</mat-error>
+            </div>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <mat-label>Availability</mat-label>
+              <mat-radio-group formControlName="availabilitySelectControl" (change)="resetControl(availabliliyWaitingPeriodControl)">
+                <mat-radio-button class="row mx-0" value="Immediately">Immediately</mat-radio-button>
+                <mat-radio-button class="row mx-0" value="Other">Other</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="availabilitySelectControl?.hasError('required')">Availability is required</mat-error>
+            </div>
+          </div>
+
+          <div *ngIf="availabilitySelectControl?.value === 'Other'" class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Availability Waiting Period</mat-label>
+              <input style="color: black;" matInput required maxlength="200" formControlName="availabliliyWaitingPeriodControl"
+                placeholder="Specify the Availability Waiting Period.">
+              <mat-error *ngIf="availabliliyWaitingPeriodControl?.hasError('required')">Availability Waiting Period is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Special Notes</mat-label>
+              <input style="color: black;" matInput required maxlength="200" formControlName="specialNotesControl"
+                placeholder="Any additional details, such as shipping options, warranties, or offers for trade.">
+              <mat-error *ngIf="specialNotesControl?.hasError('required')">Special Notes is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row mx-0 justify-content-center">
+            <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitDisabled()}"
+            (click)="submitClicked()">
+              <p class="mb-0">Submit</p>
+              <span class="red-button-icon"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isPostYourAdNowExpanded = !isPostYourAdNowExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isPostYourAdNowExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Post Your Ad Now!</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="col-10 mx-auto">
+      <p>Fill in the fields above to create your classified ad, and we'll ensure it reaches our community of aviation
+        enthusiasts.</p>
+    </div>
+
+  </mat-expansion-panel>
+</div>

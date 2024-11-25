@@ -34,6 +34,7 @@ export enum AppRoutes {
     SellMyStand = '/members/sell-my-stand',
     YourTrusteed = '/members/your-trustees',
     MembersDocuments = '/members/documents',
+    SubmitClassifieds = '/members/classifieds',
 
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
@@ -115,7 +116,11 @@ export enum Endpoints {
     GetMemebersDocumentBase64 = '/file-system/get-document.php',
     UploadMembersDocument = '/file-system/upload-document.php',
     CreateMembersDocumentsFolder = '/file-system/add-folder.php',
-    DeletMembersDocumentsFile = '/file-system/delete-file.php'
+    DeletMembersDocumentsFile = '/file-system/delete-file.php',
+
+    // Classifieds
+    ClassifiedsSubmitItem = '/classifieds/submit-item-for-sale.php',
+    ClassifiedsUploadImage = '/classifieds/upload-item-for-sale-image.php'
 }
 
 export enum EncryptionKeys {

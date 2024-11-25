@@ -10,6 +10,7 @@ import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.c
 import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
 import { LoginGuardService } from 'src/app/route-guards/login-guard.service';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
 
 const routes: Routes = [
   {
@@ -37,8 +38,11 @@ const routes: Routes = [
     path: 'your-trustees', canActivate: [LoginGuardService], component: YourTrusteesComponent
   },
   {
+    path: 'classifieds', canActivate: [LoginGuardService], component: SubmitClassifiedsComponent
+  },
+  {
     path: 'documents', canActivate: [LoginGuardService], component: DocumentsComponent
-  }
+  },
 ];
 
 @NgModule({

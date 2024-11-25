@@ -162,10 +162,12 @@
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.YourTrusteed)">Your Trustees</div>
           <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
-          </div>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.SubmitClassifieds)">Classifieds</div>
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersDocuments)">Documents
+          </div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
         </div>
       </div>
@@ -405,11 +407,14 @@
       <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.YourTrusteed)">Your
         Trustees</div>
       <mat-divider></mat-divider>
-      <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
-      </div>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.SubmitClassifieds)">
+        Classifieds</div>
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersDocuments)">
         Documents
+      </div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>
     </div>
   </mat-menu>

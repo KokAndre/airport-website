@@ -11,6 +11,7 @@ import { SellMyHangerComponent } from './components/sell-my-hanger/sell-my-hange
 import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.component';
 import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
 
 
 
@@ -24,7 +25,8 @@ import { DocumentsComponent } from './components/documents/documents.component';
     SellMyHangerComponent,
     SellMyStandComponent,
     YourTrusteesComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    SubmitClassifiedsComponent
   ],
   imports: [
     CommonModule,
