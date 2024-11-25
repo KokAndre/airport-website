@@ -55,6 +55,7 @@ export enum Endpoints {
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
     HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
     StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
+    ClassifiedsImagesBaseURL = 'https://www.tedderfield.co.za/api/classifieds/images/',
     // MembersDocumentsBaseEndpoint = 'https://www.tedderfield.co.za/api/file-system/',
     Register = '/members/register.php',
     Login = '/members/login.php',
@@ -120,7 +121,9 @@ export enum Endpoints {
 
     // Classifieds
     ClassifiedsSubmitItem = '/classifieds/submit-item-for-sale.php',
-    ClassifiedsUploadImage = '/classifieds/upload-item-for-sale-image.php'
+    ClassifiedsUploadImage = '/classifieds/upload-item-for-sale-image.php',
+    GetClassifiedsData =  '/classifieds/get-classifieds-data.php',
+    SubmitInterestedInClassifiedsItem = '/classifieds/submit-interested-in-item.php',
 }
 
 export enum EncryptionKeys {

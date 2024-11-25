@@ -102,7 +102,7 @@ export class StandsForSaleComponent implements OnInit {
   }
 
   public displayInterestedInStandModal() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.InterestedInPropertyModal, 'Capture your details', '', null, this.submitInterestedInBuyingStand.bind(this))
+    this.appModalService.ShowConfirmationModal(ModalTypes.InterestedInPropertyModal, 'Capture your details', '', null, this.submitInterestedInBuyingStand.bind(this));
   }
 
   public submitInterestedInBuyingStand(modalOutcome: string, requestData: SubmitInterestedInPropertyRequest) {

@@ -300,19 +300,6 @@ export class SellMyHangerComponent implements OnInit {
       }
     });
 
-    // if (this.pilotLevyCheckboxControl.value) {
-    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Pilot Levy ZAR770 per month');
-    // }
-    // if (this.sectionLevyCheckboxControl.value) {
-    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Section Levey ZAR1075 per month');
-    // }
-    // if (this.securityLevyCheckboxControl.value) {
-    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Security Levy ZAR110 per month');
-    // }
-    // if (this.voluntaryUseLevyCheckboxControl.value) {
-    //   this.submitHangerForSaleRequestData.leviesApplicable.push('Voluntary Use Levy ZAR1000 per month');
-    // }
-
     this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
       if (results.status === 200) {
         this.submitAdSucessId = results.id;

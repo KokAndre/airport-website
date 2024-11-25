@@ -3,9 +3,4 @@ export class SubmitInterestedInPropertyRequest {
     email: string;
     phoneNumber: string;
     propertyId: number;
-    // propertyNumber: string;
-    // propertyPrice: string;
-    // propertySellerName: string;
-    // propertySellerEmail: string;
-    // propertySellerNumber: string;
 }

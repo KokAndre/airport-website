@@ -1,41 +1,202 @@
-<div
-  style="width: 100%; height: 500px; background-image: url('assets/sample-image.webp'); background-repeat: no-repeat; background-position: bottom; background-size: cover;">
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Classifieds</p>
+    <p class="mb-0 text-size-14">FATA Merch / <span class="child-path-text">Classifieds</span></p>
+  </div>
 </div>
 
-<div class="col-12">
-  <h1 class="mt-3 mx-auto text-center">Classifieds Page</h1>
+<div [hidden]="displayClassifiedsDetails">
 
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae nisl in nisi tempor sollicitudin eget et
-    dolor. Quisque posuere scelerisque tortor, vitae tempor nunc tempus id. Nam dui nunc, finibus in tincidunt non,
-    malesuada vitae neque. Suspendisse ac ligula risus. Suspendisse eleifend, augue eget finibus facilisis, lacus nibh
-    tempor turpis, eu rhoncus magna dolor quis sem. Phasellus imperdiet euismod nulla ac interdum. Mauris congue turpis
-    nisi. Integer in fermentum purus. Sed non finibus orci. Nam dapibus ullamcorper diam, at congue arcu pellentesque
-    ac. Nunc ut luctus lectus. Fusce quis ex dui. Aenean eget libero tincidunt, facilisis urna vitae, faucibus lacus.
-    Maecenas eget risus id justo dapibus ultrices. Nunc ac porta mauris. Duis tempus, urna eget dapibus rutrum, urna
-    ante tempus lacus, accumsan semper eros lacus eu ligula.
-    <br><br>
-    Cras mattis feugiat justo, at accumsan sem congue quis. Etiam turpis magna, tempus ac elit sit amet, eleifend
-    aliquet augue. Aliquam tempor commodo magna non congue. Mauris ultrices posuere ligula vitae ullamcorper. Maecenas
-    at condimentum orci. Phasellus eget ultrices mi, a pretium diam. Fusce suscipit auctor efficitur. Suspendisse luctus
-    eget libero id dapibus. Ut eu venenatis libero. Etiam malesuada est a quam condimentum, eu lacinia augue
-    consectetur.
-    <br><br>
-    Integer nunc augue, ultrices rhoncus mattis et, scelerisque sit amet turpis. Ut suscipit metus justo, ac iaculis
-    sapien iaculis rhoncus. Sed gravida luctus sem, iaculis condimentum nibh laoreet vitae. Proin condimentum est et
-    quam ultricies porta. Suspendisse vel augue ante. Donec vel lacus a ex consectetur auctor. Pellentesque eget felis
-    at elit faucibus maximus sed sed ex. Vestibulum blandit, nulla in fermentum dapibus, est orci imperdiet justo, nec
-    blandit nisl turpis vel lorem. Praesent consequat eros at ultrices imperdiet. Suspendisse congue a dolor egestas
-    cursus. Curabitur eget eleifend eros. Cras maximus magna ac augue fringilla, vel porttitor quam egestas.
-    <br><br>
-    Morbi vitae viverra est. Donec eleifend est quam, eget dapibus mauris ornare vel. Curabitur mauris nisl, hendrerit
-    ac mauris sit amet, suscipit dictum sem. Suspendisse potenti. Nullam vitae scelerisque ex, nec sodales ipsum. Nunc
-    consequat cursus tincidunt. Pellentesque venenatis luctus congue. Quisque commodo et enim vitae aliquam.
-    <br><br>
-    Cras gravida diam lectus, eu varius nisi vehicula accumsan. Sed arcu quam, tempus id ipsum quis, fringilla bibendum
-    nulla. Sed eget odio a risus gravida cursus. Donec scelerisque porttitor tincidunt. Donec dictum, dolor id maximus
-    posuere, enim diam malesuada est, nec faucibus diam massa ac nulla. Nulla interdum urna a mauris finibus, ac aliquam
-    arcu lobortis. Suspendisse egestas semper euismod. Fusce id lacus lectus. Vivamus egestas tortor pellentesque enim
-    ornare scelerisque.
-  </p>
+  <!-- <div class="row mx-0 mb-4 justify-content-center">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image1"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image2"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image3"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image4"></div>
+    </div>
+    
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <div class="page-top-images image5"></div>
+    </div>
+  </div> -->
+
+  <app-arrow-divider class="pointer" (click)="isSectionOneExpanded = !isSectionOneExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isSectionOneExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Classifieds Heading</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Classifieds description text will go herre! :)</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider *ngIf="!classifiedsData?.length" class="pointer"
+      (click)="isNoClassifiedsAdvertsExpanded = !isNoClassifiedsAdvertsExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+    <app-arrow-divider *ngIf="classifiedsData?.length" class="pointer" (click)="togglePannel(0)"
+      [isLightToDark]="false"></app-arrow-divider>
+
+  </div>
+
+  <div class="" *ngIf="!classifiedsData?.length">
+    <mat-expansion-panel hideToggle [expanded]="isNoClassifiedsAdvertsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">No Available Classifieds</p>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="col-10 mx-auto">
+        <p>Unfortunately, there are currently no items for sale. Kindly check back periodically in case anew listing is
+          submitted.</p>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+
+  <div class="" *ngIf="classifiedsData?.length">
+    <div *ngFor="let classifiedItem of classifiedsData; let last = last; let index = index"
+      [ngClass]="{'dark-background': ((index + 1) % 2 ? false : true)}">
+      <mat-expansion-panel hideToggle [expanded]="classifiedItem.isExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <div class="col-10 mx-auto">
+            <p class="text-size-24 mb-3">{{ classifiedItem.title }} - R{{ classifiedItem.price }}</p>
+          </div>
+        </mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <div class="row mx-n2">
+            <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3 image-center-allign"
+              *ngFor="let img of classifiedItem.images">
+              <img [src]="img.fileData" [alt]="img.fileName" class="classifieds-images" />
+            </div>
+            
+            <p class="mb-0 text-size-18">Price</p>
+            <p>R{{ classifiedItem.price }}</p>
+
+            <p class="mb-0 text-size-18">Description</p>
+            <p [innerHTML]="classifiedItem.description"></p>
+
+            <p class="mb-0 text-size-18">Special Notes</p>
+            <p [innerHTML]="classifiedItem.specialNotes"></p>
+
+            <div class="row mx-0 justify-content-center">
+              <div class="red-button mb-4" (click)="viewClassifiedDetails(classifiedItem.id)">
+                <p class="mb-0">View Details</p>
+                <span class="red-button-icon"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+        [isLightToDark]="((index + 1) % 2 ? true : false)"></app-arrow-divider>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="displayClassifiedsDetails">
+
+  <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <div class="col-10 mx-auto">
+      <p class="text-size-24 mb-3">{{ clasifiedDetailsToDisplay.title }}</p>
+
+      <div class="row mx-n2">
+
+        <div class="col-lg-4 col-md-6 col-sm-12 p-2 align-content-center mb-3"
+          *ngFor="let img of clasifiedDetailsToDisplay.images">
+          <img [src]="img.fileData" [alt]="img.fileName" class="classifieds-images" />
+        </div>
+
+        <table class="classifieds-details-table">
+          <tr>
+            <th></th>
+            <th><b>Details</b></th>
+          </tr>
+
+          <tr>
+            <td>Title</td>
+            <td>{{ clasifiedDetailsToDisplay.title }}</td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td>{{ clasifiedDetailsToDisplay.category }}</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>{{ clasifiedDetailsToDisplay.description }}</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td>R{{ clasifiedDetailsToDisplay.price }}</td>
+          </tr>
+          <tr>
+            <td>Location</td>
+            <td>{{ clasifiedDetailsToDisplay.location }}</td>
+          </tr>
+          <tr>
+            <td>Seller Name</td>
+            <td>{{ clasifiedDetailsToDisplay.name }}</td>
+          </tr>
+          <tr>
+            <td>Seller Phone Number</td>
+            <td>{{ clasifiedDetailsToDisplay.phoneNumber }}</td>
+          </tr>
+          <tr>
+            <td>Seller Email</td>
+            <td>{{ clasifiedDetailsToDisplay.email }}</td>
+          </tr>
+          <tr>
+            <td>Condition</td>
+            <td>{{ clasifiedDetailsToDisplay.itemCondition }}</td>
+          </tr>
+          <tr>
+            <td>Availability</td>
+            <td>{{ clasifiedDetailsToDisplay.availability }}</td>
+          </tr>
+          <tr>
+            <td>Special Notes</td>
+            <td>{{ clasifiedDetailsToDisplay.specialNotes }}</td>
+          </tr>
+          <tr>
+            <td>Date Added</td>
+            <td>{{ clasifiedDetailsToDisplay.dateAdded }}</td>
+          </tr>
+        </table>
+
+
+        <div class="row mx-0 justify-content-center mt-3 mb-4">
+          <div class="white-button mr-3" (click)="backClicked()">
+            <p class="mb-0">Back</p>
+            <span class="white-button-icon"></span>
+          </div>
+
+          <div class="red-button" (click)="displayInterestedInItemModal()">
+            <p class="mb-0">I am interested</p>
+            <span class="red-button-icon"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>

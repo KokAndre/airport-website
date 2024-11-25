@@ -64,8 +64,8 @@ export class AppModalComponent implements OnInit {
   public initializeInterestedInPropertyFormControls() {
     this.interestedInPropertyFormGroup = this.formBuilder.group({
       interestedInPropertyNameControl: new FormControl('', [Validators.required]),
-      interestedInPropertyEmailControl: new FormControl('', [Validators.required]),
-      interestedInPropertyPhoneNumberControl: new FormControl('', [Validators.required])
+      interestedInPropertyEmailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
+      interestedInPropertyPhoneNumberControl: new FormControl('', [Validators.required, Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')])
     });
 
     this.checkIfUserIsLoggedIn();

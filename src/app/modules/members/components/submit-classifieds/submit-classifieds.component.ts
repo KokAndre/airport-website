@@ -48,7 +48,7 @@ export class SubmitClassifiedsComponent implements OnInit {
       locationOtherControl: new FormControl(''),
       nameControl: new FormControl('', [Validators.required]),
       emailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
-      phoneNumberControl: new FormControl('', [Validators.required]),
+      phoneNumberControl: new FormControl('', [Validators.required, Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       conditionSelectControl: new FormControl('', [Validators.required]),
       availabilitySelectControl: new FormControl('', [Validators.required]),
       availabliliyWaitingPeriodControl: new FormControl(''),
