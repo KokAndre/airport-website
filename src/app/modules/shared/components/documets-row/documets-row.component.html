@@ -2,15 +2,24 @@
   <mat-expansion-panel [(expanded)]="currentLevelFileData.isExpanded" hideToggle class="folder-expansion-pannel">
     <mat-expansion-panel-header class="">
       <div class="row mx-0 hover-bottom-border expansion-panel-header-row">
-        <div *ngIf="isFromAdmin" class="col-1 px-0">
-          <mat-icon *ngIf="isFromAdmin" (click)="$event.stopPropagation(); deleteFolderClicked(currentLevelFileData.name)"
-          class="pointer delete-icon">delete</mat-icon>
-        </div>
-        <div class="col-1 px-0 align-content-center">
-          <span [ngClass]="currentLevelFileData.isExpanded ? 'folder-open-icon' : 'folder-closed-icon'"></span>
-        </div>
-        <div class="px-0 align-content-center" [ngClass]="isFromAdmin ? 'col-9' : 'col-10'">
-          <p class="mb-0 width-fit-content" [innerHTML]="currentLevelFileData.name"></p>
+        <div class="px-0 align-content-center col-11">
+
+          <div class="row mx-0">
+            <mat-icon *ngIf="isFromAdmin && !isBaseLevel"
+              (click)="$event.stopPropagation(); deleteFolderClicked(currentLevelFileData.name)"
+              class="pointer delete-icon mr-3">delete</mat-icon>
+
+            <mat-icon *ngIf="isFromAdmin && !isBaseLevel" (click)="$event.stopPropagation(); editFolderNameClicked()"
+              class="pointer edit-icon mr-3">edit</mat-icon>
+
+            <span class="mr-3"
+              [ngClass]="currentLevelFileData.isExpanded ? 'folder-open-icon' : 'folder-closed-icon'"></span>
+
+
+            <p class="mb-0 width-fit-content" [innerHTML]="currentLevelFileData.name"></p>
+          </div>
+
+
         </div>
         <div class="col-1 px-0 text-end align-content-center">
           <!-- <mat-icon [ngClass]="{'rotate-expansion-panel-icon': currentLevelFileData.isExpanded}"
@@ -24,7 +33,8 @@
 
     <div *ngFor="let folder of currentLevelFileData.folders" class="ml-3">
       <app-documets-row (fileClickedEmit)="fileClicked($event)" (fileUploadedEmit)="emitFileUploaded($event)"
-        (createFolderEmit)="emitFolderUploaded($event)" (deleteFileEmit)="emitFileToDelete($event)" (deleteFolderEmit)="emitFolderToDelete($event)"
+        (createFolderEmit)="emitFolderUploaded($event)" (deleteFileEmit)="emitFileToDelete($event)"
+        (deleteFolderEmit)="emitFolderToDelete($event)" (renameFolderEmit)="emitRenameFolder($event)"
         [isFromAdmin]="isFromAdmin" [currentLevelFileData]="folder"></app-documets-row>
     </div>
 

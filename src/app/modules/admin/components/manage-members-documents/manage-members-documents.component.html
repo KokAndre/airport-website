@@ -16,9 +16,9 @@
         <p class="text-size-24 mb-3">Members Documents</p>
       </mat-expansion-panel-header>
 
-      <app-documets-row (fileClickedEmit)="openFile($event)" (fileUploadedEmit)="fileUploaded($event)"
-        (createFolderEmit)="createFOlder($event)" (deleteFileEmit)="deleteFile($event)" (deleteFolderEmit)="deleteFolder($event)" [isFromAdmin]="true"
-        [currentLevelFileData]="documentsData"></app-documets-row>
+      <app-documets-row (fileClickedEmit)="openFile($event)" (fileUploadedEmit)="fileUploaded($event)" (renameFolderEmit)="renameFolder($event)"
+        (createFolderEmit)="createFOlder($event)" (deleteFileEmit)="deleteFile($event)" (deleteFolderEmit)="deleteFolder($event)"  [isFromAdmin]="true"
+        [currentLevelFileData]="documentsData" [isBaseLevel]="true"></app-documets-row>
 
     </mat-expansion-panel>
   </div>

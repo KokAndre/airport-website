@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 import { GetDocumentsResponse } from 'src/app/models/get-documents-response.model';
+import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
 import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
@@ -14,11 +15,13 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 export class DocumetsRowComponent implements OnInit {
   @Input() public currentLevelFileData: GetDocumentsResponse.Folder;
   @Input() public isFromAdmin: boolean;
+  @Input() public isBaseLevel: boolean;
   @Output() public fileClickedEmit = new EventEmitter<string>();
   @Output() public fileUploadedEmit = new EventEmitter<UploadMembersDocumentsRequest.RootObject>();
   @Output() public createFolderEmit = new EventEmitter<CreateMembersDocumentsFolderRequest.RootObject>();
   @Output() public deleteFileEmit = new EventEmitter<string>();
   @Output() public deleteFolderEmit = new EventEmitter<string>();
+  @Output() public renameFolderEmit = new EventEmitter<RenameFolderRequest>();
 
   constructor(public appModalService: AppModalService) { }
 
@@ -94,5 +97,26 @@ export class DocumetsRowComponent implements OnInit {
     const fileToDeletePath = `${this.currentLevelFileData.name}/${folderePath}`;
     this.deleteFolderEmit.emit(fileToDeletePath);
   }
-  
+
+  public editFolderNameClicked() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.AddFolderModal, 'Rename Folder', `${this.currentLevelFileData.name}`, null, this.editFolderNameOutcome.bind(this))
+  }
+
+  public editFolderNameOutcome(modalOutcome: string, folderNmae: string) {
+    if (modalOutcome === ModalOutcomeOptions.Update && folderNmae) {
+
+      const dataToEmit = new RenameFolderRequest();
+      dataToEmit.folderBasePath = '';
+      dataToEmit.folderNewName = folderNmae;
+      dataToEmit.folderOldName = this.currentLevelFileData.name;
+
+      this.renameFolderEmit.emit(dataToEmit);
+    }
+  }
+
+  public emitRenameFolder(folderData: RenameFolderRequest) {
+    folderData.folderBasePath = `${this.currentLevelFileData.name}/${folderData.folderBasePath}`;
+    this.renameFolderEmit.emit(folderData);
+  }
+
 }

@@ -23,6 +23,7 @@ import * as moment from 'moment';
 import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
+import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -531,6 +532,18 @@ export class AdminService {
     return fetch(Endpoints.BaseURL + Endpoints.DeletMembersDocumentsFolder, {
       method: 'post',
       body: JSON.stringify({ requestData: { userId: userId, folderPath: folderPath } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public renameMembersDocumentsFolder(folderData: RenameFolderRequest) {
+    folderData.userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.RenameMembersDocumentsFolder, {
+      method: 'post',
+      body: JSON.stringify({ requestData: folderData })
     })
       .then(response => response.json())
       .then(data => {

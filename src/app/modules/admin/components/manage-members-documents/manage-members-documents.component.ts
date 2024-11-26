@@ -6,6 +6,7 @@ import { MembersService } from 'src/app/modules/members/services/members.service
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { AdminService } from '../../services/admin.service';
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
+import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 
 @Component({
   selector: 'app-manage-members-documents',
@@ -105,6 +106,15 @@ export class ManageMembersDocumentsComponent implements OnInit {
   public deleteFolder(folderPath: string) {
     this.adminService.deleteMembersDocumentsFolder(folderPath).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Folder', results.message, null);
+      if (results.status === 200) {
+        this.getDocumentsData();
+      }
+    });
+  }
+
+  public renameFolder(renameRequestData: RenameFolderRequest) {
+    this.adminService.renameMembersDocumentsFolder(renameRequestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Rename Folder', results.message, null);
       if (results.status === 200) {
         this.getDocumentsData();
       }

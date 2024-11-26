@@ -52,6 +52,13 @@ export class AppModalComponent implements OnInit {
         this.initializeInterestedInPropertyFormControls();
         break;
 
+      case ModalTypes.AddFolderModal:
+        if (this.data.details) {
+          this.folderName = this.data.details;
+        }
+        this.isLoading = false;
+        break;
+
       default:
         this.isLoading = false;
         break;
