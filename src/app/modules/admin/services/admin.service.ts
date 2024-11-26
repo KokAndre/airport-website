@@ -526,6 +526,18 @@ export class AdminService {
       });
   }
 
+  public deleteMembersDocumentsFolder(folderPath: string) {
+    const userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.DeletMembersDocumentsFolder, {
+      method: 'post',
+      body: JSON.stringify({ requestData: { userId: userId, folderPath: folderPath } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public getClassifiedsData() {
     return fetch(Endpoints.BaseURL + Endpoints.GetClassifiedsData, {
       method: 'get',

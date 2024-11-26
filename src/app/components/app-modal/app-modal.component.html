@@ -9,8 +9,7 @@
   <ng-container *ngSwitchCase="modalTypesEnum.BannerModal" [ngTemplateOutlet]="BannerModalTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.InterestedInPropertyModal"
     [ngTemplateOutlet]="InterestedInPropertyTemplate"></ng-container>
-    <ng-container *ngSwitchCase="modalTypesEnum.AddFolderModal"
-    [ngTemplateOutlet]="AddFolderTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.AddFolderModal" [ngTemplateOutlet]="AddFolderTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -64,33 +63,35 @@
 </ng-template>
 
 <ng-template #BannerModalTemplate>
-  <div *ngIf="data.title" class="modal-title">
-    <div class="row mx-0 py-2">
-      <div class="col-1 px-0"></div>
-      <div class="col-10">
-        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+  <div>
+    <div *ngIf="data.title" class="modal-title">
+      <div class="row mx-0 py-2">
+        <div class="col-1 px-0"></div>
+        <div class="col-10">
+          <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+        </div>
+        <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+            class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
       </div>
-      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
-          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+
+      <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
     </div>
 
-    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
-  </div>
-
-  <div *ngIf="data.details">
-    <div class="my-2 justify-content-center file-viewer-container">
-      <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false"
-        [render-text]="false">
-      </pdf-viewer>
-    </div>
-
-    <div class="row mx-0 justify-content-center mb-2">
-      <div class="red-button" (click)="downloadDocument()">
-        <p class="mb-0">Download</p>
-        <span class="red-button-icon"></span>
+    <div *ngIf="data.details">
+      <div class="my-2 justify-content-center file-viewer-container-custom" style="--bannerPDFHeight: {{bannerPDFHeight}};" >
+        <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false"
+          [render-text]="false" (page-rendered)="bannerLoaded()" id="banner-pdf-viewer">
+        </pdf-viewer>
       </div>
-    </div>
 
+      <div class="row mx-0 justify-content-center mb-2">
+        <div class="red-button" (click)="downloadDocument()">
+          <p class="mb-0">Download</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </ng-template>
 
@@ -223,16 +224,17 @@
 
       <mat-form-field class="col-12 px-0">
         <mat-label>Email</mat-label>
-        <input style="color: black;" matInput required maxlength="100" formControlName="interestedInPropertyEmailControl"
-          placeholder="Please enter your name">
+        <input style="color: black;" matInput required maxlength="100"
+          formControlName="interestedInPropertyEmailControl" placeholder="Please enter your name">
         <mat-error *ngIf="interestedInPropertyEmailControl.hasError('required')">Email is required</mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-12 px-0">
         <mat-label>Phone Number</mat-label>
-        <input style="color: black;" matInput required maxlength="10" formControlName="interestedInPropertyPhoneNumberControl"
-          placeholder="Please enter your name">
-        <mat-error *ngIf="interestedInPropertyPhoneNumberControl.hasError('required')">Phone Number is required</mat-error>
+        <input style="color: black;" matInput required maxlength="10"
+          formControlName="interestedInPropertyPhoneNumberControl" placeholder="Please enter your name">
+        <mat-error *ngIf="interestedInPropertyPhoneNumberControl.hasError('required')">Phone Number is
+          required</mat-error>
       </mat-form-field>
     </div>
 
@@ -243,7 +245,7 @@
       </div>
 
       <div class="red-button" (click)="submitInterestedInPropertyForm()"
-      [ngClass]="{'disable-user-click': interestedInPropertyFormGroup.invalid}">
+        [ngClass]="{'disable-user-click': interestedInPropertyFormGroup.invalid}">
         <p class="mb-0">Submit</p>
         <span class="red-button-icon"></span>
       </div>
@@ -281,8 +283,7 @@
       <span class="white-button-icon"></span>
     </div>
 
-    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !folderName}"
-      (click)="addFolderConfirmClicked()">
+    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !folderName}" (click)="addFolderConfirmClicked()">
       <p class="mb-0">Confirm</p>
       <span class="red-button-icon"></span>
     </div>

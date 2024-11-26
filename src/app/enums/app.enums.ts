@@ -120,6 +120,7 @@ export enum Endpoints {
     UploadMembersDocument = '/file-system/upload-document.php',
     CreateMembersDocumentsFolder = '/file-system/add-folder.php',
     DeletMembersDocumentsFile = '/file-system/delete-file.php',
+    DeletMembersDocumentsFolder = '/file-system/delete-folder.php',
 
     // Classifieds
     ClassifiedsSubmitItem = '/classifieds/submit-item-for-sale.php',

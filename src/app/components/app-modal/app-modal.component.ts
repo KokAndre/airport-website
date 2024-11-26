@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { PDFDocumentProxy, PdfViewerComponent } from 'ng2-pdf-viewer';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response.model';
@@ -20,11 +20,20 @@ export class AppModalComponent implements OnInit {
   public gallerySectionToEditData: GetGalleryDataResponse.Section;
   public interestedInPropertyFormGroup: FormGroup;
   public folderName = '';
+  public hideBannerModal = false;
+  public bannerPDFHeight = '40vh';
+  public bannerPDFWidth: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
 
   ngOnInit() {
-    this.initializeModalData()
+    this.initializeModalData();
+
+    if (window.innerWidth < 700) {
+      this.bannerPDFHeight = '40vh';
+    } else {
+      this.bannerPDFHeight = '80vh';
+    }
   }
 
   public initializeModalData() {
@@ -79,11 +88,11 @@ export class AppModalComponent implements OnInit {
       if (userDetails.name && userDetails.surname) {
         this.interestedInPropertyNameControl.setValue(`${userDetails.name} ${userDetails.surname}`);
       }
-      
+
       if (userDetails.email) {
         this.interestedInPropertyEmailControl.setValue(userDetails.email);
       }
-      
+
       if (userDetails.phoneNumber) {
         this.interestedInPropertyPhoneNumberControl.setValue(userDetails.phoneNumber);
       }
@@ -118,6 +127,12 @@ export class AppModalComponent implements OnInit {
     returnData.phoneNumber = this.interestedInPropertyPhoneNumberControl.value;
 
     this.data.callbackMessageResult(ModalOutcomeOptions.Confirm, returnData);
+  }
+
+  bannerLoaded() {
+    const pageElemntArr = document.getElementById('banner-pdf-viewer').children[0].children[0].children;
+    this.bannerPDFHeight = pageElemntArr[0]?.clientHeight ? `${pageElemntArr[0].clientHeight}px` : '80vh';
+    this.hideBannerModal = false;
   }
 
   public get interestedInPropertyNameControl() {

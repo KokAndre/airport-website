@@ -2,10 +2,14 @@
   <mat-expansion-panel [(expanded)]="currentLevelFileData.isExpanded" hideToggle class="folder-expansion-pannel">
     <mat-expansion-panel-header class="">
       <div class="row mx-0 hover-bottom-border expansion-panel-header-row">
+        <div *ngIf="isFromAdmin" class="col-1 px-0">
+          <mat-icon *ngIf="isFromAdmin" (click)="$event.stopPropagation(); deleteFolderClicked(currentLevelFileData.name)"
+          class="pointer delete-icon">delete</mat-icon>
+        </div>
         <div class="col-1 px-0 align-content-center">
           <span [ngClass]="currentLevelFileData.isExpanded ? 'folder-open-icon' : 'folder-closed-icon'"></span>
         </div>
-        <div class="col-10 px-0 align-content-center">
+        <div class="px-0 align-content-center" [ngClass]="isFromAdmin ? 'col-9' : 'col-10'">
           <p class="mb-0 width-fit-content" [innerHTML]="currentLevelFileData.name"></p>
         </div>
         <div class="col-1 px-0 text-end align-content-center">
@@ -20,7 +24,7 @@
 
     <div *ngFor="let folder of currentLevelFileData.folders" class="ml-3">
       <app-documets-row (fileClickedEmit)="fileClicked($event)" (fileUploadedEmit)="emitFileUploaded($event)"
-        (createFolderEmit)="emitFolderUploaded($event)" (deleteFileEmit)="emitFileToDelete($event)"
+        (createFolderEmit)="emitFolderUploaded($event)" (deleteFileEmit)="emitFileToDelete($event)" (deleteFolderEmit)="emitFolderToDelete($event)"
         [isFromAdmin]="isFromAdmin" [currentLevelFileData]="folder"></app-documets-row>
     </div>
 

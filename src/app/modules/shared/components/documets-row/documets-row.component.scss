@@ -4,7 +4,12 @@
 
 .folder-expansion-pannel {
     background-color: transparent !important;
-    box-shadow: none !important;
+    // box-shadow: none !important;
+
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+    margin: 3px;
 }
 
 .hover-bottom-border {

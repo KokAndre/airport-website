@@ -13,10 +13,25 @@
     margin: auto;
 }
 
+.file-viewer-container-custom {
+    height: var(--bannerPDFHeight) !important;
+    background-color: grey;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.pdfViewer.removePageBorders .page {
+    margin-bottom: 0px !important;
+}
+
 ::ng-deep .ng2-pdf-viewer-container {
     align-content: center !important;
 }
 
 a {
     outline: none !important;
+}
+
+.hide-modal {
+    visibility: hidden;
 }

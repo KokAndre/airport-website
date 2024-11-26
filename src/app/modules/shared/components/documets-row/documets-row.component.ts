@@ -18,6 +18,7 @@ export class DocumetsRowComponent implements OnInit {
   @Output() public fileUploadedEmit = new EventEmitter<UploadMembersDocumentsRequest.RootObject>();
   @Output() public createFolderEmit = new EventEmitter<CreateMembersDocumentsFolderRequest.RootObject>();
   @Output() public deleteFileEmit = new EventEmitter<string>();
+  @Output() public deleteFolderEmit = new EventEmitter<string>();
 
   constructor(public appModalService: AppModalService) { }
 
@@ -63,7 +64,7 @@ export class DocumetsRowComponent implements OnInit {
     this.createFolderEmit.emit(folderData);
   }
 
-  public deleteFileClicked(fileName) {
+  public deleteFileClicked(fileName: string) {
     this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Delete Document', `Are you sure you want to delete the following document:<br>${fileName}`, null, this.deleteFileOutcome.bind(this, fileName))
   }
 
@@ -77,6 +78,21 @@ export class DocumetsRowComponent implements OnInit {
   public emitFileToDelete(filePath: string) {
     const fileToDeletePath = `${this.currentLevelFileData.name}/${filePath}`;
     this.deleteFileEmit.emit(fileToDeletePath);
+  }
+
+  public deleteFolderClicked(folderName: string) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Delete Document', `Are you sure you want to delete the following folder and all it's content:<br>${folderName}`, null, this.deleteFolderOutcome.bind(this, folderName))
+  }
+
+  public deleteFolderOutcome(folderName: string, modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.deleteFolderEmit.emit(folderName);
+    }
+  }
+
+  public emitFolderToDelete(folderePath: string) {
+    const fileToDeletePath = `${this.currentLevelFileData.name}/${folderePath}`;
+    this.deleteFolderEmit.emit(fileToDeletePath);
   }
   
 }

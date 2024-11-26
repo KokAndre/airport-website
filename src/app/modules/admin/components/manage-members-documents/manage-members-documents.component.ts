@@ -101,4 +101,13 @@ export class ManageMembersDocumentsComponent implements OnInit {
       }
     });
   }
+
+  public deleteFolder(folderPath: string) {
+    this.adminService.deleteMembersDocumentsFolder(folderPath).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Folder', results.message, null);
+      if (results.status === 200) {
+        this.getDocumentsData();
+      }
+    });
+  }
 }
