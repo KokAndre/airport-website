@@ -196,7 +196,7 @@ export class FaqsComponent implements OnInit {
       questions: [
         {
           questionTitle: "Can pilots who are not residents rent space at Tedderfield Airpark?",
-          questionAnswer: "Yes, visiting pilots can rent hangar space and facilities, please contact our Administration Office or refer to our web site for specific rental details.",
+          questionAnswer: "Yes, visiting pilots can rent hangar space and facilities, please contact our Administration Office.",
           isPanelExpanded: true
         },
         {

@@ -29,33 +29,97 @@
     </div>
   </div> -->
 
-  <app-arrow-divider class="pointer" (click)="isSectionOneExpanded = !isSectionOneExpanded"
+  <app-arrow-divider class="pointer" (click)="isWelcomeToClassifiedsExpanded = !isWelcomeToClassifiedsExpanded"
     [isLightToDark]="true"></app-arrow-divider>
 
   <div class="dark-background">
-    <mat-expansion-panel hideToggle [expanded]="isSectionOneExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel hideToggle [expanded]="isWelcomeToClassifiedsExpanded" class="page-section-expansion-pannel">
       <mat-expansion-panel-header>
         <div class="col-10 mx-auto">
-          <p class="text-size-24 mb-3">Classifieds Heading</p>
+          <p class="text-size-24 mb-3">Welcome to the Tedderfield Airpark Classifieds!</p>
         </div>
       </mat-expansion-panel-header>
 
 
       <div class="col-10 mx-auto pb-4">
-        <p class="">Classifieds description text will go herre! :)</p>
+        <p class="">Here you'll find a curated selection of items posted by Tedderfield Airpark owners. From aircraft
+          and aviation tools to unique treasures, this is where owners showcase what's available for purchase.</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isHowItWorksExpanded = !isHowItWorksExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+  </div>
+
+  <div class="">
+    <mat-expansion-panel hideToggle [expanded]="isHowItWorksExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">How It Works</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <ul>
+          <li><b>Exclusive to Owners:</b> Only Tedderfield Airpark owners can post ads, ensuring the items listed come
+            from trusted members of our community. <b>No scams here!</b></li>
+          <li><b>Public Listings:</b> While only owners can post, anyone can browse the items listed here and contact
+            the seller directly for more details or to make an offer.</li>
+        </ul>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isBrowseAndBuyExpanded = !isBrowseAndBuyExpanded"
+      [isLightToDark]="true"></app-arrow-divider>
+  </div>
+
+  <div class="dark-background">
+    <mat-expansion-panel hideToggle [expanded]="isBrowseAndBuyExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Browse & Buy</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Looking for something specific? Scroll through our listings to find what you need — whether it's an
+          aircraft part, aviation gear, or something unique and unexpected!</p>
+      </div>
+    </mat-expansion-panel>
+
+    <app-arrow-divider class="pointer" (click)="isQuestionOrInterestExpanded = !isQuestionOrInterestExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+  </div>
+
+  <div class="">
+    <mat-expansion-panel hideToggle [expanded]="isQuestionOrInterestExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <div class="col-10 mx-auto">
+          <p class="text-size-24 mb-3">Questions or Interested in an Item?</p>
+        </div>
+      </mat-expansion-panel-header>
+
+
+      <div class="col-10 mx-auto pb-4">
+        <p class="">Each ad includes the seller's contact information, so you can reach out to them directly to inquire
+          or negotiate.</p>
+        <p class="">Tedderfield Airpark is proud to offer this platform to connect sellers and buyers. Happy browsing!
+        </p>
       </div>
     </mat-expansion-panel>
 
     <app-arrow-divider *ngIf="!classifiedsData?.length" class="pointer"
       (click)="isNoClassifiedsAdvertsExpanded = !isNoClassifiedsAdvertsExpanded"
-      [isLightToDark]="false"></app-arrow-divider>
+      [isLightToDark]="true"></app-arrow-divider>
 
     <app-arrow-divider *ngIf="classifiedsData?.length" class="pointer" (click)="togglePannel(0)"
-      [isLightToDark]="false"></app-arrow-divider>
+      [isLightToDark]="true"></app-arrow-divider>
 
   </div>
 
-  <div class="" *ngIf="!classifiedsData?.length">
+  <div class="dark-background" *ngIf="!classifiedsData?.length">
     <mat-expansion-panel hideToggle [expanded]="isNoClassifiedsAdvertsExpanded" class="page-section-expansion-pannel">
       <mat-expansion-panel-header>
         <div class="col-10 mx-auto">
@@ -70,10 +134,9 @@
     </mat-expansion-panel>
   </div>
 
-
   <div class="" *ngIf="classifiedsData?.length">
     <div *ngFor="let classifiedItem of classifiedsData; let last = last; let index = index"
-      [ngClass]="{'dark-background': ((index + 1) % 2 ? false : true)}">
+      [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
       <mat-expansion-panel hideToggle [expanded]="classifiedItem.isExpanded" class="page-section-expansion-pannel">
         <mat-expansion-panel-header>
           <div class="col-10 mx-auto">
@@ -86,7 +149,7 @@
               *ngFor="let img of classifiedItem.images">
               <img [src]="img.fileData" [alt]="img.fileName" class="classifieds-images" />
             </div>
-            
+
             <p class="mb-0 text-size-18">Price</p>
             <p>R{{ classifiedItem.price }}</p>
 
@@ -112,7 +175,7 @@
         </div>
       </mat-expansion-panel>
       <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
-        [isLightToDark]="((index + 1) % 2 ? true : false)"></app-arrow-divider>
+        [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
     </div>
   </div>
 </div>

@@ -13,8 +13,11 @@ import { SubmitInterestedInClassifiedsRequest } from 'src/app/models/submit-inte
 })
 export class ClassifiedsComponent implements OnInit {
   public displayClassifiedsDetails = false;
-  public isSectionOneExpanded = true; //TODO: RENAME THIS!!!!
+  public isWelcomeToClassifiedsExpanded = true;
+  public isHowItWorksExpanded = true;
   public isNoClassifiedsAdvertsExpanded = true;
+  public isBrowseAndBuyExpanded = true;
+  public isQuestionOrInterestExpanded = true;
   public classifiedsData: GetClassifiedsDataResponse.Classified[];
   public clasifiedDetailsToDisplay: GetClassifiedsDataResponse.Classified;
 
@@ -27,7 +30,6 @@ export class ClassifiedsComponent implements OnInit {
   public getClassifiedsData() {
     this.fataMerchService.getClassifiedsData().then(results => {
       if (results.status === 200) {
-        console.log('SERVICE RESULTS: ', results);
         this.formatData(results.classifieds);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);

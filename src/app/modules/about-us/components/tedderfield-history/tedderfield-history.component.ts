@@ -49,7 +49,7 @@ export class TedderfieldHistoryComponent implements OnInit {
     {
       heading: 'Facilities and Runways',
       paragraphs: [
-        'Tedderfield Airpark features a tarred runway (29/11 - 5164 feet) and a well maintained emergency grass runway (31/13 - 5135 feet) are suitable for various light aircraft.',
+        'Tedderfield Airpark features a tarred runway (29/11 - 5164 feet) and a well maintained emergency grass runway (31/13 - 5135 feet), both being suitable for various light aircraft.',
         'The clubhouse serves as a central hub for social events, management meetings, and aviation gatherings, bringing together our community of pilots for events that celebrate their shared passion for aviation.',
         'A major advantage of Tedderfield are the two boreholes, currently delivering over 750 000 litres per month whilst we also have 24/7 power supply, with a substantial diesel generator, ensuring no blackouts—more reliable than your morning coffee!',
         'A full-time maintenance manager and administrative personnel live on-site, ensuring the airpark runs smoothly and efficiently on a daily basis. This commitment to operational excellence ensures that the airpark remains a well-maintained and desirable place to be part of.'
@@ -89,7 +89,7 @@ export class TedderfieldHistoryComponent implements OnInit {
     {
       heading: 'Trustee and Governance Structure',
       paragraphs: [
-        'The airpark is governed by a dedicated team of trustees who oversee various portfolios that ensure the airpark runs smoothly. These portfolios include legal, safety, infrastructure maintenance, secretarial, treasury, and marketing.',
+        'The airpark is governed by a dedicated team of trustees who oversee various portfolios that ensure the airpark runs smoothly. These portfolios include legal, safety, infrastructure maintenance, secretarial, treasury, environmental  and marketing.',
         'Trustees are responsible for long-term planning, managing relationships with owners and suppliers, and ensuring compliance with regulatory requirements. The trustees also contribute to the airpark\'s 10-year strategic plan, which ensures the future growth and success of the community.'
       ],
       isExpanded: true

@@ -112,6 +112,7 @@ export class LoginService {
         return true;
       } else {
         this.logoutUser();
+        this.router.navigateByUrl(AppRoutes.Home);
         return false;
       }
     }
