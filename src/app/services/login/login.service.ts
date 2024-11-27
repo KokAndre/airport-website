@@ -67,23 +67,45 @@ export class LoginService {
       .then(response => response.json())
       .then(data => {
         if (data.status === 200) {
-          const tokenToStore = new LoginToken();
-          tokenToStore.name = data.data.name;
-          tokenToStore.surname = data.data.surname;
-          tokenToStore.id = data.data.id;
-          tokenToStore.email = data.data.email;
-          tokenToStore.phoneNumber = data.data.phoneNumber;
-          tokenToStore.isAdmin = data.data.isAdmin;
-          tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
-          tokenToStore.loginDateTime = new Date().toISOString();
-          tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
+          this.updateLoginToken(data.data);
+          // const tokenToStore = new LoginToken();
+          // tokenToStore.name = data.data.name;
+          // tokenToStore.surname = data.data.surname;
+          // tokenToStore.id = data.data.id;
+          // tokenToStore.email = data.data.email;
+          // tokenToStore.phoneNumber = data.data.phoneNumber;
+          // tokenToStore.isAdmin = data.data.isAdmin;
+          // tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
+          // tokenToStore.loginDateTime = new Date().toISOString();
+          // tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
 
-          const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
+          // const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
 
-          SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
+          // SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
         }
         return data;
       });
+  }
+
+  public updateLoginToken(data: any) {
+    const tokenToStore = new LoginToken();
+    tokenToStore.name = data.name;
+    tokenToStore.surname = data.surname;
+    tokenToStore.id = data.id;
+    tokenToStore.email = data.email;
+    tokenToStore.phoneNumber = data.phoneNumber;
+    tokenToStore.isAdmin = data.isAdmin;
+    tokenToStore.hasCompletedGettingToKnowYou = data.hasCompletedGettingToKnowYou;
+    tokenToStore.loginDateTime = new Date().toISOString();
+    tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
+
+    const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
+
+    // if (SessionStorageHelper.getItem(SessionStorageKeys.Token)) {
+    //   //
+    // } else {
+      SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
+    // }
   }
 
   public logoutUser() {
@@ -223,6 +245,57 @@ export class LoginService {
         } else {
           return null;
         }
+      }
+    }
+  }
+
+  public updateUserHasCompletedGettingToKnowYou() {
+    const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
+    if (!stringToken) {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not legged in', 'You are not logged in. Please login and try again.', null);
+      this.router.navigateByUrl(AppRoutes.Home);
+    } else {
+      const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const decryptedBytes = CryptoJS.AES.decrypt(stringToken, keyHex, { iv: ivHex });
+      const dectyptedStringToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      const token = JSON.parse(dectyptedStringToken);
+
+      const currentDate = new Date();
+      const tokenExpiryDate = new Date(token.logoutDateTime);
+
+      if (currentDate < tokenExpiryDate) {
+        token.hasCompletedGettingToKnowYou = '1';
+        this.updateLoginToken(token);
+        return true;
+      } else {
+        this.logoutUser();
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Session expired', 'Your session has expired. Please login and try again.', null);
+        this.router.navigateByUrl(AppRoutes.Home);
+      }
+    }
+  }
+
+  public checkIfUserHasCompletedGettingToKnowYou() {
+    const stringToken = SessionStorageHelper.getItem(SessionStorageKeys.Token);
+    if (!stringToken) {
+      return false;
+    } else {
+      const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
+      const decryptedBytes = CryptoJS.AES.decrypt(stringToken, keyHex, { iv: ivHex });
+      const dectyptedStringToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      const token = JSON.parse(dectyptedStringToken);
+
+      console.log('CJHECKIN HAS COMPLETED GTKY: ', token);
+
+      const currentDate = new Date();
+      const tokenExpiryDate = new Date(token.logoutDateTime);
+
+      if (currentDate < tokenExpiryDate) {
+        return token.hasCompletedGettingToKnowYou === '1' ? true: false;
+      } else {
+       return false;
       }
     }
   }

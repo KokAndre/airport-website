@@ -11,6 +11,7 @@ import { YourTrusteesComponent } from './components/your-trustees/your-trustees.
 import { LoginGuardService } from 'src/app/route-guards/login-guard.service';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
+import { HasCompletedGettingToKnowYouGuardService } from 'src/app/route-guards/has-completed-getting-to-know-you-guard.service';
 
 const routes: Routes = [
   {
@@ -42,6 +43,9 @@ const routes: Routes = [
   },
   {
     path: 'documents', canActivate: [LoginGuardService], component: DocumentsComponent
+  },,
+  {
+    path: 'whos-who-in-the-tedderfield-zoo', canActivate: [LoginGuardService, HasCompletedGettingToKnowYouGuardService], component: DocumentsComponent
   },
 ];
 

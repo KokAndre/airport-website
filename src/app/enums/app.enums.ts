@@ -35,6 +35,7 @@ export enum AppRoutes {
     YourTrusteed = '/members/your-trustees',
     MembersDocuments = '/members/documents',
     SubmitClassifieds = '/members/classifieds',
+    WhosWhoInTheZoo = '/members/whos-who-in-the-tedderfield-zoo',
 
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
@@ -132,6 +133,10 @@ export enum Endpoints {
     GetInterestedInClassifiedsData = '/classifieds/get-interested-in-classifieds-data.php',
     MarkInterestedInClassifiedsAsFollowedUp = '/classifieds/update-interested-in-classifieds-item.php',
     DeleteInterestedInClassifiedsItem = '/classifieds/delete-interested-in-classifieds-item.php',
+
+    // Getting To Know YOu
+    SubmitGettingToKnowYou = '/getting-to-know-you/submit-user-data.php',
+    UploadGettingToKnowYouImage = '/getting-to-know-you/upload-image.php',
 }
 
 export enum EncryptionKeys {

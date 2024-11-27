@@ -5,14 +5,16 @@ import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
 import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
 import { SubmitClassifiedsRequest } from 'src/app/models/submit-classifieds-request.model';
+import { SubmitGettingToKnowYouRequest } from 'src/app/models/submit-getting-to-know-you-request.model';
 import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public loginService: LoginService) { }
 
   public submitReportIssue(reportIssueData: ReportIssueRequest.RootObject) {
     return fetch(Endpoints.BaseURL + Endpoints.ReportIssue, {
@@ -228,4 +230,39 @@ export class MembersService {
         return data;
       });
   }
+
+  public submitGettingToKnowYou(gettingToKnowYouRequestData: SubmitGettingToKnowYouRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(gettingToKnowYouRequestData));
+    requestData.image.fileData = '';
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitGettingToKnowYou, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadGettingToKnowImage(submitSucessId: number, image: SubmitGettingToKnowYouRequest.Image) {
+    let formData: FormData = new FormData();
+    formData.append('file', image.fileData);
+    formData.append('name', image.fileName);
+    formData.append('successId', `${submitSucessId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.UploadGettingToKnowYouImage, {
+      method: 'post',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+
+
 }

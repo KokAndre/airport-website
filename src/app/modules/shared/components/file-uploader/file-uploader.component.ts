@@ -102,6 +102,7 @@ export class FileUploaderComponent implements OnInit {
 
     setImageDataResolver.then(() => {
       this.emitFileData.emit(filesToEmit);
+      this.fileUploaded.nativeElement.value = '';
     });
   }
 
