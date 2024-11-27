@@ -70,12 +70,12 @@ export class HangarsForSaleComponent implements OnInit {
       itemToPush.hangerDimensions = JSON.parse(hangerItem.hangerDimensions ? hangerItem.hangerDimensions.replaceAll('\\', '') : {});
       itemToPush.doorDimensions = JSON.parse(hangerItem.doorDimensions ? hangerItem.doorDimensions.replaceAll('\\', '') : {});
 
-      itemToPush.buildingMaterial = hangerItem.buildingMaterial?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.hangerCustomisations = hangerItem.hangerCustomisations?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.featuresAndBenefits = hangerItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.securty = hangerItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.additionalInfrastructure = hangerItem.additionalInfrastructure?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+      itemToPush.buildingMaterial = hangerItem.buildingMaterial?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.hangerCustomisations = hangerItem.hangerCustomisations?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.featuresAndBenefits = hangerItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.securty = hangerItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.additionalInfrastructure = hangerItem.additionalInfrastructure?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
 
       this.hangersForSaleData.push(itemToPush);
     });

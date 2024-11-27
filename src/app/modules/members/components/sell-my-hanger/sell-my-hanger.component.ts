@@ -239,6 +239,7 @@ export class SellMyHangerComponent implements OnInit {
     arrayOfInputValue = arrayOfInputValue.map(line => {
       line = line.replace('•', '');
       line = line.trim();
+      line = line.replace("'", "`")
       return line;
     });
     arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
