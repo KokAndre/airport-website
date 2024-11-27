@@ -1,4 +1,14 @@
-.fakeimg {
-    height: 200px;
-    background: #aaa;
+.logo-image-under-construction {
+    height: 30vh;
+    width: auto;
+    vertical-align: middle;
+    background-image: url("../assets/logo-white-background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.web-under-construction-container {
+    height: 100vh;
+    align-content: center;
 }

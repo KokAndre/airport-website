@@ -8,11 +8,17 @@ const routes: Routes = [
   {
     path: '', component: SideNavComponent, children: [
       {
-        path: '', redirectTo: 'home', pathMatch: 'full'
+        path: '', redirectTo: 'web-under-construction', pathMatch: 'full'
       },
       {
-        path: 'home', component: HomePageComponent
+        path: 'web-under-construction', component: HomePageComponent
       },
+      // {
+      //   path: '', redirectTo: 'home', pathMatch: 'full'
+      // },
+      // {
+      //   path: 'home', component: HomePageComponent
+      // },
       {
         path: 'about-us', loadChildren: () => import('./modules/about-us/about-us.module').then(m => m.AboutUsModule)
       },
