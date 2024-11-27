@@ -260,6 +260,7 @@ export class NavBarComponent implements OnInit {
 
   public logout() {
     this.loginService.logoutUser();
+    this.router.navigateByUrl(AppRoutes.Home);
   }
 
   public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
