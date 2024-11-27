@@ -50,13 +50,13 @@ export class WhosWhoInTheZooComponent implements OnInit {
       itemToPush.emergencyContactTwoPhoneNumber = member.emergencyContactTwoPhoneNumber;
       itemToPush.whereWereYouBorn = member.whereWereYouBorn;
       itemToPush.howFarDoYouDrive = member.howFarDoYouDrive;
-      itemToPush.iFlyBecause = member.iFlyBecause?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.iLoveTedderfield = member.iLoveTedderfield?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.whenIAmNotFlying = member.whenIAmNotFlying?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.whoInspiresYou = member.whoInspiresYou?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.whatStressesYouMost = member.whatStressesYouMost?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.yourMostUsefullTalent = member.yourMostUsefullTalent?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.immediateFamily = member.immediateFamily?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+      itemToPush.iFlyBecause = member.iFlyBecause?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.iLoveTedderfield = member.iLoveTedderfield?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.whenIAmNotFlying = member.whenIAmNotFlying?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.whoInspiresYou = member.whoInspiresYou?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.whatStressesYouMost = member.whatStressesYouMost?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.yourMostUsefullTalent = member.yourMostUsefullTalent?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
+      itemToPush.immediateFamily = member.immediateFamily?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replaceAll("`", "'")?.split(',');
 
       itemToPush.image = new GetGettingToKnowYouResponse.Image();
       itemToPush.image.fileName = member.image;

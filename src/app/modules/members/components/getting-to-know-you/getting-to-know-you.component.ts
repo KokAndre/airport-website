@@ -154,6 +154,7 @@ export class GettingToKnowYouComponent implements OnInit {
     if (itemArray?.length) {
       let formattedItem = '';
       itemArray.forEach(item => {
+        item = item.replaceAll("`", "'");
         formattedItem += `• ${item}\n`;
       });
       return formattedItem;
@@ -268,6 +269,7 @@ export class GettingToKnowYouComponent implements OnInit {
     arrayOfInputValue = arrayOfInputValue.map(line => {
       line = line.replace('•', '');
       line = line.trim();
+      line = line.replaceAll("'", "`");
       return line;
     });
     arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
