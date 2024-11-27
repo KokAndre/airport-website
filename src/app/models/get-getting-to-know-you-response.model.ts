@@ -3,7 +3,7 @@ export namespace GetGettingToKnowYouResponse {
         status: number;
         header: string;
         message: string;
-        members: Member[];
+        member: Member[];
     }
 
     export class Member {

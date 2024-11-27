@@ -27,7 +27,7 @@ export class WhosWhoInTheZooComponent implements OnInit {
   public getUsersData() {
     this.membersService.getGettingToKnowYouData().then((results) => {
       if (results.status === 200) {
-        this.formatData(results.members);
+        this.formatData(results.member);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, "Get Who's who in the Tedderfield Zoo", results.message, null);
       }

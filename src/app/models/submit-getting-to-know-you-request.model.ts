@@ -1,5 +1,6 @@
 export namespace SubmitGettingToKnowYouRequest {
     export class RootObject {
+        id: number;
         userId: number;
         name: string;
         email: string;

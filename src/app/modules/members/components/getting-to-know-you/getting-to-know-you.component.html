@@ -282,7 +282,7 @@
           <div class="row mx-0 justify-content-center">
             <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitDisabled()}"
               (click)="submitClicked()">
-              <p class="mb-0">Submit</p>
+              <p class="mb-0">{{ originalHasCompletedGettingToKnowYouData?.id ? 'Update' : 'Submit'}}</p>
               <span class="red-button-icon"></span>
             </div>
           </div>

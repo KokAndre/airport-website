@@ -137,7 +137,9 @@ export enum Endpoints {
 
     // Getting To Know YOu
     SubmitGettingToKnowYou = '/getting-to-know-you/submit-user-data.php',
+    UpdateGettingToKnowYou = '/getting-to-know-you/update-user-data.php',
     UploadGettingToKnowYouImage = '/getting-to-know-you/upload-image.php',
+    GetGettingToKnowYouUserData = '/getting-to-know-you/get-getting-to-know-you-user-data.php',
     GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php'
 }
 

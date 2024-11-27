@@ -6,8 +6,9 @@ import { SubmitGettingToKnowYouRequest } from 'src/app/models/submit-getting-to-
 import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { AppRoutes, Endpoints, ModalTypes } from 'src/app/enums/app.enums';
 import { Router } from '@angular/router';
+import { GetGettingToKnowYouResponse } from 'src/app/models/get-getting-to-know-you-response.model';
 
 @Component({
   selector: 'app-getting-to-know-you',
@@ -21,6 +22,8 @@ export class GettingToKnowYouComponent implements OnInit {
   public loggedInUserDetails: LoginToken;
   public submitItemSucessId: number;
   public gettingToKnowYouRequestData = new SubmitGettingToKnowYouRequest.RootObject();
+  public originalHasCompletedGettingToKnowYouData: GetGettingToKnowYouResponse.Member;
+  public hasValuesChanged = false;
 
   constructor(public loginService: LoginService,
     public formBuilder: FormBuilder,
@@ -31,6 +34,7 @@ export class GettingToKnowYouComponent implements OnInit {
   ngOnInit() {
     this.getUserData();
     this.initializeFollowUsControls();
+    this.getGettingToKnowYouData();
   }
 
   public getUserData() {
@@ -73,6 +77,88 @@ export class GettingToKnowYouComponent implements OnInit {
     if (this.loggedInUserDetails?.phoneNumber) {
       this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
       this.phoneNumberControl.disable();
+    }
+  }
+
+  public getGettingToKnowYouData() {
+    this.membersService.getGettingToKnowYouData().then((results) => {
+      if (results.status === 200) {
+        if (results.member?.length) {
+          console.log('IN IF');
+          this.formatMemberData(results.member[0]);
+        }
+      }
+    });
+  }
+
+  public formatMemberData(membersResponseData: any) {
+    console.log('DATA IN FORMAT: ', membersResponseData);
+    this.originalHasCompletedGettingToKnowYouData = new GetGettingToKnowYouResponse.Member();
+    this.originalHasCompletedGettingToKnowYouData.id = membersResponseData.id;
+    this.originalHasCompletedGettingToKnowYouData.userId = membersResponseData.userId;
+    this.originalHasCompletedGettingToKnowYouData.name = membersResponseData.name;
+    this.originalHasCompletedGettingToKnowYouData.email = membersResponseData.email;
+    this.originalHasCompletedGettingToKnowYouData.phoneNumber = membersResponseData.phoneNumber;
+    this.originalHasCompletedGettingToKnowYouData.emergencyContactOneName = membersResponseData.emergencyContactOneName;
+    this.originalHasCompletedGettingToKnowYouData.emergencyContactOnePhoneNumber = membersResponseData.emergencyContactOnePhoneNumber;
+    this.originalHasCompletedGettingToKnowYouData.emergencyContactTwoName = membersResponseData.emergencyContactTwoName;
+    this.originalHasCompletedGettingToKnowYouData.emergencyContactTwoPhoneNumber = membersResponseData.emergencyContactTwoPhoneNumber;
+    this.originalHasCompletedGettingToKnowYouData.whereWereYouBorn = membersResponseData.whereWereYouBorn;
+    this.originalHasCompletedGettingToKnowYouData.howFarDoYouDrive = membersResponseData.howFarDoYouDrive;
+    this.originalHasCompletedGettingToKnowYouData.iFlyBecause = membersResponseData.iFlyBecause?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.iLoveTedderfield = membersResponseData.iLoveTedderfield?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.whenIAmNotFlying = membersResponseData.whenIAmNotFlying?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.whoInspiresYou = membersResponseData.whoInspiresYou?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.whatStressesYouMost = membersResponseData.whatStressesYouMost?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.yourMostUsefullTalent = membersResponseData.yourMostUsefullTalent?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+    this.originalHasCompletedGettingToKnowYouData.immediateFamily = membersResponseData.immediateFamily?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+
+    this.originalHasCompletedGettingToKnowYouData.image = new GetGettingToKnowYouResponse.Image();
+    this.originalHasCompletedGettingToKnowYouData.image.fileName = membersResponseData.image;
+    this.originalHasCompletedGettingToKnowYouData.image.fileData = Endpoints.GettingoKnowYouImagesBaseURL + membersResponseData.id + '/' + membersResponseData.image;
+  
+    this.prePopTheForm();
+  }
+
+  public prePopTheForm() {
+    this.emergencyContactOneNameControl.setValue(this.originalHasCompletedGettingToKnowYouData.emergencyContactOneName || '');
+    this.emergencyContactOnePhoneNumberControl.setValue(this.originalHasCompletedGettingToKnowYouData.emergencyContactOnePhoneNumber || '');
+    this.emergencyContactTwoNameControl.setValue(this.originalHasCompletedGettingToKnowYouData.emergencyContactTwoName || '');
+    this.emergencyContactTwoPhoneNumberControl.setValue(this.originalHasCompletedGettingToKnowYouData.emergencyContactTwoPhoneNumber || '');
+    this.whereWereYouBornControl.setValue(this.originalHasCompletedGettingToKnowYouData.whereWereYouBorn || '');
+    this.howFarDoYouDriveControl.setValue(this.originalHasCompletedGettingToKnowYouData.howFarDoYouDrive || '');
+    this.iFlyBecauseControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.iFlyBecause) || '');
+    this.iLoveTedderfieldControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.iLoveTedderfield) || '');
+    this.whenIAmNotFlyingControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.whenIAmNotFlying) || '');
+    this.whoInspiresYouControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.whoInspiresYou) || '');
+    this.whatStressesYouMostControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.whatStressesYouMost) || '');
+    this.yourMostUsefullTalentControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.yourMostUsefullTalent) || '');
+    this.immediateFamilyControl.setValue(this.formatBulletPointInputDataForPrePopulation(this.originalHasCompletedGettingToKnowYouData.immediateFamily) || '');
+
+    this.gettingToKnowYouRequestData.image = new SubmitGettingToKnowYouRequest.Image();
+    this.gettingToKnowYouRequestData.image.fileName = this.originalHasCompletedGettingToKnowYouData.image.fileName;
+    this.gettingToKnowYouRequestData.image.fileData = this.originalHasCompletedGettingToKnowYouData.image.fileData;
+
+    console.log('GETTING TO KNOW YOU DATA: ', this.gettingToKnowYouRequestData);
+
+    this.subscribeToFormValueChange();
+  }
+
+  public subscribeToFormValueChange() {
+    this.gettingToKnowYouFormGroup.valueChanges.subscribe(val => {
+      this.hasValuesChanged = true;
+    });
+  }
+
+  public formatBulletPointInputDataForPrePopulation(itemArray: string[]) {
+    if (itemArray?.length) {
+      let formattedItem = '';
+      itemArray.forEach(item => {
+        formattedItem += `• ${item}\n`;
+      });
+      return formattedItem;
+    } else {
+      return '';
     }
   }
 
@@ -168,6 +254,12 @@ export class GettingToKnowYouComponent implements OnInit {
       return true;
     }
 
+    if (this.originalHasCompletedGettingToKnowYouData?.id) {
+      if (!this.hasValuesChanged) {
+        return true;
+      }
+    }
+
     return false;
   }
 
@@ -205,20 +297,44 @@ export class GettingToKnowYouComponent implements OnInit {
       this.gettingToKnowYouRequestData.emergencyContactTwoPhoneNumber = this.emergencyContactTwoPhoneNumberControl.value;
     }
 
-    this.membersService.submitGettingToKnowYou(this.gettingToKnowYouRequestData).then(results => {
-      if (results.status === 200) {
-        this.submitItemSucessId = results.id;
-        this.uploadImage();
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
-      }
-    });
+    if (this.originalHasCompletedGettingToKnowYouData?.id) {
+      this.gettingToKnowYouRequestData.id = this.originalHasCompletedGettingToKnowYouData.id;
+      this.membersService.submitGettingToKnowYou(this.gettingToKnowYouRequestData).then(results => {
+        if (results.status === 200) {
+          this.submitItemSucessId = results.id;
+
+          if (this.originalHasCompletedGettingToKnowYouData.image.fileName !== this.gettingToKnowYouRequestData.image.fileName) {
+            this.uploadImage();
+          } else {
+            this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Data has successfully been updated.', null);
+            this.router.navigateByUrl(AppRoutes.WhosWhoInTheZoo);
+          }
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
+        }
+      });
+    } else {
+      this.membersService.submitGettingToKnowYou(this.gettingToKnowYouRequestData).then(results => {
+        if (results.status === 200) {
+          this.submitItemSucessId = results.id;
+          this.uploadImage();
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
+        }
+      });
+    }
+
+
   }
 
   public uploadImage() {
     this.membersService.uploadGettingToKnowImage(this.submitItemSucessId, this.gettingToKnowYouRequestData.image).then(results => {
       if (results.status === 200) {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', "Your details have been capture seccessfully. You can now view who's who in the Tedderfield Zoo.", null);
+        if (this.originalHasCompletedGettingToKnowYouData?.id){
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Data has successfully been updated.', null);
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', "Your details have been capture seccessfully. You can now view who's who in the Tedderfield Zoo.", null);
+        }
         this.loginService.updateUserHasCompletedGettingToKnowYou();
         this.router.navigateByUrl(AppRoutes.WhosWhoInTheZoo);
       } else {
@@ -226,19 +342,6 @@ export class GettingToKnowYouComponent implements OnInit {
       }
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   public get nameControl() {
     return this.gettingToKnowYouFormGroup.get('nameControl');
