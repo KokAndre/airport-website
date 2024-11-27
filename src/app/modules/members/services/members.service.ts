@@ -263,6 +263,18 @@ export class MembersService {
       });
   }
 
+  public getGettingToKnowYouData() {
+    let formData: FormData = new FormData();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouData, {
+      method: 'get'
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 
 
 }

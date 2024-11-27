@@ -170,6 +170,10 @@
           <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GettingToKnowYou)">
             Getting To Know You
           </div>
+          <mat-divider *ngIf="hasCompletedGettingToKnowYou"></mat-divider>
+          <div *ngIf="hasCompletedGettingToKnowYou" class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
+            Who's Who in the Tedderfield Zoo
+          </div>
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
@@ -427,6 +431,10 @@
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GettingToKnowYou)">
         Getting To Know You
+      </div>
+      <mat-divider *ngIf="hasCompletedGettingToKnowYou"></mat-divider>
+      <div *ngIf="hasCompletedGettingToKnowYou" mat-menu-item class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
+        Who's Who in the Tedderfield Zoo
       </div>
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway

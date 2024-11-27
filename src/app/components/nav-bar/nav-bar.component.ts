@@ -33,6 +33,7 @@ export class NavBarComponent implements OnInit {
   @Input() public isAuthorised = false;
   @Input() public isUserAdmin = false;
   @Input() public isMobileView = false;
+  @Input() public hasCompletedGettingToKnowYou = false;
 
   // @ViewChild('drawer') public drawer;
 

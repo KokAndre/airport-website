@@ -205,22 +205,20 @@ export class GettingToKnowYouComponent implements OnInit {
       this.gettingToKnowYouRequestData.emergencyContactTwoPhoneNumber = this.emergencyContactTwoPhoneNumberControl.value;
     }
 
-    console.log('SUBMIT DATA: ', this.gettingToKnowYouRequestData);
-
-  //   this.membersService.submitGettingToKnowYou(this.gettingToKnowYouRequestData).then(results => {
-  //     if (results.status === 200) {
-  //       this.submitItemSucessId = results.id;
-  //       this.uploadImage();
-  //     } else {
-  //       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
-  //     }
-  //   });
+    this.membersService.submitGettingToKnowYou(this.gettingToKnowYouRequestData).then(results => {
+      if (results.status === 200) {
+        this.submitItemSucessId = results.id;
+        this.uploadImage();
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
+      }
+    });
   }
 
   public uploadImage() {
     this.membersService.uploadGettingToKnowImage(this.submitItemSucessId, this.gettingToKnowYouRequestData.image).then(results => {
       if (results.status === 200) {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Your details have been capture seccessfully.', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', "Your details have been capture seccessfully. You can now view who's who in the Tedderfield Zoo.", null);
         this.loginService.updateUserHasCompletedGettingToKnowYou();
         this.router.navigateByUrl(AppRoutes.WhosWhoInTheZoo);
       } else {

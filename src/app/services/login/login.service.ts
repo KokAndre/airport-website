@@ -287,8 +287,6 @@ export class LoginService {
       const dectyptedStringToken = decryptedBytes.toString(CryptoJS.enc.Utf8);
       const token = JSON.parse(dectyptedStringToken);
 
-      console.log('CJHECKIN HAS COMPLETED GTKY: ', token);
-
       const currentDate = new Date();
       const tokenExpiryDate = new Date(token.logoutDateTime);
 

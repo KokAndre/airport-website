@@ -21,7 +21,6 @@ export class ManageClassifiedsForSaleComponent implements OnInit {
   public getClassifiedsData() {
     this.adminService.getClassifiedsData().then(results => {
       if (results.status === 200) {
-        console.log('SERVICE RESULTS: ', results);
         this.formatData(results.classifieds);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);

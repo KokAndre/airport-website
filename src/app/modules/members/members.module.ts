@@ -12,6 +12,7 @@ import { SellMyStandComponent } from './components/sell-my-stand/sell-my-stand.c
 import { YourTrusteesComponent } from './components/your-trustees/your-trustees.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
+import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-who-in-the-zoo.component';
 
 
 
@@ -26,7 +27,8 @@ import { SubmitClassifiedsComponent } from './components/submit-classifieds/subm
     SellMyStandComponent,
     YourTrusteesComponent,
     DocumentsComponent,
-    SubmitClassifiedsComponent
+    SubmitClassifiedsComponent,
+    WhosWhoInTheZooComponent
   ],
   imports: [
     CommonModule,

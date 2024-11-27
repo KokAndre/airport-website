@@ -8,7 +8,7 @@
       </div>
       <div class="col-lg-8 col-md-8 col-sm-2 col-2 px-0 center-align-vertical">
         <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin"
-          [isMobileView]="isMobileView"></app-nav-bar>
+          [isMobileView]="isMobileView" [hasCompletedGettingToKnowYou]="hasCompletedGettingToKnowYou"></app-nav-bar>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical" [ngClass]="{'header-white-background': isAuthorised}">
         <p class="mb-0 text-size-20 text-center header-blue-text" *ngIf="isAuthorised">Welcome</p>
