@@ -64,6 +64,8 @@ export enum Endpoints {
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
+    SendPasswordResetEmail = '/members/email-reset-password.php',
+    SubmitPasswordReset = '/members/submit-reset-password.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',
     UploadImage = '/gallery/upload-images.php',
     UploadImageAsFile = '/gallery/upload-image-file.php',

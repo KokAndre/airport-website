@@ -68,20 +68,6 @@ export class LoginService {
       .then(data => {
         if (data.status === 200) {
           this.updateLoginToken(data.data);
-          // const tokenToStore = new LoginToken();
-          // tokenToStore.name = data.data.name;
-          // tokenToStore.surname = data.data.surname;
-          // tokenToStore.id = data.data.id;
-          // tokenToStore.email = data.data.email;
-          // tokenToStore.phoneNumber = data.data.phoneNumber;
-          // tokenToStore.isAdmin = data.data.isAdmin;
-          // tokenToStore.hasCompletedGettingToKnowYou = data.data.hasCompletedGettingToKnowYou;
-          // tokenToStore.loginDateTime = new Date().toISOString();
-          // tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
-
-          // const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
-
-          // SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
         }
         return data;
       });
@@ -101,11 +87,7 @@ export class LoginService {
 
     const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
 
-    // if (SessionStorageHelper.getItem(SessionStorageKeys.Token)) {
-    //   //
-    // } else {
-      SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
-    // }
+    SessionStorageHelper.storeItem(SessionStorageKeys.Token, encryptedToken);
   }
 
   public logoutUser() {
@@ -291,9 +273,9 @@ export class LoginService {
       const tokenExpiryDate = new Date(token.logoutDateTime);
 
       if (currentDate < tokenExpiryDate) {
-        return token.hasCompletedGettingToKnowYou === '1' ? true: false;
+        return token.hasCompletedGettingToKnowYou === '1' ? true : false;
       } else {
-       return false;
+        return false;
       }
     }
   }
@@ -308,4 +290,31 @@ export class LoginService {
       });
   }
 
+  public sendResetPasswordEmail(userEmail: string) {
+    return fetch(Endpoints.BaseURL + Endpoints.SendPasswordResetEmail, {
+      method: 'post',
+      body: JSON.stringify({ requestData: { email: userEmail } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+  
+  public submitResetPassword(userEmail: string, newPassword: string, resetCode: number) {
+    const requestData = {
+      email: userEmail,
+      password: newPassword,
+      resetCode: resetCode
+    };
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitPasswordReset, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 }
