@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { LoginRequest } from 'src/app/models/login-request.model';
 import { RegisterRequest } from 'src/app/models/register-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   public isUserRegistered = false;
   private resizeObserver: ResizeObserver;
   public isMobileView = false;
+  public displayPasswordResetScreen = false;
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router, public appModalService: AppModalService) { }
 
@@ -49,18 +50,18 @@ export class LoginComponent implements OnInit {
 
     this.isUserRegistered = this.userData.isRegistered === '1';
 
-    if (this.isUserRegistered) {
+    // if (this.isUserRegistered) {
       this.initializeLoginControls();
-    } else {
+    // } else {
       this.initializeRegisterControls();
-    }
+    // }
   }
 
   public initializeScreenSizeCheck() {
     const body = document.getElementsByTagName("body")[0];
     this.resizeObserver = new ResizeObserver(() => {
       const widthToCheck = window.innerWidth;
-      if (widthToCheck < 350) {
+      if (widthToCheck < 857) {
         this.isMobileView = true;
       } else {
         this.isMobileView = false;
@@ -201,8 +202,41 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  public resetPasswordClicked() {
+    this.loginService.sendResetPasswordEmail(this.loginEmailControl?.value).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Reset Password', results.message, null);
+      if (results.status === 200) {
+        this.registerFormGroup.addControl('registerPasswordResetControl', new FormControl('', [Validators.required, Validators.minLength(6)]));
+        this.displayPasswordResetScreen = true;
+      }
+    });
+  }
+
+  public resetPassword() {
+
+    const newPassword = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
+
+    this.loginService.submitResetPassword(this.loginEmailControl?.value, newPassword, this.registerPasswordResetControl.value).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Reset Password', results.message, null);
+      if (results.status === 200) {
+        this.cancelResetPasswordClicked();
+      }
+    });
+  }
+
+  public cancelResetPasswordClicked() {
+    this.loginPasswordControl.reset();
+    this.registerFormGroup.removeControl('registerPasswordResetControl');
+    this.displayPasswordResetScreen = false;
+  }
+
   public navigateToMembersPoliciesPage() {
     this.router.navigateByUrl(AppRoutes.Home);
+  }
+
+  public numberControlInputWithDecimals(formControl?: AbstractControl) {
+    const valueToSet = AppHelperFunction.removeNonNumericCharacters(formControl?.value);
+    formControl?.setValue(valueToSet);
   }
 
   public cancelClicked() {
@@ -226,6 +260,9 @@ export class LoginComponent implements OnInit {
   }
   public get registerConfirmPasswordControl() {
     return this.registerFormGroup.get('registerConfirmPasswordControl');
+  }
+  public get registerPasswordResetControl() {
+    return this.registerFormGroup.get('registerPasswordResetControl');
   }
   public get loginEmailControl() {
     return this.loginFormGroup.get('loginEmailControl');

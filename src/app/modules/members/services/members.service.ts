@@ -263,6 +263,29 @@ export class MembersService {
       });
   }
 
+  public getGettingToKnowYouUserData() {
+    const userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouUserData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: {userId: userId} })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public getGettingToKnowYouData() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouData, {
+      method: 'post'
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 
 
 }

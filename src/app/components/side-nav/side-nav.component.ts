@@ -22,6 +22,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public displayHeaderAsSolid = false;
   public checkIsAuthInterval: any;
   public isAuthorised = false;
+  public hasCompletedGettingToKnowYou = false;
   public modal$: Subscription;
   public dialogRefModel: any = null;
   public isUserAdmin = false;
@@ -98,6 +99,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public initializeIsLoggedInCheck() {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
+      this.hasCompletedGettingToKnowYou = this.loginService.checkIfUserHasCompletedGettingToKnowYou();
       if (this.isAuthorised) {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
       } else {

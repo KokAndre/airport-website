@@ -59,10 +59,13 @@ export enum Endpoints {
     HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
     StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
     ClassifiedsImagesBaseURL = 'https://www.tedderfield.co.za/api/classifieds/images/',
+    GettingoKnowYouImagesBaseURL = 'https://www.tedderfield.co.za/api/getting-to-know-you/images/',
     // MembersDocumentsBaseEndpoint = 'https://www.tedderfield.co.za/api/file-system/',
     Register = '/members/register.php',
     Login = '/members/login.php',
     CheckWhitelisting = '/members/get-member.php',
+    SendPasswordResetEmail = '/members/email-reset-password.php',
+    SubmitPasswordReset = '/members/submit-reset-password.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',
     UploadImage = '/gallery/upload-images.php',
     UploadImageAsFile = '/gallery/upload-image-file.php',
@@ -127,7 +130,7 @@ export enum Endpoints {
     // Classifieds
     ClassifiedsSubmitItem = '/classifieds/submit-item-for-sale.php',
     ClassifiedsUploadImage = '/classifieds/upload-item-for-sale-image.php',
-    GetClassifiedsData =  '/classifieds/get-classifieds-data.php',
+    GetClassifiedsData = '/classifieds/get-classifieds-data.php',
     SubmitInterestedInClassifiedsItem = '/classifieds/submit-interested-in-item.php',
     DeleteClassifiedsForSaleItem = '/classifieds/delete-classifieds-for-sale-item.php',
     GetInterestedInClassifiedsData = '/classifieds/get-interested-in-classifieds-data.php',
@@ -136,7 +139,10 @@ export enum Endpoints {
 
     // Getting To Know YOu
     SubmitGettingToKnowYou = '/getting-to-know-you/submit-user-data.php',
+    UpdateGettingToKnowYou = '/getting-to-know-you/update-user-data.php',
     UploadGettingToKnowYouImage = '/getting-to-know-you/upload-image.php',
+    GetGettingToKnowYouUserData = '/getting-to-know-you/get-getting-to-know-you-user-data.php',
+    GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php'
 }
 
 export enum EncryptionKeys {

@@ -1,5 +1,12 @@
-export namespace SubmitGettingToKnowYouRequest {
+export namespace GetGettingToKnowYouResponse {
     export class RootObject {
+        status: number;
+        header: string;
+        message: string;
+        member: Member[];
+    }
+
+    export class Member {
         id: number;
         userId: number;
         name: string;

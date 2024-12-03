@@ -1,0 +1,181 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Who's Who in the Tedderfield Zoo</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Who's Who in the Tedderfield Zoo</span></p>
+  </div>
+</div>
+
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-6 col-lg-3 px-0">
+    <div class="page-top-images image4"></div>
+  </div>
+</div> -->
+
+<div [hidden]="displayMemberDetails">
+
+  <app-arrow-divider class="pointer" (click)="isWelcomeExpanded = !isWelcomeExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <div class="col-10 mx-auto pb-4">
+      <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <p class="text-size-24 mb-3">Meet everyone in the Tedderfield Zoo</p>
+        </mat-expansion-panel-header>
+
+        <p>Need some conten to go here</p>
+
+      </mat-expansion-panel>
+
+    </div>
+
+    <app-arrow-divider class="pointer" (click)="isUsersDetailsExpanded = !isUsersDetailsExpanded"
+      [isLightToDark]="false"></app-arrow-divider>
+
+  </div>
+
+
+  <div class="">
+    <div class="col-10 mx-auto pb-4">
+      <mat-expansion-panel hideToggle [expanded]="isUsersDetailsExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <p class="text-size-24 mb-3">Need a heading here please</p>
+        </mat-expansion-panel-header>
+        <div class="row mx-n2 pt-3">
+          <div *ngFor="let member of membersData" class="col-12 col-sm-12 col-md-6 col-lg-4 px-2 pb-3">
+            <div class="col-12 p-3 user-card pointer text-center" (click)="viewMemberDetails(member)">
+              <img [src]="member.image.fileData" [alt]="member.image.fileName" class="image-max-height" />
+              <p class="mt-3 mb-0 text-size-20">{{ member.name }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="displayMemberDetails">
+  <app-arrow-divider class="pointer" (click)="isMemberDetailsExpanded = !isMemberDetailsExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+  <div class="dark-background">
+    <div class="col-10 mx-auto pb-4">
+      <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <p class="text-size-24 mb-3"><b>Details for: </b>{{ memberDetailsToDisplay.name }}</p>
+        </mat-expansion-panel-header>
+
+        <div class="col-12 col-sm-12 col md-6 col-lg-4 mb-3 mx-auto text-center">
+          <img [src]="memberDetailsToDisplay.image.fileData" [alt]="memberDetailsToDisplay.image.fileName" class="image-max-height" />
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.email">
+          <p class="text-sixe-18 mb-0"><b>Email:</b></p>
+          <p>{{ memberDetailsToDisplay.email }}</p>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.phoneNumber">
+          <p class="text-sixe-18 mb-0"><b>Phone Number:</b></p>
+          <p>{{ memberDetailsToDisplay.phoneNumber }}</p>
+        </div>
+
+        <div
+          *ngIf="memberDetailsToDisplay.emergencyContactOneName && memberDetailsToDisplay.emergencyContactOnePhoneNumber">
+          <p class="text-sixe-18 mb-0"><b>Emergency Contact:</b></p>
+          <p class="mb-0"><b>Name:</b></p>
+          <p>{{ memberDetailsToDisplay.emergencyContactOneName }}</p>
+          <p class="mb-0"><b>Phone Number:</b></p>
+          <p>{{ memberDetailsToDisplay.emergencyContactOnePhoneNumber }}</p>
+        </div>
+
+        <div
+          *ngIf="memberDetailsToDisplay.emergencyContactTwoName && memberDetailsToDisplay.emergencyContactTwoPhoneNumber">
+          <p class="text-sixe-18 mb-0"><b>Secondary Emergency Contact:</b></p>
+          <p class="mb-0"><b>Name:</b></p>
+          <p>{{ memberDetailsToDisplay.emergencyContactTwoName }}</p>
+          <p class="mb-0"><b>Phone Number:</b></p>
+          <p>{{ memberDetailsToDisplay.emergencyContactTwoPhoneNumber }}</p>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.whereWereYouBorn">
+          <p class="text-sixe-18 mb-0"><b>Where were you born:</b></p>
+          <p>{{ memberDetailsToDisplay.whereWereYouBorn }}</p>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.iFlyBecause">
+          <p class="text-sixe-18 mb-0"><b>I fly because:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.iFlyBecause">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.iLoveTedderfield">
+          <p class="text-sixe-18 mb-0"><b>I love Tedderfield Airpark, because:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.iLoveTedderfield">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.whenIAmNotFlying">
+          <p class="text-sixe-18 mb-0"><b>When I am not flying I keep myself busy with:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.whenIAmNotFlying">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.whoInspiresYou">
+          <p class="text-sixe-18 mb-0"><b>Who inspires you:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.whoInspiresYou">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.whatStressesYouMost">
+          <p class="text-sixe-18 mb-0"><b>What stresses you most about Tedderfield Airpark:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.whatStressesYouMost">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.yourMostUsefullTalent">
+          <p class="text-sixe-18 mb-0"><b>What is the most useful talent you have:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.yourMostUsefullTalent">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.howFarDoYouDrive">
+          <p class="text-sixe-18 mb-0"><b>How far do you drive from home to get to Tedderfield Airpark:</b></p>
+          <p>{{ memberDetailsToDisplay.howFarDoYouDrive }}km</p>
+        </div>
+
+        <div *ngIf="memberDetailsToDisplay.immediateFamily">
+          <p class="text-sixe-18 mb-0"><b>Tell us a little about your immediate family:</b></p>
+          <ul class="pl-4">
+            <li *ngFor="let item of memberDetailsToDisplay.immediateFamily">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-3 mb-4">
+          <div class="red-button" (click)="backClicked()">
+            <p class="mb-0">Back</p>
+            <span class="red-button-icon"></span>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>

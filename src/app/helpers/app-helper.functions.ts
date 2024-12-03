@@ -87,6 +87,14 @@ export class AppHelperFunction {
         return encryptedString;
     }
 
+    static decryptPassword(textToEncrypt: string) {
+        const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
+        const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
+        const enc = CryptoJS.AES.encrypt(textToEncrypt, keyHex, { iv: ivHex });
+        const encryptedString = enc.ciphertext.toString(CryptoJS.enc.Base64);
+        return encryptedString;
+    }
+
     static encryptToken(tokenObject: object) {
         const tokenString = JSON.stringify(tokenObject);
         const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.TokenEncryptionKey);
