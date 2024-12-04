@@ -34,10 +34,14 @@
         <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height"/>
       </div>
 
-      <div class="col-lg-3 col-md-6 col-sm-12 p-2">
+      <div *ngIf="section.images?.length < 12" class="col-lg-3 col-md-6 col-sm-12 p-2">
         <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)" [returnAsFile]="true"></app-image-uploader>
       </div>
     </div>
+  </div>
+
+  <div class="col-10 mx-auto" *ngIf="section.images?.length >= 12">
+    <p class="red-text text-bold text-size-20">Only 12 images per section is allowed</p>
   </div>
 
   <app-arrow-divider [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>

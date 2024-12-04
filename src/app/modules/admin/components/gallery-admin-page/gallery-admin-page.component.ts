@@ -126,30 +126,48 @@ export class GalleryAdminPageComponent implements OnInit {
       let isAllImagesUploaded = true;
       let errorMessage = '';
 
-      for (let index = 0; index < imageDataArray.length; index++) {
-        const imageFile = imageDataArray[index];
-        await this.adminService.uploadNewImageAsFile(section.id, imageFile.imageData).then(results => {
-          if (results.status !== 200) {
-            isAllImagesUploaded = false;
-            if (results.status === 403) {
-              if (!errorMessage) {
-                errorMessage = results.message + `<br> <br> ${imageFile.imageName}`;
-              } else {
-                errorMessage += `<br> <br> ${imageFile.imageName}`;
+      const currentImageLength = section.images?.length || 0;
+
+      console.log('CURRENT LENGTH: ', currentImageLength);
+
+      if (currentImageLength < 12) {
+
+        const numOfImagesLeft = 12 - currentImageLength;
+
+        console.log('NUM OF IMAGES LEFT: ', numOfImagesLeft);
+
+        if (imageDataArray.length > numOfImagesLeft) {
+          console.log('IN SPLICE: ');
+          imageDataArray = imageDataArray.splice(0, numOfImagesLeft);
+        }
+
+        console.log('IMAGE DATA ARRAY AFTER SPLICE: ', imageDataArray);
+
+        for (let index = 0; index < imageDataArray.length; index++) {
+          const imageFile = imageDataArray[index];
+          await this.adminService.uploadNewImageAsFile(section.id, imageFile.imageData).then(results => {
+            if (results.status !== 200) {
+              isAllImagesUploaded = false;
+              if (results.status === 403) {
+                if (!errorMessage) {
+                  errorMessage = results.message + `<br> <br> ${imageFile.imageName}`;
+                } else {
+                  errorMessage += `<br> <br> ${imageFile.imageName}`;
+                }
               }
             }
-          }
 
-          if (index === imageDataArray.length - 1) {
-            if (isAllImagesUploaded) {
-              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'All images uploaded successfully.', null);
-            } else {
-              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', errorMessage ? errorMessage : 'There was an issue uploading all of the images.', null);
+            if (index === imageDataArray.length - 1) {
+              if (isAllImagesUploaded) {
+                this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', 'All images uploaded successfully.', null);
+              } else {
+                this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Image', errorMessage ? errorMessage : 'There was an issue uploading all of the images.', null);
+              }
+              this.getGalleryData();
             }
-            this.getGalleryData();
-          }
 
-        });
+          });
+        }
       }
     }
   }
