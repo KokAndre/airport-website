@@ -45,7 +45,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.initializeModal();
     this.initializeScreenSizeCheck();
 
-    if (this.router.url?.includes('home')) {
+    if (this.router.url?.includes('/home')) {
       this.getHomePageBanner();
     }
 
@@ -208,7 +208,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public getHomePageBanner() {
     if (!this.hasViewedBanner) {
       this.loginService.getHomePageBanner().then((results: GetHomePageBannerResponse.RootObject) => {
-        if (results.status === 200 && results.documentData) {
+        if (results.status === 200 && results.documentData?.file && results.documentData?.name) {
           const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
           this.appModalService.ShowConfirmationModal(ModalTypes.BannerModal, results.documentData.name, urlForModal, null);
           this.hasViewedBanner = true;

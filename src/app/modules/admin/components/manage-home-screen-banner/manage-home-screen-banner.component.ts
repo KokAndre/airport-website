@@ -62,42 +62,19 @@ export class ManageHomeScreenBannerComponent implements OnInit {
     status = event.target.files.length > 0 ? true : false;
 
     if (status == true) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const documentSrc = reader.result || '';
-        // const dataToUpload = new AddHomePageBannerRequest.RootObject();
-        // dataToUpload.fileName = file.name;
-
-        // if (file.size > 500000) {
-        //   const imageToCompress = {
-        //     image: documentSrc as string,
-        //     orientation: 1,
-        //     fileName: file.name
-        //   }
-        //   this.imageCompress
-        //     .getImageWithMaxSizeAndMetas(imageToCompress, 0.5) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
-        //     .then(
-        //       (result) => {
-        //         dataToEmit.imageData = result.image;
-        //         this.imageUploadedEmit.emit(dataToEmit);
-        //       },
-        //       (result: string) => {
-        //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload image', 'The file size was too big. Please try uploading a smaller file.', null);
-        //       }
-        //     );
-        // } else {
-          // dataToUpload.fileData = documentSrc;
-          this.addNewBanner(file.name, documentSrc);
-        // }
-      }
+      // const reader = new FileReader();
+      // reader.readAsDataURL(file);
+      // reader.onload = () => {
+      //   const documentSrc = reader.result || '';
+        this.addNewBanner(file);
+      // }
     } else {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading file', 'No file was selected.', null);
     }
   }
 
-  public addNewBanner(documentName: string, documentData: any) {
-    this.adminService.addHomeScreenBanner(documentName, documentData).then(results => {
+  public addNewBanner(documentData: any) {
+    this.adminService.addHomeScreenBannerAsFile(documentData).then(results => {
       if (results.status === 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Banner', results.message, null);
         this.getHomePageBanner();

@@ -90,6 +90,7 @@ export enum Endpoints {
     GetHomePageBanner = '/home/get-home-page-banner.php',
     DeleteHomePageBanner = '/home/delete-home-page-banner.php',
     AddNewHomeScreenBanner = '/home/add-home-page-banner.php',
+    AddNewHomeScreenBannerAsFile = '/home/add-home-page-banner-file.php',
     GetHangersForSales = '/hangers-for-sale/get-hangers-for-sale.php',
     SubmitSellMyHanger = '/hangers-for-sale/submit-hanger-for-sale.php',
     UploadSellMyHangerTitleDocument = '/hangers-for-sale/upload-title-document.php',

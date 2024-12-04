@@ -317,6 +317,56 @@ export class AdminService {
       });
   }
 
+  public addHomeScreenBannerAsFile(fileData: any) {
+    // const requestData = new AddHomePageBannerRequest.RootObject();
+    const userId = this.loginService.getLoggedInUserId();
+    let fileDataToUpload: FormData = new FormData();
+    fileDataToUpload.append('file', fileData);
+    fileDataToUpload.append('name', fileData.name);
+    fileDataToUpload.append('userId', `${userId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.AddNewHomeScreenBannerAsFile, {
+      method: 'post',
+      body: fileDataToUpload
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+
+      // let testData: FormData = new FormData();
+      // testData.append('file', fileData);
+      // testData.append('name', fileData.name);
+      // testData.append('sellMyHangerId', `${sellMyHangerId}`);
+  
+      // return fetch(Endpoints.BaseURL + Endpoints.UploadSellMyHangerTitleDocument, {
+      //   method: 'post',
+      //   body: testData
+      // })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     return data;
+      //   });
+
+
+
+      // const userId = this.loginService.getLoggedInUserId();
+      // let fileDataToUpload: FormData = new FormData();
+      // fileDataToUpload.append('file', fileData);
+      // fileDataToUpload.append('name', fileData.name);
+      // fileDataToUpload.append('userId', `${userId}`);
+      // fileDataToUpload.append('sectionId', `${sectionId}`);
+  
+      // return fetch(Endpoints.BaseURL + Endpoints.UploadImageAsFile, {
+      //   method: 'post',
+      //   body: fileDataToUpload
+      // })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     return data;
+      //   });
+  }
+
   public deleteHangerForSaleItem(hangerId: number) {
     return fetch(Endpoints.BaseURL + Endpoints.DeleteHangerForSaleItem, {
       method: 'post',
