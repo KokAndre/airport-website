@@ -191,6 +191,9 @@
     <div class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersAdmin)">
+          Manage Members</div>
+        <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
           Manage Gallery</div>
         <mat-divider></mat-divider>
@@ -443,6 +446,9 @@
   </mat-menu>
 
   <mat-menu #adminMenu="matMenu">
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersAdmin)">
+      Manage Members</div>
+    <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
       Manage Gallery</div>
     <mat-divider></mat-divider>

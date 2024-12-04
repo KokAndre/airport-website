@@ -611,4 +611,16 @@ export class AdminService {
         return data;
       });
   }
+
+  public getMembersData() {
+    const userId = this.loginService.getLoggedInUserId();
+    return fetch(Endpoints.BaseURL + Endpoints.GetAllMembers, {
+      method: 'post',
+      body: JSON.stringify({ requestData: { userId: userId } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
 }

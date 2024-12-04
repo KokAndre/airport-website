@@ -37,6 +37,7 @@ export enum AppRoutes {
     SubmitClassifieds = '/members/classifieds',
     WhosWhoInTheZoo = '/members/whos-who-in-the-tedderfield-zoo',
 
+    MembersAdmin = '/admin/manage-members',
     GalleryAdmin = '/admin/edit-gallery',
     FollowUsRequests = '/admin/follow-us-requests',
     ReportIssueRequests = '/admin/report-issue-requests',
@@ -142,7 +143,10 @@ export enum Endpoints {
     UpdateGettingToKnowYou = '/getting-to-know-you/update-user-data.php',
     UploadGettingToKnowYouImage = '/getting-to-know-you/upload-image.php',
     GetGettingToKnowYouUserData = '/getting-to-know-you/get-getting-to-know-you-user-data.php',
-    GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php'
+    GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php',
+
+    // Manage Members
+    GetAllMembers = '/members/get-members.php'
 }
 
 export enum EncryptionKeys {

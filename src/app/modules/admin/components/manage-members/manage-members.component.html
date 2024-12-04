@@ -1,0 +1,56 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Manage Members
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Manage Members</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="membersData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+
+  <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4"
+      (click)="exportToExcel()">
+      <p class="mb-0">Export To Excel</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Registered</th>
+        <th>Admin</th>
+        <th>Getting To Know You</th>
+        <!-- <th>Actions</th> -->
+      </tr>
+
+      <tr *ngFor="let item of membersData">
+        <td>{{ item.name }}</td>
+        <td>{{ item.surname }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phoneNumber }}</td>
+        <td class="text-center"><mat-icon *ngIf="item.isRegistered === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.isRegistered !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
+        <td class="text-center"><mat-icon *ngIf="item.isAdmin === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.isAdmin !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
+        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasCompletedGettingToKnowYou !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
+
+        <!-- <td class="text-center py-1"><mat-icon class="pointer mr-2 vertical-allign-bottom" fontIcon="edit" (click)="editMember(item)"></mat-icon><mat-icon class="red-text pointer vertical-allign-bottom" fontIcon="delete" (click)="delteMember(item)"></mat-icon></td> -->
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf="!membersData?.length" class="col-10 mx-auto">
+  <p class="text-size-24">There is currently no members data to display.</p>
+</div>
