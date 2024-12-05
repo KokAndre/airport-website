@@ -219,11 +219,11 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   public displayTermsAndConditions() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Terms and Conditions ', '../../../assets/documents/20240801-FATA_Websites_Terms_and_Conditions.pdf', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Terms and Conditions ', '../../../assets/documents/20240801 - FATA Websites Terms and Conditions.pdf', null);
   }
 
   public displayPrivacyPolicy() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Privacy Policy', '../../../assets/documents/20240801-FATA_Privacy_Policy.pdf', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Privacy Policy', '../../../assets/documents/20241205 - FATA Privacy Policy.pdf', null);
   }
 
   public openSearchAndRescue() {

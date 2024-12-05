@@ -266,19 +266,19 @@ export class NavBarComponent implements OnInit {
   public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
     switch (documentToDisplay) {
       case DocumentsToDisplayEnum.RunwayInfo:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/Runway_Info_v1.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20241205 - Tedderfielf Airpark - Runway Information as at January 2024.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241120-FATA_Emergency_Contacts.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241205  - FATA Emergency Contacts.pdf', null);
         break;
       case DocumentsToDisplayEnum.SalesBrochure:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241120-Tedderfield_Sales_Brochure_v2.pdf', null);
         break;
       case DocumentsToDisplayEnum.ParamotorPilots:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Paramotor-V3-1-2.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Paramotor Pilots', '../../../assets/documents/Paramotor Pilots.pdf', null);
         break;
       case DocumentsToDisplayEnum.GroundOperations:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/Ground_Operations.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Ground Operations', '../../../assets/documents/20241028 - Tedderfield Airpark - Ground Operations - as at FEB 2024.pdf', null);
         break;
       case DocumentsToDisplayEnum.NOTAMSNewTab:
         AppHelperFunction.openDocumentInNewTab('https://www.b4flight.co.za/');
