@@ -24,6 +24,7 @@ import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-doc
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
 import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
+import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -333,38 +334,6 @@ export class AdminService {
       .then(data => {
         return data;
       });
-
-      // let testData: FormData = new FormData();
-      // testData.append('file', fileData);
-      // testData.append('name', fileData.name);
-      // testData.append('sellMyHangerId', `${sellMyHangerId}`);
-  
-      // return fetch(Endpoints.BaseURL + Endpoints.UploadSellMyHangerTitleDocument, {
-      //   method: 'post',
-      //   body: testData
-      // })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     return data;
-      //   });
-
-
-
-      // const userId = this.loginService.getLoggedInUserId();
-      // let fileDataToUpload: FormData = new FormData();
-      // fileDataToUpload.append('file', fileData);
-      // fileDataToUpload.append('name', fileData.name);
-      // fileDataToUpload.append('userId', `${userId}`);
-      // fileDataToUpload.append('sectionId', `${sectionId}`);
-  
-      // return fetch(Endpoints.BaseURL + Endpoints.UploadImageAsFile, {
-      //   method: 'post',
-      //   body: fileDataToUpload
-      // })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     return data;
-      //   });
   }
 
   public deleteHangerForSaleItem(hangerId: number) {
@@ -667,6 +636,21 @@ export class AdminService {
     return fetch(Endpoints.BaseURL + Endpoints.GetAllMembers, {
       method: 'post',
       body: JSON.stringify({ requestData: { userId: userId } })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteMember(memberId: number) {
+    const requestData = new MembersDataResponse.Member
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.id = memberId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteMember, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
     })
       .then(response => response.json())
       .then(data => {

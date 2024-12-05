@@ -128,20 +128,13 @@ export class GalleryAdminPageComponent implements OnInit {
 
       const currentImageLength = section.images?.length || 0;
 
-      console.log('CURRENT LENGTH: ', currentImageLength);
-
       if (currentImageLength < 12) {
 
         const numOfImagesLeft = 12 - currentImageLength;
 
-        console.log('NUM OF IMAGES LEFT: ', numOfImagesLeft);
-
         if (imageDataArray.length > numOfImagesLeft) {
-          console.log('IN SPLICE: ');
           imageDataArray = imageDataArray.splice(0, numOfImagesLeft);
         }
-
-        console.log('IMAGE DATA ARRAY AFTER SPLICE: ', imageDataArray);
 
         for (let index = 0; index < imageDataArray.length; index++) {
           const imageFile = imageDataArray[index];

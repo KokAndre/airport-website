@@ -16,5 +16,6 @@ export namespace MembersDataResponse {
         isAdmin: string;
         hasCompletedGettingToKnowYou: string;
         phoneNumber: string;
+        userId: number;
     }
 }

@@ -147,7 +147,8 @@ export enum Endpoints {
     GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php',
 
     // Manage Members
-    GetAllMembers = '/members/get-members.php'
+    GetAllMembers = '/members/get-members.php',
+    DeleteMember = '/members/delete-members.php',
 }
 
 export enum EncryptionKeys {

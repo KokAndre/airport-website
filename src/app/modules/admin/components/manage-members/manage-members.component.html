@@ -44,7 +44,7 @@
         <td class="text-center"><mat-icon *ngIf="item.isAdmin === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.isAdmin !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
         <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasCompletedGettingToKnowYou !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
 
-        <!-- <td class="text-center py-1"><mat-icon class="pointer mr-2 vertical-allign-bottom" fontIcon="edit" (click)="editMember(item)"></mat-icon><mat-icon class="red-text pointer vertical-allign-bottom" fontIcon="delete" (click)="delteMember(item)"></mat-icon></td> -->
+        <!-- <td class="text-center py-1"><mat-icon class="pointer mr-2 vertical-allign-bottom" fontIcon="edit" (click)="editMember(item)"></mat-icon><mat-icon class="red-text pointer vertical-allign-bottom" fontIcon="delete" (click)="delteMemberClicked(item)"></mat-icon></td> -->
       </tr>
 
     </table>

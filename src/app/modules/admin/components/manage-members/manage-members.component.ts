@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { ModalTypes } from 'src/app/enums/app.enums';
+import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 
 @Component({
   selector: 'app-manage-members',
@@ -28,14 +28,25 @@ export class ManageMembersComponent implements OnInit {
     });
   }
 
-  public delteMember(member: MembersDataResponse.Member) {
-    //
+  public delteMemberClicked(member: MembersDataResponse.Member) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Delete Member', `Are you sure you want to delete ${member.name} ${member.surname} <br /> All data for the user will be deleted permanently.`, null, this.deleteMemberOutcome.bind(this, member.id));
+  }
+
+  public deleteMemberOutcome(userId: number, modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.adminService.deleteMember(userId).then(results => {
+        if (results.status === 200) {
+          this.getMembersData();
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Members', results.message, null);
+        }
+      });
+    }
   }
 
   public editMember(member: MembersDataResponse.Member) {
     //
   }
-
 
   public exportToExcel() {
     const standsForSaleExcelData = new Array<any>();
