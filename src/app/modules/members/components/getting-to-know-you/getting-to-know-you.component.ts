@@ -81,18 +81,16 @@ export class GettingToKnowYouComponent implements OnInit {
   }
 
   public getGettingToKnowYouData() {
-    this.membersService.getGettingToKnowYouData().then((results) => {
+    this.membersService.getGettingToKnowYouUserData().then((results) => {
       if (results.status === 200) {
-        if (results.member?.length) {
-          console.log('IN IF');
-          this.formatMemberData(results.member[0]);
+        if (results.member) {
+          this.formatMemberData(results.member);
         }
       }
     });
   }
 
   public formatMemberData(membersResponseData: any) {
-    console.log('DATA IN FORMAT: ', membersResponseData);
     this.originalHasCompletedGettingToKnowYouData = new GetGettingToKnowYouResponse.Member();
     this.originalHasCompletedGettingToKnowYouData.id = membersResponseData.id;
     this.originalHasCompletedGettingToKnowYouData.userId = membersResponseData.userId;
@@ -116,6 +114,8 @@ export class GettingToKnowYouComponent implements OnInit {
     this.originalHasCompletedGettingToKnowYouData.image = new GetGettingToKnowYouResponse.Image();
     this.originalHasCompletedGettingToKnowYouData.image.fileName = membersResponseData.image;
     this.originalHasCompletedGettingToKnowYouData.image.fileData = Endpoints.GettingoKnowYouImagesBaseURL + membersResponseData.id + '/' + membersResponseData.image;
+
+    console.log('ORIGINAL GETTING TO KNOW YOU DATA: ', this.originalHasCompletedGettingToKnowYouData);
   
     this.prePopTheForm();
   }
@@ -155,7 +155,12 @@ export class GettingToKnowYouComponent implements OnInit {
       let formattedItem = '';
       itemArray.forEach(item => {
         item = item.replaceAll("`", "'");
-        formattedItem += `• ${item}\n`;
+        if (formattedItem) {
+           formattedItem += `\n• ${item}`;
+        } else {
+          formattedItem += `• ${item}`;
+        }
+       
       });
       return formattedItem;
     } else {
@@ -235,6 +240,10 @@ export class GettingToKnowYouComponent implements OnInit {
       }
 
       this.gettingToKnowYouRequestData.image = uploadedImageToAdd;
+
+      if (this.originalHasCompletedGettingToKnowYouData?.id) {
+        this.hasValuesChanged = true;
+      }
     }
   }
 

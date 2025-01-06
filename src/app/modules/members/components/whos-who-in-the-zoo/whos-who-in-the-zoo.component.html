@@ -25,10 +25,13 @@
 
 <div [hidden]="displayMemberDetails">
 
-  <app-arrow-divider class="pointer" (click)="isWelcomeExpanded = !isWelcomeExpanded"
+  <!-- <app-arrow-divider class="pointer" (click)="isWelcomeExpanded = !isWelcomeExpanded"
+    [isLightToDark]="true"></app-arrow-divider> -->
+
+    <app-arrow-divider class="pointer" (click)="isUsersDetailsExpanded = !isUsersDetailsExpanded"
     [isLightToDark]="true"></app-arrow-divider>
 
-  <div class="dark-background">
+  <!-- <div class="dark-background">
     <div class="col-10 mx-auto pb-4">
       <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
         <mat-expansion-panel-header>
@@ -44,14 +47,14 @@
     <app-arrow-divider class="pointer" (click)="isUsersDetailsExpanded = !isUsersDetailsExpanded"
       [isLightToDark]="false"></app-arrow-divider>
 
-  </div>
+  </div> -->
 
 
-  <div class="">
+  <div class="dark-background">
     <div class="col-10 mx-auto pb-4">
       <mat-expansion-panel hideToggle [expanded]="isUsersDetailsExpanded" class="page-section-expansion-pannel">
         <mat-expansion-panel-header>
-          <p class="text-size-24 mb-3">Need a heading here please</p>
+          <!-- <p class="text-size-24 mb-3">Need a heading here please</p> -->
         </mat-expansion-panel-header>
         <div class="row mx-n2 pt-3">
           <div *ngFor="let member of membersData" class="col-12 col-sm-12 col-md-6 col-lg-4 px-2 pb-3">

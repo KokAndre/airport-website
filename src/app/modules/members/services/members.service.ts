@@ -266,7 +266,9 @@ export class MembersService {
   public getGettingToKnowYouUserData() {
     const userId = this.loginService.getLoggedInUserId();
 
-    return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouUserData, {
+    console.log('USER ID: ', userId);
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouData, {
       method: 'post',
       body: JSON.stringify({ requestData: {userId: userId} })
     })
