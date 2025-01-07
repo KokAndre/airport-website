@@ -11,8 +11,8 @@
 <div class="dark-background pb-5">
   <div class="col-10 px-0 mx-auto">
 
-    <div *ngIf="isUserRegistered && !displayPasswordResetScreen" class="col-12 col-sm-12 col-md-8 col-lg-7 px-0 mx-auto pt-4"
-      [formGroup]="loginFormGroup">
+    <div *ngIf="isUserRegistered && !displayPasswordResetScreen"
+      class="col-12 col-sm-12 col-md-8 col-lg-7 px-0 mx-auto pt-4" [formGroup]="loginFormGroup">
       <!-- <h1 class="text-size-24 mb-2">Login</h1> -->
       <div class="login-form-background p-4">
         <div class="row justify-content-center mx-0">
@@ -70,11 +70,11 @@
 
           <div class="row mx-0 justify-content-center">
             <div class="white-button mt-3" (click)="resetPasswordClicked()">
-            <p class="mb-0">Reset Password</p>
-            <span class="white-button-icon"></span>
+              <p class="mb-0">Reset Password</p>
+              <span class="white-button-icon"></span>
+            </div>
           </div>
-          </div>
-          
+
 
           <div class="row mx-0 justify-content-center mt-3">
             <div appOnEnter [isButtonFocused]="true" class="red-button"
@@ -88,34 +88,8 @@
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div *ngIf="isUserRegistered && displayPasswordResetScreen" class="col-12 col-sm-12 col-md-8 col-lg-7 px-0 mx-auto pt-4"
-      [formGroup]="registerFormGroup">
+    <div *ngIf="isUserRegistered && displayPasswordResetScreen"
+      class="col-12 col-sm-12 col-md-8 col-lg-7 px-0 mx-auto pt-4" [formGroup]="registerFormGroup">
       <div class="login-form-background p-4">
 
         <div class="row justify-content-center mx-0">
@@ -138,17 +112,18 @@
             </div>
             <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
           </div>
-  
+
           <div class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-12 px-0">
               <mat-label>Confirm New Password</mat-label>
-              <input style="color: black;" [type]="hideConfirmPin ? 'password' : 'text'" matInput required maxlength="50"
-                [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl">
+              <input style="color: black;" [type]="hideConfirmPin ? 'password' : 'text'" matInput required
+                maxlength="50" [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl">
               <button mat-icon-button matSuffix (click)="hideConfirmPin = !hideConfirmPin"
                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPin">
                 <mat-icon class="ml-n2 mb-n4 pt-1">{{hideConfirmPin ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
-              <mat-error *ngIf="registerConfirmPasswordControl?.hasError('required')">New Password is required</mat-error>
+              <mat-error *ngIf="registerConfirmPasswordControl?.hasError('required')">New Password is
+                required</mat-error>
               <mat-error *ngIf="registerConfirmPasswordControl?.hasError('noMatch')">Passwords do not
                 match</mat-error>
             </mat-form-field>
@@ -158,30 +133,35 @@
           <div class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-12 px-0">
               <mat-label>Password Reset Code</mat-label>
-              <input style="color: black;" matInput required maxlength="6" formControlName="registerPasswordResetControl" (input)="numberControlInputWithDecimals(registerPasswordResetControl)">
+              <input style="color: black;" matInput required maxlength="6"
+                formControlName="registerPasswordResetControl"
+                (input)="numberControlInputWithDecimals(registerPasswordResetControl)">
               <mat-error *ngIf="registerPasswordResetControl?.hasError('required')">Reset Code is required</mat-error>
-              <mat-error *ngIf="registerPasswordResetControl?.hasError('minLength')">Reset Code must be 6 characters long</mat-error>
+              <mat-error *ngIf="registerPasswordResetControl?.hasError('minLength')">Reset Code must be 6 characters
+                long</mat-error>
             </mat-form-field>
             <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
           </div>
-  
 
-        <div class="row mx-0 justify-content-center">
-          <!-- <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-6" appOnEnter
+
+          <div class="row mx-0 justify-content-center">
+            <!-- <button mat-raised-button [disabled]="loginFormGroup.invalid" class="text-size-20 col-6" appOnEnter
             [isButtonFocused]="true" (click)="loginClicked()">Login</button> -->
 
-          <div class="white-button mt-2 mx-1" (click)="cancelResetPasswordClicked()">
-            <p class="mb-0">Cancel</p>
-            <span class="white-button-icon"></span>
+            <div class="white-button mt-2 mx-1" (click)="cancelResetPasswordClicked()">
+              <p class="mb-0">Cancel</p>
+              <span class="white-button-icon"></span>
+            </div>
+
+            <div appOnEnter [isButtonFocused]="true" class="red-button mt-2 mx-1"
+              [ngClass]="{'disable-user-click': registerPasswordControl.invalid || registerConfirmPasswordControl.invalid || registerPasswordResetControl.invalid}"
+              (click)="resetPassword()">
+              <p class="mb-0">Confirm</p>
+              <span class="red-button-icon"></span>
+            </div>
           </div>
 
-          <div appOnEnter [isButtonFocused]="true" class="red-button mt-2 mx-1"
-            [ngClass]="{'disable-user-click': registerPasswordControl.invalid || registerConfirmPasswordControl.invalid || registerPasswordResetControl.invalid}" (click)="resetPassword()">
-            <p class="mb-0">Confirm</p>
-            <span class="red-button-icon"></span>
-          </div>
         </div>
-
       </div>
     </div>
 
@@ -315,4 +295,3 @@
       </div>
     </div>
   </div>
-</div>

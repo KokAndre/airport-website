@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initializeScreenSizeCheck();
 
+    console.log('USER DATA: ', this.userData);
+
     if (!this.userData) {
       this.errorFetchingDataEmit.emit();
     }
