@@ -5,6 +5,11 @@
 }
 
 .image-max-height {
-    max-height: 200px !important;
+    max-height: 150px !important;
     max-width: 100%;
+}
+
+.columns-bottom-border {
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
 }

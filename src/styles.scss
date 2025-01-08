@@ -524,3 +524,7 @@ h6,
 .cdk-global-scrollblock {
   overflow-y: hidden !important;
 }
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #ee202e !important;
+}
