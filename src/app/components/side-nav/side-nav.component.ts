@@ -138,6 +138,17 @@ export class SideNavComponent implements OnInit, OnDestroy {
           break;
 
         case ModalTypes.InformationModal:
+          this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+            data: modalDetails, disableClose: false, maxWidth: '90vw', panelClass: 'min-width-modal-class'
+          });
+
+          // Close information modals after 3 seconds
+          setTimeout(() => {
+            this.modalDialog.closeAll();
+          }, 3000);
+          break;
+
+
         case ModalTypes.ConfirmationModal:
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal:

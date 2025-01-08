@@ -80,6 +80,19 @@ export class GettingToKnowYouComponent implements OnInit {
     }
   }
 
+  // TODO: REMOVE THE EDITIBLE DIV TEST DATA
+  // public testDivValue() {
+  //   console.log('DIV: ', document.getElementById('testEditibleDiv'));
+  //   console.log('DIV TEXT: ', document.getElementById('testEditibleDiv').innerText);
+  //   const divText = document.getElementById('testEditibleDiv').innerText;
+
+  //   const divTextArray = divText.split('\n');
+  //   console.log('DIV TEXT ARRAY: ', divTextArray);
+
+  //   const divTextFormatted = divText.replaceAll('\n', ', ');
+  //   console.log('DIV TEXT ARRAY: ', divTextFormatted);
+  // }
+
   public getGettingToKnowYouData() {
     this.membersService.getGettingToKnowYouUserData().then((results) => {
       if (results.status === 200) {
@@ -115,8 +128,6 @@ export class GettingToKnowYouComponent implements OnInit {
     this.originalHasCompletedGettingToKnowYouData.image.fileName = membersResponseData.image;
     this.originalHasCompletedGettingToKnowYouData.image.fileData = Endpoints.GettingoKnowYouImagesBaseURL + membersResponseData.id + '/' + membersResponseData.image;
 
-    console.log('ORIGINAL GETTING TO KNOW YOU DATA: ', this.originalHasCompletedGettingToKnowYouData);
-  
     this.prePopTheForm();
   }
 
@@ -139,8 +150,6 @@ export class GettingToKnowYouComponent implements OnInit {
     this.gettingToKnowYouRequestData.image.fileName = this.originalHasCompletedGettingToKnowYouData.image.fileName;
     this.gettingToKnowYouRequestData.image.fileData = this.originalHasCompletedGettingToKnowYouData.image.fileData;
 
-    console.log('GETTING TO KNOW YOU DATA: ', this.gettingToKnowYouRequestData);
-
     this.subscribeToFormValueChange();
   }
 
@@ -156,11 +165,11 @@ export class GettingToKnowYouComponent implements OnInit {
       itemArray.forEach(item => {
         item = item.replaceAll("`", "'");
         if (formattedItem) {
-           formattedItem += `\n• ${item}`;
+          formattedItem += `\n• ${item}`;
         } else {
           formattedItem += `• ${item}`;
         }
-       
+
       });
       return formattedItem;
     } else {
@@ -191,6 +200,34 @@ export class GettingToKnowYouComponent implements OnInit {
     }
 
     const numOfLines = formControl.value?.split('\n')?.length;
+
+    // Check that no text is placed before the bullet points
+    const allLinesArray = formControl.value?.split('\n');
+    if (allLinesArray.find(x => x.slice(0, 1) !== '•')) {
+
+      let newValueToSetAfterRemovingBulletPreText = '';
+
+      allLinesArray.forEach((line, last) => {
+        if (line.slice(0, 1) !== '•') {
+          const bulletPointIndex = line.lastIndexOf('•');
+          const newValueToSet = line.slice(bulletPointIndex, line.length);
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
+        }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
 
     if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
       if (numOfLines <= 10) {
@@ -341,7 +378,7 @@ export class GettingToKnowYouComponent implements OnInit {
   public uploadImage() {
     this.membersService.uploadGettingToKnowImage(this.submitItemSucessId, this.gettingToKnowYouRequestData.image).then(results => {
       if (results.status === 200) {
-        if (this.originalHasCompletedGettingToKnowYouData?.id){
+        if (this.originalHasCompletedGettingToKnowYouData?.id) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Data has successfully been updated.', null);
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', "Your details have been capture seccessfully. You can now view who's who in the Tedderfield Zoo.", null);
