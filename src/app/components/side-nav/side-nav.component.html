@@ -1,5 +1,25 @@
 <!-- Header -->
 <div class="main-container">
+
+  <!-- Getting to know you banner -->
+  <div class="getting-to-know-you-banner" [ngClass]="{'hide-content': !displayGettingToKnowYouBanner}">
+    <div class="getting-to-know-you-close-button pointer text-center" (click)="displayGettingToKnowYouBanner = false; hasDismissedGettingToKnowYou = true;">
+      <mat-icon class="text-size-26 close-button-icon">close</mat-icon>
+    </div>
+    <div class="p-2 pointer" (click)="navigateToGettingToKnowYou()">
+      <div class="row mx-0 align-items-center">
+        <div class="col pt-1 px-0">
+          <mat-icon class="getting-to-know-you-icon material-symbols-outlined">person</mat-icon>
+        </div>
+        <div class="col-auto ml-3 px-0">
+          <p class="mb-0 text-bold">Getting to know you</p>
+          <p class="mb-0 ">Please complete Getting To Know You</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End -->
+
   <div class="header-container">
     <div class="header row mx-0" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
       <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 pointer center-align-vertical header-white-background"
@@ -7,12 +27,14 @@
         <div class="logo-image"></div>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-2 col-2 px-0 center-align-vertical">
-        <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin"
-          [isMobileView]="isMobileView" [hasCompletedGettingToKnowYou]="hasCompletedGettingToKnowYou"></app-nav-bar>
+        <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin" [isMobileView]="isMobileView"
+          [hasCompletedGettingToKnowYou]="hasCompletedGettingToKnowYou"></app-nav-bar>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical" [ngClass]="{'header-white-background': isAuthorised}">
+      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical"
+        [ngClass]="{'header-white-background': isAuthorised}">
         <p class="mb-0 text-size-20 text-center header-blue-text" *ngIf="isAuthorised">Welcome</p>
-        <p class="mb-0 text-size-20 text-center header-red-text" *ngIf="isAuthorised"><span class="text-bold">{{ getLoggedInUsername() }}</span></p>
+        <p class="mb-0 text-size-20 text-center header-red-text" *ngIf="isAuthorised"><span class="text-bold">{{
+            getLoggedInUsername() }}</span></p>
       </div>
     </div>
   </div>
@@ -41,8 +63,7 @@
               Policy</a>
           </p>
           <p *ngIf="isFooterMobileView" class="mb-0">
-            <a class="text-size-12 white-text no-underline pointer"
-              (click)="displayTermsAndConditions()">Terms &
+            <a class="text-size-12 white-text no-underline pointer" (click)="displayTermsAndConditions()">Terms &
               Conditions</a>
           </p>
           <p class="mb-0">
@@ -50,14 +71,19 @@
               href="https://mayday-sa.org.za/">Mayday-SA</a>
           </p>
           <p class="mb-0">
-            <a class="text-size-12 white-text no-underline email-mobile-text" href="mailto:info@tedderfield.co.za">Email:
+            <a class="text-size-12 white-text no-underline email-mobile-text"
+              href="mailto:info@tedderfield.co.za">Email:
               info&#64;tedderfield.co.za</a>
           </p>
         </div>
-        <div class="col-5 col-sm-5 col-md-5 col-lg-5 p-0 " [ngClass]="{'pr-3': isMobileView, 'align-content-center': !isFooterMobileView}">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 p-0 "
+          [ngClass]="{'pr-3': isMobileView, 'align-content-center': !isFooterMobileView}">
           <div class="row mx-0 justify-content-end" [ngClass]="{'mt-2': isFooterMobileView}">
-            <div class="red-button" [ngClass]="{'px-1 mb-2': isFooterMobileView, 'mb-1': displayFooterButtonBottomMargin}" (click)="openSearchAndRescue()">
-              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">Search & Rescue</p>
+            <div class="red-button"
+              [ngClass]="{'px-1 mb-2': isFooterMobileView, 'mb-1': displayFooterButtonBottomMargin}"
+              (click)="openSearchAndRescue()">
+              <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">
+                Search & Rescue</p>
               <span
                 [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
             </div>
@@ -72,15 +98,17 @@
         </div>
         <div class="col-2 col-sm-2 col-md-1 col-lg-1 px-0 align-content-center">
           <div class="row mx-0 justify-content-end">
-            <a class="p-0" [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mb-1': displaySocialMediaLogoBottomMargin}"
+            <a class="p-0"
+              [ngClass]="{'facebook-icon-size': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mb-1': displaySocialMediaLogoBottomMargin}"
               target="_blank" href="https://www.facebook.com/share/1H1dRfWEPY/?mibextid=LQQJ4d">
               <div class="facebook-icon"></div>
             </a>
 
-            <a class="p-0" [ngClass]="{'facebook-icon-size pl-2': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mt-1': displaySocialMediaLogoBottomMargin}"
-            target="_blank" href="https://www.instagram.com/tedderfieldairpark/profilecard/?igsh=cmt4dWNkYmozNW0w">
-            <div class="instagram-icon"></div>
-          </a>
+            <a class="p-0"
+              [ngClass]="{'facebook-icon-size pl-2': !isMobileView, 'facebook-icon-size-small': isMobileView, 'mt-1': displaySocialMediaLogoBottomMargin}"
+              target="_blank" href="https://www.instagram.com/tedderfieldairpark/profilecard/?igsh=cmt4dWNkYmozNW0w">
+              <div class="instagram-icon"></div>
+            </a>
           </div>
         </div>
       </div>

@@ -32,6 +32,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public displayFooterButtonBottomMargin = false;
   public displaySocialMediaLogoBottomMargin = false;
   public hasViewedBanner = false;
+  public displayGettingToKnowYouBanner = false;
+  public hasDismissedGettingToKnowYou = false;
 
   constructor(public router: Router,
     public loginService: LoginService,
@@ -100,12 +102,27 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.checkIsAuthInterval = setInterval(() => {
       this.isAuthorised = this.loginService.isAuthorised();
       this.hasCompletedGettingToKnowYou = this.loginService.checkIfUserHasCompletedGettingToKnowYou();
+
       if (this.isAuthorised) {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
+
+        if (this.hasCompletedGettingToKnowYou && !this.hasDismissedGettingToKnowYou) {
+          this.displayGettingToKnowYouBanner = true;
+        } else {
+          this.displayGettingToKnowYouBanner = false;
+        }
       } else {
         this.isUserAdmin = false;
+        this.displayGettingToKnowYouBanner = false;
       }
     }, 1000);
+
+  }
+
+  public navigateToGettingToKnowYou() {
+    this.hasDismissedGettingToKnowYou = true;
+    this.displayGettingToKnowYouBanner = false;
+    this.router.navigateByUrl(AppRoutes.GettingToKnowYou);
   }
 
   public logout() {
