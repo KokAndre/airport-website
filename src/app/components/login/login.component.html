@@ -165,36 +165,6 @@
       </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div *ngIf="!isUserRegistered" class="col-12 col-sm-12 col-md-8 col-lg-6 px-0 mx-auto pt-4"
       [formGroup]="registerFormGroup">
       <!-- <h1 class="text-size-24 mb-2">Register</h1> -->
@@ -257,7 +227,6 @@
             </div>
             <span>{{ strengthText }} {{ passwordStrengthText }}</span>
           </div>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
@@ -273,12 +242,7 @@
             <mat-error *ngIf="registerConfirmPasswordControl?.hasError('noMatch')">Passwords do not
               match</mat-error>
           </mat-form-field>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
         </div>
-        <!-- <div class="row mx-0 mx-0 justify-content-center">
-          <button mat-raised-button [disabled]="registerFormGroup.invalid" class="text-size-20 col-6" appOnEnter
-            [isButtonFocused]="true" (click)="registerClicked()">Register</button>
-        </div> -->
 
         <div class="row mx-0 justify-content-center">
           <div class="white-button" (click)="cancelClicked()">

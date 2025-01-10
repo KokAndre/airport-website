@@ -130,33 +130,55 @@ export class SubmitClassifiedsComponent implements OnInit {
 
     const numOfLines = formControl.value?.split('\n')?.length;
 
-        // Check that no text is placed before the bullet points
-        const allLinesArray = formControl.value?.split('\n');
-        if (allLinesArray.find(x => x.slice(0, 1) !== '•')) {
-    
-          let newValueToSetAfterRemovingBulletPreText = '';
-    
-          allLinesArray.forEach((line, last) => {
-            if (line.slice(0, 1) !== '•') {
-              const bulletPointIndex = line.lastIndexOf('•');
-              const newValueToSet = line.slice(bulletPointIndex, line.length);
-    
-              if (last) {
-                newValueToSetAfterRemovingBulletPreText += newValueToSet;
-              } else {
-                newValueToSetAfterRemovingBulletPreText += newValueToSet + '\n';
-              }
-            } else {
-              if (last) {
-                newValueToSetAfterRemovingBulletPreText += line;
-              } else {
-                newValueToSetAfterRemovingBulletPreText += line + '\n';
-              }
-            }
-    
-            formControl.setValue(newValueToSetAfterRemovingBulletPreText);
-          });
+    // Check that no text is placed before the bullet points
+    const allLinesArray = formControl.value?.split('\n');
+    if (allLinesArray.find(x => x.slice(0, 1) !== '•')) {
+
+      let newValueToSetAfterRemovingBulletPreText = '';
+
+      allLinesArray.forEach((line, last) => {
+        if (line.slice(0, 1) !== '•') {
+          const bulletPointIndex = line.lastIndexOf('•');
+          const newValueToSet = line.slice(bulletPointIndex, line.length);
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
         }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
+
+    if (allLinesArray.find(x => !x.includes('•'))) {
+      let newValueToSetAfterRemovingBulletPreText = '';
+      allLinesArray.forEach((line, last) => {
+        if (!line.includes('•')) {
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
+        }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
 
     if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
       if (numOfLines <= 10) {
@@ -248,7 +270,7 @@ export class SubmitClassifiedsComponent implements OnInit {
     this.submitClassifiedsRequestData.email = this.emailControl.value;
     this.submitClassifiedsRequestData.phoneNumber = this.phoneNumberControl.value;
     this.submitClassifiedsRequestData.condition = this.conditionSelectControl.value;
-    
+
     // this.submitClassifiedsRequestData.description = this.descriptionControl.value;
     this.submitClassifiedsRequestData.description = this.formatBulletPointInputValuesToSubmit(this.descriptionControl.value);
 

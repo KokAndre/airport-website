@@ -204,7 +204,6 @@ export class GettingToKnowYouComponent implements OnInit {
     // Check that no text is placed before the bullet points
     const allLinesArray = formControl.value?.split('\n');
     if (allLinesArray.find(x => x.slice(0, 1) !== '•')) {
-
       let newValueToSetAfterRemovingBulletPreText = '';
 
       allLinesArray.forEach((line, last) => {
@@ -216,6 +215,28 @@ export class GettingToKnowYouComponent implements OnInit {
             newValueToSetAfterRemovingBulletPreText += newValueToSet;
           } else {
             newValueToSetAfterRemovingBulletPreText += newValueToSet + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
+        }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
+
+    if (allLinesArray.find(x => !x.includes('•'))) {
+      let newValueToSetAfterRemovingBulletPreText = '';
+      allLinesArray.forEach((line, last) => {
+        if (!line.includes('•')) {
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line + '\n';
           }
         } else {
           if (last) {
