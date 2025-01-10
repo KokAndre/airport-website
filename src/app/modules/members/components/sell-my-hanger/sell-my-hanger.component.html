@@ -76,7 +76,7 @@
           </mat-form-field>
         </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
+        <!-- <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">Please upload your title or real right notarial deed.</P>
             <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
@@ -98,7 +98,7 @@
                 (emitFileData)="updateTitleDocumentation($event)"></app-file-uploader>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row mx-0 justify-content-center">
           <div class="col-10 px-0">
@@ -272,14 +272,14 @@
         </div>
 
 
-        <div class="row mx-0 justify-content-center mt-2">
+        <!-- <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">
             <P class="mb-1">Levies Applicable: [Tick all applicable items]</P>
               <div *ngFor="let levieItem of leviesData">
                 <mat-checkbox *ngIf="levieItem.isForHangars === '1'" class="col-12 px-0" [checked]="levieItem.isSelected" (change)="levieItem.isSelected = $event.checked">{{ levieItem.levieName }} ZAR{{ levieItem.leviePrice }} per {{ levieItem.levieFrequency}}</mat-checkbox>
               </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row mx-0 justify-content-center mt-2">
           <div class="col-10 px-0">

@@ -144,12 +144,12 @@
                 *ngFor="let img of hangerItem.hangerImages">
                 <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="hanger-images" />
               </div>
-
+<!-- 
               <div *ngIf="hangerItem.titleDocument?.fileName && hangerItem.titleDocument?.fileData"
                 class="row mx-0 align-items-center pt-3">
                 <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
                 <p class="mb-0 width-fit-content">A Title Document / Notarial Real Right is available</p>
-              </div>
+              </div> -->
 
               <div *ngIf="hangerItem.detailedFloorPlan?.fileName && hangerItem.detailedFloorPlan?.fileData"
                 class="row mx-0 align-items-center pt-3">
@@ -231,11 +231,11 @@
             <td>R{{ hangerDetailsToDisplay.price }}</td>
           </tr>
 
-          <tr *ngIf="hangerDetailsToDisplay.titleDocument?.fileName && hangerDetailsToDisplay.titleDocument?.fileData">
+          <!-- <tr *ngIf="hangerDetailsToDisplay.titleDocument?.fileName && hangerDetailsToDisplay.titleDocument?.fileData">
             <td>Title Document / Notarial Real Right</td>
             <td class="pointer red-text" (click)="openTitleDocument('Title Document / Notarial Real Right', hangerDetailsToDisplay.id)">{{
               hangerDetailsToDisplay.titleDocument.fileName }}</td>
-          </tr>
+          </tr> -->
 
           <tr *ngIf="hangerDetailsToDisplay.hangerDimensions?.width && hangerDetailsToDisplay.hangerDimensions?.length">
             <td>Hangar Dimensions</td>
@@ -302,12 +302,12 @@
             </td>
           </tr>
 
-          <tr *ngIf="hangerDetailsToDisplay.leviesApplicable">
+          <!-- <tr *ngIf="hangerDetailsToDisplay.leviesApplicable">
             <td>Levies Applicable</td>
             <td>
               <li *ngFor="let item of hangerDetailsToDisplay.leviesApplicable">{{ item }}</li>
             </td>
-          </tr>
+          </tr> -->
 
           <tr
             *ngIf="hangerDetailsToDisplay.detailedFloorPlan?.fileName && hangerDetailsToDisplay.detailedFloorPlan?.fileData">

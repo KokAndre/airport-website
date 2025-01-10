@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalTypes } from 'src/app/enums/app.enums';
-import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
+// import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
 @Component({
   selector: 'app-sell-my-stand',
@@ -21,7 +21,7 @@ export class SellMyStandComponent implements OnInit {
   public submitStandForSaleRequestData: SellMyStandRequest.RootObject;
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
-  public leviesData = new Array<GetLeviesResponse.Levie>();
+  // public leviesData = new Array<GetLeviesResponse.Levie>();
 
   constructor(public formBuilder: FormBuilder,
     public loginService: LoginService,
@@ -30,7 +30,7 @@ export class SellMyStandComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
-    this.getLeviesData();
+    // this.getLeviesData();
     this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
     this.initializeFormControls();
   }
@@ -39,30 +39,30 @@ export class SellMyStandComponent implements OnInit {
     this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
   }
 
-  public getLeviesData() {
-    this.membersService.getLeviesData().then(results => {
-      if (results.status === 200) {
-        this.leviesData = results.levies;
-        this.leviesData?.forEach(levie => {
-          // levie.isForHangars = levie.isForHangars === '1' ? true : false;
-          levie.isSelected = false;
-        });
-      } else {
-        // Add one levie by default:
-        const defaultLevieToAdd = new GetLeviesResponse.Levie();
-        defaultLevieToAdd.levieName = 'Security Levy';
-        defaultLevieToAdd.leviePrice = '110'
-        defaultLevieToAdd.levieFrequency = 'month'
-        defaultLevieToAdd.isForHangars = '1';
-        defaultLevieToAdd.isForStands = '1';
-        defaultLevieToAdd.isSelected = false;
-        defaultLevieToAdd.id = 1
+  // public getLeviesData() {
+  //   this.membersService.getLeviesData().then(results => {
+  //     if (results.status === 200) {
+  //       this.leviesData = results.levies;
+  //       this.leviesData?.forEach(levie => {
+  //         // levie.isForHangars = levie.isForHangars === '1' ? true : false;
+  //         levie.isSelected = false;
+  //       });
+  //     } else {
+  //       // Add one levie by default:
+  //       const defaultLevieToAdd = new GetLeviesResponse.Levie();
+  //       defaultLevieToAdd.levieName = 'Security Levy';
+  //       defaultLevieToAdd.leviePrice = '110'
+  //       defaultLevieToAdd.levieFrequency = 'month'
+  //       defaultLevieToAdd.isForHangars = '1';
+  //       defaultLevieToAdd.isForStands = '1';
+  //       defaultLevieToAdd.isSelected = false;
+  //       defaultLevieToAdd.id = 1
 
-        this.leviesData = new Array<GetLeviesResponse.Levie>();
-        this.leviesData.push(defaultLevieToAdd);
-      }
-    });
-  }
+  //       this.leviesData = new Array<GetLeviesResponse.Levie>();
+  //       this.leviesData.push(defaultLevieToAdd);
+  //     }
+  //   });
+  // }
 
   public initializeFormControls() {
     this.sellMyStandFormGroup = this.formBuilder.group({
@@ -215,23 +215,23 @@ export class SellMyStandComponent implements OnInit {
     }
   }
 
-  public updateTitleDocumentation(uploadedDocuments: SellMyStandRequest.FileData[]) {
-    // Only allow one documents
-    if (uploadedDocuments?.length > 0) {
-      const uploadedDocument = uploadedDocuments[0];
+  // public updateTitleDocumentation(uploadedDocuments: SellMyStandRequest.FileData[]) {
+  //   // Only allow one documents
+  //   if (uploadedDocuments?.length > 0) {
+  //     const uploadedDocument = uploadedDocuments[0];
 
-      if (!this.submitStandForSaleRequestData.titleDocument) {
-        this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
-      }
+  //     if (!this.submitStandForSaleRequestData.titleDocument) {
+  //       this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
+  //     }
 
-      this.submitStandForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
-      this.submitStandForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
-    }
-  }
+  //     this.submitStandForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
+  //     this.submitStandForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
+  //   }
+  // }
 
-  public deleteTitleDocument() {
-    this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
-  }
+  // public deleteTitleDocument() {
+  //   this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
+  // }
 
   public updateStandImages(uploadedImages: SellMyStandRequest.FileData[]) {
     if (uploadedImages?.length > 0) {
@@ -275,12 +275,12 @@ export class SellMyStandComponent implements OnInit {
       return true;
     }
 
-    const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
-    if (!isLeviesItemSelected?.length) {
-      return true;
-    } else {
-      return false;
-    }
+    // const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
+    // if (!isLeviesItemSelected?.length) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   public submitClicked() {
@@ -303,15 +303,15 @@ export class SellMyStandComponent implements OnInit {
     this.submitStandForSaleRequestData.price = this.askingPriceControl.value;
     this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
 
-    this.submitStandForSaleRequestData.leviesApplicable = new Array<string>();
+    // this.submitStandForSaleRequestData.leviesApplicable = new Array<string>();
 
 
-    this.leviesData.forEach(levieItem => {
-      if (levieItem.isSelected) {
-        const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
-        this.submitStandForSaleRequestData.leviesApplicable.push(levieItemToPush);
-      }
-    });
+    // this.leviesData.forEach(levieItem => {
+    //   if (levieItem.isSelected) {
+    //     const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
+    //     this.submitStandForSaleRequestData.leviesApplicable.push(levieItemToPush);
+    //   }
+    // });
 
     this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
       if (results.status === 200) {
@@ -326,9 +326,9 @@ export class SellMyStandComponent implements OnInit {
   }
 
   public async uploadDocuments() {
-    if (this.submitStandForSaleRequestData.titleDocument?.fileData && this.submitStandForSaleRequestData.titleDocument?.fileName) {
-      await this.uploadTitleDocument();
-    }
+    // if (this.submitStandForSaleRequestData.titleDocument?.fileData && this.submitStandForSaleRequestData.titleDocument?.fileName) {
+    //   await this.uploadTitleDocument();
+    // }
     if (this.submitStandForSaleRequestData.standImages?.length) {
       await this.uploadStandImages();
     }
@@ -336,14 +336,14 @@ export class SellMyStandComponent implements OnInit {
     this.clearFormData();
   }
 
-  public async uploadTitleDocument() {
-    await this.membersService.uploadSellMyStandTitleDocument(this.submitAdSucessId, this.submitStandForSaleRequestData.titleDocument.fileData).then(results => {
-      if (results.status === 200) {
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
-      }
-    });
-  }
+  // public async uploadTitleDocument() {
+  //   await this.membersService.uploadSellMyStandTitleDocument(this.submitAdSucessId, this.submitStandForSaleRequestData.titleDocument.fileData).then(results => {
+  //     if (results.status === 200) {
+  //     } else {
+  //       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
+  //     }
+  //   });
+  // }
 
   public async uploadStandImages() {
     this.submitStandForSaleRequestData.standImages.forEach(async (image) => {

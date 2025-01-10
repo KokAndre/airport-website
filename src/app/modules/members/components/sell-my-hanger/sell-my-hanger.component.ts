@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalTypes } from 'src/app/enums/app.enums';
-import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
+// import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 
 @Component({
   selector: 'app-sell-my-hanger',
@@ -21,13 +21,13 @@ export class SellMyHangerComponent implements OnInit {
   public submitHangerForSaleRequestData: SellMyHangerRequest.RootObject;
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
-  public leviesData = new Array<GetLeviesResponse.Levie>();
+  // public leviesData = new Array<GetLeviesResponse.Levie>();
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public membersService: MembersService, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.getUserData();
-    this.getLeviesData();
+    // this.getLeviesData();
     this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
     this.initializeFormControls();
   }
@@ -36,30 +36,31 @@ export class SellMyHangerComponent implements OnInit {
     this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
   }
 
-  public getLeviesData() {
-    this.membersService.getLeviesData().then(results => {
-      if (results.status === 200) {
-        this.leviesData = results.levies;
-        this.leviesData?.forEach(levie => {
-          // levie.isForHangars = levie.isForHangars === '1' ? true : false;
-          levie.isSelected = false;
-        });
-      } else {
-        // Add one levie by default:
-        const defaultLevieToAdd = new GetLeviesResponse.Levie();
-        defaultLevieToAdd.levieName = 'Security Levy';
-        defaultLevieToAdd.leviePrice = '110'
-        defaultLevieToAdd.levieFrequency = 'month'
-        defaultLevieToAdd.isForHangars = '1';
-        defaultLevieToAdd.isForStands = '1';
-        defaultLevieToAdd.isSelected = false;
-        defaultLevieToAdd.id = 1
+  // public getLeviesData() {
+  //   this.membersService.getLeviesData().then(results => {
+  //     if (results.status === 200) {
+  //       this.leviesData = results.levies;
+  //       this.leviesData?.forEach(levie => {
+  //         // levie.isForHangars = levie.isForHangars === '1' ? true : false;
+  //         levie.isSelected = false;
+  //       });
+  //     } else {
+  //       // Add one levie by default:
+  //       const defaultLevieToAdd = new GetLeviesResponse.Levie();
+  //       defaultLevieToAdd.levieName = 'Security Levy';
+  //       defaultLevieToAdd.leviePrice = '110'
+  //       defaultLevieToAdd.levieFrequency = 'month'
+  //       defaultLevieToAdd.isForHangars = '1';
+  //       defaultLevieToAdd.isForStands = '1';
+  //       defaultLevieToAdd.isSelected = false;
+  //       defaultLevieToAdd.id = 1
 
-        this.leviesData = new Array<GetLeviesResponse.Levie>();
-        this.leviesData.push(defaultLevieToAdd);
-      }
-    });
-  }
+  //       this.leviesData = new Array<GetLeviesResponse.Levie>();
+  //       this.leviesData.push(defaultLevieToAdd);
+  //     }
+  //   });
+  // }
+
   public initializeFormControls() {
     this.sellMyHangerFormGroup = this.formBuilder.group({
       nameControl: new FormControl('', [Validators.required]),
@@ -215,26 +216,26 @@ export class SellMyHangerComponent implements OnInit {
     }
   }
 
-  public updateTitleDocumentation(uploadedDocuments: SellMyHangerRequest.FileData[]) {
-    // Only allow one documents
-    if (uploadedDocuments?.length > 0) {
-      const uploadedDocument = uploadedDocuments[0];
+  // public updateTitleDocumentation(uploadedDocuments: SellMyHangerRequest.FileData[]) {
+  //   // Only allow one documents
+  //   if (uploadedDocuments?.length > 0) {
+  //     const uploadedDocument = uploadedDocuments[0];
 
-      if (!this.submitHangerForSaleRequestData.titleDocument) {
-        this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
-      }
+  //     if (!this.submitHangerForSaleRequestData.titleDocument) {
+  //       this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
+  //     }
 
-      if (uploadedDocument.fileName && uploadedDocument.fileData) {
-        this.submitHangerForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
-        this.submitHangerForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
-      }
+  //     if (uploadedDocument.fileName && uploadedDocument.fileData) {
+  //       this.submitHangerForSaleRequestData.titleDocument.fileName = uploadedDocument.fileName;
+  //       this.submitHangerForSaleRequestData.titleDocument.fileData = uploadedDocument.fileData;
+  //     }
 
-    }
-  }
+  //   }
+  // }
 
-  public deleteTitleDocument() {
-    this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
-  }
+  // public deleteTitleDocument() {
+  //   this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
+  // }
 
   public updateHangerImages(uploadedImages: SellMyHangerRequest.FileData[]) {
     if (uploadedImages?.length > 0) {
@@ -302,12 +303,12 @@ export class SellMyHangerComponent implements OnInit {
       return true;
     }
 
-    const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
-    if (!isLeviesItemSelected?.length) {
-      return true;
-    } else {
-      return false;
-    }
+    // const isLeviesItemSelected = this.leviesData.filter(x => x.isSelected);
+    // if (!isLeviesItemSelected?.length) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   public submitClicked() {
@@ -342,14 +343,14 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.price = this.askingPriceControl.value;
     this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
 
-    this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
+    // this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
 
-    this.leviesData.forEach(levieItem => {
-      if (levieItem.isSelected) {
-        const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
-        this.submitHangerForSaleRequestData.leviesApplicable.push(levieItemToPush);
-      }
-    });
+    // this.leviesData.forEach(levieItem => {
+    //   if (levieItem.isSelected) {
+    //     const levieItemToPush = `${levieItem.levieName} ZAR${levieItem.leviePrice} per ${levieItem.levieFrequency}`;
+    //     this.submitHangerForSaleRequestData.leviesApplicable.push(levieItemToPush);
+    //   }
+    // });
 
     this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
       if (results.status === 200) {
@@ -363,9 +364,9 @@ export class SellMyHangerComponent implements OnInit {
   }
 
   public async uploadDocuments() {
-    if (this.submitHangerForSaleRequestData.titleDocument?.fileData && this.submitHangerForSaleRequestData.titleDocument?.fileName) {
-      await this.uploadTitleDocument();
-    }
+    // if (this.submitHangerForSaleRequestData.titleDocument?.fileData && this.submitHangerForSaleRequestData.titleDocument?.fileName) {
+    //   await this.uploadTitleDocument();
+    // }
     if (this.submitHangerForSaleRequestData.detailedFloorPlan?.fileData && this.submitHangerForSaleRequestData.detailedFloorPlan?.fileName) {
       await this.uploadFloorPlanDocument();
     }
@@ -376,14 +377,14 @@ export class SellMyHangerComponent implements OnInit {
     this.clearFormData();
   }
 
-  public async uploadTitleDocument() {
-    await this.membersService.uploadSellMyHangerTitleDocument(this.submitAdSucessId, this.submitHangerForSaleRequestData.titleDocument.fileData).then(results => {
-      if (results.status === 200) {
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
-      }
-    });
-  }
+  // public async uploadTitleDocument() {
+  //   await this.membersService.uploadSellMyHangerTitleDocument(this.submitAdSucessId, this.submitHangerForSaleRequestData.titleDocument.fileData).then(results => {
+  //     if (results.status === 200) {
+  //     } else {
+  //       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Title Document', results.message, null);
+  //     }
+  //   });
+  // }
 
   public async uploadFloorPlanDocument() {
     await this.membersService.uploadSellMyHangerFloorPlanDocument(this.submitAdSucessId, this.submitHangerForSaleRequestData.detailedFloorPlan.fileData).then(results => {

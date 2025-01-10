@@ -118,7 +118,7 @@ export class MembersService {
   public submitSellMyStand(dellMyStandRequestData: SellMyStandRequest.RootObject) {
     // Remove files to ensure request is not to big.
     const requestData = JSON.parse(JSON.stringify(dellMyStandRequestData))
-    requestData.titleDocument.fileData = '';
+    // requestData.titleDocument.fileData = '';
     requestData.standImages.forEach(x => {
       x.fileData = '';
     });

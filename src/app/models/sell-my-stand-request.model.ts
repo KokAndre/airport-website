@@ -4,12 +4,12 @@ export namespace SellMyStandRequest {
         email: string;
         phoneNumber: string;
         standNumber: string;
-        titleDocument: FileData;
+        // titleDocument: FileData;
         standDimensions: StandDimensions;
         // featuresAndBenefits: string[];
         securty: string[];
         price: number;
-        leviesApplicable: string[];
+        // leviesApplicable: string[];
         standImages: FileData[];
         reasonsForSelling: string;
     }

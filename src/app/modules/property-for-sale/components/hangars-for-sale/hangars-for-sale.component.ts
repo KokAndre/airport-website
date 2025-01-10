@@ -51,9 +51,9 @@ export class HangarsForSaleComponent implements OnInit {
       itemToPush.doorType = hangerItem.doorType;
       itemToPush.yearBuilt = hangerItem.yearBuilt;
 
-      itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
-      itemToPush.titleDocument.fileName = hangerItem.titleDocument;
-      itemToPush.titleDocument.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/title-document/' + hangerItem.titleDocument;
+      // itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
+      // itemToPush.titleDocument.fileName = hangerItem.titleDocument;
+      // itemToPush.titleDocument.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/title-document/' + hangerItem.titleDocument;
 
       itemToPush.detailedFloorPlan = new GetHangersForSaleReponse.FileData();
       itemToPush.detailedFloorPlan.fileName = hangerItem.detailedFloorPlan;
@@ -75,7 +75,7 @@ export class HangarsForSaleComponent implements OnInit {
       itemToPush.featuresAndBenefits = hangerItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
       itemToPush.securty = hangerItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
       itemToPush.additionalInfrastructure = hangerItem.additionalInfrastructure?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      // itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
 
       this.hangersForSaleData.push(itemToPush);
     });
@@ -103,15 +103,15 @@ export class HangarsForSaleComponent implements OnInit {
     this.hangerDetailsToDisplay = null;
   }
 
-  public openTitleDocument(fileDisplayName: string, handerId: number) {
-    this.propertyForSaleService.getHangerForSaleTitleDocument(handerId).then((results: any) => {
-      if (results.status === 200 && results.documentData) {
-        const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
-      }
-    });
+  // public openTitleDocument(fileDisplayName: string, handerId: number) {
+  //   this.propertyForSaleService.getHangerForSaleTitleDocument(handerId).then((results: any) => {
+  //     if (results.status === 200 && results.documentData) {
+  //       const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
+  //       this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
+  //     }
+  //   });
 
-  }
+  // }
 
   public openFloorPlanDocument(fileDisplayName: string, handerId: number) {
     this.propertyForSaleService.getHangerForSaleFloorPlanDocument(handerId).then((results: any) => {
