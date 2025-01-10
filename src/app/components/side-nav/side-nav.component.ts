@@ -106,7 +106,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
       if (this.isAuthorised) {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
 
-        if (this.hasCompletedGettingToKnowYou && !this.hasDismissedGettingToKnowYou) {
+        if (!this.hasCompletedGettingToKnowYou && !this.hasDismissedGettingToKnowYou) {
           this.displayGettingToKnowYouBanner = true;
         } else {
           this.displayGettingToKnowYouBanner = false;

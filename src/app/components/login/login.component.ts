@@ -44,19 +44,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initializeScreenSizeCheck();
 
-    console.log('USER DATA: ', this.userData);
-
     if (!this.userData) {
       this.errorFetchingDataEmit.emit();
     }
 
     this.isUserRegistered = this.userData.isRegistered === '1';
 
-    // if (this.isUserRegistered) {
       this.initializeLoginControls();
-    // } else {
       this.initializeRegisterControls();
-    // }
   }
 
   public initializeScreenSizeCheck() {
@@ -87,6 +82,8 @@ export class LoginComponent implements OnInit {
       registerSurnameControl: new FormControl(this.userData.surname || '', [Validators.required]),
       registerPhoneNumberControl: new FormControl(this.userData.phoneNumber || '', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       registerEmailControl: new FormControl(this.userData.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
+      registerHangarNumbersControl: new FormControl(''),
+      registerStandNumbersControl: new FormControl(''),
       registerPasswordControl: new FormControl('', [Validators.required]),
       registerConfirmPasswordControl: new FormControl('', [Validators.required]),
     });
@@ -100,21 +97,7 @@ export class LoginComponent implements OnInit {
       }, 500);
       this.passwordLogicHandling();
     });
-
-    // this.checkOnEnterButtonFocus();
   }
-
-  // public checkOnEnterButtonFocus() {
-  //   this.loginFormGroup.valueChanges.subscribe(() => {
-  //     this.isLoginButtonFocused = true;
-  //     this.isRegisterButtonFocused = false;
-  //   });
-
-  //   this.registerFormGroup.valueChanges.subscribe(() => {
-  //     this.isLoginButtonFocused = false;
-  //     this.isRegisterButtonFocused = true;
-  //   });
-  // }
 
   passwordLogicHandling() {
     // this.disableSaveButton = true;
@@ -178,6 +161,8 @@ export class LoginComponent implements OnInit {
     requestData.email = this.registerEmailControl?.value;
     requestData.phoneNumber = this.registerPhoneNumberControl?.value;
     requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
+    requestData.hangarNumbers = this.formatBulletPointInputValuesToSubmit(this.registerHangarNumbersControl.value);
+    requestData.standNumbers = this.formatBulletPointInputValuesToSubmit(this.registerStandNumbersControl.value);
 
     this.loginService.registerNewUser(requestData).then(results => {
       if (results.status === 200) {
@@ -241,6 +226,133 @@ export class LoginComponent implements OnInit {
     formControl?.setValue(valueToSet);
   }
 
+  public keydownOnBulletPointControl(formControl?: AbstractControl) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+  }
+
+  public inputOnBulletPointControl(formControl: AbstractControl, keyPressed: any) {
+    if (!formControl.value) {
+      formControl.setValue('• ');
+    }
+
+    const numOfLines = formControl.value?.split('\n')?.length;
+
+    // Check that no text is placed before the bullet points
+    const allLinesArray = formControl.value?.split('\n');
+    if (allLinesArray.find(x => x.slice(0, 1) !== '•')) {
+      let newValueToSetAfterRemovingBulletPreText = '';
+
+      allLinesArray.forEach((line, last) => {
+        if (line.slice(0, 1) !== '•') {
+          const bulletPointIndex = line.lastIndexOf('•');
+          const newValueToSet = line.slice(bulletPointIndex, line.length);
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += newValueToSet + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
+        }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
+
+    if (allLinesArray.find(x => !x.includes('•'))) {
+      let newValueToSetAfterRemovingBulletPreText = '';
+      allLinesArray.forEach((line, last) => {
+        if (!line.includes('•')) {
+
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += '• ' + line + '\n';
+          }
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingBulletPreText += line;
+          } else {
+            newValueToSetAfterRemovingBulletPreText += line + '\n';
+          }
+        }
+
+        formControl.setValue(newValueToSetAfterRemovingBulletPreText);
+      });
+    }
+
+    if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
+      if (numOfLines <= 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf('\n');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+    if (keyPressed.key === ',') {
+      if (numOfLines < 10) {
+        let formCotrolValue = formControl.value;
+        formCotrolValue = formCotrolValue.replace(',', "\n")
+        formCotrolValue += '• ';
+        formControl.setValue(formCotrolValue);
+      } else {
+        let formCotrolValue = formControl.value;
+        const lastIndex = formCotrolValue.lastIndexOf(',');
+        formCotrolValue = formCotrolValue.substr(0, lastIndex);
+        formControl.setValue(formCotrolValue);
+      }
+    }
+
+  }
+
+  public blurOnBulletPointControl(formControl: AbstractControl) {
+    if (formControl?.value === '• ' || formControl?.value === '•') {
+      formControl.setValue('');
+    } else {
+      //Remove all empty lines
+      const allLinesArray = formControl.value?.split('\n');
+      let newValueToSetAfterRemovingEmptyLines = '';
+      allLinesArray.forEach((line, last) => {
+        if (line === '•' || line === '• ' || line === ' •' || line === ' • ' || line === '') {
+          //
+        } else {
+          if (last) {
+            newValueToSetAfterRemovingEmptyLines += line;
+          } else {
+            newValueToSetAfterRemovingEmptyLines += line + '\n';
+          }
+        }
+      });
+
+      formControl.setValue(newValueToSetAfterRemovingEmptyLines);
+    }
+  }
+
+  public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
+    let arrayOfInputValue = valueToFormat.split('\n');
+    arrayOfInputValue = arrayOfInputValue.map(line => {
+      line = line.replace('•', '');
+      line = line.trim();
+      line = line.replaceAll("'", "`");
+      return line;
+    });
+    arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
+
+    return arrayOfInputValue;
+  }
+
   public cancelClicked() {
     this.returnToWelcomePageEmit.emit();
   }
@@ -256,6 +368,12 @@ export class LoginComponent implements OnInit {
   }
   public get registerPhoneNumberControl() {
     return this.registerFormGroup.get('registerPhoneNumberControl');
+  }
+  public get registerHangarNumbersControl() {
+    return this.registerFormGroup.get('registerHangarNumbersControl');
+  }
+  public get registerStandNumbersControl() {
+    return this.registerFormGroup.get('registerStandNumbersControl');
   }
   public get registerPasswordControl() {
     return this.registerFormGroup.get('registerPasswordControl');

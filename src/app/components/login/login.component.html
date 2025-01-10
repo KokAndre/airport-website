@@ -167,18 +167,13 @@
 
     <div *ngIf="!isUserRegistered" class="col-12 col-sm-12 col-md-8 col-lg-6 px-0 mx-auto pt-4"
       [formGroup]="registerFormGroup">
-      <!-- <h1 class="text-size-24 mb-2">Register</h1> -->
-
-
       <div class="login-form-background p-4">
-
         <div class="row mx-0 justify-content-center">
           <mat-form-field class="col-12 px-0">
             <mat-label>Name</mat-label>
             <input style="color: black;" matInput required maxlength="50" formControlName="registerNameControl">
             <mat-error *ngIf="registerNameControl?.hasError('required')">Name is required</mat-error>
           </mat-form-field>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
@@ -187,7 +182,6 @@
             <input style="color: black;" matInput required maxlength="50" formControlName="registerSurnameControl">
             <mat-error *ngIf="registerSurnameControl?.hasError('required')">Surname is required</mat-error>
           </mat-form-field>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
@@ -197,7 +191,6 @@
             <mat-error *ngIf="registerPhoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
             <mat-error *ngIf="registerPhoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
           </mat-form-field>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
@@ -207,7 +200,32 @@
             <mat-error *ngIf="registerEmailControl?.hasError('required')">Email is required</mat-error>
             <mat-error *ngIf="registerEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
           </mat-form-field>
-          <!-- <p class="custom-mat-hint">{{ benificiaryName.value ? benificiaryName.value.length : 0}}/50</p> -->
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Hangar Numbers</mat-label>
+            <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+              formControlName="registerHangarNumbersControl"
+              (keydown)="keydownOnBulletPointControl(registerHangarNumbersControl)"
+              (keyup)="inputOnBulletPointControl(registerHangarNumbersControl, $event)"
+              (blur)="blurOnBulletPointControl(registerHangarNumbersControl)"
+              placeholder="Enter the hangar number of all the hangars you own at Tedderfield Airpark"></textarea>
+            <!-- <mat-error *ngIf="registerHangarNumbersControl?.hasError('required')">Hangar Number is required</mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Stand Numbers</mat-label>
+            <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+              formControlName="registerStandNumbersControl"
+              (keydown)="keydownOnBulletPointControl(registerStandNumbersControl)"
+              (keyup)="inputOnBulletPointControl(registerStandNumbersControl, $event)"
+              (blur)="blurOnBulletPointControl(registerStandNumbersControl)"
+              placeholder="Enter the stand number of all the stands you own at Tedderfield Airpark"></textarea>
+            <!-- <mat-error *ngIf="registerStandNumbersControl?.hasError('required')">Stand Number is required</mat-error> -->
+          </mat-form-field>
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
@@ -250,8 +268,10 @@
             <span class="white-button-icon"></span>
           </div>
 
-          <div appOnEnter [isButtonFocused]="true" class="red-button ml-3"
-            [ngClass]="{'disable-user-click': registerFormGroup.invalid}" (click)="registerClicked()">
+          <!-- appOnEnter [isButtonFocused]="true" -->
+          <div class="red-button ml-3"
+            [ngClass]="{'disable-user-click': registerFormGroup.invalid || (registerFormGroup.valid && !(registerHangarNumbersControl.value || registerStandNumbersControl.value))}"
+            (click)="registerClicked()">
             <p class="mb-0">Register</p>
             <span class="red-button-icon"></span>
           </div>

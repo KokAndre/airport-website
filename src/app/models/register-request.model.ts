@@ -5,4 +5,7 @@ export class RegisterRequest {
     email: string;
     phoneNumber: string;
     password: string;
+    hangarNumbers: string[];
+    standNumbers: string[];
+
 }
