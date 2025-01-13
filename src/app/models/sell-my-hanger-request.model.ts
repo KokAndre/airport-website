@@ -4,7 +4,7 @@ export namespace SellMyHangerRequest {
         email: string;
         phoneNumber: string;
         hangerNumber: string;
-        // titleDocument: FileData;
+        titleDocument: FileData;
         hangerDimensions: HangerDimensions;
         doorType: string;
         doorDimensions: HangerDimensions
@@ -15,7 +15,7 @@ export namespace SellMyHangerRequest {
         securty: string[];
         additionalInfrastructure: string[];
         price: number;
-        // leviesApplicable: string[];
+        leviesApplicable: string[];
         hangerImages: FileData[];
         detailedFloorPlan: FileData;
         reasonsForSelling: string;

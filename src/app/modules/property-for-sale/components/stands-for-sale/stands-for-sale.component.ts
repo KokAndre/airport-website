@@ -47,9 +47,9 @@ export class StandsForSaleComponent implements OnInit {
       itemToPush.price = standItem.price;
       itemToPush.reasonsForSelling = standItem.reasonsForSelling;
 
-      // itemToPush.titleDocument = new GetStandsForSaleReponse.FileData();
-      // itemToPush.titleDocument.fileName = standItem.titleDocument;
-      // itemToPush.titleDocument.fileData = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/title-document/' + standItem.titleDocument;
+      itemToPush.titleDocument = new GetStandsForSaleReponse.FileData();
+      itemToPush.titleDocument.fileName = standItem.titleDocument;
+      itemToPush.titleDocument.fileData = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/title-document/' + standItem.titleDocument;
 
       const imageDataArray = standItem.standImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
@@ -64,7 +64,7 @@ export class StandsForSaleComponent implements OnInit {
 
       // itemToPush.featuresAndBenefits = standItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
       itemToPush.securty = standItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
-      // itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+      itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
 
       this.standsForSaleData.push(itemToPush);
     });
@@ -92,14 +92,14 @@ export class StandsForSaleComponent implements OnInit {
     this.standDetailsToDisplay = null;
   }
 
-  // public openTitleDocument(fileDisplayName: string, standId: number) {
-  //   this.propertyForSaleService.getStandForSaleTitleDocument(standId).then((results: any) => {
-  //     if (results.status === 200 && results.documentData) {
-  //       const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
-  //       this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
-  //     }
-  //   });
-  // }
+  public openTitleDocument(fileDisplayName: string, standId: number) {
+    this.propertyForSaleService.getStandForSaleTitleDocument(standId).then((results: any) => {
+      if (results.status === 200 && results.documentData) {
+        const urlForModal = 'data:application/pdf;base64,' + results.documentData.file;
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, fileDisplayName, urlForModal, { removeDownloadButton: true });
+      }
+    });
+  }
 
   public displayInterestedInStandModal() {
     this.appModalService.ShowConfirmationModal(ModalTypes.InterestedInPropertyModal, 'Capture your details', '', null, this.submitInterestedInBuyingStand.bind(this));

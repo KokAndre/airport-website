@@ -141,11 +141,11 @@
               <img [src]="img.fileData" [alt]="img.fileName" width="100%" class="stand-images" />
             </div>
 
-            <!-- <div *ngIf="standItem.titleDocument?.fileName && standItem.titleDocument?.fileData"
+            <div *ngIf="standItem.titleDocument?.fileName && standItem.titleDocument?.fileData"
               class="row mx-0 align-items-center pt-3">
               <mat-icon class="mr-3 green-icon p-0">check</mat-icon>
               <p class="mb-0 width-fit-content">A Title Document / Notarial Real Right is available</p>
-            </div> -->
+            </div>
 
             <!-- <div *ngIf="standItem.detailedFloorPlan?.fileName && standItem.detailedFloorPlan?.fileData"
               class="row mx-0 align-items-center pt-3">
@@ -226,11 +226,11 @@
             <td>R{{ standDetailsToDisplay.price }}</td>
           </tr>
 
-          <!-- <tr *ngIf="standDetailsToDisplay.titleDocument?.fileName && standDetailsToDisplay.titleDocument?.fileData">
+          <tr *ngIf="standDetailsToDisplay.titleDocument?.fileName && standDetailsToDisplay.titleDocument?.fileData">
             <td>Title Document / Notarial Real Right</td>
             <td class="pointer red-text" (click)="openTitleDocument('Title Document / Notarial Real Right', standDetailsToDisplay.id)">{{
               standDetailsToDisplay.titleDocument.fileName }}</td>
-          </tr> -->
+          </tr>
 
           <tr *ngIf="standDetailsToDisplay.standDimensions?.width && standDetailsToDisplay.standDimensions?.length">
             <td>Stand Dimensions</td>
@@ -261,14 +261,14 @@
             </td>
           </tr> -->
 
-          <!-- <tr *ngIf="standDetailsToDisplay.leviesApplicable">
+          <tr *ngIf="standDetailsToDisplay.leviesApplicable">
             <td>Levies Applicable</td>
             <td>
               <li *ngFor="let item of standDetailsToDisplay.leviesApplicable">{{ item }}</li>
             </td>
-          </tr> -->
-<!-- 
-          <tr
+          </tr>
+
+          <!-- <tr
             *ngIf="standDetailsToDisplay.detailedFloorPlan?.fileName && standDetailsToDisplay.detailedFloorPlan?.fileData">
             <td>Detailed Floor Plan</td>
             <td class="pointer red-text"

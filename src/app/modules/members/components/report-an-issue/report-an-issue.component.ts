@@ -51,11 +51,17 @@ export class ReportAnIssueComponent implements OnInit {
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
       this.nameControl.disable();
+    } else {
+      this.nameControl.setValue('');
+      this.nameControl.enable();
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
       this.emailControl.disable();
+    } else {
+      this.emailControl.setValue('');
+      this.emailControl.enable();
     }
   }
 
@@ -66,12 +72,14 @@ export class ReportAnIssueComponent implements OnInit {
     requestData.hangerOrSectionNumber = this.hangerOrsectionNumberControl?.value;
     requestData.issueDescription = this.descriptionControl?.value;
 
-    this.membersService.submitReportIssue(requestData).then(results => {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);
-      if (results.status === 200) {
+    console.log(requestData);
+
+    // this.membersService.submitReportIssue(requestData).then(results => {
+    //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);
+    //   if (results.status === 200) {
         this.clearFormData();
-      }
-    });
+      // }
+    // });
   }
 
   public clearFormData() {
@@ -83,6 +91,7 @@ export class ReportAnIssueComponent implements OnInit {
     this.hangerOrsectionNumberControl?.reset();
     this.descriptionControl?.setValue('');
     this.descriptionControl?.reset();
+    this.prePopulateData();
   }
 
   public get nameControl() {
