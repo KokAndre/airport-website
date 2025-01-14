@@ -125,6 +125,10 @@ export class SideNavComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(AppRoutes.GettingToKnowYou);
   }
 
+  public navigateToWelcomeScreen() {
+    this.router.navigateByUrl(AppRoutes.MembersWelcome);
+  }
+
   public logout() {
     this.loginService.logoutUser();
   }

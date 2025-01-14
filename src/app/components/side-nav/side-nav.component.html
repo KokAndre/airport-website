@@ -3,7 +3,8 @@
 
   <!-- Getting to know you banner -->
   <div class="getting-to-know-you-banner" [ngClass]="{'hide-content': !displayGettingToKnowYouBanner}">
-    <div class="getting-to-know-you-close-button pointer text-center" (click)="displayGettingToKnowYouBanner = false; hasDismissedGettingToKnowYou = true;">
+    <div class="getting-to-know-you-close-button pointer text-center"
+      (click)="displayGettingToKnowYouBanner = false; hasDismissedGettingToKnowYou = true;">
       <mat-icon class="text-size-26 close-button-icon">close</mat-icon>
     </div>
     <div class="p-2 pointer" (click)="navigateToGettingToKnowYou()">
@@ -30,11 +31,18 @@
         <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin" [isMobileView]="isMobileView"
           [hasCompletedGettingToKnowYou]="hasCompletedGettingToKnowYou"></app-nav-bar>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical"
-        [ngClass]="{'header-white-background': isAuthorised}">
+      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical header-white-background">
         <p class="mb-0 text-size-20 text-center header-blue-text" *ngIf="isAuthorised">Welcome</p>
         <p class="mb-0 text-size-20 text-center header-red-text" *ngIf="isAuthorised"><span class="text-bold">{{
             getLoggedInUsername() }}</span></p>
+
+        <div *ngIf="!isAuthorised">
+          <div class="red-button mx-auto" (click)="navigateToWelcomeScreen()">
+            <p class="mb-0" [ngClass]="{'text-size-16': !isFooterMobileView, 'text-size-12': isFooterMobileView}">Take Off</p>
+            <span
+              [ngClass]="{'red-button-icon': !isFooterMobileView, 'red-button-icon-small': isFooterMobileView}"></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
