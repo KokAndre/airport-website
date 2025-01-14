@@ -3,6 +3,7 @@ import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data
 import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-report-issue-requests',
@@ -11,11 +12,22 @@ import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 })
 export class ReportIssueRequestsComponent implements OnInit {
   public reportIssueRequests: GetReportIssueDataResponse.Requests[];
+  public allowAdminToDelete = false;
 
-  constructor(private adminService: AdminService, private appModalService: AppModalService) { }
+  constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
 
   ngOnInit() {
     this.getReportIssueData();
+    this.checkIfAdminIsAllowedToDelete();
+  }
+
+  private checkIfAdminIsAllowedToDelete() {
+    const userDetails = this.loginService.getLoggedInUserDetails();
+    if (userDetails?.email === 'nic.rfp@gmail.com') {
+     this.allowAdminToDelete = true; 
+    } else {
+      this.allowAdminToDelete = false;
+    }
   }
 
   public getReportIssueData() {

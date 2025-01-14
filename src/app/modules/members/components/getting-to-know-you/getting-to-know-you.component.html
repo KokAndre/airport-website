@@ -31,10 +31,98 @@
   <div class="col-10 mx-auto pb-4">
     <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
       <mat-expansion-panel-header>
-        <p class="text-size-24 mb-3">Tedderfield Airpark - Getting to Know YOU!</p>
+        <p class="text-size-24 mb-3">Let's Get to Know YOU! 🌟</p>
       </mat-expansion-panel-header>
 
-      <p>Some fun questions to allow people to get to know you a little better..........</p>
+      <p>Welcome to our Tedderfield Airpark community, where the magic of flight meets the power of connection! ✈️ But
+        wait—this isn't just about aircraft and runways. It's about YOU—the people who make this airpark soar.</p>
+
+      <p>Here's what this little project is all about:</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isWhyShareExpanded = !isWhyShareExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWhyShareExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">1. Why Share? 🤔</p>
+      </mat-expansion-panel-header>
+
+      <p>Because Tedderfield isn't just a place. We want to discover the hidden talents, quirky hobbies, and incredible
+        stories that make each of us unique. From ace pilots to DIY geniuses and weekend bakers, <b>we bet there's more
+          to you than meets the eye.</b></p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isWhatsInItForYouExpanded = !isWhatsInItForYouExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+</div>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWhatsInItForYouExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">2. What's in It for YOU? 🎉</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li>Build friendships beyond just a wave at the gate. 👋</li>
+        <li>Find hidden experts right next door (someone might know how to fix your hangar door).</li>
+      </ul>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isHowItWorksExpanded = !isHowItWorksExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isHowItWorksExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">3. How It Works: 📝</p>
+      </mat-expansion-panel-header>
+
+      <p>Step 1: Share a little about yourself.</p>
+
+      <p>Step 2: Brag a little—it's encouraged! Tell us about your hobbies or talents.</p>
+
+      <p>Step 3: Sit back and watch connections spark.</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isSurpriseFactorExpanded = !isSurpriseFactorExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+</div>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isSurpriseFactorExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">4. Surprise Factor: 🎭</p>
+      </mat-expansion-panel-header>
+
+      <p>Ever wondered if your neighbour is a salsa dancer? A comic book illustrator? A 3D printing wizard? This is your chance to find out.</p>
+
+      <p class="red-text underline-text italic-text">The moment you complete your section, then all others will become available.</p>
+
+      <p>So what are you waiting for? Let's fill the skies (and the website) with stories, laughs, and the magic of US! 🚀</p>
 
     </mat-expansion-panel>
 
@@ -44,7 +132,6 @@
     [isLightToDark]="false"></app-arrow-divider>
 
 </div>
-
 
 <div class="">
   <div class="col-10 mx-auto pb-4">

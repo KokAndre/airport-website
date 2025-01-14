@@ -343,7 +343,7 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.price = this.askingPriceControl.value;
     this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
 
-    // this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
+    this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
 
     this.leviesData.forEach(levieItem => {
       if (levieItem.isSelected) {

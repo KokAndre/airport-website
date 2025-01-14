@@ -45,7 +45,7 @@
             fontIcon="close"></mat-icon></td>
         <td class="text-no-wrap text-center"><mat-icon *ngIf="item.hasFollowedUp === '0'"
             class="green-text mr-2 pointer" fontIcon="check"
-            (click)="markIssueAsFollowedUpClicked(item)"></mat-icon><mat-icon class="red-text pointer" fontIcon="delete"
+            (click)="markIssueAsFollowedUpClicked(item)"></mat-icon><mat-icon *ngIf="allowAdminToDelete" class="red-text pointer" fontIcon="delete"
             (click)="deleteReportIssueRequestClicked(item)"></mat-icon></td>
       </tr>
 

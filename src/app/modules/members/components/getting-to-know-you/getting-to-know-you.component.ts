@@ -17,6 +17,10 @@ import { GetGettingToKnowYouResponse } from 'src/app/models/get-getting-to-know-
 })
 export class GettingToKnowYouComponent implements OnInit {
   public isWelcomeExpanded = true;
+  public isWhyShareExpanded = true;
+  public isWhatsInItForYouExpanded = true;
+  public isHowItWorksExpanded = true;
+  public isSurpriseFactorExpanded = true;
   public isFormExpanded = true;
   public gettingToKnowYouFormGroup: FormGroup;
   public loggedInUserDetails: LoginToken;
