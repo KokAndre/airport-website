@@ -23,8 +23,8 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   private checkIfAdminIsAllowedToDelete() {
     const userDetails = this.loginService.getLoggedInUserDetails();
-    if (userDetails?.email === 'nic.rfp@gmail.com') {
-     this.allowAdminToDelete = true; 
+    if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com') {
+      this.allowAdminToDelete = true;
     } else {
       this.allowAdminToDelete = false;
     }
@@ -40,21 +40,46 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
-  public markIssueAsFollowedUpClicked(reportIssueRequest: GetReportIssueDataResponse.Requests) {
-    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Edit Report Issue Request', `Are you sure you want to mark the Issue for ${reportIssueRequest.name} as followed up?`, null, this.markIssueAsFollowedUp.bind(this, reportIssueRequest));
+  // public markIssueAsFollowedUpClicked(reportIssueRequest: GetReportIssueDataResponse.Requests) {
+  //   this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Edit Report Issue Request', `Are you sure you want to mark the Issue for ${reportIssueRequest.name} as followed up?`, null, this.markIssueAsFollowedUp.bind(this, reportIssueRequest));
+  // }
+
+  // public markIssueAsFollowedUp(reportIssueRequest: GetReportIssueDataResponse.Requests, modalOutcome: string) {
+  //   if (modalOutcome === ModalOutcomeOptions.Confirm) {
+  //     this.adminService.editReportIssueEntry(reportIssueRequest.id).then(results => {
+  //       if (results.status === 200) {
+  //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
+  //         this.getReportIssueData();
+  //       } else {
+  //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
+  //       }
+  //     });
+  //   }
+  // }
+
+  public updateReportIssueRequestType(reportIssueRequestId: string, reportIssueRequestType: string) {
+    this.adminService.updateReportIssueChangeRequest(reportIssueRequestId, reportIssueRequestType).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Request Type', results.message, null);
+      // if (results.status === 200) {
+      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
+      //   this.getReportIssueData();
+      // } else {
+      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
+      // }
+    });
   }
 
-  public markIssueAsFollowedUp(reportIssueRequest: GetReportIssueDataResponse.Requests, modalOutcome: string) {
-    if (modalOutcome === ModalOutcomeOptions.Confirm) {
-      this.adminService.editReportIssueEntry(reportIssueRequest.id).then(results => {
-        if (results.status === 200) {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
-          this.getReportIssueData();
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
-        }
-      });
-    }
+
+  public updateReportIssueStatus(reportIssueRequestId: string, reportIssueStatus: string) {
+    this.adminService.updateReportIssueStatus(reportIssueRequestId, reportIssueStatus).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
+      // if (results.status === 200) {
+      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
+      //   this.getReportIssueData();
+      // } else {
+      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
+      // }
+    });
   }
 
   public deleteReportIssueRequestClicked(reportIssueRequest: GetReportIssueDataResponse.Requests) {

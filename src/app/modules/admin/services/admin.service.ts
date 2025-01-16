@@ -221,12 +221,44 @@ export class AdminService {
       });
   }
 
-  public editReportIssueEntry(reportIssueRequestId: string) {
+  // public editReportIssueEntry(reportIssueRequestId: string) {
+  //   const requestData = new UpdateReportIssueItemRequest.RootObject();
+  //   requestData.userId = this.loginService.getLoggedInUserId();
+  //   requestData.reportIssueId = reportIssueRequestId;
+
+  //   return fetch(Endpoints.BaseURL + Endpoints.MarkReportIssueAsFollowedUp, {
+  //     method: 'post',
+  //     body: JSON.stringify({ requestData: requestData })
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       return data;
+  //     });
+  // }
+
+  public updateReportIssueChangeRequest(reportIssueRequestId: string, reportIssueRequestType: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();
     requestData.reportIssueId = reportIssueRequestId;
+    requestData.reportIssueRequestType = reportIssueRequestType;
 
-    return fetch(Endpoints.BaseURL + Endpoints.MarkReportIssueAsFollowedUp, {
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueRequestType, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public updateReportIssueStatus(reportIssueRequestId: string, status: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+    requestData.status = status;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueStatus, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

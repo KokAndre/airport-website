@@ -14,7 +14,10 @@ export namespace GetReportIssueDataResponse {
         hangerOrSectionNumber: string;
         issueDescription: string;
         dateAdded: string;
-        hasFollowedUp: string;
-        dateFollowedUp: any;
+        // hasFollowedUp: string;
+        // dateFollowedUp: any;
+        changeRequest: string;
+        status: string
+        statusDateChanged: string;
       }
 }

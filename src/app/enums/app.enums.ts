@@ -81,7 +81,10 @@ export enum Endpoints {
     MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php',
     ReportIssue = '/report-issue/submit-report-issue.php',
     GetReportIssueData = '/report-issue/get-report-issue-data.php',
-    MarkReportIssueAsFollowedUp = '/report-issue/update-report-issue-item.php',
+
+    UpdateReportIssueRequestType = '/report-issue/update-issue-request-type.php',
+    UpdateReportIssueStatus = '/report-issue/update-issue-status.php',
+
     DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
     GetGreeningTedderfieldData = '/greening-tedderfield/get-greening-tedderfield-data.php',

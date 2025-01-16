@@ -72,14 +72,12 @@ export class ReportAnIssueComponent implements OnInit {
     requestData.hangerOrSectionNumber = this.hangerOrsectionNumberControl?.value;
     requestData.issueDescription = this.descriptionControl?.value;
 
-    console.log(requestData);
-
-    // this.membersService.submitReportIssue(requestData).then(results => {
-    //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);
-    //   if (results.status === 200) {
+    this.membersService.submitReportIssue(requestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);
+      if (results.status === 200) {
         this.clearFormData();
-      // }
-    // });
+      }
+    });
   }
 
   public clearFormData() {
