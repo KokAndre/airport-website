@@ -5,6 +5,7 @@ import { PDFDocumentProxy, PdfViewerComponent } from 'ng2-pdf-viewer';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response.model';
+import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -23,6 +24,7 @@ export class AppModalComponent implements OnInit {
   public hideBannerModal = false;
   public bannerPDFHeight = '40vh';
   public bannerPDFWidth: string;
+  public editReportIssueData: GetReportIssueDataResponse.Requests;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
 
@@ -59,6 +61,15 @@ export class AppModalComponent implements OnInit {
         this.isLoading = false;
         break;
 
+        case ModalTypes.EditReportIssueData:
+          if (this.data.inputValues) {
+            this.editReportIssueData = this.data.inputValues;
+          } else {
+            this.editReportIssueData = new GetReportIssueDataResponse.Requests;
+          }
+          this.isLoading = false;
+          break;
+
       default:
         this.isLoading = false;
         break;
@@ -68,6 +79,12 @@ export class AppModalComponent implements OnInit {
   public confirmGallerySectionChanges() {
     if (this.gallerySectionToEditData.title) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.gallerySectionToEditData);
+    }
+  }
+
+  public updateReportIssueData() {
+    if (this.editReportIssueData.hangerOrSectionNumber && this.editReportIssueData.issueDescription) {
+      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.editReportIssueData);
     }
   }
 

@@ -10,6 +10,7 @@
   <ng-container *ngSwitchCase="modalTypesEnum.InterestedInPropertyModal"
     [ngTemplateOutlet]="InterestedInPropertyTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.AddFolderModal" [ngTemplateOutlet]="AddFolderTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.EditReportIssueData" [ngTemplateOutlet]="EditReportIssueDataTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -285,6 +286,50 @@
 
     <div class="red-button ml-3" [ngClass]="{'disable-user-click': !folderName}" (click)="addFolderConfirmClicked()">
       <p class="mb-0">Confirm</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #EditReportIssueDataTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div class="row mx-3 justify-content-center mt-2">
+    <mat-form-field class="col-12 px-0">
+      <mat-label>Hangar or Section Number</mat-label>
+      <input style="color: black;" matInput required maxlength="50" [(ngModel)]="editReportIssueData.hangerOrSectionNumber">
+      <mat-error *ngIf="!editReportIssueData.hangerOrSectionNumber">Hangar or Section Number is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-3 justify-content-center mt-2">
+    <mat-form-field class="col-12 px-0">
+      <mat-label>Issue Description</mat-label>
+      <input style="color: black;" matInput maxlength="500" [(ngModel)]="editReportIssueData.issueDescription">
+      <mat-error *ngIf="!editReportIssueData.issueDescription">Issue Description is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 my-4 justify-content-center">
+    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+      <p class="mb-0">Cancel</p>
+      <span class="white-button-icon"></span>
+    </div>
+
+    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !editReportIssueData.hangerOrSectionNumber || !editReportIssueData.issueDescription}"
+      (click)="updateReportIssueData()">
+      <p class="mb-0">Update</p>
       <span class="red-button-icon"></span>
     </div>
   </div>

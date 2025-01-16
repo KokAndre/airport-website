@@ -84,6 +84,7 @@ export enum Endpoints {
 
     UpdateReportIssueRequestType = '/report-issue/update-issue-request-type.php',
     UpdateReportIssueStatus = '/report-issue/update-issue-status.php',
+    UpdateReportIssueData = '/report-issue/update-issue-data.php',
 
     DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
@@ -176,7 +177,8 @@ export enum ModalTypes {
     SearchAndSecueModal = 'searchAndSecueModal',
     BannerModal = 'bannerModal',
     InterestedInPropertyModal = 'interestedInPropertyModal',
-    AddFolderModal = 'addFolderModal'
+    AddFolderModal = 'addFolderModal',
+    EditReportIssueData = 'editReportIssueData'
 }
 
 export enum ModalOutcomeOptions {

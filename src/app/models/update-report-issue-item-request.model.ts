@@ -4,5 +4,7 @@ export namespace UpdateReportIssueItemRequest {
         reportIssueId: string;
         reportIssueRequestType: string;
         status: string;
+        hangarOrSectionNumber: string;
+        issueDescription: string;
     }
 }

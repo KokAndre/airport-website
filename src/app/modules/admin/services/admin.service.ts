@@ -268,6 +268,23 @@ export class AdminService {
       });
   }
 
+  public updateReportIssueData(reportIssueRequestId: string, hangarOrSectionNumber: string, issueDescription: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+    requestData.hangarOrSectionNumber = hangarOrSectionNumber;
+    requestData.issueDescription = issueDescription;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public getGreeningTedderfieldData() {
     const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();

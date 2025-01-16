@@ -32,7 +32,8 @@
         <!-- <th>Followed Up</th> -->
         <th>Change request</th>
         <th>Status</th>
-        <th style="width: fit-content;" *ngIf="allowAdminToDelete"><mat-icon class="mx-2" fontIcon="delete"></mat-icon></th>
+        <th style="width: fit-content;"><div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
+            *ngIf="allowAdminToDelete" class="ml-1 p-0" fontIcon="delete"></mat-icon></div></th>
       </tr>
 
       <tr *ngFor="let item of reportIssueRequests">
@@ -48,7 +49,8 @@
         <td>
           <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
             <mat-label>Change Request</mat-label>
-            <mat-select [(value)]="item.changeRequest" (selectionChange)="updateReportIssueRequestType(item.id, $event.value)">
+            <mat-select [(value)]="item.changeRequest"
+              (selectionChange)="updateReportIssueRequestType(item.id, $event.value)">
               <mat-option class="px-1" value="issue">Issue</mat-option>
               <mat-option class="px-1" value="changeRequest">Change Request</mat-option>
             </mat-select>
@@ -70,8 +72,11 @@
           </mat-form-field>
         </td>
 
-        <td *ngIf="allowAdminToDelete"><mat-icon class="red-text pointer mx-2" fontIcon="delete"
-            (click)="deleteReportIssueRequestClicked(item)"></mat-icon></td>
+        <td><div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+            (click)="editReportIssueRequestClicked(item)"></mat-icon>
+          <mat-icon *ngIf="allowAdminToDelete" class="red-text pointer ml-1 p-0" fontIcon="delete"
+            (click)="deleteReportIssueRequestClicked(item)"></mat-icon></div>
+        </td>
       </tr>
 
     </table>

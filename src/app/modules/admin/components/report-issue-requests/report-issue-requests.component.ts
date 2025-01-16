@@ -40,45 +40,38 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
-  // public markIssueAsFollowedUpClicked(reportIssueRequest: GetReportIssueDataResponse.Requests) {
-  //   this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Edit Report Issue Request', `Are you sure you want to mark the Issue for ${reportIssueRequest.name} as followed up?`, null, this.markIssueAsFollowedUp.bind(this, reportIssueRequest));
-  // }
+  public editReportIssueRequestClicked(reportIssueItem: GetReportIssueDataResponse.Requests) {
+    const modalData = new GetReportIssueDataResponse.Requests();
+    modalData.id = reportIssueItem.id;
+    modalData.hangerOrSectionNumber = reportIssueItem.hangerOrSectionNumber;
+    modalData.issueDescription = reportIssueItem.issueDescription;
+    this.appModalService.ShowConfirmationModal(ModalTypes.EditReportIssueData, 'Edit Report Issue Request Data', '', modalData, this.editReportIssueRequest.bind(this));
+  }
 
-  // public markIssueAsFollowedUp(reportIssueRequest: GetReportIssueDataResponse.Requests, modalOutcome: string) {
-  //   if (modalOutcome === ModalOutcomeOptions.Confirm) {
-  //     this.adminService.editReportIssueEntry(reportIssueRequest.id).then(results => {
-  //       if (results.status === 200) {
-  //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
-  //         this.getReportIssueData();
-  //       } else {
-  //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request', results.message, null);
-  //       }
-  //     });
-  //   }
-  // }
+  public editReportIssueRequest(modalOutcome: string, reportIssueItem?: GetReportIssueDataResponse.Requests) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    console.log('REPORT ISSUE DATA: ', reportIssueItem);
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
+        if (results.status === 200) {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+          this.getReportIssueData();
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+        }
+      });
+    }
+  }
 
   public updateReportIssueRequestType(reportIssueRequestId: string, reportIssueRequestType: string) {
     this.adminService.updateReportIssueChangeRequest(reportIssueRequestId, reportIssueRequestType).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Request Type', results.message, null);
-      // if (results.status === 200) {
-      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
-      //   this.getReportIssueData();
-      // } else {
-      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
-      // }
     });
   }
-
 
   public updateReportIssueStatus(reportIssueRequestId: string, reportIssueStatus: string) {
     this.adminService.updateReportIssueStatus(reportIssueRequestId, reportIssueStatus).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
-      // if (results.status === 200) {
-      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
-      //   this.getReportIssueData();
-      // } else {
-      //   this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
-      // }
     });
   }
 
