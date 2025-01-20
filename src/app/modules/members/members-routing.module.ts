@@ -13,6 +13,7 @@ import { DocumentsComponent } from './components/documents/documents.component';
 import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
 import { HasCompletedGettingToKnowYouGuardService } from 'src/app/route-guards/has-completed-getting-to-know-you-guard.service';
 import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-who-in-the-zoo.component';
+import { ManageProfileComponent } from './components/manage-profile/manage-profile.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,9 @@ const routes: Routes = [
   },
   {
     path: 'whos-who-in-the-tedderfield-zoo', canActivate: [LoginGuardService, HasCompletedGettingToKnowYouGuardService], component: WhosWhoInTheZooComponent
+  },
+  {
+    path: 'manage-profile', canActivate: [LoginGuardService], component: ManageProfileComponent
   },
 ];
 

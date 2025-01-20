@@ -1,0 +1,113 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Manage Profile</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Manage Profile</span></p>
+  </div>
+</div>
+
+<app-arrow-divider class="pointer" (click)="isExplinationExpanded = !isExplinationExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isExplinationExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Manage your profile data</p>
+      </mat-expansion-panel-header>
+
+      <p class="">Here you can manage your profile data</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isProfileFormExpanded = !isProfileFormExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isProfileFormExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Profile data</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="mb-3 pb-4" [formGroup]="memberFormGroup">
+      <div class="col-11 col-sm-11 col-md-10 col-lg-7 mx-auto p-3 manage-profile-form-background">
+        <div class="row mx-0 justify-content-center">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Name</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="nameControl">
+            <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Surname</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="surnameControl">
+            <mat-error *ngIf="surnameControl?.hasError('required')">Surname is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Phone Number</mat-label>
+            <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl">
+            <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+            <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Email</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+            <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Hangar Numbers</mat-label>
+            <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+              formControlName="hangarNumbersControl"
+              (keydown)="keydownOnBulletPointControl(hangarNumbersControl)"
+              (keyup)="inputOnBulletPointControl(hangarNumbersControl, $event)"
+              (blur)="blurOnBulletPointControl(hangarNumbersControl)"
+              placeholder="Enter the hangar number of all the hangars you own at Tedderfield Airpark"></textarea>
+            <!-- <mat-error *ngIf="hangarNumbersControl?.hasError('required')">Hangar Number is required</mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-12 px-0">
+            <mat-label>Stand Numbers</mat-label>
+            <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+              formControlName="standNumbersControl"
+              (keydown)="keydownOnBulletPointControl(standNumbersControl)"
+              (keyup)="inputOnBulletPointControl(standNumbersControl, $event)"
+              (blur)="blurOnBulletPointControl(standNumbersControl)"
+              placeholder="Enter the stand number of all the stands you own at Tedderfield Airpark"></textarea>
+            <!-- <mat-error *ngIf="standNumbersControl?.hasError('required')">Stand Number is required</mat-error> -->
+          </mat-form-field>
+        </div>
+
+
+
+        <div *ngIf="!isLoading" class="row mx-0 justify-content-center">
+          <div class="red-button" [ngClass]="{'disable-user-click': isSubmitDisabled()}"
+            (click)="submitClicked()">
+            <p class="mb-0">Submit</p>
+            <span class="red-button-icon"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+
+</div>

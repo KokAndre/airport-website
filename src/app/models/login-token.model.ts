@@ -8,4 +8,6 @@ export class LoginToken {
     email: string
     phoneNumber: string;
     hasCompletedGettingToKnowYou: string;
+    hangarNumbers: string;
+    standNumbers: string;
 }

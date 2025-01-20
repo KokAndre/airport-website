@@ -36,6 +36,7 @@ export enum AppRoutes {
     MembersDocuments = '/members/documents',
     SubmitClassifieds = '/members/classifieds',
     WhosWhoInTheZoo = '/members/whos-who-in-the-tedderfield-zoo',
+    ManageProfile = '/members/manage-profile',
 
     MembersAdmin = '/admin/manage-members',
     GalleryAdmin = '/admin/edit-gallery',
@@ -153,6 +154,7 @@ export enum Endpoints {
     // Manage Members
     GetAllMembers = '/members/get-members.php',
     DeleteMember = '/members/delete-members.php',
+    UpdateMemberData = '/members/update-member-data.php'
 }
 
 export enum EncryptionKeys {

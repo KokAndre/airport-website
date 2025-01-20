@@ -10,6 +10,7 @@ import * as CryptoJS from 'crypto-js';
 import { AppModalService } from '../app-modal/app-modal.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { Router } from '@angular/router';
+import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,8 @@ export class LoginService {
     tokenToStore.hasCompletedGettingToKnowYou = data.hasCompletedGettingToKnowYou;
     tokenToStore.loginDateTime = new Date().toISOString();
     tokenToStore.logoutDateTime = moment(new Date()).add(60, 'm').toISOString();
+    tokenToStore.hangarNumbers = data.hangarNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'");
+    tokenToStore.standNumbers = data.standNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'");
 
     const encryptedToken = AppHelperFunction.encryptToken(tokenToStore);
 
@@ -218,6 +221,8 @@ export class LoginService {
         userdetails.surname = token.surname;
         userdetails.phoneNumber = token.phoneNumber;
         userdetails.email = token.email;
+        userdetails.hangarNumbers = token.hangarNumbers;
+        userdetails.standNumbers = token.standNumbers;
         return userdetails;
       } else {
         this.logoutUser();
@@ -312,9 +317,26 @@ export class LoginService {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 200) {
+        this.updateLoginToken(data.data);
+      }
+      return data;
+    });
+  }
+
+  public updateMemberData(memberData: UpdateMemberDataRequest.RootObject) {
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateMemberData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: memberData })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 200) {
+        this.updateLoginToken(data.data);
+      }
+      return data;
+    });
   }
 }

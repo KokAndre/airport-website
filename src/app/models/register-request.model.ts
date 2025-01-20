@@ -7,5 +7,4 @@ export class RegisterRequest {
     password: string;
     hangarNumbers: string[];
     standNumbers: string[];
-
 }

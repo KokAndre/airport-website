@@ -13,6 +13,7 @@ import { YourTrusteesComponent } from './components/your-trustees/your-trustees.
 import { DocumentsComponent } from './components/documents/documents.component';
 import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
 import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-who-in-the-zoo.component';
+import { ManageProfileComponent } from './components/manage-profile/manage-profile.component';
 
 
 
@@ -28,7 +29,8 @@ import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-
     YourTrusteesComponent,
     DocumentsComponent,
     SubmitClassifiedsComponent,
-    WhosWhoInTheZooComponent
+    WhosWhoInTheZooComponent,
+    ManageProfileComponent
   ],
   imports: [
     CommonModule,

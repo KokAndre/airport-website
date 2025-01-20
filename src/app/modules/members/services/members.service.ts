@@ -7,6 +7,7 @@ import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
 import { SubmitClassifiedsRequest } from 'src/app/models/submit-classifieds-request.model';
 import { SubmitGettingToKnowYouRequest } from 'src/app/models/submit-getting-to-know-you-request.model';
 import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
+import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Injectable({
@@ -287,7 +288,5 @@ export class MembersService {
         return data;
       });
   }
-
-
 
 }

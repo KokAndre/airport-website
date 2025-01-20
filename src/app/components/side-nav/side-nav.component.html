@@ -23,18 +23,28 @@
 
   <div class="header-container">
     <div class="header row mx-0" [ngClass]="{'header-solid-bakground': displayHeaderAsSolid}">
-      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 pointer center-align-vertical header-white-background"
+      <div class="col-lg-2 col-md-4 col-sm-5 col-5 px-0 pointer center-align-vertical header-white-background"
         (click)="navigateToRoute(navigationRoutes.Home)">
         <div class="logo-image"></div>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-2 col-2 px-0 center-align-vertical">
+      <div class="col-lg-8 col-md-4 col-sm-2 col-2 px-0 center-align-vertical">
         <app-nav-bar [isAuthorised]="isAuthorised" [isUserAdmin]="isUserAdmin" [isMobileView]="isMobileView"
           [hasCompletedGettingToKnowYou]="hasCompletedGettingToKnowYou"></app-nav-bar>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-5 col-5 px-0 center-align-vertical header-white-background">
-        <p class="mb-0 text-size-20 text-center header-blue-text" *ngIf="isAuthorised">Welcome</p>
-        <p class="mb-0 text-size-20 text-center header-red-text" *ngIf="isAuthorised"><span class="text-bold">{{
-            getLoggedInUsername() }}</span></p>
+      <div class="col-lg-2 col-md-4 col-sm-5 col-5 px-0 center-align-vertical header-white-background">
+        <div *ngIf="isAuthorised" class="row mx-0">
+
+          <div class="col">
+            <p class="mb-0 text-size-20 text-center header-blue-text">Welcome</p>
+            <p class="mb-0 text-size-20 text-center header-red-text"><span class="text-bold">{{
+                getLoggedInUsername() }}</span></p>
+          </div>
+
+          <div style="align-content: center;" class="col-auto">
+            <div class="manage-profile-icon pointer" (click)="goToManageProfile()"></div>
+          </div>
+
+        </div>
 
         <div *ngIf="!isAuthorised">
           <div class="red-button mx-auto" (click)="navigateToWelcomeScreen()">
