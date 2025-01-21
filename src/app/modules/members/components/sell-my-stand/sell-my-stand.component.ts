@@ -194,7 +194,7 @@ export class SellMyStandComponent implements OnInit {
     }
 
     if (keyPressed.key === ',') {
-      if (numOfLines < 10) {
+      if (numOfLines < 20) {
         let formCotrolValue = formControl.value;
         formCotrolValue = formCotrolValue.replace(',', "\n")
         formCotrolValue += '• ';

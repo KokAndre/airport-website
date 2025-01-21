@@ -70,7 +70,7 @@ export class ReportAnIssueComponent implements OnInit {
     requestData.name = this.nameControl?.value;
     requestData.email = this.emailControl?.value;
     requestData.hangerOrSectionNumber = this.hangerOrsectionNumberControl?.value;
-    requestData.issueDescription = this.descriptionControl?.value;
+    requestData.issueDescription = this.descriptionControl?.value.replaceAll("'", '’');
 
     this.membersService.submitReportIssue(requestData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);

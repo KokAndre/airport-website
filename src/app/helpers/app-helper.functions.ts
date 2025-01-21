@@ -120,6 +120,13 @@ export class AppHelperFunction {
         }
     }
 
+    public static thousandSeporatorWithWhiteSpace(value: string) {
+        if (value) {
+            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return value;
+        }
+    }
+
     public static includeDecimalsOnInputValue(value: string, formControl?: any) {
         // Make sure the value comming through is a string
         value = value.toString();
@@ -204,6 +211,39 @@ export class AppHelperFunction {
         } else {
             return formattedValue;
         }
+    }
+
+    public static inputBoxSeparatorWithoutDecimalsAndWhiteSpaceSeparator(value: string, formControl?: any) {
+        // Make sure the value comming through is a string
+        value = value.toString();
+
+        let formattedValue = this.removeNonNumericCharacters(value);
+
+        formattedValue = this.thousandSeporatorWithWhiteSpace(formattedValue);
+
+        if (formControl) {
+            // Update the value on the form
+            formControl.setValue(value);
+        } else {
+            return formattedValue;
+        }
+    }
+
+    public static splitStringToArray(stringData: string) {
+        let arrayData = stringData.split('\",');
+        let returnArray = [];
+
+        console.log('IN NEW SPLIT METHOD');
+
+        arrayData.forEach(item => {
+            const itemToPush = item.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'");
+            console.log('ITEM AFTER EDIT: ', item);
+            returnArray.push(itemToPush);
+        });
+
+        console.log('DATA TO RETUEN: ', returnArray);
+
+        return returnArray;
     }
 
 }

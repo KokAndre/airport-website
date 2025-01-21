@@ -4,6 +4,7 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { Endpoints, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
+import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-hangars-for-sale',
@@ -70,12 +71,12 @@ export class HangarsForSaleComponent implements OnInit {
       itemToPush.hangerDimensions = JSON.parse(hangerItem.hangerDimensions ? hangerItem.hangerDimensions.replaceAll('\\', '') : {});
       itemToPush.doorDimensions = JSON.parse(hangerItem.doorDimensions ? hangerItem.doorDimensions.replaceAll('\\', '') : {});
 
-      itemToPush.buildingMaterial = hangerItem.buildingMaterial?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.hangerCustomisations = hangerItem.hangerCustomisations?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.featuresAndBenefits = hangerItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.securty = hangerItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.additionalInfrastructure = hangerItem.additionalInfrastructure?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.buildingMaterial = AppHelperFunction.splitStringToArray(hangerItem.buildingMaterial);
+      itemToPush.hangerCustomisations = AppHelperFunction.splitStringToArray(hangerItem.hangerCustomisations);
+      itemToPush.featuresAndBenefits = AppHelperFunction.splitStringToArray(hangerItem.featuresAndBenefits);
+      itemToPush.securty = AppHelperFunction.splitStringToArray(hangerItem.securty);
+      itemToPush.additionalInfrastructure = AppHelperFunction.splitStringToArray(hangerItem.additionalInfrastructure);
+      itemToPush.leviesApplicable = AppHelperFunction.splitStringToArray(hangerItem.leviesApplicable);
 
       this.hangersForSaleData.push(itemToPush);
     });

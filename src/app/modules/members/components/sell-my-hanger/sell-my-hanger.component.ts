@@ -182,7 +182,7 @@ export class SellMyHangerComponent implements OnInit {
     }
 
     if (keyPressed.keyCode === '13' || keyPressed.keyCode === 13 || keyPressed.key === 'Enter') {
-      if (numOfLines <= 10) {
+      if (numOfLines <= 20) {
         let formCotrolValue = formControl.value;
         formCotrolValue += '• ';
         formControl.setValue(formCotrolValue);

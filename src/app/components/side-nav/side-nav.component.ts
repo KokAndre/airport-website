@@ -173,7 +173,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
           }, 3000);
           break;
 
-
         case ModalTypes.ConfirmationModal:
         case ModalTypes.CaptureGallerySectionTitle:
         case ModalTypes.SearchAndSecueModal:
@@ -188,6 +187,12 @@ export class SideNavComponent implements OnInit, OnDestroy {
         //   data: modalDetails, disableClose: true, maxWidth
         // });
         // break;
+
+        case ModalTypes.EditReportIssueData:
+          this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
+            data: modalDetails, disableClose: true, maxWidth: '90vw', panelClass: 'min-width-modal-class-medium'
+          });
+          break;
 
         default:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {

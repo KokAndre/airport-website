@@ -10,7 +10,8 @@
   <ng-container *ngSwitchCase="modalTypesEnum.InterestedInPropertyModal"
     [ngTemplateOutlet]="InterestedInPropertyTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.AddFolderModal" [ngTemplateOutlet]="AddFolderTemplate"></ng-container>
-  <ng-container *ngSwitchCase="modalTypesEnum.EditReportIssueData" [ngTemplateOutlet]="EditReportIssueDataTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.EditReportIssueData"
+    [ngTemplateOutlet]="EditReportIssueDataTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -73,14 +74,15 @@
         </div>
         <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
             class="pt-1 pointer mr-3">close</mat-icon></div>
-            <!-- ml-n2 mb-n4  -->
+        <!-- ml-n2 mb-n4  -->
       </div>
 
       <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
     </div>
 
     <div *ngIf="data.details">
-      <div class="my-2 justify-content-center file-viewer-container-custom" style="--bannerPDFHeight: {{bannerPDFHeight}};" >
+      <div class="my-2 justify-content-center file-viewer-container-custom"
+        style="--bannerPDFHeight: {{bannerPDFHeight}};">
         <pdf-viewer class="pdf-size" [src]="data.details" [zoom-scale]="'page-fit'" [original-size]="false"
           [render-text]="false" (page-rendered)="bannerLoaded()" id="banner-pdf-viewer">
         </pdf-viewer>
@@ -309,7 +311,8 @@
   <div class="row mx-3 justify-content-center mt-2">
     <mat-form-field class="col-12 px-0">
       <mat-label>Hangar or Section Number</mat-label>
-      <input style="color: black;" matInput required maxlength="50" [(ngModel)]="editReportIssueData.hangerOrSectionNumber">
+      <input style="color: black;" matInput required maxlength="50"
+        [(ngModel)]="editReportIssueData.hangerOrSectionNumber">
       <mat-error *ngIf="!editReportIssueData.hangerOrSectionNumber">Hangar or Section Number is required</mat-error>
     </mat-form-field>
   </div>
@@ -317,7 +320,8 @@
   <div class="row mx-3 justify-content-center mt-2">
     <mat-form-field class="col-12 px-0">
       <mat-label>Issue Description</mat-label>
-      <input style="color: black;" matInput maxlength="500" [(ngModel)]="editReportIssueData.issueDescription">
+      <textarea style="color: black;" matInput maxlength="900"
+        [(ngModel)]="editReportIssueData.issueDescription"></textarea>
       <mat-error *ngIf="!editReportIssueData.issueDescription">Issue Description is required</mat-error>
     </mat-form-field>
   </div>
@@ -328,7 +332,8 @@
       <span class="white-button-icon"></span>
     </div>
 
-    <div class="red-button ml-3" [ngClass]="{'disable-user-click': !editReportIssueData.hangerOrSectionNumber || !editReportIssueData.issueDescription}"
+    <div class="red-button ml-3"
+      [ngClass]="{'disable-user-click': !editReportIssueData.hangerOrSectionNumber || !editReportIssueData.issueDescription}"
       (click)="updateReportIssueData()">
       <p class="mb-0">Update</p>
       <span class="red-button-icon"></span>
