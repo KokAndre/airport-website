@@ -60,6 +60,17 @@ export class LoginService {
       });
   }
 
+  //TODO: Remove !!!!!!
+  //TODO: Remove !!!!!!
+  //TODO: Remove !!!!!!
+  // public decryptPassword(password: string) {
+  //   const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
+  //   const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
+  //   const decryptedBytes = CryptoJS.AES.decrypt(password, keyHex, { iv: ivHex });
+  //   const dectyptedString = decryptedBytes.toString(CryptoJS.enc.Utf8);
+  //   console.log('PASSWORD: ', dectyptedString);
+  // }
+
   public loginUser(requestData: LoginRequest) {
     return fetch(Endpoints.BaseURL + Endpoints.Login, {
       method: 'post',
@@ -69,6 +80,10 @@ export class LoginService {
       .then(data => {
         if (data.status === 200) {
           this.updateLoginToken(data.data);
+          // TODO: Remove the below !!!!!!
+          // TODO: Remove the below !!!!!!
+          // TODO: Remove the below !!!!!!
+          // this.decryptPassword('EvQniKdjr2j43mqCVVKXHQ==');
         }
         return data;
       });

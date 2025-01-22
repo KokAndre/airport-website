@@ -228,13 +228,13 @@ export class ManageProfileComponent implements OnInit {
     }
 
     const newHangarNumbersArray = this.formatBulletPointInputValuesToSubmit(this.hangarNumbersControl.value);
-    const originalHangarNumbersArray = this.userDetails.hangarNumbers.split(',');
+    const originalHangarNumbersArray = this.userDetails?.hangarNumbers?.split(',');
     if (JSON.stringify(originalHangarNumbersArray) !== JSON.stringify(newHangarNumbersArray)) {
       hasValuesChanged = true;
     }
 
     const newStandNumbersArray = this.formatBulletPointInputValuesToSubmit(this.standNumbersControl.value);
-    const originalStandNumbersArray = this.userDetails.standNumbers.split(',');
+    const originalStandNumbersArray = this.userDetails?.standNumbers?.split(',');
     if (JSON.stringify(originalStandNumbersArray) !== JSON.stringify(newStandNumbersArray)) {
       hasValuesChanged = true;
     }

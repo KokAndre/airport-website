@@ -320,7 +320,7 @@
   <div class="row mx-3 justify-content-center mt-2">
     <mat-form-field class="col-12 px-0">
       <mat-label>Issue Description</mat-label>
-      <textarea style="color: black;" matInput maxlength="900"
+      <textarea style="color: black;" matInput maxlength="2000"
         [(ngModel)]="editReportIssueData.issueDescription"></textarea>
       <mat-error *ngIf="!editReportIssueData.issueDescription">Issue Description is required</mat-error>
     </mat-form-field>
