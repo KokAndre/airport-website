@@ -4,6 +4,7 @@ import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
+import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 
 @Component({
   selector: 'app-manage-members',
@@ -51,11 +52,39 @@ export class ManageMembersComponent implements OnInit {
   }
 
   public addMemberClicked() {
-    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Members', 'Add', null);
+    this.appModalService.ShowConfirmationModal(ModalTypes.CaptureMember, 'Add Members', 'Add', null, this.addMemberOutcome.bind(this));
   }
 
-  public editMember(member: MembersDataResponse.Member) {
-    //
+  public addMemberOutcome(modalOutcome: string, newMemberData: UpdateMembersRequest.RootObject) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      console.log('NEW MEMBER DATA: ', newMemberData);
+      this.adminService.addNewMemberMember(newMemberData).then(results => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Member', results.message, null);
+        if (results.status === 200) {
+          this.getMembersData();
+          this.appModalService.CloseModal();
+        }
+      });
+    }
+  }
+
+  public editMember(selectedMember: UpdateMembersRequest.RootObject) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.CaptureMember, 'Update Members', 'Update', selectedMember, this.editMemberOutcome.bind(this));
+  }
+
+  public editMemberOutcome(modalOutcome: string, newMemberData: UpdateMembersRequest.RootObject) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      console.log('NEW MEMBER DATA: ', newMemberData);
+      this.adminService.manageMembersUpdateMemberData(newMemberData).then(results => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Member', results.message, null);
+        if (results.status === 200) {
+          this.getMembersData();
+          this.appModalService.CloseModal();
+        }
+      });
+    }
   }
 
   public exportToExcel() {

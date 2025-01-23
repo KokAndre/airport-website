@@ -723,4 +723,19 @@ export class AdminService {
       });
   }
 
+  public manageMembersUpdateMemberData(memberData: UpdateMembersRequest.RootObject) {
+    let requestData = new UpdateMembersRequest.RootObject
+    requestData = memberData;
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 }

@@ -121,21 +121,29 @@ export class AppModalComponent implements OnInit {
   }
 
   public initializeCaptureMemberFormControls() {
-    this.interestedInPropertyFormGroup = this.formBuilder.group({
+    this.captureMemberFormGroup = this.formBuilder.group({
       captureMemberNameControl: new FormControl(this.memberData.name || '', [Validators.required]),
       captureMemberSurnameControl: new FormControl(this.memberData.surname || '', [Validators.required]),
       captureMemberPhoneNumberControl: new FormControl(this.memberData.phoneNumber || '', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       captureMemberEmailControl: new FormControl(this.memberData.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       captureMemberHangarNumbersControl: new FormControl(''),
       captureMemberStandNumbersControl: new FormControl(''),
-      captureMemberIsAdminControl: new FormControl(this.memberData.isAdmin === '1' ? true : false, [Validators.required])
+      captureMemberIsAdminControl: new FormControl(this.memberData.isAdmin || '0', [Validators.required])
     });
 
+    // console.log('ORIGINAL HANGAR DATA: ', this.memberData.hangarNumbers);
+    // if (this.memberData.hangarNumbers?.length) {
+    console.log('IN THE IF');
     const hangarDataToSet = this.memberData.hangarNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-    const standDataToSet = this.memberData.standNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-
+    console.log('HANGAR DATA TO SET: ', hangarDataToSet);
     this.captureMemberHangarNumbersControl.setValue(this.formatBulletPointInputDataForPrePopulation(hangarDataToSet) || '');
-    this.captureMemberStandNumbersControl.setValue(this.formatBulletPointInputDataForPrePopulation(standDataToSet) || '');
+    // }
+
+    if (this.memberData.standNumbers?.length) {
+      const standDataToSet = this.memberData.standNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+      this.captureMemberStandNumbersControl.setValue(this.formatBulletPointInputDataForPrePopulation(standDataToSet) || '');
+    }
+
 
     this.isLoading = false;
   }
@@ -145,11 +153,14 @@ export class AppModalComponent implements OnInit {
       let formattedItem = '';
       itemArray.forEach(item => {
         item = item.replaceAll("`", "'");
-        if (formattedItem) {
-          formattedItem += `\n• ${item}`;
-        } else {
-          formattedItem += `• ${item}`;
+        if (item) {
+          if (formattedItem) {
+            formattedItem += `\n• ${item}`;
+          } else {
+            formattedItem += `• ${item}`;
+          }
         }
+
 
       });
       return formattedItem;
@@ -252,23 +263,6 @@ export class AppModalComponent implements OnInit {
   public blurOnBulletPointControl(formControl: AbstractControl) {
     if (formControl?.value === '• ' || formControl?.value === '•') {
       formControl.setValue('');
-    } else {
-      //Remove all empty lines
-      const allLinesArray = formControl.value?.split('\n');
-      let newValueToSetAfterRemovingEmptyLines = '';
-      allLinesArray.forEach((line, last) => {
-        if (line === '•' || line === '• ' || line === ' •' || line === ' • ' || line === '') {
-          //
-        } else {
-          if (last) {
-            newValueToSetAfterRemovingEmptyLines += line;
-          } else {
-            newValueToSetAfterRemovingEmptyLines += line + '\n';
-          }
-        }
-      });
-
-      formControl.setValue(newValueToSetAfterRemovingEmptyLines);
     }
   }
 
@@ -296,6 +290,8 @@ export class AppModalComponent implements OnInit {
 
     memberDataToUpdate.hangarNumbersArray = this.formatBulletPointInputValuesToSubmit(this.captureMemberHangarNumbersControl.value);
     memberDataToUpdate.standNumbersArray = this.formatBulletPointInputValuesToSubmit(this.captureMemberStandNumbersControl.value);
+
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, memberDataToUpdate);
   }
 
   public checkIfUserIsLoggedIn() {

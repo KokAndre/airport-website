@@ -12,8 +12,7 @@
   <ng-container *ngSwitchCase="modalTypesEnum.AddFolderModal" [ngTemplateOutlet]="AddFolderTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.EditReportIssueData"
     [ngTemplateOutlet]="EditReportIssueDataTemplate"></ng-container>
-    <ng-container *ngSwitchCase="modalTypesEnum.CaptureMember"
-    [ngTemplateOutlet]="CaptureMemberTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CaptureMember" [ngTemplateOutlet]="CaptureMemberTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -357,77 +356,94 @@
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
   </div>
 
-  <div class="row mx-3 justify-content-center">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Name</mat-label>
-      <input style="color: black;" matInput required maxlength="50" formControlName="captureMemberNameControl">
-      <mat-error *ngIf="captureMemberNameControl?.hasError('required')">Name is required</mat-error>
-    </mat-form-field>
-  </div>
+  <div class="capture-member-data" [formGroup]="captureMemberFormGroup">
 
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Surname</mat-label>
-      <input style="color: black;" matInput required maxlength="50" formControlName="captureMemberSurnameControl">
-      <mat-error *ngIf="captureMemberSurnameControl?.hasError('required')">Surname is required</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Phone Number</mat-label>
-      <input style="color: black;" matInput required maxlength="10" formControlName="captureMemberPhoneNumberControl">
-      <mat-error *ngIf="captureMemberPhoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
-      <mat-error *ngIf="captureMemberPhoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Email</mat-label>
-      <input style="color: black;" matInput required maxlength="100" formControlName="captureMemberEmailControl">
-      <mat-error *ngIf="captureMemberEmailControl?.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="captureMemberEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Hangar Numbers</mat-label>
-      <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
-        formControlName="captureMemberHangarNumbersControl"
-        (keydown)="keydownOnBulletPointControl(captureMemberHangarNumbersControl)"
-        (keyup)="inputOnBulletPointControl(captureMemberHangarNumbersControl, $event)"
-        (blur)="blurOnBulletPointControl(captureMemberHangarNumbersControl)"
-        placeholder="Enter the hangar number of all the hangars you own at Tedderfield Airpark"></textarea>
-      <!-- <mat-error *ngIf="captureMemberHangarNumbersControl?.hasError('required')">Hangar Number is required</mat-error> -->
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Stand Numbers</mat-label>
-      <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
-        formControlName="captureMemberStandNumbersControl"
-        (keydown)="keydownOnBulletPointControl(captureMemberStandNumbersControl)"
-        (keyup)="inputOnBulletPointControl(captureMemberStandNumbersControl, $event)"
-        (blur)="blurOnBulletPointControl(captureMemberStandNumbersControl)"
-        placeholder="Enter the stand number of all the stands you own at Tedderfield Airpark"></textarea>
-      <!-- <mat-error *ngIf="captureMemberStandNumbersControl?.hasError('required')">Stand Number is required</mat-error> -->
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-0 my-4 justify-content-center">
-    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
-      <p class="mb-0">Cancel</p>
-      <span class="white-button-icon"></span>
+    <div class="row mx-3 justify-content-center">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Name</mat-label>
+        <input style="color: black;" matInput required maxlength="50" formControlName="captureMemberNameControl">
+        <mat-error *ngIf="captureMemberNameControl?.hasError('required')">Name is required</mat-error>
+      </mat-form-field>
     </div>
 
-    <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': captureMemberFormGroup.invalid || (captureMemberFormGroup.valid && !(captureMemberHangarNumbersControl.value || captureMemberStandNumbersControl.value))}"
-      (click)="updateMemberData()">
-      <p class="mb-0">Update</p>
-      <span class="red-button-icon"></span>
+    <div class="row mx-3 justify-content-center mt-1">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Surname</mat-label>
+        <input style="color: black;" matInput required maxlength="50" formControlName="captureMemberSurnameControl">
+        <mat-error *ngIf="captureMemberSurnameControl?.hasError('required')">Surname is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-3 justify-content-center mt-1">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Phone Number</mat-label>
+        <input style="color: black;" matInput required maxlength="10" formControlName="captureMemberPhoneNumberControl">
+        <mat-error *ngIf="captureMemberPhoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+        <mat-error *ngIf="captureMemberPhoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-3 justify-content-center mt-1">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Email</mat-label>
+        <input style="color: black;" matInput required maxlength="100" formControlName="captureMemberEmailControl">
+        <mat-error *ngIf="captureMemberEmailControl?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="captureMemberEmailControl?.hasError('pattern')">Enter a valid email</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-3 justify-content-center mt-1">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Hangar Numbers</mat-label>
+        <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+          formControlName="captureMemberHangarNumbersControl"
+          (keydown)="keydownOnBulletPointControl(captureMemberHangarNumbersControl)"
+          (keyup)="inputOnBulletPointControl(captureMemberHangarNumbersControl, $event)"
+          (blur)="blurOnBulletPointControl(captureMemberHangarNumbersControl)"
+          placeholder="Enter the hangar number of all the hangars you own at Tedderfield Airpark"></textarea>
+        <!-- <mat-error *ngIf="captureMemberHangarNumbersControl?.hasError('required')">Hangar Number is required</mat-error> -->
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-3 justify-content-center mt-1">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Stand Numbers</mat-label>
+        <textarea cdkTextareaAutosize style="color: black;" matInput maxlength="500"
+          formControlName="captureMemberStandNumbersControl"
+          (keydown)="keydownOnBulletPointControl(captureMemberStandNumbersControl)"
+          (keyup)="inputOnBulletPointControl(captureMemberStandNumbersControl, $event)"
+          (blur)="blurOnBulletPointControl(captureMemberStandNumbersControl)"
+          placeholder="Enter the stand number of all the stands you own at Tedderfield Airpark"></textarea>
+        <!-- <mat-error *ngIf="captureMemberStandNumbersControl?.hasError('required')">Stand Number is required</mat-error> -->
+      </mat-form-field>
+    </div>
+    
+    <div class="row mx-3 justify-content-center mt-1">
+      <p class="mb-0 p-0 text-size-16">Is Admin:</p>
+    </div>
+
+    <div class="row ml-2 mr-3 justify-content-center">
+      <div class="col-12 px-0">
+        <mat-radio-group formControlName="captureMemberIsAdminControl">
+          <mat-radio-button class="row mx-0" [value]="'1'">Yes</mat-radio-button>
+          <mat-radio-button class="row mx-0" [value]="'0'">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row mx-0 my-4 justify-content-center">
+      <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+        <p class="mb-0">Cancel</p>
+        <span class="white-button-icon"></span>
+      </div>
+
+      <div class="red-button ml-3"
+        [ngClass]="{'disable-user-click': captureMemberFormGroup.invalid || (captureMemberFormGroup.valid && !(captureMemberHangarNumbersControl.value || captureMemberStandNumbersControl.value))}"
+        (click)="updateMemberData()">
+        <p class="mb-0">{{ data.details || 'Save'}}</p>
+        <span class="red-button-icon"></span>
+      </div>
     </div>
   </div>
+
 </ng-template>

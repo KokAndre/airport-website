@@ -179,23 +179,6 @@ export class ManageProfileComponent implements OnInit {
   public blurOnBulletPointControl(formControl: AbstractControl) {
     if (formControl?.value === '• ' || formControl?.value === '•') {
       formControl.setValue('');
-    } else {
-      //Remove all empty lines
-      const allLinesArray = formControl.value?.split('\n');
-      let newValueToSetAfterRemovingEmptyLines = '';
-      allLinesArray.forEach((line, last) => {
-        if (line === '•' || line === '• ' || line === ' •' || line === ' • ' || line === '') {
-          //
-        } else {
-          if (last || allLinesArray.length === 1) {
-            newValueToSetAfterRemovingEmptyLines += line;
-          } else {
-            newValueToSetAfterRemovingEmptyLines += line + '\n';
-          }
-        }
-      });
-
-      formControl.setValue(newValueToSetAfterRemovingEmptyLines);
     }
   }
 

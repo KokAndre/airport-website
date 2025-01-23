@@ -153,9 +153,10 @@ export enum Endpoints {
 
     // Manage Members
     GetAllMembers = '/members/get-members.php',
-    DeleteMember = '/members/delete-members.php',
     UpdateMemberData = '/members/update-member-data.php',
-    AddNewMember = '/member/add-member.php'
+    DeleteMember = '/members/delete-members.php',
+    AddNewMember = '/members/add-member.php',
+    ManageMembersUpdateMemberData = '/members/manage-members-update-member-data.php'
 }
 
 export enum EncryptionKeys {

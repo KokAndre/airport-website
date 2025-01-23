@@ -189,6 +189,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         // break;
 
         case ModalTypes.EditReportIssueData:
+        case ModalTypes.CaptureMember:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: true, maxWidth: '90vw', panelClass: 'min-width-modal-class-medium'
           });
