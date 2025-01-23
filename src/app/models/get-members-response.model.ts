@@ -17,5 +17,9 @@ export namespace MembersDataResponse {
         hasCompletedGettingToKnowYou: string;
         phoneNumber: string;
         userId: number;
+        hangarNumbers: string;
+        hangarNumbersArray: string[];
+        standNumbers: string;
+        standNumbersArray: string[];
     }
 }

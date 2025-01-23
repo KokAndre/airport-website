@@ -15,15 +15,14 @@
 <div *ngIf="membersData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
 
   <div class="row mx-0 justify-content-end">
-    <div class="red-button mb-4"
-      (click)="exportToExcel()">
+    <div class="red-button mb-4" (click)="exportToExcel()">
       <p class="mb-0">Export To Excel</p>
       <span class="red-button-icon"></span>
     </div>
   </div>
 
   <div class="col-12 pb-4">
-    <table>
+    <table style="width:100%; table-layout: auto;">
       <tr>
         <th>Name</th>
         <th>Surname</th>
@@ -31,8 +30,10 @@
         <th>Phone Number</th>
         <th>Registered</th>
         <th>Admin</th>
+        <th>Hangar Number</th>
+        <th>Stand Number</th>
         <th>Getting To Know You</th>
-        <!-- <th>Actions</th> -->
+        <th>Actions</th>
       </tr>
 
       <tr *ngFor="let item of membersData">
@@ -40,17 +41,44 @@
         <td>{{ item.surname }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phoneNumber }}</td>
-        <td class="text-center"><mat-icon *ngIf="item.isRegistered === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.isRegistered !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
-        <td class="text-center"><mat-icon *ngIf="item.isAdmin === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.isAdmin !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
-        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === '1'" class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasCompletedGettingToKnowYou !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon></td>
+        <td class="text-center"><mat-icon *ngIf="item.isRegistered === '1'"
+            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+            *ngIf="item.isRegistered !== '1'" class="red-text text-bold vertical-allign-bottom"
+            fontIcon="close"></mat-icon></td>
+        <td class="text-center"><mat-icon *ngIf="item.isAdmin === '1'"
+            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+            *ngIf="item.isAdmin !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon>
+        </td>
 
-        <!-- <td class="text-center py-1"><mat-icon class="pointer mr-2 vertical-allign-bottom" fontIcon="edit" (click)="editMember(item)"></mat-icon><mat-icon class="red-text pointer vertical-allign-bottom" fontIcon="delete" (click)="delteMemberClicked(item)"></mat-icon></td> -->
+
+        <td>
+          <p class="mb-0 text-no-wrap" *ngFor="let hangarItem of item.hangarNumbersArray">{{ hangarItem }}</p>
+        </td>
+        <td>
+          <p class="mb-0 text-no-wrap" *ngFor="let standItem of item.standNumbersArray">{{ standItem }}</p>
+        </td>
+
+
+        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === '1'"
+            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+            *ngIf="item.hasCompletedGettingToKnowYou !== '1'" class="red-text text-bold vertical-allign-bottom"
+            fontIcon="close"></mat-icon></td>
+
+        <td>
+          <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+              (click)="editMember(item)"></mat-icon>
+            <mat-icon class="red-text pointer ml-1 p-0" fontIcon="delete" (click)="delteMemberClicked(item)"></mat-icon>
+          </div>
+        </td>
+        
       </tr>
 
     </table>
   </div>
 </div>
 
-<div *ngIf="!membersData?.length" class="col-10 mx-auto">
-  <p class="text-size-24">There is currently no members data to display.</p>
+<div *ngIf="!membersData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24">There is currently no members data to display.</p>
+  </div>
 </div>

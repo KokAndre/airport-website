@@ -154,7 +154,8 @@ export enum Endpoints {
     // Manage Members
     GetAllMembers = '/members/get-members.php',
     DeleteMember = '/members/delete-members.php',
-    UpdateMemberData = '/members/update-member-data.php'
+    UpdateMemberData = '/members/update-member-data.php',
+    AddNewMember = '/member/add-member.php'
 }
 
 export enum EncryptionKeys {
@@ -180,7 +181,8 @@ export enum ModalTypes {
     BannerModal = 'bannerModal',
     InterestedInPropertyModal = 'interestedInPropertyModal',
     AddFolderModal = 'addFolderModal',
-    EditReportIssueData = 'editReportIssueData'
+    EditReportIssueData = 'editReportIssueData',
+    CaptureMember = 'captureMember'
 }
 
 export enum ModalOutcomeOptions {

@@ -3,6 +3,7 @@ import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
+import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-manage-members',
@@ -21,7 +22,13 @@ export class ManageMembersComponent implements OnInit {
   public getMembersData() {
     this.adminService.getMembersData().then(results => {
       if (results.status === 200) {
-        this.membersData = results.members
+        this.membersData = results.members;
+
+        this.membersData.forEach(member => {
+          member.hangarNumbersArray = member.hangarNumbers ? AppHelperFunction.splitStringToArray(member.hangarNumbers) : [];
+          member.standNumbersArray = member.standNumbers ? AppHelperFunction.splitStringToArray(member.standNumbers) : [];
+        });
+
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Members data', results.message, null);
       }
@@ -35,13 +42,16 @@ export class ManageMembersComponent implements OnInit {
   public deleteMemberOutcome(userId: number, modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
       this.adminService.deleteMember(userId).then(results => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Members', results.message, null);
         if (results.status === 200) {
           this.getMembersData();
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Members', results.message, null);
         }
       });
     }
+  }
+
+  public addMemberClicked() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Members', 'Add', null);
   }
 
   public editMember(member: MembersDataResponse.Member) {

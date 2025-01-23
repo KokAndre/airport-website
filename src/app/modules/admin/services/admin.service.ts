@@ -25,6 +25,7 @@ import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-membe
 import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
 import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
+import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -706,4 +707,20 @@ export class AdminService {
         return data;
       });
   }
+
+  public addNewMemberMember(memberData: UpdateMembersRequest.RootObject) {
+    let requestData = new UpdateMembersRequest.RootObject
+    requestData = memberData;
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.AddNewMember, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 }

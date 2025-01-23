@@ -233,15 +233,10 @@ export class AppHelperFunction {
         let arrayData = stringData.split('\",');
         let returnArray = [];
 
-        console.log('IN NEW SPLIT METHOD');
-
         arrayData.forEach(item => {
             const itemToPush = item.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'");
-            console.log('ITEM AFTER EDIT: ', item);
             returnArray.push(itemToPush);
         });
-
-        console.log('DATA TO RETUEN: ', returnArray);
 
         return returnArray;
     }
