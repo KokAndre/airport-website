@@ -171,7 +171,8 @@
             Getting To Know You
           </div>
           <mat-divider *ngIf="hasCompletedGettingToKnowYou"></mat-divider>
-          <div *ngIf="hasCompletedGettingToKnowYou" class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
+          <div *ngIf="hasCompletedGettingToKnowYou" class="dropdown-item p-2"
+            (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
             Who's Who in the Tedderfield Zoo
           </div>
           <mat-divider></mat-divider>
@@ -236,6 +237,9 @@
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">
           Manage
           Interests In Classifieds For Sale</div>
+        <mat-divider></mat-divider>
+        <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
+          (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
       </div>
     </div>
   </div>
@@ -436,7 +440,8 @@
         Getting To Know You
       </div>
       <mat-divider *ngIf="hasCompletedGettingToKnowYou"></mat-divider>
-      <div *ngIf="hasCompletedGettingToKnowYou" mat-menu-item class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
+      <div *ngIf="hasCompletedGettingToKnowYou" mat-menu-item class="dropdown-item p-2"
+        (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
         Who's Who in the Tedderfield Zoo
       </div>
       <mat-divider></mat-divider>
@@ -494,5 +499,8 @@
     <div class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Manage
       Interests In Classifieds For Sale</div>
+      <mat-divider></mat-divider>
+      <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
+        (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
   </mat-menu>
 </div>

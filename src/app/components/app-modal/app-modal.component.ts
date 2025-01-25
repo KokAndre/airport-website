@@ -29,6 +29,7 @@ export class AppModalComponent implements OnInit {
   public editReportIssueData: GetReportIssueDataResponse.Requests;
   public captureMemberFormGroup: FormGroup;
   public memberData: UpdateMembersRequest.RootObject;
+  public captureSingleFieldData: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
 
@@ -131,13 +132,8 @@ export class AppModalComponent implements OnInit {
       captureMemberIsAdminControl: new FormControl(this.memberData.isAdmin || '0', [Validators.required])
     });
 
-    // console.log('ORIGINAL HANGAR DATA: ', this.memberData.hangarNumbers);
-    // if (this.memberData.hangarNumbers?.length) {
-    console.log('IN THE IF');
     const hangarDataToSet = this.memberData.hangarNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-    console.log('HANGAR DATA TO SET: ', hangarDataToSet);
     this.captureMemberHangarNumbersControl.setValue(this.formatBulletPointInputDataForPrePopulation(hangarDataToSet) || '');
-    // }
 
     if (this.memberData.standNumbers?.length) {
       const standDataToSet = this.memberData.standNumbers?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
@@ -292,6 +288,10 @@ export class AppModalComponent implements OnInit {
     memberDataToUpdate.standNumbersArray = this.formatBulletPointInputValuesToSubmit(this.captureMemberStandNumbersControl.value);
 
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, memberDataToUpdate);
+  }
+
+  public updateSinglrFieldData() {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.captureSingleFieldData);
   }
 
   public checkIfUserIsLoggedIn() {

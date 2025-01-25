@@ -1,23 +1,33 @@
 export namespace GetReportIssueDataResponse {
-    export class RootObject {
-        status: number
-        header: string
-        message: string
-        requests: Requests[];
-        
-      }
+  export class RootObject {
+    status: number
+    header: string
+    message: string
+    requests: Requests[];
+    categories: Category[];
+    resposiblePersons: ResponsiblePerson[];
+  }
 
-      export class Requests {
-        id: string;
-        name: string;
-        email: string;
-        hangerOrSectionNumber: string;
-        issueDescription: string;
-        dateAdded: string;
-        // hasFollowedUp: string;
-        // dateFollowedUp: any;
-        changeRequest: string;
-        status: string
-        statusDateChanged: string;
-      }
+  export class Requests {
+    id: string;
+    name: string;
+    email: string;
+    hangerOrSectionNumber: string;
+    issueDescription: string;
+    dateAdded: string;
+    personResponsible: string;
+    category: string
+    status: string
+    statusDateChanged: string;
+  }
+
+  export class Category {
+    id: number;
+    category: string;
+  }
+
+  export class ResponsiblePerson {
+    id: number;
+    name: string;
+  }
 }

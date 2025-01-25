@@ -24,35 +24,41 @@
   <div class="col-12 pb-4">
     <table style="width:100%; table-layout: auto;">
       <tr>
+        <th>ID</th>
         <th>Name</th>
-        <!-- <th>Email</th> -->
         <th>Hanger or Section Number</th>
         <th style="width: 30%;">Issue Description</th>
         <th>Date Captured</th>
-        <!-- <th>Followed Up</th> -->
-        <th>Change request</th>
+        <th>Category</th>
+        <th>Person Responsible</th>
         <th>Status</th>
         <th style="width: fit-content;"><div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
             *ngIf="allowAdminToDelete" class="ml-1 p-0" fontIcon="delete"></mat-icon></div></th>
       </tr>
 
       <tr *ngFor="let item of reportIssueRequests">
+        <td class="text-no-wrap" [innerHTML]="item.id"></td>
         <td class="text-no-wrap" [innerHTML]="item.name"></td>
-        <!-- <td [innerHTML]="item.email"></td> -->
         <td class="text-no-wrap" [innerHTML]="item.hangerOrSectionNumber"></td>
         <td [innerHTML]="item.issueDescription"></td>
         <td class="text-no-wrap" [innerHTML]="item.dateAdded"></td>
-        <!-- <td class="text-center"><mat-icon *ngIf="item.hasFollowedUp !== '0'" class="green-text text-bold"
-            fontIcon="check"></mat-icon><mat-icon *ngIf="item.hasFollowedUp === '0'" class="red-text text-bold"
-            fontIcon="close"></mat-icon></td> -->
 
         <td>
           <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
-            <mat-label>Change Request</mat-label>
-            <mat-select [(value)]="item.changeRequest"
-              (selectionChange)="updateReportIssueRequestType(item.id, $event.value)">
-              <mat-option class="px-1" value="issue">Issue</mat-option>
-              <mat-option class="px-1" value="changeRequest">Change Request</mat-option>
+            <mat-label>Category</mat-label>
+            <mat-select [(value)]="item.category"
+              (selectionChange)="updateReportIssueCategory(item.id, $event.value)">
+              <mat-option *ngFor="let category of categoryList" class="px-1" [value]="category.category">{{ category.category }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+
+        <td>
+          <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
+            <mat-label>Person Responsible</mat-label>
+            <mat-select [(value)]="item.personResponsible"
+              (selectionChange)="updateReportIssuePersonResponsible(item.id, $event.value)">
+              <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{ person.name }}</mat-option>
             </mat-select>
           </mat-form-field>
         </td>

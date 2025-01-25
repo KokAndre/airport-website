@@ -26,6 +26,7 @@ import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-
 import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
+import { UpdateIssueConfigRequest } from 'src/app/models/update-issue-config-request.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -207,6 +208,20 @@ export class AdminService {
       });
   }
 
+  public getReportIssueConfigData() {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+
+    return fetch(Endpoints.BaseURL + Endpoints.GetReportIssueConfigData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public deleteReportIssueEntry(reportIssueRequestId: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();
@@ -237,13 +252,29 @@ export class AdminService {
   //     });
   // }
 
-  public updateReportIssueChangeRequest(reportIssueRequestId: string, reportIssueRequestType: string) {
+  public updateReportIssueCategory(reportIssueRequestId: string, category: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();
     requestData.reportIssueId = reportIssueRequestId;
-    requestData.reportIssueRequestType = reportIssueRequestType;
+    requestData.reportIssueCategory = category;
 
-    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueRequestType, {
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueCategory, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public updateReportIssuePersonResponsible(reportIssueRequestId: string, personResponsible: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+    requestData.personResponsible = personResponsible;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssuePersonResponsible, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })
@@ -729,6 +760,66 @@ export class AdminService {
     requestData.userId = this.loginService.getLoggedInUserId();
 
     return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteIssueCategory(categoryId: number) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.categoryId = categoryId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueCategory, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public addIssueCategory(category: string) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.category = category;
+
+    return fetch(Endpoints.BaseURL + Endpoints.AddReportIssueCategory, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteIssueResponsiblePerson(responsiblePersonId: number) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.responsiblePersonId = responsiblePersonId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssuePersonResponsible, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public addIssuePersonResponsible(personResponsible: string) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.responsiblePersonName = personResponsible;
+
+    return fetch(Endpoints.BaseURL + Endpoints.AddReportIssuePersonResponsible, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

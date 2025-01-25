@@ -14,6 +14,7 @@ import { ManageMembersDocumentsComponent } from './components/manage-members-doc
 import { ManageClassifiedsForSaleComponent } from './components/manage-classifieds-for-sale/manage-classifieds-for-sale.component';
 import { ManageClassifiedsForSaleInterestComponent } from './components/manage-classifieds-for-sale-interest/manage-classifieds-for-sale-interest.component';
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
+import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-members', component: ManageMembersComponent
+  },
+  {
+    path: 'manage-report-issue-config', component: ManageReportIssueConfigComponent
   }
 ];
 

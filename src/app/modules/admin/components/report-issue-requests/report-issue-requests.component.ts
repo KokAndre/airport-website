@@ -12,6 +12,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class ReportIssueRequestsComponent implements OnInit {
   public reportIssueRequests: GetReportIssueDataResponse.Requests[];
+  public categoryList: GetReportIssueDataResponse.Category[];
+  public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
   public allowAdminToDelete = false;
 
   constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
@@ -34,6 +36,8 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.adminService.getReportIssueData().then((results: GetReportIssueDataResponse.RootObject) => {
       if (results.status === 200) {
         this.reportIssueRequests = results.requests;
+        this.categoryList = results.categories;
+        this.responsiblePersonList = results.resposiblePersons;
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Data', results.message, null);
       }
@@ -49,8 +53,6 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public editReportIssueRequest(modalOutcome: string, reportIssueItem?: GetReportIssueDataResponse.Requests) {
-    console.log('MODAL OUTCOME: ', modalOutcome);
-    console.log('REPORT ISSUE DATA: ', reportIssueItem);
     if (modalOutcome === ModalOutcomeOptions.Update) {
       this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
         if (results.status === 200) {
@@ -63,9 +65,15 @@ export class ReportIssueRequestsComponent implements OnInit {
     }
   }
 
-  public updateReportIssueRequestType(reportIssueRequestId: string, reportIssueRequestType: string) {
-    this.adminService.updateReportIssueChangeRequest(reportIssueRequestId, reportIssueRequestType).then(results => {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Request Type', results.message, null);
+  public updateReportIssueCategory(reportIssueRequestId: string, reportIssueCategory: string) {
+    this.adminService.updateReportIssueCategory(reportIssueRequestId, reportIssueCategory).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Category', results.message, null);
+    });
+  }
+
+  public updateReportIssuePersonResponsible(reportIssueRequestId: string, reportIssuePersonResponsible: string) {
+    this.adminService.updateReportIssuePersonResponsible(reportIssueRequestId, reportIssuePersonResponsible).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Responsible Person', results.message, null);
     });
   }
 

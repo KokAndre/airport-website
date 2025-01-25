@@ -26,6 +26,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public modal$: Subscription;
   public dialogRefModel: any = null;
   public isUserAdmin = false;
+  public isSuperAdmin = false;
   private resizeObserver: ResizeObserver;
   public isMobileView = false;
   public isFooterMobileView = false;
@@ -106,6 +107,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
       if (this.isAuthorised) {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
 
+        const userDetails = this.loginService.getLoggedInUserDetails();
+        if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com') {
+          this.isSuperAdmin = true;
+        } else {
+          this.isSuperAdmin = false;
+        }
+
         if (!this.hasCompletedGettingToKnowYou && !this.hasDismissedGettingToKnowYou) {
           this.displayGettingToKnowYouBanner = true;
         } else {
@@ -113,6 +121,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         }
       } else {
         this.isUserAdmin = false;
+        this.isSuperAdmin = false;
         this.displayGettingToKnowYouBanner = false;
       }
     }, 1000);
@@ -183,13 +192,9 @@ export class SideNavComponent implements OnInit, OnDestroy {
           });
           break;
 
-        // this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
-        //   data: modalDetails, disableClose: true, maxWidth
-        // });
-        // break;
-
         case ModalTypes.EditReportIssueData:
         case ModalTypes.CaptureMember:
+        case ModalTypes.CapturSingleInputField:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: true, maxWidth: '90vw', panelClass: 'min-width-modal-class-medium'
           });

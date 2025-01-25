@@ -51,7 +51,8 @@ export enum AppRoutes {
     ManageLevies = '/admin/manage-levies',
     ManageMembersDocuments = '/admin/manage-members-documents',
     ManageClassifiedsForSale = '/admin/manage-classifieds-for-sale',
-    ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale'
+    ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale',
+    ManageReportIssueConfig = '/admin/manage-report-issue-config'
 }
 
 export enum Endpoints {
@@ -82,10 +83,17 @@ export enum Endpoints {
     MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php',
     ReportIssue = '/report-issue/submit-report-issue.php',
     GetReportIssueData = '/report-issue/get-report-issue-data.php',
+    GetReportIssueConfigData = '/report-issue/get-report-issue-config-data.php',
 
-    UpdateReportIssueRequestType = '/report-issue/update-issue-request-type.php',
+    UpdateReportIssueCategory = '/report-issue/update-issue-category.php',
+    UpdateReportIssuePersonResponsible = '/report-issue/update-issue-person-responsible.php',
     UpdateReportIssueStatus = '/report-issue/update-issue-status.php',
     UpdateReportIssueData = '/report-issue/update-issue-data.php',
+
+    DeleteReportIssueCategory = '/report-issue/delete-issue-category.php',
+    AddReportIssueCategory = '/report-issue/add-issue-category.php',
+    DeleteReportIssuePersonResponsible = '/report-issue/delete-issue-person-responsible.php',
+    AddReportIssuePersonResponsible = '/report-issue/add-issue-person-responsible.php',
 
     DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
@@ -183,7 +191,8 @@ export enum ModalTypes {
     InterestedInPropertyModal = 'interestedInPropertyModal',
     AddFolderModal = 'addFolderModal',
     EditReportIssueData = 'editReportIssueData',
-    CaptureMember = 'captureMember'
+    CaptureMember = 'captureMember',
+    CapturSingleInputField = 'capturSingleInputField'
 }
 
 export enum ModalOutcomeOptions {
