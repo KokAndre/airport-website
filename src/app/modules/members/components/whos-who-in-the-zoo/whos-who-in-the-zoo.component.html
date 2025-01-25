@@ -50,13 +50,16 @@
           <div class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border" *ngIf="memberDetailsToDisplay.email">
             <p class="text-sixe-18 mb-0"><b>Email:</b></p>
             <p>{{ memberDetailsToDisplay.email }}</p>
+
+            <p *ngIf="memberDetailsToDisplay.phoneNumber" class="text-sixe-18 mb-0"><b>Phone Number:</b></p>
+            <p *ngIf="memberDetailsToDisplay.phoneNumber">{{ memberDetailsToDisplay.phoneNumber }}</p>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"
+          <!-- <div class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"
             *ngIf="memberDetailsToDisplay.phoneNumber">
             <p class="text-sixe-18 mb-0"><b>Phone Number:</b></p>
             <p>{{ memberDetailsToDisplay.phoneNumber }}</p>
-          </div>
+          </div> -->
 
           <div class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"
             *ngIf="memberDetailsToDisplay.emergencyContactOneName && memberDetailsToDisplay.emergencyContactOnePhoneNumber">
@@ -144,11 +147,11 @@
             </ul>
           </div>
 
-          <div
+          <!-- <div
             *ngIf="memberDetailsToDisplay.emergencyContactTwoName && memberDetailsToDisplay.emergencyContactTwoPhoneNumber"
-            class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"></div>
+            class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"></div> -->
           <div
-            *ngIf="memberDetailsToDisplay.emergencyContactTwoName && memberDetailsToDisplay.emergencyContactTwoPhoneNumber"
+            *ngIf="!memberDetailsToDisplay.emergencyContactTwoName && !memberDetailsToDisplay.emergencyContactTwoPhoneNumber"
             class="col-lg-4 col-md-6 col-sm12 col-12 columns-bottom-border"></div>
 
         </div>
