@@ -54,6 +54,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   public editReportIssueRequest(modalOutcome: string, reportIssueItem?: GetReportIssueDataResponse.Requests) {
     if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.appModalService.CloseModal();
       this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
         if (results.status === 200) {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);

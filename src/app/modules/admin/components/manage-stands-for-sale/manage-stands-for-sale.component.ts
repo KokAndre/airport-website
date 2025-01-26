@@ -42,6 +42,7 @@ export class ManageStandsForSaleComponent implements OnInit {
       itemToPush.price = standItem.price;
       itemToPush.reasonsForSelling = standItem.reasonsForSelling;
       itemToPush.dateAdded = standItem.dateAdded;
+      itemToPush.approvedByAdmin = standItem.approvedByAdmin;
 
       itemToPush.titleDocument = new GetStandsForSaleReponse.FileData();
       itemToPush.titleDocument.fileName = standItem.titleDocument;
@@ -77,6 +78,21 @@ export class ManageStandsForSaleComponent implements OnInit {
           this.getStandForSaleData();
         }
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Stand for Sale Data', results.message, null);
+      });
+    }
+  }
+
+  public markAdAsApprovedClicked(standData: GetStandsForSaleReponse.Stands) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Approve Stand for Sale', `Are you sure you want to approve the data for the following stand to go live to the public? <br /> Stand: ${standData.standNumber}`, null, this.markAdAsApprovedOutcome.bind(this, standData));
+  }
+
+  public markAdAsApprovedOutcome(standData: GetStandsForSaleReponse.Stands, modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.adminService.approveStandForSaleItem(standData).then(results => {
+        if (results.status === 200) {
+          this.getStandForSaleData();
+        }
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Approve Stand for Sale', results.message, null);
       });
     }
   }

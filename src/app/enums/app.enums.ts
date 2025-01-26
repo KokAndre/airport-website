@@ -113,7 +113,10 @@ export enum Endpoints {
     GetHangerTitleDocument = '/hangers-for-sale/get-title-document.php',
     GetHangerFloorPlanDocument = '/hangers-for-sale/get-floor-plan-document.php',
     SubmitInterestedInHanger = '/hangers-for-sale/submit-interested-in-hanger.php',
+
     DeleteHangerForSaleItem = '/hangers-for-sale/delete-hanger-for-sale-item.php',
+    ApproveHangerForSaleItem = '/hangers-for-sale/approve-hanger-for-sale-item.php',
+
     GetInterestedInHangerData = '/hangers-for-sale/get-interested-in-hanger-data.php',
     MarkInterestedInHangerAsFollowedUp = '/hangers-for-sale/update-interested-in-hanger-item.php',
     DeleteInterestedInHangerItem = '/hangers-for-sale/delete-interested-in-hanger-item.php',
@@ -124,6 +127,8 @@ export enum Endpoints {
     GetStandTitleDocument = '/stands-for-sale/get-title-document.php',
     SubmitInterestedInStand = '/stands-for-sale/submit-interested-in-stand.php',
     DeleteStandForSaleItem = '/stands-for-sale/delete-stand-for-sale-item.php',
+    ApproveStandForSaleItem = '/stands-for-sale/approve-stand-for-sale-item.php',
+
     GetInterestedInStandData = '/stands-for-sale/get-interested-in-stand-data.php',
     MarkInterestedInStandAsFollowedUp = '/stands-for-sale/update-interested-in-stand-item.php',
     DeleteInterestedInStandItem = '/stands-for-sale/delete-interested-in-stand-item.php',

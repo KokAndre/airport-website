@@ -30,6 +30,7 @@ export namespace GetHangersForSaleReponse {
         reasonsForSelling: string;
         dateAdded: string;
         isExpanded: boolean;
+        approvedByAdmin: string;
     }
 
     export class FileData {

@@ -15,8 +15,7 @@
 <div *ngIf="hangersForSaleData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
 
   <div class="row mx-0 justify-content-end">
-    <div class="red-button mb-4"
-      (click)="exportToExcel()">
+    <div class="red-button mb-4" (click)="exportToExcel()">
       <p class="mb-0">Export To Excel</p>
       <span class="red-button-icon"></span>
     </div>
@@ -37,6 +36,7 @@
         <th>Detailed Floor Plan</th>
         <th>Reasons For Selling</th>
         <th>Date Added</th>
+        <th>Approved</th>
         <th>Action</th>
       </tr>
 
@@ -47,8 +47,8 @@
         <td [innerHTML]="item.hangerNumber"></td>
 
         <td class="text-center"><mat-icon *ngIf="item.titleDocument?.fileName" class="green-text text-bold"
-          fontIcon="check"></mat-icon><mat-icon *ngIf="!item.titleDocument?.fileName" class="red-text text-bold"
-          fontIcon="close"></mat-icon></td>
+            fontIcon="check"></mat-icon><mat-icon *ngIf="!item.titleDocument?.fileName" class="red-text text-bold"
+            fontIcon="close"></mat-icon></td>
 
         <td>Width: {{ item.hangerDimensions.width }}, Length: {{ item.hangerDimensions.length }}</td>
         <td [innerHTML]="item.yearBuilt"></td>
@@ -57,18 +57,31 @@
         <td>Number of Images: {{ item.hangerImages?.length }}</td>
 
         <td class="text-center"><mat-icon *ngIf="item.detailedFloorPlan?.fileName" class="green-text text-bold"
-          fontIcon="check"></mat-icon><mat-icon *ngIf="!item.detailedFloorPlan?.fileName" class="red-text text-bold"
-          fontIcon="close"></mat-icon></td>
+            fontIcon="check"></mat-icon><mat-icon *ngIf="!item.detailedFloorPlan?.fileName" class="red-text text-bold"
+            fontIcon="close"></mat-icon></td>
 
         <td [innerHTML]="item.reasonsForSelling"></td>
         <td [innerHTML]="item.dateAdded"></td>
-        <td class="text-center"><mat-icon class="red-text pointer" fontIcon="delete" (click)="deleteHangerForSaleClicked(item)"></mat-icon></td>
+
+        <td class="text-center"><mat-icon *ngIf="item.approvedByAdmin === '1'" class="green-text text-bold"
+            fontIcon="check"></mat-icon><mat-icon *ngIf="item.approvedByAdmin !== '1'" class="red-text text-bold"
+            fontIcon="close"></mat-icon></td>
+
+        <td class="text-center">
+          <div class="row mx-auto mx-0 actions-row">
+            <mat-icon class="red-text pointer p-0" fontIcon="delete"
+              (click)="deleteHangerForSaleClicked(item)"></mat-icon>
+            <mat-icon *ngIf="item.approvedByAdmin !== '1'" class="green-text pointer ml-2 p-0" fontIcon="check" (click)="markAdAsApprovedClicked(item)"></mat-icon>
+          </div>
+        </td>
       </tr>
 
     </table>
   </div>
 </div>
 
-<div *ngIf="!hangersForSaleData?.length" class="col-10 mx-auto">
-  <p class="text-size-24">There are currently no hangars for sale.</p>
+<div *ngIf="!hangersForSaleData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24 pt-4 pb-5">There are currently no hangars for sale.</p>
+  </div>
 </div>

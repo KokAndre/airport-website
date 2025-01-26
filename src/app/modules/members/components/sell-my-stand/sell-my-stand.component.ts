@@ -314,12 +314,10 @@ export class SellMyStandComponent implements OnInit {
     });
 
     this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', results.message, null);
       if (results.status === 200) {
         this.submitAdSucessId = results.id;
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', 'Your request has been captured successfully.', null);
         this.uploadDocuments();
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', results.message, null);
       }
     });
 

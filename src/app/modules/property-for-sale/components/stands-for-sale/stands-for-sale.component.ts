@@ -37,36 +37,38 @@ export class StandsForSaleComponent implements OnInit {
   public formatData(results: any) {
     this.standsForSaleData = new Array<GetStandsForSaleReponse.Stands>();
     results?.forEach(standItem => {
-      const itemToPush = new GetStandsForSaleReponse.Stands();
-      itemToPush.isExpanded = true;
-      itemToPush.id = standItem.id;
-      itemToPush.name = standItem.name;
-      itemToPush.email = standItem.email;
-      itemToPush.phoneNumber = standItem.phoneNumber;
-      itemToPush.standNumber = standItem.standNumber;
-      itemToPush.price = standItem.price;
-      itemToPush.reasonsForSelling = standItem.reasonsForSelling;
+      if (standItem.approvedByAdmin === '1') {
+        const itemToPush = new GetStandsForSaleReponse.Stands();
+        itemToPush.isExpanded = true;
+        itemToPush.id = standItem.id;
+        itemToPush.name = standItem.name;
+        itemToPush.email = standItem.email;
+        itemToPush.phoneNumber = standItem.phoneNumber;
+        itemToPush.standNumber = standItem.standNumber;
+        itemToPush.price = standItem.price;
+        itemToPush.reasonsForSelling = standItem.reasonsForSelling;
 
-      itemToPush.titleDocument = new GetStandsForSaleReponse.FileData();
-      itemToPush.titleDocument.fileName = standItem.titleDocument;
-      itemToPush.titleDocument.fileData = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/title-document/' + standItem.titleDocument;
+        itemToPush.titleDocument = new GetStandsForSaleReponse.FileData();
+        itemToPush.titleDocument.fileName = standItem.titleDocument;
+        itemToPush.titleDocument.fileData = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/title-document/' + standItem.titleDocument;
 
-      const imageDataArray = standItem.standImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+        const imageDataArray = standItem.standImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
-      itemToPush.standImages = new Array<GetStandsForSaleReponse.FileData>();
-      imageDataArray.forEach(img => {
-        const standImageURL = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/images/' + img;
-        itemToPush.standImages.push({ fileName: img, fileData: standImageURL });
-      });
+        itemToPush.standImages = new Array<GetStandsForSaleReponse.FileData>();
+        imageDataArray.forEach(img => {
+          const standImageURL = Endpoints.StandsForSaleBaseURL + itemToPush.id + '/images/' + img;
+          itemToPush.standImages.push({ fileName: img, fileData: standImageURL });
+        });
 
 
-      itemToPush.standDimensions = JSON.parse(standItem.standDimensions ? standItem.standDimensions.replaceAll('\\', '') : {});
+        itemToPush.standDimensions = JSON.parse(standItem.standDimensions ? standItem.standDimensions.replaceAll('\\', '') : {});
 
-      // itemToPush.featuresAndBenefits = standItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-      itemToPush.securty = standItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
-      itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+        // itemToPush.featuresAndBenefits = standItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+        itemToPush.securty = standItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+        itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
 
-      this.standsForSaleData.push(itemToPush);
+        this.standsForSaleData.push(itemToPush);
+      }
     });
 
   }

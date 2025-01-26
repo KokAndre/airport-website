@@ -47,6 +47,7 @@ export class ManageHangersForSaleComponent implements OnInit {
       itemToPush.doorType = hangerItem.doorType;
       itemToPush.yearBuilt = hangerItem.yearBuilt;
       itemToPush.dateAdded = hangerItem.dateAdded;
+      itemToPush.approvedByAdmin = hangerItem.approvedByAdmin;
 
       itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
       itemToPush.titleDocument.fileName = hangerItem.titleDocument;
@@ -89,6 +90,21 @@ export class ManageHangersForSaleComponent implements OnInit {
           this.getHangerForSaleData();
         }
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Hanger for Sale Data', results.message, null);
+      });
+    }
+  }
+
+  public markAdAsApprovedClicked(hangerData: GetHangersForSaleReponse.Hanger) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Approve Hanager for Sale', `Are you sure you want to approve the data for the following hangar to go live to the public? <br /> Hangar: ${hangerData.hangerNumber}`, null, this.markAdAsApprovedOutcome.bind(this, hangerData));
+  }
+
+  public markAdAsApprovedOutcome(hangerData: GetHangersForSaleReponse.Hanger, modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.adminService.approveHangerForSaleItem(hangerData).then(results => {
+        if (results.status === 200) {
+          this.getHangerForSaleData();
+        }
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Approve Hanager for Sale', results.message, null);
       });
     }
   }

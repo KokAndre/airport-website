@@ -23,6 +23,7 @@ export namespace GetStandsForSaleReponse {
         reasonsForSelling: string;
         isExpanded: boolean;
         dateAdded: string;
+        approvedByAdmin: string;
     }
 
     export class FileData {

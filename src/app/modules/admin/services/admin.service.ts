@@ -27,6 +27,8 @@ import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model'
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 import { UpdateIssueConfigRequest } from 'src/app/models/update-issue-config-request.model';
+import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
+import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -428,10 +430,40 @@ export class AdminService {
       });
   }
 
+  public approveHangerForSaleItem(hangerData: GetHangersForSaleReponse.Hanger) {
+    const requestData = new GetHangersForSaleReponse.Hanger();
+    requestData.id = hangerData.id;
+    requestData.name = hangerData.name;
+    requestData.email = hangerData.email;
+    return fetch(Endpoints.BaseURL + Endpoints.ApproveHangerForSaleItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public deleteStandForSaleItem(standId: number) {
     return fetch(Endpoints.BaseURL + Endpoints.DeleteStandForSaleItem, {
       method: 'post',
       body: JSON.stringify({ id: standId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+  
+  public approveStandForSaleItem(standData: GetStandsForSaleReponse.Stands) {
+    const requestData = new GetStandsForSaleReponse.Stands();
+    requestData.id = standData.id;
+    requestData.name = standData.name;
+    requestData.email = standData.email;
+    return fetch(Endpoints.BaseURL + Endpoints.ApproveStandForSaleItem, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
     })
       .then(response => response.json())
       .then(data => {

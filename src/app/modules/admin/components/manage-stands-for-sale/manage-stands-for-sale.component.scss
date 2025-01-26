@@ -1,8 +1,16 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 
-  th, td {
-    padding: 0px 5px;
-  }
+th,
+td {
+  padding: 0px 5px;
+}
+
+.actions-row {
+  width: fit-content;
+  flex-wrap: nowrap;
+}

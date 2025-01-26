@@ -353,13 +353,11 @@ export class SellMyHangerComponent implements OnInit {
     });
 
     this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', results.message, null);
       if (results.status === 200) {
         this.submitAdSucessId = results.id;
         this.uploadDocuments();
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', 'Your request has been captured successfully.', null);
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', results.message, null);
-      }
+      } 
     });
   }
 

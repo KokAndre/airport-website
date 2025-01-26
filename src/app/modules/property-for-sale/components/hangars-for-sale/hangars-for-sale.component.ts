@@ -40,45 +40,47 @@ export class HangarsForSaleComponent implements OnInit {
   public formatData(results: any) {
     this.hangersForSaleData = new Array<GetHangersForSaleReponse.Hanger>();
     results.forEach(hangerItem => {
-      const itemToPush = new GetHangersForSaleReponse.Hanger();
-      itemToPush.isExpanded = true;
-      itemToPush.id = hangerItem.id;
-      itemToPush.name = hangerItem.name;
-      itemToPush.email = hangerItem.email;
-      itemToPush.phoneNumber = hangerItem.phoneNumber;
-      itemToPush.hangerNumber = hangerItem.hangerNumber;
-      itemToPush.price = hangerItem.price;
-      itemToPush.reasonsForSelling = hangerItem.reasonsForSelling;
-      itemToPush.doorType = hangerItem.doorType;
-      itemToPush.yearBuilt = hangerItem.yearBuilt;
+      if (hangerItem.approvedByAdmin === '1') {
+        const itemToPush = new GetHangersForSaleReponse.Hanger();
+        itemToPush.isExpanded = true;
+        itemToPush.id = hangerItem.id;
+        itemToPush.name = hangerItem.name;
+        itemToPush.email = hangerItem.email;
+        itemToPush.phoneNumber = hangerItem.phoneNumber;
+        itemToPush.hangerNumber = hangerItem.hangerNumber;
+        itemToPush.price = hangerItem.price;
+        itemToPush.reasonsForSelling = hangerItem.reasonsForSelling;
+        itemToPush.doorType = hangerItem.doorType;
+        itemToPush.yearBuilt = hangerItem.yearBuilt;
 
-      itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
-      itemToPush.titleDocument.fileName = hangerItem.titleDocument;
-      itemToPush.titleDocument.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/title-document/' + hangerItem.titleDocument;
+        itemToPush.titleDocument = new GetHangersForSaleReponse.FileData();
+        itemToPush.titleDocument.fileName = hangerItem.titleDocument;
+        itemToPush.titleDocument.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/title-document/' + hangerItem.titleDocument;
 
-      itemToPush.detailedFloorPlan = new GetHangersForSaleReponse.FileData();
-      itemToPush.detailedFloorPlan.fileName = hangerItem.detailedFloorPlan;
-      itemToPush.detailedFloorPlan.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/floor-plan-document/' + hangerItem.titleDocument;
+        itemToPush.detailedFloorPlan = new GetHangersForSaleReponse.FileData();
+        itemToPush.detailedFloorPlan.fileName = hangerItem.detailedFloorPlan;
+        itemToPush.detailedFloorPlan.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/floor-plan-document/' + hangerItem.titleDocument;
 
-      const imageDataArray = hangerItem.hangerImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+        const imageDataArray = hangerItem.hangerImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
-      itemToPush.hangerImages = new Array<GetHangersForSaleReponse.FileData>();
-      imageDataArray.forEach(img => {
-        const hangerImageURL = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/images/' + img;
-        itemToPush.hangerImages.push({ fileName: img, fileData: hangerImageURL });
-      });
+        itemToPush.hangerImages = new Array<GetHangersForSaleReponse.FileData>();
+        imageDataArray.forEach(img => {
+          const hangerImageURL = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/images/' + img;
+          itemToPush.hangerImages.push({ fileName: img, fileData: hangerImageURL });
+        });
 
-      itemToPush.hangerDimensions = JSON.parse(hangerItem.hangerDimensions ? hangerItem.hangerDimensions.replaceAll('\\', '') : {});
-      itemToPush.doorDimensions = JSON.parse(hangerItem.doorDimensions ? hangerItem.doorDimensions.replaceAll('\\', '') : {});
+        itemToPush.hangerDimensions = JSON.parse(hangerItem.hangerDimensions ? hangerItem.hangerDimensions.replaceAll('\\', '') : {});
+        itemToPush.doorDimensions = JSON.parse(hangerItem.doorDimensions ? hangerItem.doorDimensions.replaceAll('\\', '') : {});
 
-      itemToPush.buildingMaterial = AppHelperFunction.splitStringToArray(hangerItem.buildingMaterial);
-      itemToPush.hangerCustomisations = AppHelperFunction.splitStringToArray(hangerItem.hangerCustomisations);
-      itemToPush.featuresAndBenefits = AppHelperFunction.splitStringToArray(hangerItem.featuresAndBenefits);
-      itemToPush.securty = AppHelperFunction.splitStringToArray(hangerItem.securty);
-      itemToPush.additionalInfrastructure = AppHelperFunction.splitStringToArray(hangerItem.additionalInfrastructure);
-      itemToPush.leviesApplicable = AppHelperFunction.splitStringToArray(hangerItem.leviesApplicable);
+        itemToPush.buildingMaterial = AppHelperFunction.splitStringToArray(hangerItem.buildingMaterial);
+        itemToPush.hangerCustomisations = AppHelperFunction.splitStringToArray(hangerItem.hangerCustomisations);
+        itemToPush.featuresAndBenefits = AppHelperFunction.splitStringToArray(hangerItem.featuresAndBenefits);
+        itemToPush.securty = AppHelperFunction.splitStringToArray(hangerItem.securty);
+        itemToPush.additionalInfrastructure = AppHelperFunction.splitStringToArray(hangerItem.additionalInfrastructure);
+        itemToPush.leviesApplicable = AppHelperFunction.splitStringToArray(hangerItem.leviesApplicable);
 
-      this.hangersForSaleData.push(itemToPush);
+        this.hangersForSaleData.push(itemToPush);
+      }
     });
   }
 
@@ -90,11 +92,11 @@ export class HangarsForSaleComponent implements OnInit {
     // this.hangerDetailsToDisplay = null;
     this.hangerDetailsToDisplay = this.hangersForSaleData.find(x => x.id === hangerItemId);
     if (this.hangerDetailsToDisplay) {
-      document.getElementById('content-container').scroll({ 
-        top: 0, 
-        left: 0, 
+      document.getElementById('content-container').scroll({
+        top: 0,
+        left: 0,
         behavior: 'smooth'
- });
+      });
       this.displayHangerDetails = true;
     }
   }
