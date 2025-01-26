@@ -52,7 +52,8 @@ export enum AppRoutes {
     ManageMembersDocuments = '/admin/manage-members-documents',
     ManageClassifiedsForSale = '/admin/manage-classifieds-for-sale',
     ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale',
-    ManageReportIssueConfig = '/admin/manage-report-issue-config'
+    ManageReportIssueConfig = '/admin/manage-report-issue-config',
+    ManageGettingToKnowYou = '/admin/manage-getting-to-know-you'
 }
 
 export enum Endpoints {

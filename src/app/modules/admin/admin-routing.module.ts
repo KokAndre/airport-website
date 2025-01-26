@@ -15,6 +15,7 @@ import { ManageClassifiedsForSaleComponent } from './components/manage-classifie
 import { ManageClassifiedsForSaleInterestComponent } from './components/manage-classifieds-for-sale-interest/manage-classifieds-for-sale-interest.component';
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
+import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-report-issue-config', component: ManageReportIssueConfigComponent
+  },
+  {
+    path: 'manage-getting-to-know-you', component: ManageGettingToKnowYouComponent
   }
 ];
 

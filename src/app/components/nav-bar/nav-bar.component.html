@@ -239,6 +239,9 @@
           Interests In Classifieds For Sale</div>
         <mat-divider></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
+          (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
+        <mat-divider></mat-divider>
+        <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
       </div>
     </div>
@@ -499,8 +502,11 @@
     <div class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Manage
       Interests In Classifieds For Sale</div>
-      <mat-divider></mat-divider>
-      <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
-        (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
+    <mat-divider></mat-divider>
+    <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
+    <mat-divider></mat-divider>
+    <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
   </mat-menu>
 </div>

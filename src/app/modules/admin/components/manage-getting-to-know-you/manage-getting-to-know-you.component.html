@@ -1,0 +1,74 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Manage Getting To Know You
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Manage Getting To Know You</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="membersData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+
+  <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4" (click)="exportToExcel()">
+      <p class="mb-0">Export To Excel</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Emergency Contact</th>
+        <th>Second Emergency Contact</th>
+        <th>Where Were You Born</th>
+        <th>How Far Do You Drive</th>
+        <th>I Fly Because</th>
+        <th>I Love Tedderfield</th>
+        <th>When I Am Not Flying</th>
+        <th>Who Inspires You</th>
+        <th>What Stresses You</th>
+        <th>Most Usefull Talent</th>
+        <th>Immediate Family</th>
+        <th>Image</th>
+      </tr>
+
+      <tr *ngFor="let item of membersData">
+
+        <td [innerHTML]="item.name"></td>
+        <td [innerHTML]="item.email"></td>
+        <td [innerHTML]="item.phoneNumber"></td>
+
+        <td><p class="mb-0" [innerHTML]="item.emergencyContactOneName"></p><p class="mb-0" [innerHTML]="item.emergencyContactOnePhoneNumber"></p></td>
+        <td><p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0" [innerHTML]="item.emergencyContactTwoName"></p><p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0" [innerHTML]="item.emergencyContactTwoPhoneNumber"></p></td>
+
+        <td [innerHTML]="item.whereWereYouBorn"></td>
+        <td [innerHTML]="item.howFarDoYouDrive"></td>
+        <td [innerHTML]="item.iFlyBecause"></td>
+        <td [innerHTML]="item.iLoveTedderfield"></td>
+        <td [innerHTML]="item.whenIAmNotFlying"></td>
+        <td [innerHTML]="item.whoInspiresYou"></td>
+        <td [innerHTML]="item.whatStressesYouMost"></td>
+        <td [innerHTML]="item.yourMostUsefullTalent"></td>
+        <td [innerHTML]="item.immediateFamily"></td>
+        <td [innerHTML]="item.image.fileName"></td>
+
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf="!membersData?.length" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24 pt-4 pb-5">There are currently no membrs data to display.</p>
+  </div>
+</div>
