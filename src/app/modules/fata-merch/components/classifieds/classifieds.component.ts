@@ -20,6 +20,7 @@ export class ClassifiedsComponent implements OnInit {
   public isQuestionOrInterestExpanded = true;
   public classifiedsData: GetClassifiedsDataResponse.Classified[];
   public clasifiedDetailsToDisplay: GetClassifiedsDataResponse.Classified;
+  public isClassifiedsAdvertsExpanded = true;
 
   constructor(public fataMerchService: FataMerchService, private appModalService: AppModalService) { }
 

@@ -18,6 +18,7 @@ import { ManageClassifiedsForSaleInterestComponent } from './components/manage-c
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
 import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
+import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-
     ManageClassifiedsForSaleInterestComponent,
     ManageMembersComponent,
     ManageReportIssueConfigComponent,
-    ManageGettingToKnowYouComponent
+    ManageGettingToKnowYouComponent,
+    ManageYoutubeVideosComponent
   ]
 })
 export class AdminModule { }

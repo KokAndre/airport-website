@@ -243,6 +243,9 @@
         <mat-divider></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
+          <!-- <mat-divider></mat-divider>
+          <div class="dropdown-item p-2"
+            (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
       </div>
     </div>
   </div>
@@ -508,5 +511,8 @@
     <mat-divider></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
+      <!-- <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item
+        (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
   </mat-menu>
 </div>

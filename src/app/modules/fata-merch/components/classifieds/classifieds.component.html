@@ -91,8 +91,11 @@
       (click)="isNoClassifiedsAdvertsExpanded = !isNoClassifiedsAdvertsExpanded"
       [isLightToDark]="true"></app-arrow-divider>
 
-    <app-arrow-divider *ngIf="classifiedsData?.length" class="pointer" (click)="togglePannel(0)"
-      [isLightToDark]="true"></app-arrow-divider>
+    <!-- <app-arrow-divider *ngIf="classifiedsData?.length" class="pointer" (click)="togglePannel(0)"
+      [isLightToDark]="true"></app-arrow-divider> -->
+
+    <app-arrow-divider *ngIf="classifiedsData?.length" class="pointer"
+      (click)="isClassifiedsAdvertsExpanded = !isClassifiedsAdvertsExpanded" [isLightToDark]="true"></app-arrow-divider>
 
   </div>
 
@@ -111,7 +114,7 @@
     </mat-expansion-panel>
   </div>
 
-  <div class="" *ngIf="classifiedsData?.length">
+  <!-- <div class="" *ngIf="classifiedsData?.length">
     <div *ngFor="let classifiedItem of classifiedsData; let last = last; let index = index"
       [ngClass]="{'dark-background': ((index + 1) % 2 ? true : false)}">
       <mat-expansion-panel hideToggle [expanded]="classifiedItem.isExpanded" class="page-section-expansion-pannel">
@@ -134,13 +137,11 @@
             <ul>
               <li *ngFor="let item of classifiedItem.description">{{ item }}</li>
             </ul>
-            <!-- <p [innerHTML]="classifiedItem.description"></p> -->
 
             <p class="mb-0 text-size-18">Special Notes</p>
             <ul>
               <li *ngFor="let item of classifiedItem.specialNotes">{{ item }}</li>
             </ul>
-            <!-- <p [innerHTML]="classifiedItem.specialNotes"></p> -->
 
             <div class="row mx-0 justify-content-center">
               <div class="red-button mb-4" (click)="viewClassifiedDetails(classifiedItem.id)">
@@ -154,7 +155,84 @@
       <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
         [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider>
     </div>
+  </div> -->
+
+
+
+
+
+  <div class="" *ngIf="classifiedsData?.length">
+    <div class="dark-background">
+      <mat-expansion-panel hideToggle [expanded]="isClassifiedsAdvertsExpanded" class="page-section-expansion-pannel">
+        <mat-expansion-panel-header>
+          <div class="col-10 mx-auto">
+            <p class="text-size-24 mb-3">Classifieds</p>
+          </div>
+        </mat-expansion-panel-header>
+        <div class="col-10 mb-4 mx-auto">
+          <div class="row mx-n2 mb-4">
+
+
+            <div class="col-lg-4 col-md-6 col-sm-12 m-2 p-2 classifieds-container"  *ngFor="let classifiedItem of classifiedsData; let last = last; let index = index">
+
+              <p class="text-bold mb-1">{{ classifiedItem.title }} - R{{ classifiedItem.price }}</p>
+
+
+              <div class="col-lg-4 col-md-6 col-sm-12 p-3 align-content-center mb-3 image-center-allign"
+                *ngFor="let img of classifiedItem.images">
+                <img [src]="img.fileData" [alt]="img.fileName" class="classifieds-images" />
+              </div>
+
+              <p class="mb-0 text-size-18">Price</p>
+              <p>R{{ classifiedItem.price }}</p>
+
+              <p class="mb-0 text-size-18">Description</p>
+              <ul>
+                <li *ngFor="let item of classifiedItem.description">{{ item }}</li>
+              </ul>
+              <!-- <p [innerHTML]="classifiedItem.description"></p> -->
+
+              <p class="mb-0 text-size-18">Special Notes</p>
+              <ul>
+                <li *ngFor="let item of classifiedItem.specialNotes">{{ item }}</li>
+              </ul>
+              <!-- <p [innerHTML]="classifiedItem.specialNotes"></p> -->
+
+              <div class="row mx-0 justify-content-center">
+                <div class="red-button mb-4" (click)="viewClassifiedDetails(classifiedItem.id)">
+                  <p class="mb-0">View Details</p>
+                  <span class="red-button-icon"></span>
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <!-- <app-arrow-divider class="pointer" (click)="togglePannel(index + 1)" *ngIf="!last"
+        [isLightToDark]="((index + 1) % 2 ? false : true)"></app-arrow-divider> -->
+    </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 <div *ngIf="displayClassifiedsDetails">

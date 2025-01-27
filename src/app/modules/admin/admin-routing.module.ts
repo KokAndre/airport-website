@@ -16,6 +16,7 @@ import { ManageClassifiedsForSaleInterestComponent } from './components/manage-c
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
 import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
+import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-getting-to-know-you', component: ManageGettingToKnowYouComponent
+  },
+  {
+    path: 'manage-youtube-videos', component: ManageYoutubeVideosComponent
   }
 ];
 

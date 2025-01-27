@@ -53,7 +53,8 @@ export enum AppRoutes {
     ManageClassifiedsForSale = '/admin/manage-classifieds-for-sale',
     ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale',
     ManageReportIssueConfig = '/admin/manage-report-issue-config',
-    ManageGettingToKnowYou = '/admin/manage-getting-to-know-you'
+    ManageGettingToKnowYou = '/admin/manage-getting-to-know-you',
+    ManageYoutubeVideos = '/admin/manage-youtube-videos'
 }
 
 export enum Endpoints {
