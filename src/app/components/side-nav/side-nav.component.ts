@@ -108,7 +108,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.isUserAdmin = this.loginService.isLogedInUserAdmin();
 
         const userDetails = this.loginService.getLoggedInUserDetails();
-        if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com') {
+        if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
           this.isSuperAdmin = true;
         } else {
           this.isSuperAdmin = false;

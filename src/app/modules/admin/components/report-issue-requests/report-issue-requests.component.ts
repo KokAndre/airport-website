@@ -25,7 +25,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   private checkIfAdminIsAllowedToDelete() {
     const userDetails = this.loginService.getLoggedInUserDetails();
-    if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com') {
+    if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
       this.allowAdminToDelete = true;
     } else {
       this.allowAdminToDelete = false;
