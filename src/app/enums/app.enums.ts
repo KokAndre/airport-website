@@ -23,6 +23,7 @@ export enum AppRoutes {
     CircuitProcedures = '/pilot-information/circuit-procedures',
     Projects = '/projects',
     Classifieds = '/merch/classifieds',
+    TedderfieldMerchHub = '/merch/tedderfield-merch-hub',
     StandsForSale = '/property-for-sale/stands-for-sale',
     HangarsForSale = '/property-for-sale/hangars-for-sale',
     MembersWelcome = '/members/welcome',

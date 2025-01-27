@@ -105,6 +105,8 @@
       <div class="dropdown-content">
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Classifieds)">
           Classifieds</div>
+          <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">Tedderfield Merch Hub</div>
       </div>
     </div>
   </div>
@@ -397,6 +399,8 @@
   <mat-menu #fataMerchMenu="matMenu">
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.Classifieds)">
       Classifieds</div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">Tedderfield Merch Hub</div>
   </mat-menu>
 
   <mat-menu #propertyForSaleRentMenu="matMenu">

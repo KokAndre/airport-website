@@ -1,0 +1,213 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Tedderfield Merch Hub</p>
+    <p class="mb-0 text-size-14">FATA Merch / <span class="child-path-text">Tedderfield Merch Hub</span></p>
+  </div>
+</div>
+
+
+<app-arrow-divider class="pointer" (click)="isWelcomeExpanded = !isWelcomeExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isWelcomeExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">🌟 Tedderfield Airpark Merchandise & Peak Cap Challenge 🌟</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+      <p class="">Welcome to the Tedderfield Airpark Merchandise Hangar! 🎉 Whether you're looking to rep your favourite
+        airpark 🛩️ or join in on an adventure, we've got you covered with awesome branded goodies and a challenge to
+        show them off! 😎</p>
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isWhatsInOurCargoHodldExpanded = !isWhatsInOurCargoHodldExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isWhatsInOurCargoHodldExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">🛒 What's in Our Cargo Hold?</p>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="col-10 mx-auto pb-4">
+
+      <div class="row mx-n2 justify-content-center">
+
+        <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 p-2 product-container text-center">
+            <p class="text-size-18">🎩 <b>Tedderfield Peak Caps</b> - R150</p>
+
+            <img [src]="'assets/tedderfield-merch-hub/peak-cap.jpg'" alt="Tedderfield Peak Caps" class="image-max-height" />
+
+            <p class="mb-0  mt-3">Shade your brilliance in style! 🧢 Bonus: Makes you 10% cooler on the flight line! 😏</p>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 p-2 product-container text-center">
+            <p class="text-size-18">🕰️ <b>Altimeter Desk Organiser</b> - R500</p>
+
+            <img [src]="'assets/tedderfield-merch-hub/desk-organiser.jpg'" alt="Altimeter Desk Organiser" class="image-max-height" />
+
+            <p class="mb-0  mt-3">Not just a clock! ⏰ It's a pen holder, stationery keeper, and guaranteed desk conversation
+              starter. 💼✨</p>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 p-2 product-container text-center">
+            <p class="text-size-18">🚀 <b>Tedderfield Stickers</b> - R30</p>
+
+            <img [src]="'assets/tedderfield-merch-hub/sticker.jpg'" alt="Tedderfield Stickers" class="image-max-height" />
+
+            <p class="mb-0  mt-3">Stick 'em on your car, laptop, your fridge, your fuel bowser, or toolbox! ❄️ Your stuff will
+              thank you. 😉</p>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 p-2 product-container text-center">
+            <p class="text-size-18">👕 <b>Tedderfield Shirts</b> (Coming Soon)</p>
+
+            <img [src]="'assets/tedderfield-merch-hub/coming-soon.jpeg'" alt="Tedderfield Shirts" class="image-max-height" />
+
+            <p class="mb-0  mt-3">Look sharp, feel comfy, and show your Tedderfield pride wherever you go. 💃🕺</p>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-6 col-lg-4 p-2">
+          <div class="col-12 p-2 product-container text-center">
+            <p class="text-size-18">☕ <b>Branded Coffee Mugs</b> - R70</p>
+
+            <img [src]="'assets/tedderfield-merch-hub/coffee-mug.jpg'" alt="Branded Coffee Mugs" class="image-max-height" />
+
+            <p class="mb-0 mt-3">Your coffee will taste infinitely better in one of these! ☕ (Test pilot-approved! ✅)</p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isHowToOrderExpanded = !isHowToOrderExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isHowToOrderExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">📩 How to Order:</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+
+      <ul>
+        <li>Shopping with us is as easy as a smooth takeoff.</li>
+        <li>Email your wish list to <a class="text-size-14 mb-0 no-underline red-text"
+            href="mailto:grounds@tedderfield.co.za">grounds&#64;tedderfield.co.za</a></li>
+        <li>Include the items, quantities, and your contact details.</li>
+        <li>We'll sort out collection or delivery faster than you can say “clear prop!” 🚚</li>
+      </ul>
+
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isPeakCupChallengeExpanded = !isPeakCupChallengeExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isPeakCupChallengeExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">🌍 Tedderfield Peak Cap Challenge! 🌍</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+
+      <p>Here's your chance to take your Tedderfield swag on a world tour! 🌎</p>
+
+      <p class="text-size-18 text-bold">How It Works:</p>
+
+      <ul>
+        <li>Buy a <b>Tedderfield Peak Cap.</b> 🧢</li>
+        <li>Snap a fun pic of your cap in an exciting location. 📸 The more creative, the better! 😜</li>
+        <li>Email your photo to <a class="text-size-14 mb-0 no-underline red-text"
+            href="mailto:grounds@tedderfield.co.za">grounds&#64;tedderfield.co.za</a> and let us know where the cap is
+          flying! ✉️</li>
+      </ul>
+
+    </div>
+  </mat-expansion-panel>
+
+
+  <app-arrow-divider class="pointer" (click)="isWhatsInItForYouExpanded = !isWhatsInItForYouExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <mat-expansion-panel hideToggle [expanded]="isWhatsInItForYouExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">🎉 What's in It for You?</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+
+      <ul>
+        <li>Bragging rights as the most adventurous Tedderfield traveller! 🏆</li>
+        <li>A chance to have your photo featured on our website or socials. 🌟</li>
+        <li>The joy of knowing your Tedderfield cap is literally going places! ✈️</li>
+      </ul>
+
+    </div>
+  </mat-expansion-panel>
+
+  <app-arrow-divider class="pointer" (click)="isReadyToJoinTheFunExpanded = !isReadyToJoinTheFunExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+</div>
+
+<div class="">
+  <mat-expansion-panel hideToggle [expanded]="isReadyToJoinTheFunExpanded" class="page-section-expansion-pannel">
+    <mat-expansion-panel-header>
+      <div class="col-10 mx-auto">
+        <p class="text-size-24 mb-3">Ready to Join the Fun?</p>
+      </div>
+    </mat-expansion-panel-header>
+
+
+    <div class="col-10 mx-auto pb-4">
+
+      <p>From airport terminals 🛫 to mountain tops 🏔️, deserts 🏜️ to oceans 🌊, let's see how far our Tedderfield
+        caps can travel!</p>
+
+      <p class="text-bold text-size-20 text-center">✨ Shop now, snap later, and let's make the world a Tedderfield
+        runway! 🛍️</p>
+
+      <p class="text-bold text-size-20 text-center">P.S. Don't wait - email us at <a
+          class="text-size-20 mb-0 no-underline red-text"
+          href="mailto:grounds@tedderfield.co.za">grounds&#64;tedderfield.co.za</a> to grab your gear and start your
+        adventure! 🎒✨</p>
+
+    </div>
+  </mat-expansion-panel>
+</div>

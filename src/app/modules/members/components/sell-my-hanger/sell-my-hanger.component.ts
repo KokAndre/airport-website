@@ -93,17 +93,23 @@ export class SellMyHangerComponent implements OnInit {
   public prePopulateData() {
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
-      this.nameControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+        this.nameControl.disable();
+      }
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
-      this.emailControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+        this.emailControl.disable();
+      }
     }
 
     if (this.loggedInUserDetails?.phoneNumber) {
       this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
-      this.phoneNumberControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+        this.phoneNumberControl.disable();
+      }
     }
   }
 
@@ -290,7 +296,7 @@ export class SellMyHangerComponent implements OnInit {
     arrayOfInputValue = arrayOfInputValue.map(line => {
       line = line.replace('•', '');
       line = line.trim();
-      line = line.replace("'", "`")
+      line = line.replaceAll("'", '’');
       return line;
     });
     arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
@@ -341,7 +347,7 @@ export class SellMyHangerComponent implements OnInit {
     this.submitHangerForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.hangerSecurityControl.value);
     this.submitHangerForSaleRequestData.additionalInfrastructure = this.formatBulletPointInputValuesToSubmit(this.hangerAdditionalInfrastucture.value);
     this.submitHangerForSaleRequestData.price = this.askingPriceControl.value;
-    this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
+    this.submitHangerForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value?.replaceAll("'", '’');
 
     this.submitHangerForSaleRequestData.leviesApplicable = new Array<string>();
 
@@ -357,7 +363,7 @@ export class SellMyHangerComponent implements OnInit {
       if (results.status === 200) {
         this.submitAdSucessId = results.id;
         this.uploadDocuments();
-      } 
+      }
     });
   }
 

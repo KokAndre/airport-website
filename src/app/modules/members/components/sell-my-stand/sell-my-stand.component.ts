@@ -88,17 +88,23 @@ export class SellMyStandComponent implements OnInit {
   public prePopulateData() {
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
-      this.nameControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+        this.nameControl.disable();
+      }
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
-      this.emailControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+        this.emailControl.disable();
+      }
     }
 
     if (this.loggedInUserDetails?.phoneNumber) {
       this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
-      this.phoneNumberControl.disable();
+      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+        this.phoneNumberControl.disable();
+      }
     }
   }
 
@@ -262,7 +268,7 @@ export class SellMyStandComponent implements OnInit {
     arrayOfInputValue = arrayOfInputValue.map(line => {
       line = line.replace('•', '');
       line = line.trim();
-      line = line.replace("'", "`");
+      line = line.replaceAll("'", '’')
       return line;
     });
     arrayOfInputValue = arrayOfInputValue.filter(x => x !== '');
@@ -301,7 +307,7 @@ export class SellMyStandComponent implements OnInit {
     // this.submitStandForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.standFeaturesAndBenefitsControl.value);
     this.submitStandForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.standSecurityControl.value);
     this.submitStandForSaleRequestData.price = this.askingPriceControl.value;
-    this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value;
+    this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value?.replaceAll("'", '’');
 
     this.submitStandForSaleRequestData.leviesApplicable = new Array<string>();
 
@@ -312,6 +318,10 @@ export class SellMyStandComponent implements OnInit {
         this.submitStandForSaleRequestData.leviesApplicable.push(levieItemToPush);
       }
     });
+
+    if (!this.submitStandForSaleRequestData.titleDocument) {
+      this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
+    }
 
     this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', results.message, null);
