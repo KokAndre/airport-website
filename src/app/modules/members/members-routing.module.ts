@@ -14,6 +14,7 @@ import { SubmitClassifiedsComponent } from './components/submit-classifieds/subm
 import { HasCompletedGettingToKnowYouGuardService } from 'src/app/route-guards/has-completed-getting-to-know-you-guard.service';
 import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-who-in-the-zoo.component';
 import { ManageProfileComponent } from './components/manage-profile/manage-profile.component';
+import { DonationsComponent } from './components/donations/donations.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,9 @@ const routes: Routes = [
   },
   {
     path: 'manage-profile', canActivate: [LoginGuardService], component: ManageProfileComponent
+  },
+  {
+    path: 'donations', canActivate: [LoginGuardService], component: DonationsComponent
   },
 ];
 

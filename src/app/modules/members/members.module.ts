@@ -14,6 +14,7 @@ import { DocumentsComponent } from './components/documents/documents.component';
 import { SubmitClassifiedsComponent } from './components/submit-classifieds/submit-classifieds.component';
 import { WhosWhoInTheZooComponent } from './components/whos-who-in-the-zoo/whos-who-in-the-zoo.component';
 import { ManageProfileComponent } from './components/manage-profile/manage-profile.component';
+import { DonationsComponent } from './components/donations/donations.component';
 
 
 
@@ -30,7 +31,8 @@ import { ManageProfileComponent } from './components/manage-profile/manage-profi
     DocumentsComponent,
     SubmitClassifiedsComponent,
     WhosWhoInTheZooComponent,
-    ManageProfileComponent
+    ManageProfileComponent,
+    DonationsComponent
   ],
   imports: [
     CommonModule,

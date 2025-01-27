@@ -176,6 +176,8 @@
             Who's Who in the Tedderfield Zoo
           </div>
           <mat-divider></mat-divider>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersDonations)">Donations Board</div>
+          <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
         </div>
@@ -450,6 +452,8 @@
         (click)="navigateToRoute(navigationRoutes.WhosWhoInTheZoo)">
         Who's Who in the Tedderfield Zoo
       </div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersDonations)">Donations Board</div>
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>

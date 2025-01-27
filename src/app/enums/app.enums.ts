@@ -37,6 +37,7 @@ export enum AppRoutes {
     SubmitClassifieds = '/members/classifieds',
     WhosWhoInTheZoo = '/members/whos-who-in-the-tedderfield-zoo',
     ManageProfile = '/members/manage-profile',
+    MembersDonations = '/members/donations',
 
     MembersAdmin = '/admin/manage-members',
     GalleryAdmin = '/admin/edit-gallery',

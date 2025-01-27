@@ -1,0 +1,160 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Donations</p>
+    <p class="mb-0 text-size-14">Members / <span class="child-path-text">Donations</span></p>
+  </div>
+</div>
+
+<!-- <div class="row mx-0 mb-4 justify-content-center">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image1"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image2"></div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+    <div class="page-top-images image3"></div>
+  </div>
+</div> -->
+
+<app-arrow-divider class="pointer" (click)="isNameInLightsExpanded = !isNameInLightsExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isNameInLightsExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">"Get Your Name Up in Lights - Literally!"</p>
+      </mat-expansion-panel-header>
+
+      <p class="">At Tedderfield Airpark, some owners have truly gone above and beyond, opening their wallets, hearts,
+        and maybe even their toolkits to make our airpark soar higher.</p>
+
+    </mat-expansion-panel>
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isWhyShouldYouContributeExpanded = !isWhyShouldYouContributeExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div>
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWhyShouldYouContributeExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Why Should You Contribute?</p>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li><b>Be the Rockstar:</b> Want your name to shine brighter than the runway lights? This is your backstage pass
+          to airpark fame.</li>
+        <li><b>FOMO is Real.</b></li>
+        <li><b>Claim Your Turf:</b> A bench, a braai stand, a shared weather station - make it yours. </li>
+        <li><b>Outshine the Competition:</b> Let's face it, friendly rivalry fuels Tedderfield. Your donation isn't just
+          a gift - it's a flex. "Oh, Ian donated a windsock? Cute. I just got us a solar-powered windsock."</li>
+        <li><b>Legends Leave Tracks:</b> And not just on the runway. After all, every pilot knows it's about the <span
+            class="italic-text">take-off AND the legacy.</span></li>
+      </ul>
+
+    </mat-expansion-panel>
+
+  </div>
+  <app-arrow-divider class="pointer" (click)="isWhatCanYouDonateExpanded = !isWhatCanYouDonateExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWhatCanYouDonateExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">What can you donate?</p>
+      </mat-expansion-panel-header>
+
+      <p class="">Cash, a piece of equipment, your time, your expertise, or maybe even just a really great idea (we'll
+        count it). Think of it as your ticket to airpark immortality.</p>
+
+    </mat-expansion-panel>
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isHowDoYouJoinTheRanksExpanded = !isHowDoYouJoinTheRanksExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div>
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isHowDoYouJoinTheRanksExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">How do you join the ranks?</p>
+      </mat-expansion-panel-header>
+
+      <p>Simple! Just reach out by making contact on the website. We'll handle the rest - and promise your name will
+        shine
+        as brightly as our runway lights.</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isWhatsThePlanExpanded = !isWhatsThePlanExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+</div>
+
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isWhatsThePlanExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">What's the Plan?</p>
+      </mat-expansion-panel-header>
+
+      <p class="">We're planting trees to green the airfield and remove invasive wattle. For just <b>R300 per tree</b>
+        or <b>R3000 for a grove of 10</b>, you can help transform Tedderfield into a lush oasis that future generations
+        will enjoy. 🌱</p>
+
+    </mat-expansion-panel>
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isHowDoYouJoinExpanded = !isHowDoYouJoinExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
+
+</div>
+
+<div>
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isHowDoYouJoinExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">How Do You Join the Green Team?</p>
+      </mat-expansion-panel-header>
+
+      <p>It's easy! Just visit <span class="red-text pointer"
+          (click)="navigateToGreeningTedderfield()">https://tedderfield.co.za/members/greening-tedderfield</span> to
+        make
+        your contribution. Don't let the trees have all the glory - let your name grow along with them!</p>
+
+    </mat-expansion-panel>
+  </div>
+
+  <app-arrow-divider class="pointer" (click)="isRememberExpanded = !isRememberExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
+
+</div>
+
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isRememberExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Remember:</p>
+      </mat-expansion-panel-header>
+
+      <p class="">Every tree counts, and every name on the donations page tells a story of someone who cared enough to
+        make Tedderfield greener. Let's make history - one tree at a time! 🌳✨</p>
+
+    </mat-expansion-panel>
+  </div>
+
+</div>
