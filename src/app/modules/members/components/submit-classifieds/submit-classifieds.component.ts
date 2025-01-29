@@ -193,19 +193,19 @@ export class SubmitClassifiedsComponent implements OnInit {
       }
     }
 
-    if (keyPressed.key === ',') {
-      if (numOfLines < 10) {
-        let formCotrolValue = formControl.value;
-        formCotrolValue = formCotrolValue.replace(',', "\n")
-        formCotrolValue += '• ';
-        formControl.setValue(formCotrolValue);
-      } else {
-        let formCotrolValue = formControl.value;
-        const lastIndex = formCotrolValue.lastIndexOf(',');
-        formCotrolValue = formCotrolValue.substr(0, lastIndex);
-        formControl.setValue(formCotrolValue);
-      }
-    }
+    // if (keyPressed.key === ',') {
+    //   if (numOfLines < 10) {
+    //     let formCotrolValue = formControl.value;
+    //     formCotrolValue = formCotrolValue.replace(',', "\n")
+    //     formCotrolValue += '• ';
+    //     formControl.setValue(formCotrolValue);
+    //   } else {
+    //     let formCotrolValue = formControl.value;
+    //     const lastIndex = formCotrolValue.lastIndexOf(',');
+    //     formCotrolValue = formCotrolValue.substr(0, lastIndex);
+    //     formControl.setValue(formCotrolValue);
+    //   }
+    // }
 
   }
 
@@ -218,7 +218,7 @@ export class SubmitClassifiedsComponent implements OnInit {
   public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
     let arrayOfInputValue = valueToFormat.split('\n');
     arrayOfInputValue = arrayOfInputValue.map(line => {
-      line = line.replace('•', '');
+      line = line.replaceAll('•', '');
       line = line.trim();
       line = line.replace("'", "`");
       return line;

@@ -28,6 +28,7 @@ export class GettingToKnowYouComponent implements OnInit {
   public gettingToKnowYouRequestData = new SubmitGettingToKnowYouRequest.RootObject();
   public originalHasCompletedGettingToKnowYouData: GetGettingToKnowYouResponse.Member;
   public hasValuesChanged = false;
+  public displayImageErrorMessage = false;
 
   constructor(public loginService: LoginService,
     public formBuilder: FormBuilder,
@@ -267,19 +268,19 @@ export class GettingToKnowYouComponent implements OnInit {
       }
     }
 
-    if (keyPressed.key === ',') {
-      if (numOfLines < 10) {
-        let formCotrolValue = formControl.value;
-        formCotrolValue = formCotrolValue.replace(',', "\n")
-        formCotrolValue += '• ';
-        formControl.setValue(formCotrolValue);
-      } else {
-        let formCotrolValue = formControl.value;
-        const lastIndex = formCotrolValue.lastIndexOf(',');
-        formCotrolValue = formCotrolValue.substr(0, lastIndex);
-        formControl.setValue(formCotrolValue);
-      }
-    }
+    // if (keyPressed.key === ',') {
+    //   if (numOfLines < 10) {
+    //     let formCotrolValue = formControl.value;
+    //     formCotrolValue = formCotrolValue.replace(',', "\n")
+    //     formCotrolValue += '• ';
+    //     formControl.setValue(formCotrolValue);
+    //   } else {
+    //     let formCotrolValue = formControl.value;
+    //     const lastIndex = formCotrolValue.lastIndexOf(',');
+    //     formCotrolValue = formCotrolValue.substr(0, lastIndex);
+    //     formControl.setValue(formCotrolValue);
+    //   }
+    // }
 
   }
 
@@ -323,7 +324,10 @@ export class GettingToKnowYouComponent implements OnInit {
     }
 
     if (!this.gettingToKnowYouRequestData?.image?.fileName || !this.gettingToKnowYouRequestData?.image?.fileName) {
+      this.displayImageErrorMessage = true;
       return true;
+    } else {
+      this.displayImageErrorMessage = false;
     }
 
     if (this.originalHasCompletedGettingToKnowYouData?.id) {
@@ -338,7 +342,7 @@ export class GettingToKnowYouComponent implements OnInit {
   public formatBulletPointInputValuesToSubmit(valueToFormat: string) {
     let arrayOfInputValue = valueToFormat.split('\n');
     arrayOfInputValue = arrayOfInputValue.map(line => {
-      line = line.replace('•', '');
+      line = line.replaceAll('•', '');
       line = line.trim();
       line = line.replaceAll("'", "`");
       return line;

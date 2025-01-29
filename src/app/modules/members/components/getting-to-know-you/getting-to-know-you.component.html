@@ -395,6 +395,9 @@
               <span class="red-button-icon"></span>
             </div>
           </div>
+
+          <p *ngIf="displayImageErrorMessage && !gettingToKnowYouRequestData.image?.fileName" class="text-size-18 red-text p-0 my-3 text-center px-2 text-bold">Please upload an image before submitting the data.</p>
+
         </div>
       </div>
 
