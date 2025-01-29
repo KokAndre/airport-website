@@ -30,4 +30,14 @@ export class AboutUsService {
       });
   }
 
+  public getYoutubeVideos() {
+    return fetch(Endpoints.BaseURL + Endpoints.GetGalleryData, {
+      method: 'get'
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
 }

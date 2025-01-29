@@ -173,7 +173,10 @@ export enum Endpoints {
     UpdateMemberData = '/members/update-member-data.php',
     DeleteMember = '/members/delete-members.php',
     AddNewMember = '/members/add-member.php',
-    ManageMembersUpdateMemberData = '/members/manage-members-update-member-data.php'
+    ManageMembersUpdateMemberData = '/members/manage-members-update-member-data.php',
+
+    // Youtube Videos
+    GetYoutubeVideos = '/youtube-videos/get-videos.php'
 }
 
 export enum EncryptionKeys {

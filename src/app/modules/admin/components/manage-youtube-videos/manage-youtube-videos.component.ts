@@ -11,6 +11,11 @@ export class ManageYoutubeVideosComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.getYoutubeVideos();
+  }
+
+  public getYoutubeVideos() {
+    //
   }
 
 }
