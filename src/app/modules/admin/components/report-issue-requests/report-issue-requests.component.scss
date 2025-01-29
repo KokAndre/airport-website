@@ -31,3 +31,7 @@ td {
 ::ng-deep .mat-mdc-option.mat-mdc-option-active {
   background-color: white;
 }
+
+.row-no-wrap {
+  flex-wrap: nowrap;
+}

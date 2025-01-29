@@ -24,10 +24,17 @@ export namespace GetReportIssueDataResponse {
   export class Category {
     id: number;
     category: string;
+    isFilterSelected: boolean;
   }
 
   export class ResponsiblePerson {
     id: number;
     name: string;
+    isFilterSelected: boolean;
+  }
+
+  export class PropertyNumber {
+    description: string;
+    isFilterSelected: boolean;
   }
 }

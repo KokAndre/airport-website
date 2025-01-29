@@ -16,6 +16,28 @@ export class ReportIssueRequestsComponent implements OnInit {
   public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
   public allowAdminToDelete = false;
 
+  // Person Responsible Filters
+  public blankPersonResponsibleCheckBox = true;
+  public allPersonResponsibleCheckbox = true;
+  public sortAlphabeticalPersonResponsible = false;
+
+  // Category Filters
+  public blankCategoryCheckBox = true;
+  public allCategoryCheckbox = true;
+  public sortAlphabeticalCategory = false;
+
+  // Status Filters
+  public statusNotStartedCheckBox = true;
+  public statusInProgressCheckBox = true;
+  public statusDoneCheckBox = true;
+  public allStatusCheckBox = true;
+  public sortAlphabeticalStatus = false;
+
+  // Hangar Or STand Number Filters
+  public propertyNumbersList: GetReportIssueDataResponse.PropertyNumber[];
+  public allPropertyNumberCheckBox = true;
+  public sortAlphabeticalPropertyNumber = false;
+
   constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
 
   ngOnInit() {
@@ -38,11 +60,152 @@ export class ReportIssueRequestsComponent implements OnInit {
         this.reportIssueRequests = results.requests;
         this.categoryList = results.categories;
         this.responsiblePersonList = results.resposiblePersons;
+
+        this.propertyNumbersList = new Array<GetReportIssueDataResponse.PropertyNumber>();
+        this.reportIssueRequests.forEach(request => {
+          if (!this.propertyNumbersList.find(x => x.description === request.hangerOrSectionNumber)) {
+            const itemToPush = new GetReportIssueDataResponse.PropertyNumber();
+            itemToPush.description = request.hangerOrSectionNumber;
+            itemToPush.isFilterSelected = true;
+            this.propertyNumbersList.push(itemToPush);
+          }
+        });
+
+        this.categoryList.forEach(x => {
+          x.isFilterSelected = true;
+        });
+
+        this.responsiblePersonList.forEach(x => {
+          x.isFilterSelected = true;
+        });
+
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Data', results.message, null);
       }
     });
   }
+
+  public checkIfRowIsHidden(row: GetReportIssueDataResponse.Requests) {
+
+    const personResponsibleOfRow = this.responsiblePersonList.find(x => x.name === row.personResponsible);
+
+    if (personResponsibleOfRow) {
+      if (!personResponsibleOfRow?.isFilterSelected) {
+        return true;
+      }
+    } else if (!this.blankPersonResponsibleCheckBox) {
+      return true;
+    }
+
+    const categoryOfRow = this.categoryList.find(x => x.category === row.category);
+
+    if (categoryOfRow) {
+      if (!categoryOfRow?.isFilterSelected) {
+        return true;
+      }
+    } else if (!this.blankCategoryCheckBox) {
+      return true;
+    }
+
+    const propertyNumberOfRow = this.propertyNumbersList.find(x => x.description === row.hangerOrSectionNumber);
+
+    if (propertyNumberOfRow) {
+      if (!propertyNumberOfRow?.isFilterSelected) {
+        return true;
+      }
+    }
+
+    if (row.status === 'notStarted' && !this.statusNotStartedCheckBox) {
+      return true
+    }
+    if (row.status === 'inProgress' && !this.statusInProgressCheckBox) {
+      return true
+    }
+    if (row.status === 'done' && !this.statusDoneCheckBox) {
+      return true
+    }
+
+    return false;
+  }
+
+  public allResponsiblePersonsClicked() {
+    this.responsiblePersonList.forEach(x => {
+      x.isFilterSelected = this.allPersonResponsibleCheckbox;
+    });
+    this.blankPersonResponsibleCheckBox = this.allPersonResponsibleCheckbox;
+  }
+
+  public orderDataByPersonResponsible() {
+    this.sortAlphabeticalPersonResponsible = !this.sortAlphabeticalPersonResponsible;
+
+    if (this.sortAlphabeticalPersonResponsible) {
+      this.reportIssueRequests.sort((a, b) => a.personResponsible > b.personResponsible ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => a.personResponsible > b.personResponsible ? -1 : 1);
+    }
+  }
+
+  public allCategoryClicked() {
+    this.categoryList.forEach(x => {
+      x.isFilterSelected = this.allCategoryCheckbox;
+    });
+    this.blankCategoryCheckBox = this.allCategoryCheckbox;
+  }
+
+  public orderDataByCategory() {
+    this.sortAlphabeticalCategory = !this.sortAlphabeticalCategory;
+
+    if (this.sortAlphabeticalCategory) {
+      this.reportIssueRequests.sort((a, b) => a.category > b.category ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => a.category > b.category ? -1 : 1);
+    }
+  }
+
+  public allStatusClicked() {
+    this.propertyNumbersList.forEach(x => {
+      x.isFilterSelected = this.allPropertyNumberCheckBox;
+    });
+    this.blankCategoryCheckBox = this.allPropertyNumberCheckBox;
+  }
+
+  public orderDataByStatusy() {
+    this.sortAlphabeticalStatus = !this.sortAlphabeticalStatus;
+
+    if (this.sortAlphabeticalStatus) {
+      this.reportIssueRequests.sort((a, b) => a.status > b.status ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => a.status > b.status ? -1 : 1);
+    }
+  }
+
+
+
+
+
+  public allProperyNumberClicked() {
+    this.propertyNumbersList.forEach(x => {
+      x.isFilterSelected = this.allPropertyNumberCheckBox;
+    });
+  }
+
+  public orderDataByPropertyNumber() {
+    this.sortAlphabeticalPropertyNumber = !this.sortAlphabeticalPropertyNumber;
+
+    if (this.sortAlphabeticalPropertyNumber) {
+      this.reportIssueRequests.sort((a, b) => a.hangerOrSectionNumber > b.hangerOrSectionNumber ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => a.hangerOrSectionNumber > b.hangerOrSectionNumber ? -1 : 1);
+    }
+  }
+
+
+
+
+
+
+
+
 
   public editReportIssueRequestClicked(reportIssueItem: GetReportIssueDataResponse.Requests) {
     const modalData = new GetReportIssueDataResponse.Requests();
