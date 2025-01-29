@@ -22,6 +22,7 @@ export class SellMyHangerComponent implements OnInit {
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
   public leviesData = new Array<GetLeviesResponse.Levie>();
+  public isPersonalDetailsAcknowledgementCheckboxChecked = false;
 
   constructor(public formBuilder: FormBuilder, public loginService: LoginService, public membersService: MembersService, public appModalService: AppModalService) { }
 
@@ -111,6 +112,8 @@ export class SellMyHangerComponent implements OnInit {
         this.phoneNumberControl.disable();
       }
     }
+
+    this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
   }
 
   public numberControlInput(formControl?: AbstractControl) {
@@ -305,7 +308,7 @@ export class SellMyHangerComponent implements OnInit {
   }
 
   public isSubmitDisabled() {
-    if (this.sellMyHangerFormGroup.invalid || !this.submitHangerForSaleRequestData.hangerImages?.length) {
+    if (this.sellMyHangerFormGroup.invalid || !this.submitHangerForSaleRequestData.hangerImages?.length || !this.isPersonalDetailsAcknowledgementCheckboxChecked) {
       return true;
     }
 

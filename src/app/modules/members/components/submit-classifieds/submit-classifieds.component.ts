@@ -22,6 +22,7 @@ export class SubmitClassifiedsComponent implements OnInit {
   public loggedInUserDetails: LoginToken;
   public submitClassifiedsRequestData = new SubmitClassifiedsRequest.RootObject();
   public submitItemSucessId: number;
+  public isPersonalDetailsAcknowledgementCheckboxChecked = false;
 
   constructor(private formBuilder: FormBuilder,
     private loginService: LoginService,
@@ -260,6 +261,10 @@ export class SubmitClassifiedsComponent implements OnInit {
       return true;
     }
 
+    if (!this.isPersonalDetailsAcknowledgementCheckboxChecked) {
+      return true;
+    }
+
     return false;
   }
 
@@ -327,6 +332,7 @@ export class SubmitClassifiedsComponent implements OnInit {
     this.submitClassifiedsRequestData = new SubmitClassifiedsRequest.RootObject();
     this.submitClassifiedsFormGroup.reset();
     this.prePopulateData();
+    this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
   }
 
   public get titleControl() {

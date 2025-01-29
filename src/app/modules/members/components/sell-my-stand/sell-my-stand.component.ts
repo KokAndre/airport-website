@@ -22,6 +22,7 @@ export class SellMyStandComponent implements OnInit {
   public loggedInUserDetails: LoginToken;
   public submitAdSucessId: number;
   public leviesData = new Array<GetLeviesResponse.Levie>();
+  public isPersonalDetailsAcknowledgementCheckboxChecked = false;
 
   constructor(public formBuilder: FormBuilder,
     public loginService: LoginService,
@@ -106,6 +107,8 @@ export class SellMyStandComponent implements OnInit {
         this.phoneNumberControl.disable();
       }
     }
+
+    this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
   }
 
   public numberControlInput(formControl?: AbstractControl) {
@@ -277,7 +280,7 @@ export class SellMyStandComponent implements OnInit {
   }
 
   public isSubmitDisabled() {
-    if (this.sellMyStandFormGroup.invalid || !this.submitStandForSaleRequestData.standImages?.length) {
+    if (this.sellMyStandFormGroup.invalid || !this.submitStandForSaleRequestData.standImages?.length || !this.isPersonalDetailsAcknowledgementCheckboxChecked) {
       return true;
     }
 

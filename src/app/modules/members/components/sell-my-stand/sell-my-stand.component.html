@@ -35,92 +35,93 @@
       </div>
     </mat-expansion-panel-header>
 
-    <div class="mb-3 pb-4" [formGroup]="sellMyStandFormGroup">
+    <div class="mb-3 pb-4">
       <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto form-background">
-        <div class="row mx-0 justify-content-center mt-4">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Name</mat-label>
-            <input style="color: black;" matInput required maxlength="100" formControlName="nameControl"
-              placeholder="Please enter your name">
-            <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
-          </mat-form-field>
-        </div>
+        <div [formGroup]="sellMyStandFormGroup">
+          <div class="row mx-0 justify-content-center mt-4">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Name</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="nameControl"
+                placeholder="Please enter your name">
+              <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Email</mat-label>
-            <input style="color: black;" matInput required maxlength="100" formControlName="emailControl"
-              placeholder="Please capture a valid email address">
-            <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
-          </mat-form-field>
-        </div>
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Email</mat-label>
+              <input style="color: black;" matInput required maxlength="100" formControlName="emailControl"
+                placeholder="Please capture a valid email address">
+              <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Phone Number</mat-label>
-            <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
-              placeholder="Please enter a valid phone number"
-              (input)="numberControlInput(phoneNumberControl || undefined)">
-            <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
-            <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
-          </mat-form-field>
-        </div>
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Phone Number</mat-label>
+              <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
+                placeholder="Please enter a valid phone number"
+                (input)="numberControlInput(phoneNumberControl || undefined)">
+              <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+              <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Stand Number</mat-label>
-            <input style="color: black;" matInput required maxlength="10" formControlName="standNumberControl"
-              placeholder="Please enter your stand number">
-            <mat-error *ngIf="standNumberControl?.hasError('required')">Stand Number is required</mat-error>
-          </mat-form-field>
-        </div>
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Stand Number</mat-label>
+              <input style="color: black;" matInput required maxlength="10" formControlName="standNumberControl"
+                placeholder="Please enter your stand number">
+              <mat-error *ngIf="standNumberControl?.hasError('required')">Stand Number is required</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <div class="col-10 px-0">
-            <P class="mb-1">Please upload your title or real right notarial deed.</P>
-            <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <P class="mb-1">Please upload your title or real right notarial deed.</P>
+              <p class="text-size-12 child-path-text">Upload 1 supported file. File type: PDF. Max file size: 10MB</p>
 
-            <div
-              *ngIf="submitStandForSaleRequestData.titleDocument?.fileName && submitStandForSaleRequestData.titleDocument?.fileData">
-              <div class="row mb-2 mx-0">
-                <div class="col-1 px-0 align-content-center">
-                  <mat-icon class="pointer delete-icon align-bottom" (click)="deleteTitleDocument()">delete</mat-icon>
-                </div>
-                <div class="col-11 pr-0 align-content-center">
-                  <p class="mb-0 text-size-14">{{ submitStandForSaleRequestData.titleDocument.fileName }}</p>
+              <div
+                *ngIf="submitStandForSaleRequestData.titleDocument?.fileName && submitStandForSaleRequestData.titleDocument?.fileData">
+                <div class="row mb-2 mx-0">
+                  <div class="col-1 px-0 align-content-center">
+                    <mat-icon class="pointer delete-icon align-bottom" (click)="deleteTitleDocument()">delete</mat-icon>
+                  </div>
+                  <div class="col-11 pr-0 align-content-center">
+                    <p class="mb-0 text-size-14">{{ submitStandForSaleRequestData.titleDocument.fileName }}</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1" [returnAsFile]="true"
-                (emitFileData)="updateTitleDocumentation($event)"></app-file-uploader>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mx-0 justify-content-center">
-          <div class="col-10 px-0">
-            <p class="mb-1 mt-2">Stand Dimensions</p>
-            <div class="row justify-content-between">
-              <mat-form-field class="col-6 pr-2 pl-0">
-                <mat-label>Width (Meter)</mat-label>
-                <input style="color: black;" (input)="numberControlInputWithDecimal(standDimentionsWidthControl)"
-                  matInput maxlength="10" formControlName="standDimentionsWidthControl" placeholder="Width (Meter)">
-                <!-- <mat-error *ngIf="standDimentionsWidthControl?.hasError('required')">Width is required</mat-error> -->
-              </mat-form-field>
-              <mat-form-field class="col-6 pr-0 pl-2">
-                <mat-label>Length (Meter)</mat-label>
-                <input style="color: black;" (input)="numberControlInputWithDecimal(standDimentionsLengthControl)"
-                  matInput maxlength="10" formControlName="standDimentionsLengthControl" placeholder="Length (Meter)">
-                <!-- <mat-error *ngIf="standDimentionsLengthControl?.hasError('required')">Length is required</mat-error> -->
-              </mat-form-field>
+              <div class="col-12 px-0">
+                <app-file-uploader [allowSelectImages]="false" [numOfFilesAllowed]="1" [returnAsFile]="true"
+                  (emitFileData)="updateTitleDocumentation($event)"></app-file-uploader>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- <div class="row mx-0 justify-content-center mt-2">
+          <div class="row mx-0 justify-content-center">
+            <div class="col-10 px-0">
+              <p class="mb-1 mt-2">Stand Dimensions</p>
+              <div class="row justify-content-between">
+                <mat-form-field class="col-6 pr-2 pl-0">
+                  <mat-label>Width (Meter)</mat-label>
+                  <input style="color: black;" (input)="numberControlInputWithDecimal(standDimentionsWidthControl)"
+                    matInput maxlength="10" formControlName="standDimentionsWidthControl" placeholder="Width (Meter)">
+                  <!-- <mat-error *ngIf="standDimentionsWidthControl?.hasError('required')">Width is required</mat-error> -->
+                </mat-form-field>
+                <mat-form-field class="col-6 pr-0 pl-2">
+                  <mat-label>Length (Meter)</mat-label>
+                  <input style="color: black;" (input)="numberControlInputWithDecimal(standDimentionsLengthControl)"
+                    matInput maxlength="10" formControlName="standDimentionsLengthControl" placeholder="Length (Meter)">
+                  <!-- <mat-error *ngIf="standDimentionsLengthControl?.hasError('required')">Length is required</mat-error> -->
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row mx-0 justify-content-center mt-2">
           <mat-form-field class="col-10 px-0">
             <mat-label>Stand Features and Benefits</mat-label>
             <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(standFeaturesAndBenefitsControl)"
@@ -129,90 +130,104 @@
               maxlength="500" formControlName="standFeaturesAndBenefitsControl"
               placeholder="I am selling my stand with the following items (included in the price)"></textarea>
           </mat-form-field>
-        </div> -->
+          </div> -->
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Stand Security</mat-label>
-            <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(standSecurityControl)"
-            (keyup)="inputOnBulletPointControl(standSecurityControl, $event)"
-            (blur)="blurOnBulletPointControl(standSecurityControl)" style="color: black;" matInput required
-            maxlength="500" formControlName="standSecurityControl"
-            placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."></textarea>
-            <!-- <input style="color: black;" matInput required maxlength="500" formControlName="standSecurityControl"
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Stand Security</mat-label>
+              <textarea cdkTextareaAutosize (keydown)="keydownOnBulletPointControl(standSecurityControl)"
+                (keyup)="inputOnBulletPointControl(standSecurityControl, $event)"
+                (blur)="blurOnBulletPointControl(standSecurityControl)" style="color: black;" matInput required
+                maxlength="500" formControlName="standSecurityControl"
+                placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."></textarea>
+              <!-- <input style="color: black;" matInput required maxlength="500" formControlName="standSecurityControl"
               placeholder="Highlight any security measures like CCTV coverage, alarms, Armed Response, etc."> -->
-            <mat-error *ngIf="standSecurityControl?.hasError('required')">Hangar Security is required</mat-error>
-          </mat-form-field>
-        </div>
+              <mat-error *ngIf="standSecurityControl?.hasError('required')">Hangar Security is required</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Asking Price</mat-label>
-            <div class="d-flex">
-              <span *ngIf="askingPriceControl.value" class="currency-input-prefix">ZAR</span>
-              <input style="color: black;" (blur)="thousandSeparatorControlInput(askingPriceControl || undefined)"
-                (input)="numberControlInputWithDecimal(askingPriceControl || undefined)" matInput required
-                maxlength="100" formControlName="askingPriceControl" placeholder="Price in South African Rand(ZAR)">
-            </div>
-            <mat-error *ngIf="askingPriceControl?.hasError('required')">Asking price Built is required</mat-error>
-          </mat-form-field>
-        </div>
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Asking Price</mat-label>
+              <div class="d-flex">
+                <span *ngIf="askingPriceControl.value" class="currency-input-prefix">ZAR</span>
+                <input style="color: black;" (blur)="thousandSeparatorControlInput(askingPriceControl || undefined)"
+                  (input)="numberControlInputWithDecimal(askingPriceControl || undefined)" matInput required
+                  maxlength="100" formControlName="askingPriceControl" placeholder="Price in South African Rand(ZAR)">
+              </div>
+              <mat-error *ngIf="askingPriceControl?.hasError('required')">Asking price Built is required</mat-error>
+            </mat-form-field>
+          </div>
 
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <div class="col-10 px-0">
-            <P class="mb-1">Levies Applicable: [Tick all applicable items]</P>
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <P class="mb-1">Levies Applicable: [Tick all applicable items]</P>
               <div *ngFor="let levieItem of leviesData">
-                <mat-checkbox *ngIf="levieItem.isForStands === '1'" class="col-12 px-0" [checked]="levieItem.isSelected" (change)="levieItem.isSelected = $event.checked">{{ levieItem.levieName }} ZAR{{ levieItem.leviePrice }} per {{ levieItem.levieFrequency}}</mat-checkbox>
+                <mat-checkbox *ngIf="levieItem.isForStands === '1'" class="col-12 px-0" [checked]="levieItem.isSelected"
+                  (change)="levieItem.isSelected = $event.checked">{{ levieItem.levieName }} ZAR{{ levieItem.leviePrice
+                  }} per {{ levieItem.levieFrequency}}</mat-checkbox>
               </div>
+            </div>
           </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <div class="col-10 px-0">
+              <P class="mb-1">High-quality images of stand, showing key features like proximity of the runway or other
+                facilities. </P>
+              <p class="text-size-12 child-path-text">Upload up to 5 supported files. File types: PNG, JPG, JPEG, SVG.
+                Max
+                50MB per file.
+              </p>
+
+              <div *ngIf="submitStandForSaleRequestData.standImages?.length">
+                <div class="row mb-2 mx-0" *ngFor="let image of submitStandForSaleRequestData.standImages">
+
+                  <div class="col-1 px-0 align-content-center">
+                    <mat-icon class="pointer delete-icon align-bottom"
+                      (click)="deleteStandImage(image.fileName)">delete</mat-icon>
+                  </div>
+                  <div class="col-11 pr-0 align-content-center">
+                    <p class="mb-0 text-size-14">{{ image.fileName }}</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-12 px-0">
+                <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000"
+                  [returnAsFile]="true" (emitFileData)="updateStandImages($event)"></app-file-uploader>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mx-0 justify-content-center mt-2">
+            <mat-form-field class="col-10 px-0">
+              <mat-label>Reason for selling</mat-label>
+              <input style="color: black;" matInput required maxlength="500" formControlName="reasonForSellingControl"
+                placeholder="Relocating, Retiring, Upgrading, etc">
+              <mat-error *ngIf="reasonForSellingControl?.hasError('required')">Reason for selling is
+                required</mat-error>
+            </mat-form-field>
+          </div>
+
+
+
         </div>
 
         <div class="row mx-0 justify-content-center mt-2">
-          <div class="col-10 px-0">
-            <P class="mb-1">High-quality images of stand, showing key features like proximity of the runway or other facilities. </P>
-            <p class="text-size-12 child-path-text">Upload up to 5 supported files. File types: PNG, JPG, JPEG, SVG. Max
-              50MB per file.
-            </p>
-
-            <div *ngIf="submitStandForSaleRequestData.standImages?.length">
-              <div class="row mb-2 mx-0" *ngFor="let image of submitStandForSaleRequestData.standImages">
-
-                <div class="col-1 px-0 align-content-center">
-                  <mat-icon class="pointer delete-icon align-bottom"
-                    (click)="deleteStandImage(image.fileName)">delete</mat-icon>
-                </div>
-                <div class="col-11 pr-0 align-content-center">
-                  <p class="mb-0 text-size-14">{{ image.fileName }}</p>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="col-12 px-0">
-              <app-file-uploader [allowSelectImages]="true" [numOfFilesAllowed]="5" [maxFileSize]="50000000" [returnAsFile]="true"
-                (emitFileData)="updateStandImages($event)"></app-file-uploader>
-            </div>
-          </div>
+          <mat-checkbox class="col-10 px-0" [(ngModel)]="isPersonalDetailsAcknowledgementCheckboxChecked">I confirm
+            that I am comfortable with my personal data being publicly available as part of this
+            advertisement.</mat-checkbox>
         </div>
 
-        <div class="row mx-0 justify-content-center mt-2">
-          <mat-form-field class="col-10 px-0">
-            <mat-label>Reason for selling</mat-label>
-            <input style="color: black;" matInput required maxlength="500" formControlName="reasonForSellingControl"
-              placeholder="Relocating, Retiring, Upgrading, etc">
-            <mat-error *ngIf="reasonForSellingControl?.hasError('required')">Reason for selling is required</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="row mx-0 justify-content-center">
-          <div class="red-button mb-4"
-            [ngClass]="{'disable-user-click': isSubmitDisabled()}"
-            (click)="submitClicked()">
+        <div class="row mx-0 justify-content-center mt-4">
+          <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitDisabled()}" (click)="submitClicked()">
             <p class="mb-0">Submit</p>
             <span class="red-button-icon"></span>
           </div>
         </div>
+
       </div>
     </div>
   </mat-expansion-panel>
