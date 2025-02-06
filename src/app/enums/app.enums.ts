@@ -61,6 +61,14 @@ export enum AppRoutes {
 
 export enum Endpoints {
     BaseURL = 'https://www.tedderfield.co.za/api',
+
+    NewBaseURL = 'http://localhost/tedderfield-api/public/api',
+
+    // New members endpoints
+    Login = '/members/login',
+    Register = '/members/regist',
+    CheckWhitelisting = '/members/check-whitelisting',
+
     HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
     HangersForSaleBaseURL = 'https://www.tedderfield.co.za/api/hangers-for-sale/documents/',
@@ -68,9 +76,9 @@ export enum Endpoints {
     ClassifiedsImagesBaseURL = 'https://www.tedderfield.co.za/api/classifieds/images/',
     GettingoKnowYouImagesBaseURL = 'https://www.tedderfield.co.za/api/getting-to-know-you/images/',
     // MembersDocumentsBaseEndpoint = 'https://www.tedderfield.co.za/api/file-system/',
-    Register = '/members/register.php',
-    Login = '/members/login.php',
-    CheckWhitelisting = '/members/get-member.php',
+    // Register = '/members/register.php',
+    // Login = '/members/login.php',
+    // CheckWhitelisting = '/members/get-member.php',
     SendPasswordResetEmail = '/members/email-reset-password.php',
     SubmitPasswordReset = '/members/submit-reset-password.php',
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',

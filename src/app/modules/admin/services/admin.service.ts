@@ -746,7 +746,7 @@ export class AdminService {
 
   public getMembersData() {
     const userId = this.loginService.getLoggedInUserId();
-    return fetch(Endpoints.BaseURL + Endpoints.GetAllMembers, {
+    return fetch('http://localhost/teddefield-airfield-test/members/get-members.php', {
       method: 'post',
       body: JSON.stringify({ requestData: { userId: userId } })
     })
