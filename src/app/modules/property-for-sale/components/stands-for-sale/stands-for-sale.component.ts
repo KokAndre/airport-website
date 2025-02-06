@@ -4,6 +4,7 @@ import { PropertyForSaleService } from '../../services/property-for-sale.service
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { Endpoints, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
+import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-stands-for-sale',
@@ -65,7 +66,15 @@ export class StandsForSaleComponent implements OnInit {
 
         // itemToPush.featuresAndBenefits = standItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
         itemToPush.securty = standItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
-        itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+        // itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+
+        itemToPush.leviesApplicable = AppHelperFunction.splitStringToArray(standItem.leviesApplicable);
+
+        // itemToPush.leviesApplicable = new Array<string>();
+        // const leviesArray = standItem.leviesApplicable.split('\",\"');
+        // leviesArray.forEach(levie => {
+        //   itemToPush.leviesApplicable.push(levie.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`"));
+        // });
 
         this.standsForSaleData.push(itemToPush);
       }
