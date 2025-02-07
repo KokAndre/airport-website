@@ -19,6 +19,7 @@ export class StandsForSaleComponent implements OnInit {
   public standsForSaleData = new Array<GetStandsForSaleReponse.Stands>();
   public displayStandDetails = false;
   public standDetailsToDisplay: GetStandsForSaleReponse.Stands;
+  public scrollPositionBeforeStandDetail = 0;
 
   constructor(public propertyForSaleService: PropertyForSaleService, public appModalService: AppModalService) { }
 
@@ -89,6 +90,7 @@ export class StandsForSaleComponent implements OnInit {
   public viewStandDetails(standItemId: number) {
     this.standDetailsToDisplay = this.standsForSaleData.find(x => x.id === standItemId);
     if (this.standDetailsToDisplay) {
+      this.scrollPositionBeforeStandDetail = document.getElementById('content-container').scrollTop;
       document.getElementById('content-container').scroll({
         top: 0,
         left: 0,
@@ -101,6 +103,14 @@ export class StandsForSaleComponent implements OnInit {
   public backClicked() {
     this.displayStandDetails = false;
     this.standDetailsToDisplay = null;
+    setTimeout(() => {
+       document.getElementById('content-container').scroll({
+      top: this.scrollPositionBeforeStandDetail,
+      left: 0,
+      behavior: 'smooth'
+    });
+    }, 50);
+   
   }
 
   public openTitleDocument(fileDisplayName: string, standId: number) {
