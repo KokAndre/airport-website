@@ -89,4 +89,46 @@
 
   </div>
 
+  <app-arrow-divider class="pointer" (click)="isPriorityExpanded = !isPriorityExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+</div>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isPriorityExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Priority</p>
+      </mat-expansion-panel-header>
+
+      <div class="row mx-0">
+        <div class="red-button my-3" (click)="addPriorityClicked()">
+          <p class="mb-0">Add Priority</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+
+      <table>
+        <tr>
+          <th>Priority</th>
+          <th>Time to complete</th>
+          <th style="flex-wrap: nowrap;"><mat-icon class="ml-1 p-0" fontIcon="delete"></mat-icon></th>
+        </tr>
+  
+        <tr *ngFor="let priority of priorityList">
+          <td class="text-no-wrap" [innerHTML]="priority.name"></td>
+          
+          <td class="text-no-wrap" [innerHTML]="priority.time"></td>
+  
+          <td>
+            <mat-icon class="red-text pointer ml-1 p-0" fontIcon="delete"
+              (click)="deletePriorityClicked(priority)"></mat-icon>
+          </td>
+        </tr>
+  
+      </table>
+
+    </mat-expansion-panel>
+
+  </div>
+
 </div>

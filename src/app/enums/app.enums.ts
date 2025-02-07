@@ -90,6 +90,7 @@ export enum Endpoints {
     GetReportIssueConfigData = '/report-issue/get-report-issue-config-data.php',
 
     UpdateReportIssueCategory = '/report-issue/update-issue-category.php',
+    UpdateReportIssuePriority = '/report-issue/update-issue-priority.php',
     UpdateReportIssuePersonResponsible = '/report-issue/update-issue-person-responsible.php',
     UpdateReportIssueStatus = '/report-issue/update-issue-status.php',
     UpdateReportIssueData = '/report-issue/update-issue-data.php',
@@ -98,6 +99,8 @@ export enum Endpoints {
     AddReportIssueCategory = '/report-issue/add-issue-category.php',
     DeleteReportIssuePersonResponsible = '/report-issue/delete-issue-person-responsible.php',
     AddReportIssuePersonResponsible = '/report-issue/add-issue-person-responsible.php',
+    DeleteReportIssuePriority = '/report-issue/delete-issue-priority.php',
+    AddReportIssuePriority = '/report-issue/add-issue-priority.php',
 
     DeleteReportIssueItem = '/report-issue/delete-report-issue-item.php',
     SubmitGreeninTedderfield = '/greening-tedderfield/submit-greening-tedderfield.php',
@@ -204,7 +207,8 @@ export enum ModalTypes {
     AddFolderModal = 'addFolderModal',
     EditReportIssueData = 'editReportIssueData',
     CaptureMember = 'captureMember',
-    CapturSingleInputField = 'capturSingleInputField'
+    CapturSingleInputField = 'capturSingleInputField',
+    CapturePriorityData = 'capturePriorityData'
 }
 
 export enum ModalOutcomeOptions {

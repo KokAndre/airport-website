@@ -14,6 +14,7 @@
     [ngTemplateOutlet]="EditReportIssueDataTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.CaptureMember" [ngTemplateOutlet]="CaptureMemberTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.CapturSingleInputField" [ngTemplateOutlet]="CaptureSingleInputTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CapturePriorityData" [ngTemplateOutlet]="CapturePriorityTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -488,4 +489,52 @@
     </div>
   </div>
 
+</ng-template>
+
+<ng-template #CapturePriorityTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div class="capture-member-data">
+
+    <div class="row mx-3 justify-content-center">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Priority Description</mat-label>
+        <input style="color: black;" matInput required maxlength="50" [(ngModel)]="capturePriorityData.name">
+        <!-- <mat-error *ngIf="captureMemberNameControl?.hasError('required')">{{ data.details || 'Capture Data' }} is required</mat-error> -->
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-3 justify-content-center">
+      <mat-form-field class="col-12 px-0">
+        <mat-label>Time To Complete</mat-label>
+        <input style="color: black;" matInput required maxlength="50" [(ngModel)]="capturePriorityData.time">
+        <!-- <mat-error *ngIf="captureMemberNameControl?.hasError('required')">{{ data.details || 'Capture Data' }} is required</mat-error> -->
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-0 my-4 justify-content-center">
+      <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+        <p class="mb-0">Cancel</p>
+        <span class="white-button-icon"></span>
+      </div>
+
+      <div class="red-button ml-3"
+        [ngClass]="{'disable-user-click': !capturePriorityData.name && !capturePriorityData.time}"
+        (click)="updatePriorityData()">
+        <p class="mb-0">Save</p>
+        <span class="red-button-icon"></span>
+      </div>
+    </div>
+  </div>
 </ng-template>

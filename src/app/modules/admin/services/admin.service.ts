@@ -302,6 +302,22 @@ export class AdminService {
       });
   }
 
+  public updateReportIssuePriority(reportIssueRequestId: string, priority: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.reportIssueId = reportIssueRequestId;
+    requestData.priority = priority;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssuePriority, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public updateReportIssueData(reportIssueRequestId: string, hangarOrSectionNumber: string, issueDescription: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.loginService.getLoggedInUserId();
@@ -852,6 +868,37 @@ export class AdminService {
     requestData.responsiblePersonName = personResponsible;
 
     return fetch(Endpoints.BaseURL + Endpoints.AddReportIssuePersonResponsible, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteIssuePriority(priorityId: number) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.priorityId = priorityId;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssuePriority, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public addIssuePriority(priorityName: string, priorityTime: string) {
+    let requestData = new UpdateIssueConfigRequest.RootObject();
+    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.priorityName = priorityName;
+    requestData.priorityTime = priorityTime;
+
+    return fetch(Endpoints.BaseURL + Endpoints.AddReportIssuePriority, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

@@ -25,12 +25,13 @@
     <table style="width:100%;">
       <tr>
         <th>ID</th>
+        <th>Date Captured</th>
         <th>Name</th>
 
         <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-baseline">
-            Hangar or Section Number
-            <div class="width-fit-content">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Section
+            <div class="width-fit-content pt-1">
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByPropertyNumber()">unfold_more</mat-icon>
               </span>
@@ -44,12 +45,11 @@
         </th>
 
         <th style="width: 30%;">Issue Description</th>
-        <th>Date Captured</th>
 
         <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-baseline">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
             Category
-            <div class="width-fit-content">
+            <div class="width-fit-content pt-1">
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByCategory()">unfold_more</mat-icon>
               </span>
@@ -63,9 +63,25 @@
         </th>
 
         <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-baseline">
-            Person Responsible
-            <div class="width-fit-content">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Priority
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderDataByPriority()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="priorityMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Assignee
+            <div class="width-fit-content pt-1">
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByPersonResponsible()">unfold_more</mat-icon>
               </span>
@@ -79,9 +95,9 @@
         </th>
 
         <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-baseline">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
             Status
-            <div class="width-fit-content">
+            <div class="width-fit-content pt-1">
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByStatusy()">unfold_more</mat-icon>
               </span>
@@ -103,13 +119,13 @@
       <ng-container *ngFor="let item of reportIssueRequests">
         <tr [hidden]="checkIfRowIsHidden(item)">
           <td class="text-no-wrap" [innerHTML]="item.id"></td>
-          <td class="text-no-wrap" [innerHTML]="item.name"></td>
-          <td class="text-no-wrap" [innerHTML]="item.hangerOrSectionNumber"></td>
-          <td [innerHTML]="item.issueDescription"></td>
           <td class="text-no-wrap" [innerHTML]="item.dateAdded"></td>
+          <td class="text-no-wrap" [innerHTML]="item.name"></td>
+          <td [innerHTML]="item.hangerOrSectionNumber"></td>
+          <td [innerHTML]="item.issueDescription"></td>
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 195px !important;">
               <mat-label>Category</mat-label>
               <mat-select [(value)]="item.category"
                 (selectionChange)="updateReportIssueCategory(item.id, $event.value)">
@@ -120,8 +136,19 @@
           </td>
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
-              <mat-label>Person Responsible</mat-label>
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 175px !important;">
+              <mat-label>Priority</mat-label>
+              <mat-select [(value)]="item.priority"
+                (selectionChange)="updateReposrtIssuePriority(item.id, $event.value)">
+                <mat-option *ngFor="let priority of priorityList" class="px-1" [value]="priority.name">{{
+                  priority.name }} [{{ priority.time }}]</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 160px !important;">
+              <mat-label>Assignee</mat-label>
               <mat-select [(value)]="item.personResponsible"
                 (selectionChange)="updateReportIssuePersonResponsible(item.id, $event.value)">
                 <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{
@@ -136,7 +163,7 @@
             (click)="markIssueAsFollowedUpClicked(item)"></mat-icon></td> -->
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 140px !important;">
               <mat-label>Status</mat-label>
               <mat-select [(value)]="item.status" (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
                 <mat-option class="px-1" value="notStarted">Not Started</mat-option>
@@ -238,5 +265,24 @@
       }}</mat-checkbox>
     <mat-divider *ngIf="!last"></mat-divider>
   </div>
+
+</mat-menu>
+
+<mat-menu #priorityMenu="matMenu" yPosition="above">
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPriorityClicked();"
+    [(ngModel)]="allPriorityCheckbox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let priority of priorityList; let last = last">
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="priority.isFilterSelected">{{
+      priority.name
+      }}</mat-checkbox>
+    <mat-divider></mat-divider>
+  </div>
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+  [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
 
 </mat-menu>

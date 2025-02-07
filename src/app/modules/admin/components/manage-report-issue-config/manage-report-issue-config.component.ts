@@ -12,8 +12,10 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 export class ManageReportIssueConfigComponent implements OnInit {
   public isCategoryExpanded = true;
   public isPersonResponsibleExpanded = true;
+  public isPriorityExpanded = true;
   public categoryList: GetReportIssueDataResponse.Category[];
   public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
+  public priorityList: GetReportIssueDataResponse.priorityList[];
 
   constructor(public adminService: AdminService, public appModalService: AppModalService) { }
 
@@ -22,10 +24,11 @@ export class ManageReportIssueConfigComponent implements OnInit {
   }
 
   public getManageReportIssueConfig() {
-    this.adminService.getReportIssueData().then((results: GetReportIssueDataResponse.RootObject) => {
+    this.adminService.getReportIssueConfigData().then((results: GetReportIssueDataResponse.RootObject) => {
       if (results.status === 200) {
         this.categoryList = results.categories;
         this.responsiblePersonList = results.resposiblePersons;
+        this.priorityList = results.priority
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Config', results.message, null);
       }
@@ -85,6 +88,45 @@ export class ManageReportIssueConfigComponent implements OnInit {
     if (modalOutcome === ModalOutcomeOptions.Update) {
       this.adminService.addIssuePersonResponsible(name).then(results => {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Person Responsible', results.message, null);
+        if (results.status === 200) {
+          this.getManageReportIssueConfig();
+        }
+      });
+    }
+  }
+
+  ///
+  ///
+  //
+  //
+  //
+  //
+  //
+
+
+  public deletePriorityClicked(priority: GetReportIssueDataResponse.priorityList) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.ConfirmationModal, 'Delete Priority', `Are you sure you want to delete the following prority: </br> ${priority.name}?`, null, this.deletePriorityOutcome.bind(this, priority));
+  }
+
+  public deletePriorityOutcome(priority: GetReportIssueDataResponse.priorityList, modalOutcome: string) {
+    if (modalOutcome === ModalOutcomeOptions.Confirm) {
+      this.adminService.deleteIssuePriority(priority.id).then(results => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Priority', results.message, null);
+        if (results.status === 200) {
+          this.getManageReportIssueConfig();
+        }
+      });
+    }
+  }
+
+  public addPriorityClicked() {
+    this.appModalService.ShowConfirmationModal(ModalTypes.CapturePriorityData, 'Add Priority', 'Priority', null, this.addPriorityOutcome.bind(this));
+  }
+
+  public addPriorityOutcome(modalOutcome: string, priorityData: GetReportIssueDataResponse.priorityList) {
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.adminService.addIssuePriority(priorityData.name, priorityData.time).then(results => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Priority', results.message, null);
         if (results.status === 200) {
           this.getManageReportIssueConfig();
         }
