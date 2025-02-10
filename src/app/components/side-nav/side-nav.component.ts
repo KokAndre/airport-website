@@ -179,7 +179,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
           // Close information modals after 3 seconds
           setTimeout(() => {
             this.modalDialog.closeAll();
-          }, 3000);
+          }, 1500);
           break;
 
         case ModalTypes.ConfirmationModal:
