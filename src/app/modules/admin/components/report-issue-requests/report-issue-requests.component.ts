@@ -16,6 +16,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
   public priorityList: GetReportIssueDataResponse.priorityList[];
   public allowAdminToDelete = false;
+  public loggedInUserName = '';
 
   // Person Responsible Filters
   public blankPersonResponsibleCheckBox = true;
@@ -39,10 +40,10 @@ export class ReportIssueRequestsComponent implements OnInit {
   public allPropertyNumberCheckBox = true;
   public sortAlphabeticalPropertyNumber = false;
 
-    // Priority Filters
-    public blankPriorityCheckBox = true;
-    public allPriorityCheckbox = true;
-    public sortAlphabeticalPriority = false;
+  // Priority Filters
+  public blankPriorityCheckBox = true;
+  public allPriorityCheckbox = true;
+  public sortAlphabeticalPriority = false;
 
   constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
 
@@ -53,6 +54,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   private checkIfAdminIsAllowedToDelete() {
     const userDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserName = userDetails.name;
     if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
       this.allowAdminToDelete = true;
     } else {
@@ -186,11 +188,26 @@ export class ReportIssueRequestsComponent implements OnInit {
   public orderDataByPriority() {
     this.sortAlphabeticalPriority = !this.sortAlphabeticalPriority;
 
-    if (this.sortAlphabeticalPriority) {
-      this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? 1 : -1);
-    } else {
-      this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? -1 : 1);
-    }
+    // if (this.sortAlphabeticalPriority) {
+      // this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? 1 : -1);
+    // } else {
+    //   this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? -1 : 1);
+    // }
+
+    // New Prority Sort
+    // FIrtst order the priority list
+    this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+
+    // Loop through the priority list, and pust the item in order of the priority list
+    let newOrderedList = new Array<GetReportIssueDataResponse.Requests>();
+    this.priorityList.forEach(priority => {
+      newOrderedList = [...newOrderedList, ...this.reportIssueRequests.filter(x => x.priority === priority.name)];
+    });
+
+    // Add in the blank priority items
+    newOrderedList = [...newOrderedList, ...this.reportIssueRequests.filter(x => x.priority === '')];
+
+    this.reportIssueRequests = newOrderedList;
   }
 
   public allStatusClicked() {
@@ -218,7 +235,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.blankPriorityCheckBox = this.allPriorityCheckbox
   }
 
-  
+
   public allPriorityClicked() {
     this.priorityList.forEach(x => {
       x.isFilterSelected = this.allPriorityCheckbox;
@@ -234,6 +251,28 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => a.hangerOrSectionNumber > b.hangerOrSectionNumber ? -1 : 1);
     }
+  }
+
+  public myOpenTicketsClicked() {
+    // Filter only by person that is logged in
+    this.responsiblePersonList.forEach((x, index) => {
+      if (x.name?.toLowerCase() === this.loggedInUserName?.toLowerCase()) {
+        this.responsiblePersonList[index].isFilterSelected = true;
+      } else {
+        this.responsiblePersonList[index].isFilterSelected = false;
+      }
+    });
+    this.blankPersonResponsibleCheckBox = false;
+
+    // Filter on all ticketsd that are not in a Done status
+    this.allStatusCheckBox = false;
+    this.statusNotStartedCheckBox = true;
+    this.statusInProgressCheckBox = true;
+    this.statusDoneCheckBox = false;
+
+    // Order all tickets by Priority
+    this.sortAlphabeticalPriority
+    this.orderDataByPriority();
   }
 
 

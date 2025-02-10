@@ -15,6 +15,11 @@
 <div *ngIf="reportIssueRequests?.length" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
 
   <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4 mr-3" (click)="myOpenTicketsClicked()">
+      <p class="mb-0">My Open Tickets</p>
+      <span class="red-button-icon"></span>
+    </div>
+
     <div class="red-button mb-4" (click)="exportToExcel()">
       <p class="mb-0">Export To Excel</p>
       <span class="red-button-icon"></span>
@@ -91,7 +96,7 @@
                 </button>
               </span>
             </div>
-          </div>          
+          </div>
         </th>
 
         <th class="text-nowrap">
@@ -125,7 +130,8 @@
           <td [innerHTML]="item.issueDescription"></td>
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 195px !important;">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 195px !important;">
               <mat-label>Category</mat-label>
               <mat-select [(value)]="item.category"
                 (selectionChange)="updateReportIssueCategory(item.id, $event.value)">
@@ -136,7 +142,8 @@
           </td>
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 175px !important;">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 175px !important;">
               <mat-label>Priority</mat-label>
               <mat-select [(value)]="item.priority"
                 (selectionChange)="updateReposrtIssuePriority(item.id, $event.value)">
@@ -147,7 +154,8 @@
           </td>
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 160px !important;">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 160px !important;">
               <mat-label>Assignee</mat-label>
               <mat-select [(value)]="item.personResponsible"
                 (selectionChange)="updateReportIssuePersonResponsible(item.id, $event.value)">
@@ -163,7 +171,8 @@
             (click)="markIssueAsFollowedUpClicked(item)"></mat-icon></td> -->
 
           <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic" style="width: 140px !important;">
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 140px !important;">
               <mat-label>Status</mat-label>
               <mat-select [(value)]="item.status" (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
                 <mat-option class="px-1" value="notStarted">Not Started</mat-option>
@@ -283,6 +292,6 @@
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-  [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
+    [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
 
 </mat-menu>
