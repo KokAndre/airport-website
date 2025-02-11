@@ -148,7 +148,7 @@
               <mat-select [(value)]="item.priority"
                 (selectionChange)="updateReposrtIssuePriority(item.id, $event.value)">
                 <mat-option *ngFor="let priority of priorityList" class="px-1" [value]="priority.name">{{
-                  priority.name }} [{{ priority.time }}]</mat-option>
+                  priority.name }} [{{ priority.time || 'No Time Frame' }}]</mat-option>
               </mat-select>
             </mat-form-field>
           </td>
