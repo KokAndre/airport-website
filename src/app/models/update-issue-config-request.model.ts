@@ -5,5 +5,9 @@ export namespace UpdateIssueConfigRequest {
         category: string;
         responsiblePersonId: number;
         responsiblePersonName: string;
+        // Priority Fields
+        priorityId: number;
+        priorityName: string;
+        priorityTime: string
     }
 }

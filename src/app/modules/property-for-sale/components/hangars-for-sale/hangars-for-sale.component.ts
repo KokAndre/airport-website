@@ -19,6 +19,7 @@ export class HangarsForSaleComponent implements OnInit {
   public hangersForSaleData = new Array<GetHangersForSaleReponse.Hanger>();
   public displayHangerDetails = false;
   public hangerDetailsToDisplay: GetHangersForSaleReponse.Hanger;
+  public scrollPositionBeforeHangarDetail = 0;
 
   constructor(public propertyForSaleService: PropertyForSaleService, public appModalService: AppModalService) { }
 
@@ -92,6 +93,7 @@ export class HangarsForSaleComponent implements OnInit {
     // this.hangerDetailsToDisplay = null;
     this.hangerDetailsToDisplay = this.hangersForSaleData.find(x => x.id === hangerItemId);
     if (this.hangerDetailsToDisplay) {
+      this.scrollPositionBeforeHangarDetail = document.getElementById('content-container').scrollTop;
       document.getElementById('content-container').scroll({
         top: 0,
         left: 0,
@@ -104,6 +106,14 @@ export class HangarsForSaleComponent implements OnInit {
   public backClicked() {
     this.displayHangerDetails = false;
     this.hangerDetailsToDisplay = null;
+
+    setTimeout(() => {
+      document.getElementById('content-container').scroll({
+     top: this.scrollPositionBeforeHangarDetail,
+     left: 0,
+     behavior: 'smooth'
+   });
+   }, 50);
   }
 
   public openTitleDocument(fileDisplayName: string, handerId: number) {

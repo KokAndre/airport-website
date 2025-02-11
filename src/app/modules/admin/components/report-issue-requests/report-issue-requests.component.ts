@@ -4,6 +4,7 @@ import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { LoginService } from 'src/app/services/login/login.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel.service';
 
 @Component({
   selector: 'app-report-issue-requests',
@@ -14,7 +15,9 @@ export class ReportIssueRequestsComponent implements OnInit {
   public reportIssueRequests: GetReportIssueDataResponse.Requests[];
   public categoryList: GetReportIssueDataResponse.Category[];
   public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
+  public priorityList: GetReportIssueDataResponse.priorityList[];
   public allowAdminToDelete = false;
+  public loggedInUserName = '';
 
   // Person Responsible Filters
   public blankPersonResponsibleCheckBox = true;
@@ -33,12 +36,20 @@ export class ReportIssueRequestsComponent implements OnInit {
   public allStatusCheckBox = true;
   public sortAlphabeticalStatus = false;
 
-  // Hangar Or STand Number Filters
+  // Hangar Or Stand Number Filters
   public propertyNumbersList: GetReportIssueDataResponse.PropertyNumber[];
   public allPropertyNumberCheckBox = true;
   public sortAlphabeticalPropertyNumber = false;
 
-  constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
+  // Priority Filters
+  public blankPriorityCheckBox = true;
+  public allPriorityCheckbox = true;
+  public sortAlphabeticalPriority = false;
+
+  constructor(private adminService: AdminService,
+    private appModalService: AppModalService,
+    public loginService: LoginService,
+  public excelService: ExcelService) { }
 
   ngOnInit() {
     this.getReportIssueData();
@@ -47,6 +58,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   private checkIfAdminIsAllowedToDelete() {
     const userDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserName = userDetails.name;
     if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
       this.allowAdminToDelete = true;
     } else {
@@ -60,6 +72,7 @@ export class ReportIssueRequestsComponent implements OnInit {
         this.reportIssueRequests = results.requests;
         this.categoryList = results.categories;
         this.responsiblePersonList = results.resposiblePersons;
+        this.priorityList = results.priority;
 
         this.propertyNumbersList = new Array<GetReportIssueDataResponse.PropertyNumber>();
         this.reportIssueRequests.forEach(request => {
@@ -76,6 +89,10 @@ export class ReportIssueRequestsComponent implements OnInit {
         });
 
         this.responsiblePersonList.forEach(x => {
+          x.isFilterSelected = true;
+        });
+
+        this.priorityList.forEach(x => {
           x.isFilterSelected = true;
         });
 
@@ -125,6 +142,16 @@ export class ReportIssueRequestsComponent implements OnInit {
       return true
     }
 
+    const priorityOfRow = this.priorityList.find(x => x.name === row.priority);
+
+    if (priorityOfRow) {
+      if (!priorityOfRow?.isFilterSelected) {
+        return true;
+      }
+    } else if (!this.blankPriorityCheckBox) {
+      return true;
+    }
+
     return false;
   }
 
@@ -162,11 +189,37 @@ export class ReportIssueRequestsComponent implements OnInit {
     }
   }
 
-  public allStatusClicked() {
-    this.propertyNumbersList.forEach(x => {
-      x.isFilterSelected = this.allPropertyNumberCheckBox;
+  public orderDataByPriority() {
+    this.sortAlphabeticalPriority = !this.sortAlphabeticalPriority;
+
+    // if (this.sortAlphabeticalPriority) {
+    // this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? 1 : -1);
+    // } else {
+    //   this.reportIssueRequests.sort((a, b) => a.priority > b.priority ? -1 : 1);
+    // }
+
+    // New Prority Sort
+    // FIrtst order the priority list
+    this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+
+    // Loop through the priority list, and pust the item in order of the priority list
+    let newOrderedList = new Array<GetReportIssueDataResponse.Requests>();
+    this.priorityList.forEach(priority => {
+      newOrderedList = [...newOrderedList, ...this.reportIssueRequests.filter(x => x.priority === priority.name)];
     });
-    this.blankCategoryCheckBox = this.allPropertyNumberCheckBox;
+
+    // Add in the blank priority items
+    newOrderedList = [...newOrderedList, ...this.reportIssueRequests.filter(x => x.priority === '')];
+
+    this.reportIssueRequests = newOrderedList;
+  }
+
+  public allStatusClicked() {
+    this.allStatusCheckBox = !this.allCategoryCheckbox;
+
+    this.statusNotStartedCheckBox = this.allStatusCheckBox;
+    this.statusInProgressCheckBox = this.allStatusCheckBox;
+    this.statusDoneCheckBox = this.allStatusCheckBox;
   }
 
   public orderDataByStatusy() {
@@ -179,14 +232,19 @@ export class ReportIssueRequestsComponent implements OnInit {
     }
   }
 
-
-
-
-
   public allProperyNumberClicked() {
     this.propertyNumbersList.forEach(x => {
       x.isFilterSelected = this.allPropertyNumberCheckBox;
     });
+    this.blankPriorityCheckBox = this.allPriorityCheckbox
+  }
+
+
+  public allPriorityClicked() {
+    this.priorityList.forEach(x => {
+      x.isFilterSelected = this.allPriorityCheckbox;
+    });
+    this.blankPriorityCheckBox = this.allPriorityCheckbox;
   }
 
   public orderDataByPropertyNumber() {
@@ -197,6 +255,28 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => a.hangerOrSectionNumber > b.hangerOrSectionNumber ? -1 : 1);
     }
+  }
+
+  public myOpenTicketsClicked() {
+    // Filter only by person that is logged in
+    this.responsiblePersonList.forEach((x, index) => {
+      if (x.name?.toLowerCase() === this.loggedInUserName?.toLowerCase()) {
+        this.responsiblePersonList[index].isFilterSelected = true;
+      } else {
+        this.responsiblePersonList[index].isFilterSelected = false;
+      }
+    });
+    this.blankPersonResponsibleCheckBox = false;
+
+    // Filter on all ticketsd that are not in a Done status
+    this.allStatusCheckBox = false;
+    this.statusNotStartedCheckBox = true;
+    this.statusInProgressCheckBox = true;
+    this.statusDoneCheckBox = false;
+
+    // Order all tickets by Priority
+    this.sortAlphabeticalPriority
+    this.orderDataByPriority();
   }
 
 
@@ -220,7 +300,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       this.appModalService.CloseModal();
       this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
         if (results.status === 200) {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+          // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
           this.getReportIssueData();
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
@@ -231,19 +311,33 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   public updateReportIssueCategory(reportIssueRequestId: string, reportIssueCategory: string) {
     this.adminService.updateReportIssueCategory(reportIssueRequestId, reportIssueCategory).then(results => {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Category', results.message, null);
+      if (results.status !== 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Category', results.message, null);
+      }
+    });
+  }
+
+  public updateReposrtIssuePriority(reportIssueRequestId: string, reportIssuePriority: string) {
+    this.adminService.updateReportIssuePriority(reportIssueRequestId, reportIssuePriority).then(results => {
+      if (results.status !== 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Priority', results.message, null);
+      }
     });
   }
 
   public updateReportIssuePersonResponsible(reportIssueRequestId: string, reportIssuePersonResponsible: string) {
     this.adminService.updateReportIssuePersonResponsible(reportIssueRequestId, reportIssuePersonResponsible).then(results => {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Responsible Person', results.message, null);
+      if (results.status !== 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Responsible Person', results.message, null);
+      }
     });
   }
 
   public updateReportIssueStatus(reportIssueRequestId: string, reportIssueStatus: string) {
     this.adminService.updateReportIssueStatus(reportIssueRequestId, reportIssueStatus).then(results => {
-      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
+      if (results.status !== 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
+      }
     });
   }
 
@@ -255,7 +349,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
       this.adminService.deleteReportIssueEntry(reportIssueRequest.id).then(results => {
         if (results.status === 200) {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
+          // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
           this.getReportIssueData();
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
@@ -265,7 +359,38 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public exportToExcel() {
-    this.adminService.exportAsExcelFile(this.reportIssueRequests, 'Report Issue Requests');
+    const dataForExcell = new Array<any>();
+
+    this.reportIssueRequests.forEach(x => {
+      if (!this.checkIfRowIsHidden(x)) {
+        const priorityItem = this.priorityList.find(priority => priority.name === x.priority);
+        const itemToPush = [
+          x.id || '',
+          x.dateAdded || '',
+          x.name || '',
+          x.hangerOrSectionNumber || '',
+          x.issueDescription || '',
+          x.category || '',
+
+          priorityItem.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
+
+          x.personResponsible || '',
+          x.status || ''
+        ];
+
+
+        dataForExcell.push(itemToPush);
+      }
+    });
+
+
+    const fileName = 'Report Issue Requests';
+    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
+
+    console.log('DAT FOR EXCEL: ', dataForExcell);
+    
+    // this.adminService.exportAsExcelFile(dataForExcell, 'Report Issue Requests');
+    this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }
 
 }

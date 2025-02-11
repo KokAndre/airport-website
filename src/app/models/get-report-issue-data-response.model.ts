@@ -6,6 +6,7 @@ export namespace GetReportIssueDataResponse {
     requests: Requests[];
     categories: Category[];
     resposiblePersons: ResponsiblePerson[];
+    priority: priorityList[];
   }
 
   export class Requests {
@@ -19,6 +20,7 @@ export namespace GetReportIssueDataResponse {
     category: string
     status: string
     statusDateChanged: string;
+    priority: string;
   }
 
   export class Category {
@@ -30,6 +32,13 @@ export namespace GetReportIssueDataResponse {
   export class ResponsiblePerson {
     id: number;
     name: string;
+    isFilterSelected: boolean;
+  }
+
+  export class priorityList {
+    id: number;
+    name: string;
+    time: string
     isFilterSelected: boolean;
   }
 

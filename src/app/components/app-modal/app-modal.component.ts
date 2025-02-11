@@ -30,6 +30,7 @@ export class AppModalComponent implements OnInit {
   public captureMemberFormGroup: FormGroup;
   public memberData: UpdateMembersRequest.RootObject;
   public captureSingleFieldData: string;
+  public capturePriorityData: GetReportIssueDataResponse.priorityList;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
 
@@ -84,6 +85,16 @@ export class AppModalComponent implements OnInit {
 
         this.initializeCaptureMemberFormControls();
         break;
+
+        case ModalTypes.CapturePriorityData:
+          if (this.data.inputValues) {
+            this.capturePriorityData = this.data.inputValues;
+          } else {
+            this.capturePriorityData = new GetReportIssueDataResponse.priorityList();
+          }
+          
+          this.isLoading = false;
+          break;
 
       default:
         this.isLoading = false;
@@ -292,6 +303,10 @@ export class AppModalComponent implements OnInit {
 
   public updateSinglrFieldData() {
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.captureSingleFieldData);
+  }
+
+  public updatePriorityData() {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.capturePriorityData);
   }
 
   public checkIfUserIsLoggedIn() {

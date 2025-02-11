@@ -4,6 +4,7 @@ import { PropertyForSaleService } from '../../services/property-for-sale.service
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { Endpoints, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
+import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 
 @Component({
   selector: 'app-stands-for-sale',
@@ -18,6 +19,7 @@ export class StandsForSaleComponent implements OnInit {
   public standsForSaleData = new Array<GetStandsForSaleReponse.Stands>();
   public displayStandDetails = false;
   public standDetailsToDisplay: GetStandsForSaleReponse.Stands;
+  public scrollPositionBeforeStandDetail = 0;
 
   constructor(public propertyForSaleService: PropertyForSaleService, public appModalService: AppModalService) { }
 
@@ -65,7 +67,15 @@ export class StandsForSaleComponent implements OnInit {
 
         // itemToPush.featuresAndBenefits = standItem.featuresAndBenefits?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
         itemToPush.securty = standItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
-        itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+        // itemToPush.leviesApplicable = standItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`")?.split(',');
+
+        itemToPush.leviesApplicable = AppHelperFunction.splitStringToArray(standItem.leviesApplicable);
+
+        // itemToPush.leviesApplicable = new Array<string>();
+        // const leviesArray = standItem.leviesApplicable.split('\",\"');
+        // leviesArray.forEach(levie => {
+        //   itemToPush.leviesApplicable.push(levie.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "`"));
+        // });
 
         this.standsForSaleData.push(itemToPush);
       }
@@ -80,6 +90,7 @@ export class StandsForSaleComponent implements OnInit {
   public viewStandDetails(standItemId: number) {
     this.standDetailsToDisplay = this.standsForSaleData.find(x => x.id === standItemId);
     if (this.standDetailsToDisplay) {
+      this.scrollPositionBeforeStandDetail = document.getElementById('content-container').scrollTop;
       document.getElementById('content-container').scroll({
         top: 0,
         left: 0,
@@ -92,6 +103,14 @@ export class StandsForSaleComponent implements OnInit {
   public backClicked() {
     this.displayStandDetails = false;
     this.standDetailsToDisplay = null;
+    setTimeout(() => {
+       document.getElementById('content-container').scroll({
+      top: this.scrollPositionBeforeStandDetail,
+      left: 0,
+      behavior: 'smooth'
+    });
+    }, 50);
+   
   }
 
   public openTitleDocument(fileDisplayName: string, standId: number) {

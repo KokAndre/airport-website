@@ -128,9 +128,9 @@ export class GalleryAdminPageComponent implements OnInit {
 
       const currentImageLength = section.images?.length || 0;
 
-      if (currentImageLength < 12) {
+      if (currentImageLength < 24) {
 
-        const numOfImagesLeft = 12 - currentImageLength;
+        const numOfImagesLeft = 24 - currentImageLength;
 
         if (imageDataArray.length > numOfImagesLeft) {
           imageDataArray = imageDataArray.splice(0, numOfImagesLeft);
