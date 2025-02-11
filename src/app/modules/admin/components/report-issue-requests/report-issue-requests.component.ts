@@ -4,6 +4,7 @@ import { AdminService } from '../../services/admin.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { LoginService } from 'src/app/services/login/login.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel.service';
 
 @Component({
   selector: 'app-report-issue-requests',
@@ -45,7 +46,10 @@ export class ReportIssueRequestsComponent implements OnInit {
   public allPriorityCheckbox = true;
   public sortAlphabeticalPriority = false;
 
-  constructor(private adminService: AdminService, private appModalService: AppModalService, public loginService: LoginService) { }
+  constructor(private adminService: AdminService,
+    private appModalService: AppModalService,
+    public loginService: LoginService,
+  public excelService: ExcelService) { }
 
   ngOnInit() {
     this.getReportIssueData();
@@ -355,16 +359,38 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public exportToExcel() {
-    const dataForExcell = new Array<GetReportIssueDataResponse.Requests>();
+    const dataForExcell = new Array<any>();
 
     this.reportIssueRequests.forEach(x => {
       if (!this.checkIfRowIsHidden(x)) {
-        dataForExcell.push(x);
-      }
-    })
+        const priorityItem = this.priorityList.find(priority => priority.name === x.priority);
+        const itemToPush = [
+          x.id || '',
+          x.dateAdded || '',
+          x.name || '',
+          x.hangerOrSectionNumber || '',
+          x.issueDescription || '',
+          x.category || '',
 
+          priorityItem.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
+
+          x.personResponsible || '',
+          x.status || ''
+        ];
+
+
+        dataForExcell.push(itemToPush);
+      }
+    });
+
+
+    const fileName = 'Report Issue Requests';
+    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
+
+    console.log('DAT FOR EXCEL: ', dataForExcell);
     
-    this.adminService.exportAsExcelFile(dataForExcell, 'Report Issue Requests');
+    // this.adminService.exportAsExcelFile(dataForExcell, 'Report Issue Requests');
+    this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }
 
 }
