@@ -6,6 +6,12 @@ import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { LoginService } from 'src/app/services/login/login.service';
 import { ExcelService } from 'src/app/modules/shared/services/excel.service';
 
+export enum StatusEnum {
+  notStarted = "Not Started",
+  inProgress = "In Progress",
+  done = "Done",
+}
+
 @Component({
   selector: 'app-report-issue-requests',
   templateUrl: './report-issue-requests.component.html',
@@ -32,7 +38,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   // Status Filters
   public statusNotStartedCheckBox = true;
   public statusInProgressCheckBox = true;
-  public statusDoneCheckBox = true;
+  public statusDoneCheckBox = false;
   public allStatusCheckBox = true;
   public sortAlphabeticalStatus = false;
 
@@ -49,7 +55,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   constructor(private adminService: AdminService,
     private appModalService: AppModalService,
     public loginService: LoginService,
-  public excelService: ExcelService) { }
+    public excelService: ExcelService) { }
 
   ngOnInit() {
     this.getReportIssueData();
@@ -95,6 +101,8 @@ export class ReportIssueRequestsComponent implements OnInit {
         this.priorityList.forEach(x => {
           x.isFilterSelected = true;
         });
+
+        this.orderDataByPriority();
 
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Data', results.message, null);
@@ -199,8 +207,12 @@ export class ReportIssueRequestsComponent implements OnInit {
     // }
 
     // New Prority Sort
-    // FIrtst order the priority list
-    this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+    // Firtst order the priority list
+    if (this.sortAlphabeticalPriority) {
+      this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+    } else {
+      this.priorityList.sort((a, b) => a.id > b.id ? -1 : 1);
+    }
 
     // Loop through the priority list, and pust the item in order of the priority list
     let newOrderedList = new Array<GetReportIssueDataResponse.Requests>();
@@ -275,7 +287,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.statusDoneCheckBox = false;
 
     // Order all tickets by Priority
-    this.sortAlphabeticalPriority
+    this.sortAlphabeticalPriority = false;
     this.orderDataByPriority();
   }
 
@@ -375,7 +387,7 @@ export class ReportIssueRequestsComponent implements OnInit {
           priorityItem.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
 
           x.personResponsible || '',
-          x.status || ''
+          StatusEnum[x.status] || ''
         ];
 
 
@@ -387,9 +399,8 @@ export class ReportIssueRequestsComponent implements OnInit {
     const fileName = 'Report Issue Requests';
     const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
 
-    console.log('DAT FOR EXCEL: ', dataForExcell);
-    
-    // this.adminService.exportAsExcelFile(dataForExcell, 'Report Issue Requests');
+    // console.log('DAT FOR EXCEL: ', dataForExcell);
+
     this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }
 
