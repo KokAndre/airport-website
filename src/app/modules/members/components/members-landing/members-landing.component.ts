@@ -33,11 +33,11 @@ export class MembersLandingComponent implements OnInit {
   }
 
   public loginClicked() {
-    this.loginService.checkWhitelisting(this.loginEmailControl?.value).then((result: GetUserDataResponse.RootObject) => {
+    this.loginService.checkWhitelisting(this.loginEmailControl?.value).subscribe((result: GetUserDataResponse.RootObject) => {
       if (result.status === 200) {
         this.addPrefferedEmailToLocalStorage();
         this.userData = result.data;
-        this.displayLoginScreen = true;
+        // this.displayLoginScreen = true;
       }
     });
   }

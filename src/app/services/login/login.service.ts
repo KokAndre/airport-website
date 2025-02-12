@@ -18,21 +18,26 @@ import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request
 export class LoginService {
   public loggedInUser: string;
 
-  constructor(http: HttpClient, public appModalService: AppModalService, public router: Router) {
+  constructor(public http: HttpClient, public appModalService: AppModalService, public router: Router) {
   }
 
   public checkWhitelisting(userEmail: string) {
-    return fetch(Endpoints.BaseURL + Endpoints.CheckWhitelisting, {
-      method: 'post',
-      body: JSON.stringify({ userEmail: userEmail })
-    })
-      .then(response => response.json())
-      .then((data: GetUserDataResponse.RootObject) => {
-        if (data.status !== 200) {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, data.header, data.message, null);
-        }
-        return data;
-      });
+    // return fetch(Endpoints.NewBaseURL + Endpoints.CheckWhitelisting, {
+    //   method: 'post',
+    //   body: JSON.stringify({ userEmail: userEmail })
+    // })
+    //   .then(response => response.json())
+    //   .then((data: GetUserDataResponse.RootObject) => {
+    //     if (data.status !== 200) {
+    //       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, data.header, data.message, null);
+    //     }
+    //     return data;
+    //   });
+
+
+
+      
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.CheckWhitelisting, { userEmail: userEmail });
   }
 
   public registerNewUser(requestData: RegisterRequest) {
