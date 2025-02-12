@@ -63,7 +63,7 @@ export class ExcelService {
               maxLength = columnLength;
           }
       });
-      column.width = maxLength < 10 ? 10 : (maxLength > 50 ? 50 : maxLength);
+      column.width = maxLength < 10 ? 10 : (maxLength > 120 ? 120 : maxLength);
   });
 
 

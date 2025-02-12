@@ -32,7 +32,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   // Status Filters
   public statusNotStartedCheckBox = true;
   public statusInProgressCheckBox = true;
-  public statusDoneCheckBox = true;
+  public statusDoneCheckBox = false;
   public allStatusCheckBox = true;
   public sortAlphabeticalStatus = false;
 
@@ -95,6 +95,8 @@ export class ReportIssueRequestsComponent implements OnInit {
         this.priorityList.forEach(x => {
           x.isFilterSelected = true;
         });
+
+        this.orderDataByPriority();
 
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Data', results.message, null);
@@ -199,8 +201,12 @@ export class ReportIssueRequestsComponent implements OnInit {
     // }
 
     // New Prority Sort
-    // FIrtst order the priority list
-    this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+    // Firtst order the priority list
+    if (this.sortAlphabeticalPriority) {
+      this.priorityList.sort((a, b) => a.id > b.id ? 1 : -1);
+    } else {
+      this.priorityList.sort((a, b) => a.id > b.id ? -1 : 1);
+    }
 
     // Loop through the priority list, and pust the item in order of the priority list
     let newOrderedList = new Array<GetReportIssueDataResponse.Requests>();
