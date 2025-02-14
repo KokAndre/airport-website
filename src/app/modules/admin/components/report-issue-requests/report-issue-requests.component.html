@@ -174,10 +174,10 @@
             <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
               style="width: 140px !important;">
               <mat-label>Status</mat-label>
-              <mat-select [(value)]="item.status" (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
+              <mat-select [(value)]="item.status" [disabled]="item.status === 'done' && !allowAdminToDelete" (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
                 <mat-option class="px-1" value="notStarted">Not Started</mat-option>
                 <mat-option class="px-1" value="inProgress">In Progress</mat-option>
-                <mat-option class="px-1" value="done">Done</mat-option>
+                <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
               </mat-select>
             </mat-form-field>
           </td>
