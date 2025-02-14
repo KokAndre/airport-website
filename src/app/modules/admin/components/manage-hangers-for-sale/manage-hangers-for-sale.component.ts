@@ -33,7 +33,6 @@ export class ManageHangersForSaleComponent implements OnInit {
     });
   }
   public formatData(results: any) {
-    console.log('DATA TO FORMAT: ', results);
     this.hangersForSaleData = new Array<GetHangersForSaleReponse.Hanger>();
     results.forEach(hangerItem => {
       const itemToPush = new GetHangersForSaleReponse.Hanger();
@@ -75,8 +74,6 @@ export class ManageHangersForSaleComponent implements OnInit {
       itemToPush.securty = hangerItem.securty?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
       itemToPush.additionalInfrastructure = hangerItem.additionalInfrastructure?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
       itemToPush.leviesApplicable = hangerItem.leviesApplicable?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
-
-      console.log('ITEM TO PUSH: ', itemToPush);
 
       this.hangersForSaleData.push(itemToPush);
     });

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Endpoints } from 'src/app/enums/app.enums';
+import { Endpoints, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
 import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
@@ -9,13 +9,14 @@ import { SubmitGettingToKnowYouRequest } from 'src/app/models/submit-getting-to-
 import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
 import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
 import { LoginService } from 'src/app/services/login/login.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService {
 
-  constructor(public http: HttpClient, public loginService: LoginService) { }
+  constructor(public http: HttpClient, public tokenService: TokenService) { }
 
   public submitReportIssue(reportIssueData: ReportIssueRequest.RootObject) {
     return fetch(Endpoints.BaseURL + Endpoints.ReportIssue, {
@@ -236,7 +237,7 @@ export class MembersService {
     // Remove files to ensure request is not to big.
     const requestData = JSON.parse(JSON.stringify(gettingToKnowYouRequestData));
     requestData.image.fileData = '';
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID);
 
     return fetch(Endpoints.BaseURL + Endpoints.SubmitGettingToKnowYou, {
       method: 'post',
@@ -265,9 +266,7 @@ export class MembersService {
   }
 
   public getGettingToKnowYouUserData() {
-    const userId = this.loginService.getLoggedInUserId();
-
-    console.log('USER ID: ', userId);
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID)
 
     return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouData, {
       method: 'post',

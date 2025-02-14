@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalTypes } from 'src/app/enums/app.enums';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
-import { FollowUsRequest } from 'src/app/models/follow-us-request.model';
-import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
-import { AboutUsService } from 'src/app/modules/about-us/services/about-us.service';
-import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { MembersService } from '../../services/members.service';
 import { LoginToken } from 'src/app/models/login-token.model';
-import { LoginService } from 'src/app/services/login/login.service';
+import { ReportIssueRequest } from 'src/app/models/report-issue-request.model';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import { MembersService } from '../../services/members.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-report-an-issue',
@@ -21,12 +20,12 @@ export class ReportAnIssueComponent implements OnInit {
   public isWereHereToHelpExpanded = true;
   public isHowItWorksExpanded = true;
   public isReportFormExpanded = true;
-  public loggedInUserDetails: LoginToken;
+  public loggedInUserDetails: GetUserDataResponse.Data;
 
   constructor(private formBuilder: FormBuilder,
     private membersService: MembersService,
     public appModalService: AppModalService,
-  public loginService: LoginService) { }
+  public tokenService: TokenService) { }
 
   ngOnInit() {
     this.getUserData();
@@ -34,7 +33,7 @@ export class ReportAnIssueComponent implements OnInit {
   }
 
   public getUserData() {
-    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
   }
 
   public initializeFollowUsControls() {

@@ -1,51 +1,51 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { LoginService } from 'src/app/services/login/login.service';
-import { UploadImageRequest } from 'src/app/models/upload-image-request.model';
-import { Endpoints } from 'src/app/enums/app.enums';
+import * as FileSaver from 'file-saver';
+import * as moment from 'moment';
+import { Observable } from 'rxjs';
+import { Endpoints, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
+import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-request.model';
+import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 import { CreateSectionRequest } from 'src/app/models/create-section-request.model';
 import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
-import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
-import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
-import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
-import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-request.model';
-import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
-import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
-
-
-
-
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
-import * as moment from 'moment';
-import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
-import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
-import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
-import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
-import { MembersDataResponse } from 'src/app/models/get-members-response.model';
-import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
-import { UpdateIssueConfigRequest } from 'src/app/models/update-issue-config-request.model';
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
+import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
+import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
+import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
+import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
+import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
+import { UpdateInterestedInClassifiedsItemRequest } from 'src/app/models/update-interested-in-classifieds-item-request.model';
+import { UpdateInterestedInPropertyItemRequest } from 'src/app/models/update-interested-in-property-item-request.model';
+import { UpdateIssueConfigRequest } from 'src/app/models/update-issue-config-request.model';
+import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
+import { UpdateReportIssueItemRequest } from 'src/app/models/update-report-issue-item-request.model';
+import { UploadImageRequest } from 'src/app/models/upload-image-request.model';
+import { UploadMembersDocumentsRequest } from 'src/app/models/upload-members-documents-request.model';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { LoginService } from 'src/app/services/login/login.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import * as XLSX from 'xlsx';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(public appModalService: AppModalService, public loginService: LoginService) { }
+  constructor(public http: HttpClient,
+    public appModalService: AppModalService,
+    public loginService: LoginService,
+    public tokenService: TokenService) { }
 
   public uploadNewImages(sectionId: string, imageData: UploadImageRequest.FileData[]) {
     const requestData = new UploadImageRequest.RootObject;
     requestData.sectionId = sectionId;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.filesArray = new Array<UploadImageRequest.FileData>();
     requestData.filesArray = imageData;
 
@@ -60,7 +60,7 @@ export class AdminService {
   }
 
   public uploadNewImageAsFile(sectionId: string, fileData: any) {
-    const userId = this.loginService.getLoggedInUserId();
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     let fileDataToUpload: FormData = new FormData();
     fileDataToUpload.append('file', fileData);
     fileDataToUpload.append('name', fileData.name);
@@ -82,7 +82,7 @@ export class AdminService {
     const requestData = new CreateSectionRequest.RootObject();
     requestData.title = title;
     requestData.description = description;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.CreateGallerySection, {
       method: 'post',
@@ -108,7 +108,7 @@ export class AdminService {
     const requestData = new DeleteImageRequest.RootObject();
     requestData.imageName = imageName;
     requestData.id = imageId;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteImage, {
       method: 'post',
@@ -123,7 +123,7 @@ export class AdminService {
   public deleteSection(sectionId: string) {
     const requestData = new DeleteSectionRequest.RootObject();
     requestData.sectionId = sectionId;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteSection, {
       method: 'post',
@@ -140,7 +140,7 @@ export class AdminService {
     requestData.sectionId = sectionId;
     requestData.title = title;
     requestData.description = description;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.EditSection, {
       method: 'post',
@@ -154,7 +154,7 @@ export class AdminService {
 
   public getFollowUsData() {
     const requestData = new UpdateFollowUsItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.GetFollowUsData, {
       method: 'post',
@@ -168,7 +168,7 @@ export class AdminService {
 
   public deleteFollowUsEntry(followUsRequestId: string) {
     const requestData = new UpdateFollowUsItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.followUsId = followUsRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteFollowUsItem, {
@@ -183,7 +183,7 @@ export class AdminService {
 
   public editFollowUsEntry(followUsRequestId: string) {
     const requestData = new UpdateFollowUsItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.followUsId = followUsRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkFollowUsAsFollowedUp, {
@@ -198,7 +198,7 @@ export class AdminService {
 
   public getReportIssueData() {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.GetReportIssueData, {
       method: 'post',
@@ -212,7 +212,7 @@ export class AdminService {
 
   public getReportIssueConfigData() {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.GetReportIssueConfigData, {
       method: 'post',
@@ -226,7 +226,7 @@ export class AdminService {
 
   public deleteReportIssueEntry(reportIssueRequestId: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueItem, {
@@ -241,7 +241,7 @@ export class AdminService {
 
   // public editReportIssueEntry(reportIssueRequestId: string) {
   //   const requestData = new UpdateReportIssueItemRequest.RootObject();
-  //   requestData.userId = this.loginService.getLoggedInUserId();
+  //   requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
   //   requestData.reportIssueId = reportIssueRequestId;
 
   //   return fetch(Endpoints.BaseURL + Endpoints.MarkReportIssueAsFollowedUp, {
@@ -256,7 +256,7 @@ export class AdminService {
 
   public updateReportIssueCategory(reportIssueRequestId: string, category: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.reportIssueCategory = category;
 
@@ -272,7 +272,7 @@ export class AdminService {
 
   public updateReportIssuePersonResponsible(reportIssueRequestId: string, personResponsible: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.personResponsible = personResponsible;
 
@@ -288,7 +288,7 @@ export class AdminService {
 
   public updateReportIssueStatus(reportIssueRequestId: string, status: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.status = status;
 
@@ -304,7 +304,7 @@ export class AdminService {
 
   public updateReportIssuePriority(reportIssueRequestId: string, priority: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.priority = priority;
 
@@ -320,7 +320,7 @@ export class AdminService {
 
   public updateReportIssueData(reportIssueRequestId: string, hangarOrSectionNumber: string, issueDescription: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.hangarOrSectionNumber = hangarOrSectionNumber;
     requestData.issueDescription = issueDescription;
@@ -337,7 +337,7 @@ export class AdminService {
 
   public getGreeningTedderfieldData() {
     const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.GetGreeningTedderfieldData, {
       method: 'post',
@@ -351,7 +351,7 @@ export class AdminService {
 
   public deleteGreeningTedderfieldEntry(greeninfTedderfieldRequestId: string) {
     const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.greeningItemId = greeninfTedderfieldRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteGreeningTedderfieldItem, {
@@ -366,7 +366,7 @@ export class AdminService {
 
   public editGreeningTedderfieldEntry(greeninfTedderfieldRequestId: string) {
     const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.greeningItemId = greeninfTedderfieldRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkGreeningTedderfieldAsFollowedUp, {
@@ -391,7 +391,7 @@ export class AdminService {
 
   public deleteHomeScreenBanner() {
     const requestData = new AddHomePageBannerRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.DeleteHomePageBanner, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
@@ -404,7 +404,7 @@ export class AdminService {
 
   public addHomeScreenBanner(fileName: string, fileData: string) {
     const requestData = new AddHomePageBannerRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.fileName = fileName;
     requestData.fileData = fileData;
     return fetch(Endpoints.BaseURL + Endpoints.AddNewHomeScreenBanner, {
@@ -419,7 +419,7 @@ export class AdminService {
 
   public addHomeScreenBannerAsFile(fileData: any) {
     // const requestData = new AddHomePageBannerRequest.RootObject();
-    const userId = this.loginService.getLoggedInUserId();
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     let fileDataToUpload: FormData = new FormData();
     fileDataToUpload.append('file', fileData);
     fileDataToUpload.append('name', fileData.name);
@@ -471,7 +471,7 @@ export class AdminService {
         return data;
       });
   }
-  
+
   public approveStandForSaleItem(standData: GetStandsForSaleReponse.Stands) {
     const requestData = new GetStandsForSaleReponse.Stands();
     requestData.id = standData.id;
@@ -499,7 +499,7 @@ export class AdminService {
 
   public editInterestedInHangerData(interestedInHangerRequestId: number) {
     const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.propertyItemId = interestedInHangerRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInHangerAsFollowedUp, {
@@ -514,7 +514,7 @@ export class AdminService {
 
   public deleteInterestedInHangerData(interestedInHangerRequestId: number) {
     const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.propertyItemId = interestedInHangerRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInHangerItem, {
@@ -539,7 +539,7 @@ export class AdminService {
 
   public editInterestedInStandData(interestedInStandRequestId: number) {
     const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.propertyItemId = interestedInStandRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInStandAsFollowedUp, {
@@ -554,7 +554,7 @@ export class AdminService {
 
   public deleteInterestedInStandData(interestedInStandRequestId: number) {
     const requestData = new UpdateInterestedInPropertyItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.propertyItemId = interestedInStandRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInStandItem, {
@@ -579,7 +579,7 @@ export class AdminService {
 
   public addLieviesItem(levieItems: GetLeviesResponse.Levie) {
     const levieItemRequestData = JSON.parse(JSON.stringify(levieItems));
-    levieItemRequestData.userId = this.loginService.getLoggedInUserId();
+    levieItemRequestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     levieItemRequestData.isForHangars = levieItemRequestData.isForHangars ? '1' : '0';
     levieItemRequestData.isForStands = levieItemRequestData.isForStands ? '1' : '0';
     return fetch(Endpoints.BaseURL + Endpoints.AddLeviItem, {
@@ -594,7 +594,7 @@ export class AdminService {
 
   public updateLieviesItem(levieItems: GetLeviesResponse.Levie) {
     const levieItemRequestData = JSON.parse(JSON.stringify(levieItems));
-    levieItemRequestData.userId = this.loginService.getLoggedInUserId();
+    levieItemRequestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     levieItemRequestData.isForHangars = levieItemRequestData.isForHangars ? '1' : '0';
     levieItemRequestData.isForStands = levieItemRequestData.isForStands ? '1' : '0';
     return fetch(Endpoints.BaseURL + Endpoints.UpdateLeviesData, {
@@ -608,7 +608,7 @@ export class AdminService {
   }
 
   public deleteLieviesItem(id: number) {
-    const userId = this.loginService.getLoggedInUserId();
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.DeleteLevieItem, {
       method: 'post',
       body: JSON.stringify({ requestData: { id: id, userId: userId } })
@@ -639,7 +639,7 @@ export class AdminService {
     documentToUploadData.append('file', uploadedMembersDocuments.fileData);
     documentToUploadData.append('name', uploadedMembersDocuments.fileName);
     documentToUploadData.append('fileRoute', fileRoute);
-    documentToUploadData.append('userId', this.loginService.getLoggedInUserId());
+    documentToUploadData.append('userId', this.tokenService.getUserData(UserDataInTokenToReturn.ID) as string);
 
     return fetch(Endpoints.BaseURL + Endpoints.UploadMembersDocument, {
       method: 'post',
@@ -652,7 +652,7 @@ export class AdminService {
   }
 
   public createMembersDocumentsFolder(folderData: CreateMembersDocumentsFolderRequest.RootObject) {
-    folderData.userId = this.loginService.getLoggedInUserId();
+    folderData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.CreateMembersDocumentsFolder, {
       method: 'post',
       body: JSON.stringify({ requestData: folderData })
@@ -664,7 +664,7 @@ export class AdminService {
   }
 
   public deleteMembersDocumentsFile(filePath: string) {
-    const userId = this.loginService.getLoggedInUserId();
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.DeletMembersDocumentsFile, {
       method: 'post',
       body: JSON.stringify({ requestData: { userId: userId, filePath: filePath } })
@@ -676,7 +676,7 @@ export class AdminService {
   }
 
   public deleteMembersDocumentsFolder(folderPath: string) {
-    const userId = this.loginService.getLoggedInUserId();
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.DeletMembersDocumentsFolder, {
       method: 'post',
       body: JSON.stringify({ requestData: { userId: userId, folderPath: folderPath } })
@@ -688,7 +688,7 @@ export class AdminService {
   }
 
   public renameMembersDocumentsFolder(folderData: RenameFolderRequest) {
-    folderData.userId = this.loginService.getLoggedInUserId();
+    folderData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     return fetch(Endpoints.BaseURL + Endpoints.RenameMembersDocumentsFolder, {
       method: 'post',
       body: JSON.stringify({ requestData: folderData })
@@ -732,7 +732,7 @@ export class AdminService {
 
   public editInterestedInClassifiedsData(interestedInClassifiedsRequestId: number) {
     const requestData = new UpdateInterestedInClassifiedsItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.classifiedsItemId = interestedInClassifiedsRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.MarkInterestedInClassifiedsAsFollowedUp, {
@@ -747,7 +747,7 @@ export class AdminService {
 
   public deleteInterestedInClassifiedsData(interestedInHangerRequestId: number) {
     const requestData = new UpdateInterestedInClassifiedsItemRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.classifiedsItemId = interestedInHangerRequestId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteInterestedInClassifiedsItem, {
@@ -761,65 +761,72 @@ export class AdminService {
   }
 
   public getMembersData() {
-    const userId = this.loginService.getLoggedInUserId();
-    return fetch('http://localhost/teddefield-airfield-test/members/get-members.php', {
-      method: 'post',
-      body: JSON.stringify({ requestData: { userId: userId } })
-    })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    const userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    // return fetch('http://localhost/teddefield-airfield-test/members/get-members.php', {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: { userId: userId } })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    //   });
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.GetAllMembers, { requestData: { userId: userId } }) as Observable<any>;
   }
 
   public deleteMember(memberId: number) {
     const requestData = new MembersDataResponse.Member
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.id = memberId;
+    
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteMember, { requestData: requestData }) as Observable<any>;
 
-    return fetch(Endpoints.BaseURL + Endpoints.DeleteMember, {
-      method: 'post',
-      body: JSON.stringify({ requestData: requestData })
-    })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    // return fetch(Endpoints.BaseURL + Endpoints.DeleteMember, {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: requestData })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    //   });
   }
 
   public addNewMemberMember(memberData: UpdateMembersRequest.RootObject) {
     let requestData = new UpdateMembersRequest.RootObject
     requestData = memberData;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
-    return fetch(Endpoints.BaseURL + Endpoints.AddNewMember, {
-      method: 'post',
-      body: JSON.stringify({ requestData: requestData })
-    })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    // return fetch(Endpoints.BaseURL + Endpoints.AddNewMember, {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: requestData })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    // });
+
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.AddNewMember, { requestData: requestData }) as Observable<any>;
   }
 
   public manageMembersUpdateMemberData(memberData: UpdateMembersRequest.RootObject) {
     let requestData = new UpdateMembersRequest.RootObject
     requestData = memberData;
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.ManageMembersUpdateMemberData, { requestData: requestData }) as Observable<any>;
 
-    return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
-      method: 'post',
-      body: JSON.stringify({ requestData: requestData })
-    })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
+    // return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: requestData })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    //   });
   }
 
   public deleteIssueCategory(categoryId: number) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.categoryId = categoryId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueCategory, {
@@ -834,7 +841,7 @@ export class AdminService {
 
   public addIssueCategory(category: string) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.category = category;
 
     return fetch(Endpoints.BaseURL + Endpoints.AddReportIssueCategory, {
@@ -849,7 +856,7 @@ export class AdminService {
 
   public deleteIssueResponsiblePerson(responsiblePersonId: number) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.responsiblePersonId = responsiblePersonId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssuePersonResponsible, {
@@ -864,7 +871,7 @@ export class AdminService {
 
   public addIssuePersonResponsible(personResponsible: string) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.responsiblePersonName = personResponsible;
 
     return fetch(Endpoints.BaseURL + Endpoints.AddReportIssuePersonResponsible, {
@@ -879,7 +886,7 @@ export class AdminService {
 
   public deleteIssuePriority(priorityId: number) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.priorityId = priorityId;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssuePriority, {
@@ -894,7 +901,7 @@ export class AdminService {
 
   public addIssuePriority(priorityName: string, priorityTime: string) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
-    requestData.userId = this.loginService.getLoggedInUserId();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.priorityName = priorityName;
     requestData.priorityTime = priorityTime;
 

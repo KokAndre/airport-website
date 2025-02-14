@@ -1,6 +1,6 @@
 export namespace UpdateInterestedInPropertyItemRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         propertyItemId: number;
     }
 }

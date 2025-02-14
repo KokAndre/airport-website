@@ -1,6 +1,6 @@
 export namespace UpdateIssueConfigRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         categoryId: number;
         category: string;
         responsiblePersonId: number;

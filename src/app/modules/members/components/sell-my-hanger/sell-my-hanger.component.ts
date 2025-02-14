@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalTypes } from 'src/app/enums/app.enums';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
+import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { LoginToken } from 'src/app/models/login-token.model';
 import { SellMyHangerRequest } from 'src/app/models/sell-my-hanger-request.model';
-import { LoginService } from 'src/app/services/login/login.service';
-import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { ModalTypes } from 'src/app/enums/app.enums';
-import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
+import { MembersService } from '../../services/members.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-sell-my-hanger',
@@ -19,12 +20,12 @@ export class SellMyHangerComponent implements OnInit {
   public isSellMyHangerFormExpanded = true;
   public sellMyHangerFormGroup: FormGroup;
   public submitHangerForSaleRequestData: SellMyHangerRequest.RootObject;
-  public loggedInUserDetails: LoginToken;
+  public loggedInUserDetails: GetUserDataResponse.Data;
   public submitAdSucessId: number;
   public leviesData = new Array<GetLeviesResponse.Levie>();
   public isPersonalDetailsAcknowledgementCheckboxChecked = false;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public membersService: MembersService, public appModalService: AppModalService) { }
+  constructor(public formBuilder: FormBuilder, public tokenService: TokenService, public membersService: MembersService, public appModalService: AppModalService) { }
 
   ngOnInit() {
     this.getUserData();
@@ -34,7 +35,7 @@ export class SellMyHangerComponent implements OnInit {
   }
 
   public getUserData() {
-    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
   }
 
   public getLeviesData() {

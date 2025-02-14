@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MembersService } from '../../services/members.service';
-import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
-import { LoginService } from 'src/app/services/login/login.service';
-import { LoginToken } from 'src/app/models/login-token.model';
-import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
 import { Router } from '@angular/router';
+import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
+import { LoginToken } from 'src/app/models/login-token.model';
+import { SubmitGreeningTedderfieldRequest } from 'src/app/models/submit-greening-tedderfield-request.model';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import { MembersService } from '../../services/members.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-green-tedderfield',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class GreenTedderfieldComponent implements OnInit {
   public greeningTedderfieldFormGroup: FormGroup;
-  public loggedInUserDetails = new LoginToken();
+  public loggedInUserDetails = new GetUserDataResponse.Data();
   public isHelpUsExpanded = true;
   public isGeeningFormExpanded = true;
   public amountSelectControlData = [
@@ -36,7 +37,7 @@ export class GreenTedderfieldComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private membersService: MembersService,
     public appModalService: AppModalService,
-    public loginService: LoginService,
+    public tokenService: TokenService,
     public router: Router) { }
 
   ngOnInit() {
@@ -45,7 +46,7 @@ export class GreenTedderfieldComponent implements OnInit {
   }
 
   public getUserDetails() {
-    const userDetails = this.loginService.getLoggedInUserDetails();
+    const userDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
     if (!userDetails) {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not logged in', 'You are not logged in. Please log in and try again.', null);
       this.router.navigateByUrl(AppRoutes.Home);

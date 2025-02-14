@@ -22,9 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          console.log('error in interceptor: ', err);
           if (err.status === 401 && err.statusText === 'Unauthorized') {
-            console.log('IN INTERECPTOR IF');
             return throwError(err)
           } else {
             return throwError(err)

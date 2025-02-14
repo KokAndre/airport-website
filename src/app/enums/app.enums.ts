@@ -62,12 +62,26 @@ export enum AppRoutes {
 export enum Endpoints {
     BaseURL = 'https://www.tedderfield.co.za/api',
 
-    NewBaseURL = 'http://localhost/tedderfield-api/public/api',
+    NewLocalBaseURL = 'http://localhost/tedderfield-api/public/api',
+    NewBaseURL = 'https://tedderfield.co.za/tedderfield-api/api',
 
     // New members endpoints
     Login = '/members/login',
-    Register = '/members/regist',
+    Register = '/members/register',
+    RefreshAuthToken = '/members/refresh-token',
+    TestEnpoint = '/members/test-endpoint',
     CheckWhitelisting = '/members/check-whitelisting',
+    // Manage Members
+    GetAllMembers = '/members/get-all-members',
+    UpdateMemberData = '/members/update-member-data',
+    DeleteMember = '/members/delete-members',
+    AddNewMember = '/members/add-member',
+    ManageMembersUpdateMemberData = '/members/manage-members-update-member-data',
+
+    SendPasswordResetEmail = '/members/email-reset-password',
+    SubmitPasswordReset = '/members/submit-reset-password',
+
+
 
     HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',
@@ -75,12 +89,8 @@ export enum Endpoints {
     StandsForSaleBaseURL = 'https://www.tedderfield.co.za/api/stands-for-sale/documents/',
     ClassifiedsImagesBaseURL = 'https://www.tedderfield.co.za/api/classifieds/images/',
     GettingoKnowYouImagesBaseURL = 'https://www.tedderfield.co.za/api/getting-to-know-you/images/',
-    // MembersDocumentsBaseEndpoint = 'https://www.tedderfield.co.za/api/file-system/',
-    // Register = '/members/register.php',
-    // Login = '/members/login.php',
-    // CheckWhitelisting = '/members/get-member.php',
-    SendPasswordResetEmail = '/members/email-reset-password.php',
-    SubmitPasswordReset = '/members/submit-reset-password.php',
+
+
     SlingCraftWeatherWidget = 'https://www.slingaircraft.com/live-cam/data.php',
     UploadImage = '/gallery/upload-images.php',
     UploadImageAsFile = '/gallery/upload-image-file.php',
@@ -179,15 +189,19 @@ export enum Endpoints {
     GetGettingToKnowYouUserData = '/getting-to-know-you/get-getting-to-know-you-user-data.php',
     GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php',
 
-    // Manage Members
-    GetAllMembers = '/members/get-members.php',
-    UpdateMemberData = '/members/update-member-data.php',
-    DeleteMember = '/members/delete-members.php',
-    AddNewMember = '/members/add-member.php',
-    ManageMembersUpdateMemberData = '/members/manage-members-update-member-data.php',
-
     // Youtube Videos
     GetYoutubeVideos = '/youtube-videos/get-videos.php'
+}
+
+export enum CallTypes {
+    Service = 'Service',
+    NewService = 'NewService',
+    HomePageBanner = 'HomePageBanner',
+    GalleryImages = 'GalleryImages',
+    HangersForSaleDocuments = 'HangersForSaleDocuments',
+    StandsForSaleDocuments = 'StandsForSaleDocuments',
+    ClassifiedsImages = 'ClassifiedsImages',
+    GettingoKnowYouImages = 'GettingoKnowYouImages'
 }
 
 export enum EncryptionKeys {
@@ -197,6 +211,7 @@ export enum EncryptionKeys {
 
 export enum SessionStorageKeys {
     Token = 'token',
+    AuthToken = 'auth_token'
     // HasViewedBanner = 'hasViewedBanner'
 }
 
@@ -224,4 +239,17 @@ export enum ModalOutcomeOptions {
     Cancel = 'cancel',
     Confirm = 'confirm',
     Update = 'update'
+}
+
+export enum UserDataInTokenToReturn {
+    ID = 'id',
+    Name = 'name',
+    Surname = 'surname',
+    Email = 'email',
+    isAdmin = 'isAdmin',
+    IsSuperAdmin = 'isSuperAdmin',
+    HasCompletedGettingToKnowYou = 'hasCompletedGettingToKnowYou',
+    HangarNumbers = 'hangarNumbers',
+    StandNumbers = 'standNumbers',
+    IsRegistered = 'isRegistered',
 }

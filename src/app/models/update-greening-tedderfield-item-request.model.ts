@@ -1,6 +1,6 @@
 export namespace UpdateGreeningTedderfieldItemRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         greeningItemId: string;
     }
 }

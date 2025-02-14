@@ -8,13 +8,16 @@ export namespace GetUserDataResponse {
     }
 
     export class Data {
-        id: string;
+        id: number;
         name: string;
         surname: string;
         email: string;
         password: string;
         phoneNumber: string;
-        isRegistered: string;
-        hasCompletedGettingToKnowYou: string;
+        isRegistered: number;
+        isAdmin: number;
+        hasCompletedGettingToKnowYou: number;
+        standNumbers: string[];
+        hangarNumbers: string [];
     }
 }

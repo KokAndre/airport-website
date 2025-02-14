@@ -1,6 +1,6 @@
 export namespace UpdateInterestedInClassifiedsItemRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         classifiedsItemId: number;
     }
 }

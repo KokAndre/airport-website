@@ -9,6 +9,8 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { AppRoutes, Endpoints, ModalTypes } from 'src/app/enums/app.enums';
 import { Router } from '@angular/router';
 import { GetGettingToKnowYouResponse } from 'src/app/models/get-getting-to-know-you-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-getting-to-know-you',
@@ -23,7 +25,7 @@ export class GettingToKnowYouComponent implements OnInit {
   public isSurpriseFactorExpanded = true;
   public isFormExpanded = true;
   public gettingToKnowYouFormGroup: FormGroup;
-  public loggedInUserDetails: LoginToken;
+  public loggedInUserDetails: GetUserDataResponse.Data;
   public submitItemSucessId: number;
   public gettingToKnowYouRequestData = new SubmitGettingToKnowYouRequest.RootObject();
   public originalHasCompletedGettingToKnowYouData: GetGettingToKnowYouResponse.Member;
@@ -34,7 +36,8 @@ export class GettingToKnowYouComponent implements OnInit {
     public formBuilder: FormBuilder,
     public membersService: MembersService,
     public appModalService: AppModalService,
-    public router: Router) { }
+    public router: Router,
+  public tokenService: TokenService) { }
 
   ngOnInit() {
     this.getUserData();
@@ -43,7 +46,7 @@ export class GettingToKnowYouComponent implements OnInit {
   }
 
   public getUserData() {
-    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
   }
 
   public initializeFollowUsControls() {
@@ -84,19 +87,6 @@ export class GettingToKnowYouComponent implements OnInit {
       this.phoneNumberControl.disable();
     }
   }
-
-  // TODO: REMOVE THE EDITIBLE DIV TEST DATA
-  // public testDivValue() {
-  //   console.log('DIV: ', document.getElementById('testEditibleDiv'));
-  //   console.log('DIV TEXT: ', document.getElementById('testEditibleDiv').innerText);
-  //   const divText = document.getElementById('testEditibleDiv').innerText;
-
-  //   const divTextArray = divText.split('\n');
-  //   console.log('DIV TEXT ARRAY: ', divTextArray);
-
-  //   const divTextFormatted = divText.replaceAll('\n', ', ');
-  //   console.log('DIV TEXT ARRAY: ', divTextFormatted);
-  // }
 
   public getGettingToKnowYouData() {
     this.membersService.getGettingToKnowYouUserData().then((results) => {
@@ -412,7 +402,7 @@ export class GettingToKnowYouComponent implements OnInit {
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', "Your details have been capture seccessfully. You can now view who's who in the Tedderfield Zoo.", null);
         }
-        this.loginService.updateUserHasCompletedGettingToKnowYou();
+        this.tokenService.updateHasCompletedGettingToKnowYou();
         this.router.navigateByUrl(AppRoutes.WhosWhoInTheZoo);
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);

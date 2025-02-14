@@ -1,6 +1,6 @@
 export namespace AddHomePageBannerRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         fileName: string;
         fileData: any;
     }

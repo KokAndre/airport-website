@@ -232,7 +232,7 @@
           <mat-form-field class="col-12 px-0">
             <mat-label>Password</mat-label>
             <input style="color: black;" [type]="hideNewPin ? 'password' : 'text'" matInput required maxlength="50"
-              formControlName="registerPasswordControl">
+              formControlName="registerPasswordControl" autocomplete="new-password">
             <button mat-icon-button matSuffix (click)="hideNewPin = !hideNewPin" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hideNewPin">
               <mat-icon class="ml-n2 mb-n4 pt-1">{{hideNewPin ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -251,7 +251,7 @@
           <mat-form-field class="col-12 px-0">
             <mat-label>Confirm Password</mat-label>
             <input style="color: black;" [type]="hideConfirmPin ? 'password' : 'text'" matInput required maxlength="50"
-              [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl">
+              [disabled]="!passwordIsStrong" formControlName="registerConfirmPasswordControl" autocomplete="new-password">
             <button mat-icon-button matSuffix (click)="hideConfirmPin = !hideConfirmPin"
               [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPin">
               <mat-icon class="ml-n2 mb-n4 pt-1">{{hideConfirmPin ? 'visibility_off' : 'visibility'}}</mat-icon>

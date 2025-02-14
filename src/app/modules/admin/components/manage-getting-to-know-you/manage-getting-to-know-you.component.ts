@@ -87,7 +87,6 @@ export class ManageGettingToKnowYouComponent implements OnInit {
       membersDataExcelData.push(itemToPush);
     });
 
-    // console.log('EXCEL DATA: ', membersDataExcelData);
     this.adminService.exportAsExcelFile(membersDataExcelData, 'Getting To Know You');
   }
 

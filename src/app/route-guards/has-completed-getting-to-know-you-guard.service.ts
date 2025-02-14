@@ -1,17 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from '../services/login/login.service';
-import { AppRoutes } from '../enums/app.enums';
+import { AppRoutes, UserDataInTokenToReturn } from '../enums/app.enums';
+import { TokenService } from '../services/token/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HasCompletedGettingToKnowYouGuardService {
 
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private tokenService: TokenService) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const hasCompletedGettingToKnowYou = this.loginService.checkIfUserHasCompletedGettingToKnowYou();
+    const hasCompletedGettingToKnowYou = this.tokenService.getUserData(UserDataInTokenToReturn.HasCompletedGettingToKnowYou);
 
     if (hasCompletedGettingToKnowYou) {
       return true;

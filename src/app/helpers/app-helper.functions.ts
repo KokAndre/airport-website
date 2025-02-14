@@ -81,7 +81,7 @@ export class LocalStorageHelper {
 export class AppHelperFunction {
     static encryptPassword(textToEncrypt: string) {
         const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
-        const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
+        const ivHex = CryptoJS.enc.Hex.parse('ijhe3759ok1snvh4');
         const enc = CryptoJS.AES.encrypt(textToEncrypt, keyHex, { iv: ivHex });
         const encryptedString = enc.ciphertext.toString(CryptoJS.enc.Base64);
         return encryptedString;
@@ -241,4 +241,21 @@ export class AppHelperFunction {
         return returnArray;
     }
 
+    public static formatBulletPointInputDataForPrePopulation(itemArray: string[]) {
+        if (itemArray?.length) {
+          let formattedItem = '';
+          itemArray.forEach(item => {
+            item = item.replaceAll("`", "'");
+            if (formattedItem) {
+              formattedItem += `\n• ${item}`;
+            } else {
+              formattedItem += `• ${item}`;
+            }
+    
+          });
+          return formattedItem;
+        } else {
+          return '';
+        }
+      }
 }
