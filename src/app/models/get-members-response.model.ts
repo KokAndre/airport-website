@@ -12,14 +12,17 @@ export namespace MembersDataResponse {
         surname: string;
         email: string;
         password: string;
-        isRegistered: string;
-        isAdmin: string;
-        hasCompletedGettingToKnowYou: string;
+        isRegistered: number;
+        isAdmin: number;
+        hasCompletedGettingToKnowYou: number;
         phoneNumber: string;
-        userId: number;
+        userId?: number;
         hangarNumbers: string;
-        hangarNumbersArray: string[];
+        hangarNumbersArray?: string[];
         standNumbers: string;
-        standNumbersArray: string[];
+        standNumbersArray?: string[];
+
+        // Delete the below field! 
+        newPassword?: string;
     }
 }

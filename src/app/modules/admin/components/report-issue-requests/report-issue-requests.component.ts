@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalOutcomeOptions, ModalTypes, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
-import { AdminService } from '../../services/admin.service';
-import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
-import { LoginService } from 'src/app/services/login/login.service';
 import { ExcelService } from 'src/app/modules/shared/services/excel.service';
+import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import { AdminService } from '../../services/admin.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 export enum StatusEnum {
   notStarted = "Not Started",
@@ -54,7 +55,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   constructor(private adminService: AdminService,
     private appModalService: AppModalService,
-    public loginService: LoginService,
+    public tokenService: TokenService,
     public excelService: ExcelService) { }
 
   ngOnInit() {
@@ -63,13 +64,10 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   private checkIfAdminIsAllowedToDelete() {
-    const userDetails = this.loginService.getLoggedInUserDetails();
-    this.loggedInUserName = userDetails.name;
-    if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
-      this.allowAdminToDelete = true;
-    } else {
-      this.allowAdminToDelete = false;
-    }
+    // const userDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
+    this.loggedInUserName = this.tokenService.getUserData(UserDataInTokenToReturn.Name) as string;
+
+    this.allowAdminToDelete = this.tokenService.getUserData(UserDataInTokenToReturn.IsSuperAdmin) as boolean;
   }
 
   public getReportIssueData() {
@@ -398,8 +396,6 @@ export class ReportIssueRequestsComponent implements OnInit {
 
     const fileName = 'Report Issue Requests';
     const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
-
-    // console.log('DAT FOR EXCEL: ', dataForExcell);
 
     this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }

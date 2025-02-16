@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { AdminGuardService } from './route-guards/admin-guard.service';
+import { LoginGuardService } from './route-guards/login-guard.service';
 
 const routes: Routes = [
   {
@@ -45,7 +46,7 @@ const routes: Routes = [
       },
       {
         // TODO: Add route guard so only logged in admin can see this page!!
-        path: 'admin', canActivate: [AdminGuardService], loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+        path: 'admin', canActivate: [LoginGuardService, AdminGuardService], loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
       }
     ]
   }

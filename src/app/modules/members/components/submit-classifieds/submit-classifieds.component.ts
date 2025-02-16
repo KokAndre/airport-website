@@ -7,6 +7,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { ModalTypes } from 'src/app/enums/app.enums';
+import { TokenService } from 'src/app/services/token/token.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-submit-classifieds',
@@ -19,13 +21,13 @@ export class SubmitClassifiedsComponent implements OnInit {
   public isFormExpanded = true;
   public isPostYourAdNowExpanded = true;
   public submitClassifiedsFormGroup: FormGroup;
-  public loggedInUserDetails: LoginToken;
+  public loggedInUserDetails: GetUserDataResponse.Data;
   public submitClassifiedsRequestData = new SubmitClassifiedsRequest.RootObject();
   public submitItemSucessId: number;
   public isPersonalDetailsAcknowledgementCheckboxChecked = false;
 
   constructor(private formBuilder: FormBuilder,
-    private loginService: LoginService,
+    private tokenService: TokenService,
     private appModalService: AppModalService,
     private membersService: MembersService) { }
 
@@ -35,7 +37,7 @@ export class SubmitClassifiedsComponent implements OnInit {
   }
 
   public getUserData() {
-    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
   }
 
   public initializeFollowUsControls() {

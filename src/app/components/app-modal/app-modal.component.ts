@@ -1,15 +1,14 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PDFDocumentProxy, PdfViewerComponent } from 'ng2-pdf-viewer';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response.model';
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
-import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
-import { LoginService } from 'src/app/services/login/login.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-app-modal',
@@ -32,7 +31,7 @@ export class AppModalComponent implements OnInit {
   public captureSingleFieldData: string;
   public capturePriorityData: GetReportIssueDataResponse.priorityList;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public loginService: LoginService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
   ngOnInit() {
     this.initializeModalData();
@@ -310,7 +309,7 @@ export class AppModalComponent implements OnInit {
   }
 
   public checkIfUserIsLoggedIn() {
-    const userDetails = this.loginService.getLoggedInUserDetails(true);
+    const userDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
     if (userDetails) {
       if (userDetails.name && userDetails.surname) {
         this.interestedInPropertyNameControl.setValue(`${userDetails.name} ${userDetails.surname}`);

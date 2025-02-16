@@ -12,6 +12,7 @@ import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-hel
 import { Router } from '@angular/router';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,11 @@ export class LoginComponent implements OnInit {
   public isMobileView = false;
   public displayPasswordResetScreen = false;
 
-  constructor(public formBuilder: FormBuilder, public loginService: LoginService, public router: Router, public appModalService: AppModalService) { }
+  constructor(public formBuilder: FormBuilder,
+    public loginService: LoginService,
+    public router: Router,
+    public appModalService: AppModalService,
+    public tokenService: TokenService) { }
 
   ngOnInit() {
     this.initializeScreenSizeCheck();
@@ -48,10 +53,10 @@ export class LoginComponent implements OnInit {
       this.errorFetchingDataEmit.emit();
     }
 
-    this.isUserRegistered = this.userData.isRegistered === '1';
+    this.isUserRegistered = this.userData.isRegistered === 1;
 
-      this.initializeLoginControls();
-      this.initializeRegisterControls();
+    this.initializeLoginControls();
+    this.initializeRegisterControls();
   }
 
   public initializeScreenSizeCheck() {
@@ -97,6 +102,9 @@ export class LoginComponent implements OnInit {
       }, 500);
       this.passwordLogicHandling();
     });
+
+    this.registerHangarNumbersControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.userData.hangarNumbers as Array<string>));
+    this.registerStandNumbersControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.userData.standNumbers as Array<string>));
   }
 
   passwordLogicHandling() {
@@ -160,12 +168,14 @@ export class LoginComponent implements OnInit {
     requestData.surname = this.registerSurnameControl?.value;
     requestData.email = this.registerEmailControl?.value;
     requestData.phoneNumber = this.registerPhoneNumberControl?.value;
-    requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
+    // requestData.password = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
+    requestData.password = this.registerPasswordControl?.value;
     requestData.hangarNumbers = this.formatBulletPointInputValuesToSubmit(this.registerHangarNumbersControl.value);
     requestData.standNumbers = this.formatBulletPointInputValuesToSubmit(this.registerStandNumbersControl.value);
 
-    this.loginService.registerNewUser(requestData).then(results => {
+    this.loginService.registerNewUser(requestData).subscribe(results => {
       if (results.status === 200) {
+        this.tokenService.setToken(results.access_token);
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Register', 'You have successfully registered.', null);
         this.navigateToMembersPoliciesPage();
       } else {
@@ -177,20 +187,24 @@ export class LoginComponent implements OnInit {
   public loginClicked() {
     const requestData = new LoginRequest();
     requestData.email = this.loginEmailControl?.value;
-    requestData.password = AppHelperFunction.encryptPassword(this.loginPasswordControl?.value);
+    // requestData.password = AppHelperFunction.encryptPassword(this.loginPasswordControl?.value);
+    requestData.password = this.loginPasswordControl?.value;
 
-    this.loginService.loginUser(requestData).then(results => {
+    this.loginService.loginUser(requestData).subscribe(results => {
       if (results.status === 200) {
+        this.tokenService.setToken(results.access_token);
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', 'You have successfully logged in.', null);
         this.navigateToMembersPoliciesPage();
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', results.message, null);
       }
+    }, error => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Login', error.error.message, null);
     });
   }
 
   public resetPasswordClicked() {
-    this.loginService.sendResetPasswordEmail(this.loginEmailControl?.value).then(results => {
+    this.loginService.sendResetPasswordEmail(this.loginEmailControl?.value).subscribe(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Reset Password', results.message, null);
       if (results.status === 200) {
         this.registerFormGroup.addControl('registerPasswordResetControl', new FormControl('', [Validators.required, Validators.minLength(6)]));
@@ -201,9 +215,9 @@ export class LoginComponent implements OnInit {
 
   public resetPassword() {
 
-    const newPassword = AppHelperFunction.encryptPassword(this.registerPasswordControl?.value);
+    const newPassword = this.registerPasswordControl?.value;
 
-    this.loginService.submitResetPassword(this.loginEmailControl?.value, newPassword, this.registerPasswordResetControl.value).then(results => {
+    this.loginService.submitResetPassword(this.loginEmailControl?.value, newPassword, this.registerPasswordResetControl.value).subscribe(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Reset Password', results.message, null);
       if (results.status === 200) {
         this.cancelResetPasswordClicked();

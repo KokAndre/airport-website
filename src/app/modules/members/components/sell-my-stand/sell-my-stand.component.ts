@@ -6,8 +6,10 @@ import { SellMyStandRequest } from 'src/app/models/sell-my-stand-request.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
-import { ModalTypes } from 'src/app/enums/app.enums';
+import { ModalTypes, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 
 @Component({
   selector: 'app-sell-my-stand',
@@ -19,13 +21,14 @@ export class SellMyStandComponent implements OnInit {
   public isSellMyStandFormExpanded = true;
   public sellMyStandFormGroup: FormGroup;
   public submitStandForSaleRequestData: SellMyStandRequest.RootObject;
-  public loggedInUserDetails: LoginToken;
+  public loggedInUserDetails: GetUserDataResponse.Data;
   public submitAdSucessId: number;
   public leviesData = new Array<GetLeviesResponse.Levie>();
   public isPersonalDetailsAcknowledgementCheckboxChecked = false;
+  public isSuperAdmin = false;
 
   constructor(public formBuilder: FormBuilder,
-    public loginService: LoginService,
+    public tokenServise: TokenService,
     public membersService: MembersService,
     public appModalService: AppModalService) { }
 
@@ -37,7 +40,7 @@ export class SellMyStandComponent implements OnInit {
   }
 
   public getUserData() {
-    this.loggedInUserDetails = this.loginService.getLoggedInUserDetails();
+    this.loggedInUserDetails = this.tokenServise.getUserData() as GetUserDataResponse.Data;
   }
 
   public getLeviesData() {
@@ -87,16 +90,17 @@ export class SellMyStandComponent implements OnInit {
   }
 
   public prePopulateData() {
+    this.isSuperAdmin = this.tokenServise.getUserData(UserDataInTokenToReturn.IsSuperAdmin) as boolean;
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+      if (!this.isSuperAdmin) {
         this.nameControl.disable();
       }
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+      if (!this.isSuperAdmin) {
         this.emailControl.disable();
       }
     }

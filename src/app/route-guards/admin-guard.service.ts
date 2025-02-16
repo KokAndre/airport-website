@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { LoginService } from '../services/login/login.service';
-import { AppRoutes } from '../enums/app.enums';
+import { AppRoutes, UserDataInTokenToReturn } from '../enums/app.enums';
+import { TokenService } from '../services/token/token.service';
 import { LoginGuardService } from './login-guard.service';
 
 @Injectable({
@@ -9,12 +9,12 @@ import { LoginGuardService } from './login-guard.service';
 })
 export class AdminGuardService {
 
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private tokenService: TokenService) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const isLoggedIn = this.loginService.isLogedInUserAdmin(true);
+    const isUserAdmin = this.tokenService.getUserData(UserDataInTokenToReturn.isAdmin);
 
-    if (isLoggedIn) {
+    if (isUserAdmin) {
       return true;
     } else {
       this.router.navigateByUrl(AppRoutes.Home);

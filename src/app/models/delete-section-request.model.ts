@@ -1,6 +1,6 @@
 export namespace DeleteSectionRequest {
     export class RootObject {
         sectionId: string;
-        userId: string;
+        userId: number;
     }
 }

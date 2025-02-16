@@ -1,6 +1,6 @@
 export namespace UpdateFollowUsItemRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         followUsId: string;
     }
 }

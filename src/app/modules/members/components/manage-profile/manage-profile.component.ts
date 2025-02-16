@@ -7,6 +7,8 @@ import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { MembersService } from '../../services/members.service';
+import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -17,20 +19,21 @@ export class ManageProfileComponent implements OnInit {
   public isExplinationExpanded = true;
   public isProfileFormExpanded = true;
   public memberFormGroup: FormGroup;
-  public userDetails: LoginToken;
+  public userDetails: GetUserDataResponse.Data;
   public isLoading = true;
 
   constructor(private formBuilder: FormBuilder,
     public loginService: LoginService,
     public appModalService: AppModalService,
-    public router: Router) { }
+    public router: Router,
+    public tokenService: TokenService) { }
 
   ngOnInit() {
     this.getUserData();
   }
 
   public getUserData() {
-    this.userDetails = this.loginService.getLoggedInUserDetails();
+    this.userDetails = this.tokenService.getUserData() as GetUserDataResponse.Data;
     if (!this.userDetails) {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'User not logged in', 'You are not logged in. Please log in and try again.', null);
       this.router.navigateByUrl(AppRoutes.Home);
@@ -55,7 +58,7 @@ export class ManageProfileComponent implements OnInit {
 
   public prePopulateData() {
     if (this.userDetails.hangarNumbers?.includes(',')) {
-      const hangarsArray = this.userDetails.hangarNumbers.split(',');
+      const hangarsArray = this.userDetails.hangarNumbers;
       let hangarDataToSet = '';
       hangarsArray.forEach((item, last) => {
         if (last) {
@@ -70,7 +73,7 @@ export class ManageProfileComponent implements OnInit {
     }
 
     if (this.userDetails.standNumbers?.includes(',')) {
-      const standsArray = this.userDetails.standNumbers.split(',');
+      const standsArray = this.userDetails.standNumbers;
       let standDataToSet = '';
       standsArray.forEach((item, last) => {
         if (last) {
@@ -211,13 +214,13 @@ export class ManageProfileComponent implements OnInit {
     }
 
     const newHangarNumbersArray = this.formatBulletPointInputValuesToSubmit(this.hangarNumbersControl.value);
-    const originalHangarNumbersArray = this.userDetails?.hangarNumbers?.split(',');
+    const originalHangarNumbersArray = this.userDetails?.hangarNumbers;
     if (JSON.stringify(originalHangarNumbersArray) !== JSON.stringify(newHangarNumbersArray)) {
       hasValuesChanged = true;
     }
 
     const newStandNumbersArray = this.formatBulletPointInputValuesToSubmit(this.standNumbersControl.value);
-    const originalStandNumbersArray = this.userDetails?.standNumbers?.split(',');
+    const originalStandNumbersArray = this.userDetails?.standNumbers;
     if (JSON.stringify(originalStandNumbersArray) !== JSON.stringify(newStandNumbersArray)) {
       hasValuesChanged = true;
     }
@@ -235,13 +238,22 @@ export class ManageProfileComponent implements OnInit {
     requestData.hangarNumbers = this.formatBulletPointInputValuesToSubmit(this.hangarNumbersControl.value);
     requestData.standNumbers = this.formatBulletPointInputValuesToSubmit(this.standNumbersControl.value);
 
-    this.loginService.updateMemberData(requestData).then(results => {
+    this.loginService.updateMemberData(requestData).subscribe(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update profile data', results.message, null);
       if (results.status === 200) {
+        // Update the User Data in the data service and refresh the screen
+        this.tokenService.updateUserData(requestData);
         this.getUserData();
       }
     });
   }
+
+  //TODO: Imlpement TOken Refresh!!!!!!!!
+  // public refreshToken() {
+  //   this.loginService.refresAuthToken().subscribe(results => {
+  //     console.log('RESULTS: ', results);
+  //   });
+  // }
 
   public get nameControl() {
     return this.memberFormGroup.get('nameControl')

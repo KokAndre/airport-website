@@ -46,13 +46,13 @@
         <td>{{ item.surname }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phoneNumber }}</td>
-        <td class="text-center"><mat-icon *ngIf="item.isRegistered === '1'"
+        <td class="text-center"><mat-icon *ngIf="item.isRegistered === 1"
             class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.isRegistered !== '1'" class="red-text text-bold vertical-allign-bottom"
+            *ngIf="item.isRegistered !== 1" class="red-text text-bold vertical-allign-bottom"
             fontIcon="close"></mat-icon></td>
-        <td class="text-center"><mat-icon *ngIf="item.isAdmin === '1'"
+        <td class="text-center"><mat-icon *ngIf="item.isAdmin === 1 || item.isAdmin === 2"
             class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.isAdmin !== '1'" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon>
+            *ngIf="item.isAdmin === 0" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon>
         </td>
 
 
@@ -64,9 +64,9 @@
         </td>
 
 
-        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === '1'"
+        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === 1"
             class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.hasCompletedGettingToKnowYou !== '1'" class="red-text text-bold vertical-allign-bottom"
+            *ngIf="item.hasCompletedGettingToKnowYou !== 1" class="red-text text-bold vertical-allign-bottom"
             fontIcon="close"></mat-icon></td>
 
         <td>

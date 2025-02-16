@@ -1,6 +1,6 @@
 export namespace UpdateReportIssueItemRequest {
     export class RootObject {
-        userId: string;
+        userId: number;
         reportIssueId: string;
         reportIssueCategory: string;
         personResponsible: string;

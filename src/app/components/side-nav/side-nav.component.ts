@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppRoutes, ModalTypes, SessionStorageKeys } from 'src/app/enums/app.enums';
+import { AppRoutes, ModalTypes, SessionStorageKeys, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -11,6 +11,7 @@ import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import * as moment from 'moment';
 import { SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { GetHomePageBannerResponse } from 'src/app/models/get-home-page-banner-response.model';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -40,7 +41,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
     public loginService: LoginService,
     public appModalService: AppModalService,
     private modalDialog: MatDialog,
-    private gtmService: GoogleTagManagerService) {
+    private gtmService: GoogleTagManagerService,
+    public tokenService: TokenService) {
   }
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         const gtmTag = {
           event: 'navigate',
           isLoggedIn: this.isAuthorised,
-          name: this.isAuthorised ? this.loginService.isAuthorised(true) : '',
+          name: this.isAuthorised ? this.tokenService.getUserData(UserDataInTokenToReturn.Name) : '',
           url: item.url,
           dateTime: moment(new Date()).format('YYYY-MM-DD - HH:mm:ss:SSS')
         };
@@ -79,7 +81,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.checkIsAuthInterval = null;
-    this.loginService.logoutUser();
+    this.tokenService.logoutUser();
 
     if (this.modal$) {
       this.modal$.unsubscribe();
@@ -101,18 +103,25 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   public initializeIsLoggedInCheck() {
     this.checkIsAuthInterval = setInterval(() => {
-      this.isAuthorised = this.loginService.isAuthorised();
-      this.hasCompletedGettingToKnowYou = this.loginService.checkIfUserHasCompletedGettingToKnowYou();
+      this.isAuthorised = this.tokenService.isLoggedIn();
+      this.hasCompletedGettingToKnowYou = this.tokenService.getUserData(UserDataInTokenToReturn.HasCompletedGettingToKnowYou) as boolean;
 
       if (this.isAuthorised) {
-        this.isUserAdmin = this.loginService.isLogedInUserAdmin();
+        this.isUserAdmin = this.tokenService.getUserData(UserDataInTokenToReturn.isAdmin) as boolean;
 
-        const userDetails = this.loginService.getLoggedInUserDetails();
-        if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
-          this.isSuperAdmin = true;
+        if (this.isUserAdmin) {
+          // Check For Super Admin
+          this.isSuperAdmin = this.tokenService.getUserData(UserDataInTokenToReturn.IsSuperAdmin) as boolean;
         } else {
           this.isSuperAdmin = false;
         }
+
+        // const userDetails = this.tokenService.getUserData();
+        // if (userDetails?.email === 'nic.rfp@gmail.com' || userDetails?.email === 'andre.kok97@outlook.com' || userDetails?.email === 'cathy@zapco.co.za') {
+        //   this.isSuperAdmin = true;
+        // } else {
+        //   this.isSuperAdmin = false;
+        // }
 
         if (!this.hasCompletedGettingToKnowYou && !this.hasDismissedGettingToKnowYou) {
           this.displayGettingToKnowYouBanner = true;
@@ -143,11 +152,11 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   public logout() {
-    this.loginService.logoutUser();
+    this.tokenService.logoutUser();
   }
 
   public getLoggedInUsername() {
-    return this.loginService.getLoggedInUsername();
+    return this.tokenService.getUserData(UserDataInTokenToReturn.Name);
   }
 
   public initializeModal() {
