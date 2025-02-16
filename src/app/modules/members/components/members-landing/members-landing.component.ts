@@ -34,14 +34,14 @@ export class MembersLandingComponent implements OnInit {
 
   public loginClicked() {
     this.loginService.checkWhitelisting(this.loginEmailControl?.value).subscribe((result: GetUserDataResponse.RootObject) => {
-      if (result.status === 200) {
-        this.addPrefferedEmailToLocalStorage();
-        this.userData = result.data;
+      this.addPrefferedEmailToLocalStorage();
+      this.userData = result.data;
 
-        this.userData.hangarNumbers = AppHelperFunction.splitStringToArray(`${result.data.hangarNumbers}`);
-        this.userData.standNumbers = AppHelperFunction.splitStringToArray(`${result.data.standNumbers}`);
-        this.displayLoginScreen = true;
-      }
+      this.userData.hangarNumbers = AppHelperFunction.splitStringToArray(`${result.data.hangarNumbers}`);
+      this.userData.standNumbers = AppHelperFunction.splitStringToArray(`${result.data.standNumbers}`);
+      this.displayLoginScreen = true;
+    }, error => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
     });
   }
 

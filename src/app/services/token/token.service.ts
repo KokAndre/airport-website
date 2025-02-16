@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppRoutes, SessionStorageKeys, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +105,15 @@ export class TokenService {
     } else {
       this.userData = new GetUserDataResponse.Data;
     }
+  }
+
+  public updateUserData(userData: UpdateMemberDataRequest.RootObject) {
+    this.userData.name = userData.name;
+    this.userData.surname = userData.surname;
+    this.userData.email = userData.email;
+    this.userData.phoneNumber = userData.phoneNumber;
+    this.userData.standNumbers = AppHelperFunction.splitStringToArray(`${userData.standNumbers}`);
+    this.userData.hangarNumbers = AppHelperFunction.splitStringToArray(`${userData.hangarNumbers}`);
   }
 
   public getUserData(dataToReturn?: UserDataInTokenToReturn) {

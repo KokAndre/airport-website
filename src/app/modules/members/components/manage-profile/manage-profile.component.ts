@@ -241,17 +241,9 @@ export class ManageProfileComponent implements OnInit {
     this.loginService.updateMemberData(requestData).subscribe(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update profile data', results.message, null);
       if (results.status === 200) {
-        // this.refreshToken();
-        
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // TODO: FIX FETCHING THE DATA!!!!!!
-        // this.getUserData();
-
-        // this.
+        // Update the User Data in the data service and refresh the screen
+        this.tokenService.updateUserData(requestData);
+        this.getUserData();
       }
     });
   }

@@ -824,6 +824,39 @@ export class AdminService {
     //   });
   }
 
+
+
+
+
+
+
+  public addExistingMember(memberData: MembersDataResponse.Member) {
+    let requestData = new MembersDataResponse.Member
+    requestData = memberData;
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    
+    return this.http.post(Endpoints.NewBaseURL + '/members/add-existing-member', { requestData: requestData }) as Observable<any>;
+
+    // return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
+    //   method: 'post',
+    //   body: JSON.stringify({ requestData: requestData })
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    //   });
+  }
+
+
+
+
+
+
+
+
+
+
+
   public deleteIssueCategory(categoryId: number) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
