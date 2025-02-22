@@ -159,7 +159,7 @@
       <ng-container *ngFor="let item of webTicketsData">
         <tr [hidden]="checkIfRowIsHidden(item)">
 
-          <td [innerHTML]="item.id"></td>
+          <td class="text-nowrap" [innerHTML]="item.id"></td>
           <td [innerHTML]="item.name"></td>
           <td [innerHTML]="item.category"></td>
           <td [innerHTML]="item.description"></td>

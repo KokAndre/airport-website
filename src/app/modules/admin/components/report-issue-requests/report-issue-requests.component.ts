@@ -19,6 +19,7 @@ export enum StatusEnum {
   styleUrls: ['./report-issue-requests.component.scss']
 })
 export class ReportIssueRequestsComponent implements OnInit {
+  public isLoading = true;
   public reportIssueRequests: GetReportIssueDataResponse.Requests[];
   public categoryList: GetReportIssueDataResponse.Category[];
   public responsiblePersonList: GetReportIssueDataResponse.ResponsiblePerson[];
@@ -101,6 +102,11 @@ export class ReportIssueRequestsComponent implements OnInit {
         });
 
         this.orderDataByPriority();
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
+
 
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Report Issue Data', results.message, null);

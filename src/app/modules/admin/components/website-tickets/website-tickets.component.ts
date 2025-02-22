@@ -228,7 +228,7 @@ export class WebsiteTicketsComponent implements OnInit {
       webTicket: new GetWebTicketsDataResponse.WebTicket()
     };
 
-    this.appModalService.ShowConfirmationModal(ModalTypes.CaptureWebTicketData, 'Add Web Ticked', '', modalData, this.addWebTicketOutcome.bind(this));
+    this.appModalService.ShowConfirmationModal(ModalTypes.CaptureWebTicketData, 'Add Web Ticket', '', modalData, this.addWebTicketOutcome.bind(this));
   }
 
   public addWebTicketOutcome(modalOutcome: string, webTicket?: GetWebTicketsDataResponse.WebTicket) {
