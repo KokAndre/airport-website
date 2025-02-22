@@ -6,6 +6,7 @@ import { ModalDetails } from 'src/app/models/app-modal.model';
 import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response.model';
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 import { TokenService } from 'src/app/services/token/token.service';
@@ -30,6 +31,11 @@ export class AppModalComponent implements OnInit {
   public memberData: UpdateMembersRequest.RootObject;
   public captureSingleFieldData: string;
   public capturePriorityData: GetReportIssueDataResponse.priorityList;
+  public webTicketData: GetWebTicketsDataResponse.WebTicket;
+  public sectionsData: GetWebTicketsDataResponse.Section[];
+  public pageDisplayData: GetWebTicketsDataResponse.Page[];
+  public priorityData: GetWebTicketsDataResponse.Priority[];
+  public statusData: GetWebTicketsDataResponse.Status[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -85,15 +91,33 @@ export class AppModalComponent implements OnInit {
         this.initializeCaptureMemberFormControls();
         break;
 
-        case ModalTypes.CapturePriorityData:
-          if (this.data.inputValues) {
-            this.capturePriorityData = this.data.inputValues;
-          } else {
-            this.capturePriorityData = new GetReportIssueDataResponse.priorityList();
-          }
-          
-          this.isLoading = false;
-          break;
+      case ModalTypes.CapturePriorityData:
+        if (this.data.inputValues) {
+          this.capturePriorityData = this.data.inputValues;
+        } else {
+          this.capturePriorityData = new GetReportIssueDataResponse.priorityList();
+        }
+
+        this.isLoading = false;
+        break;
+
+      case ModalTypes.CaptureWebTicketData:
+        this.sectionsData = this.data.inputValues?.sections;
+        this.priorityData = this.data.inputValues?.priorities;
+        this.statusData = this.data.inputValues?.statusList;
+
+        if (this.data.inputValues?.webTicket) {
+          this.webTicketData = this.data.inputValues.webTicket;
+        } else {
+          this.webTicketData = new GetWebTicketsDataResponse.WebTicket();
+        }
+
+        if (this.webTicketData?.section) {
+          this.pageDisplayData = this.sectionsData.find(x => x.name === this.webTicketData.section)?.pages;
+        }
+
+        this.isLoading = false;
+        break;
 
       default:
         this.isLoading = false;
@@ -359,6 +383,30 @@ export class AppModalComponent implements OnInit {
     const pageElemntArr = document.getElementById('banner-pdf-viewer').children[0].children[0].children;
     this.bannerPDFHeight = pageElemntArr[0]?.clientHeight ? `${pageElemntArr[0].clientHeight}px` : '80vh';
     this.hideBannerModal = false;
+  }
+
+  public webTicketCategoryChanged() {
+    if (this.webTicketData.category === 'Administration') {
+      this.webTicketData.section = 'Administration';
+      this.webTicketData.page = 'Administration';
+    }
+
+    if (this.webTicketData.category === 'Web Development') {
+      this.webTicketData.section = '';
+      this.webTicketData.page = undefined;
+      this.pageDisplayData = [];
+    }
+  }
+
+  public webTicketSectionChanged() {
+    this.pageDisplayData = this.sectionsData.find(x => x.name === this.webTicketData.section)?.pages;
+    this.webTicketData.page = undefined;
+  }
+
+  public saveWebTicketData() {
+    if (this.webTicketData.section && this.webTicketData.page && this.webTicketData.description && this.webTicketData.personResponsible && this.webTicketData.category && this.webTicketData.status && this.webTicketData.priority) {
+      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.webTicketData);
+    }
   }
 
   public get interestedInPropertyNameControl() {

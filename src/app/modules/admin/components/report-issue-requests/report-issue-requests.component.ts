@@ -225,7 +225,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public allStatusClicked() {
-    this.allStatusCheckBox = !this.allCategoryCheckbox;
+    // this.allStatusCheckBox = !this.allStatusCheckBox;
 
     this.statusNotStartedCheckBox = this.allStatusCheckBox;
     this.statusInProgressCheckBox = this.allStatusCheckBox;

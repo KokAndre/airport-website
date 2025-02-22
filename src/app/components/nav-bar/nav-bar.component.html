@@ -105,8 +105,9 @@
       <div class="dropdown-content">
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.Classifieds)">
           Classifieds</div>
-          <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">Tedderfield Merch Hub</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">Tedderfield Merch
+          Hub</div>
       </div>
     </div>
   </div>
@@ -178,7 +179,8 @@
             Who's Who in the Tedderfield Zoo
           </div>
           <mat-divider></mat-divider>
-          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersDonations)">Donations Board</div>
+          <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersDonations)">Donations Board
+          </div>
           <mat-divider></mat-divider>
           <div class="dropdown-item p-2" (click)="logout()">Vacate Runway
           </div>
@@ -241,15 +243,18 @@
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">
           Manage
           Interests In Classifieds For Sale</div>
-        <mat-divider></mat-divider>
+        <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
-        <mat-divider></mat-divider>
+        <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
-          <!-- <mat-divider></mat-divider>
+        <!-- <mat-divider></mat-divider>
           <div class="dropdown-item p-2"
             (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
+        <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
+        <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
+          (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>
       </div>
     </div>
   </div>
@@ -399,8 +404,9 @@
   <mat-menu #fataMerchMenu="matMenu">
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.Classifieds)">
       Classifieds</div>
-      <mat-divider></mat-divider>
-      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">Tedderfield Merch Hub</div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.TedderfieldMerchHub)">
+      Tedderfield Merch Hub</div>
   </mat-menu>
 
   <mat-menu #propertyForSaleRentMenu="matMenu">
@@ -457,7 +463,8 @@
         Who's Who in the Tedderfield Zoo
       </div>
       <mat-divider></mat-divider>
-      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersDonations)">Donations Board</div>
+      <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersDonations)">
+        Donations Board</div>
       <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item (click)="logout()">Vacate Runway
       </div>
@@ -513,14 +520,17 @@
     <div class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Manage
       Interests In Classifieds For Sale</div>
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
-      <!-- <mat-divider></mat-divider>
+    <!-- <mat-divider></mat-divider>
       <div class="dropdown-item p-2" mat-menu-item
         (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
+    <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
+    <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
+      (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>
   </mat-menu>
 </div>

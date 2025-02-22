@@ -33,50 +33,101 @@
         <th>Surname</th>
         <th>Email</th>
         <th>Phone Number</th>
-        <th>Registered</th>
-        <th>Admin</th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Registered
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByIsRegisteredClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="isRegisteredFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Admin
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByIsAdminClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="isAdminFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
         <th>Hangar Number</th>
         <th>Stand Number</th>
-        <th>Getting To Know You</th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Getting To Know You
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByHasCompletedGettingToKNowYouClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="hasCompletedGettingToKnowYouFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <!-- <th>Getting To Know You</th> -->
         <th>Actions</th>
       </tr>
 
-      <tr *ngFor="let item of membersData">
-        <td>{{ item.name }}</td>
-        <td>{{ item.surname }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.phoneNumber }}</td>
-        <td class="text-center"><mat-icon *ngIf="item.isRegistered === 1"
-            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.isRegistered !== 1" class="red-text text-bold vertical-allign-bottom"
-            fontIcon="close"></mat-icon></td>
-        <td class="text-center"><mat-icon *ngIf="item.isAdmin === 1 || item.isAdmin === 2"
-            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.isAdmin === 0" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon>
-        </td>
+      <ng-container *ngFor="let item of membersData">
+        <tr [hidden]="checkIfRowIsHidden(item)">
+          <td>{{ item.name }}</td>
+          <td>{{ item.surname }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.phoneNumber }}</td>
+          <td class="text-center"><mat-icon *ngIf="item.isRegistered === 1"
+              class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+              *ngIf="item.isRegistered !== 1" class="red-text text-bold vertical-allign-bottom"
+              fontIcon="close"></mat-icon></td>
+          <td class="text-center"><mat-icon *ngIf="item.isAdmin === 1 || item.isAdmin === 2"
+              class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+              *ngIf="item.isAdmin === 0" class="red-text text-bold vertical-allign-bottom" fontIcon="close"></mat-icon>
+          </td>
 
 
-        <td>
-          <p class="mb-0 text-no-wrap" *ngFor="let hangarItem of item.hangarNumbersArray">{{ hangarItem }}</p>
-        </td>
-        <td>
-          <p class="mb-0 text-no-wrap" *ngFor="let standItem of item.standNumbersArray">{{ standItem }}</p>
-        </td>
+          <td>
+            <p class="mb-0 text-no-wrap" *ngFor="let hangarItem of item.hangarNumbersArray">{{ hangarItem }}</p>
+          </td>
+          <td>
+            <p class="mb-0 text-no-wrap" *ngFor="let standItem of item.standNumbersArray">{{ standItem }}</p>
+          </td>
 
 
-        <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === 1"
-            class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
-            *ngIf="item.hasCompletedGettingToKnowYou !== 1" class="red-text text-bold vertical-allign-bottom"
-            fontIcon="close"></mat-icon></td>
+          <td class="text-center"><mat-icon *ngIf="item.hasCompletedGettingToKnowYou === 1"
+              class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
+              *ngIf="item.hasCompletedGettingToKnowYou !== 1" class="red-text text-bold vertical-allign-bottom"
+              fontIcon="close"></mat-icon></td>
 
-        <td>
-          <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
-              (click)="editMember(item)"></mat-icon>
-            <mat-icon class="red-text pointer ml-1 p-0" fontIcon="delete" (click)="delteMemberClicked(item)"></mat-icon>
-          </div>
-        </td>
-        
-      </tr>
+          <td>
+            <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+                (click)="editMember(item)"></mat-icon>
+              <mat-icon class="red-text pointer ml-1 p-0" fontIcon="delete"
+                (click)="delteMemberClicked(item)"></mat-icon>
+            </div>
+          </td>
+
+        </tr>
+      </ng-container>
 
     </table>
   </div>
@@ -87,3 +138,43 @@
     <p class="text-size-24">There is currently no members data to display.</p>
   </div>
 </div>
+
+<mat-menu #isRegisteredFilterMenu="matMenu" yPosition="above">
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allIsRegisteredClicked();"
+    [(ngModel)]="allRegisteredCheckBox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="isRegisteredCheckBox">Is
+    Registered</mat-checkbox>
+  <mat-divider></mat-divider>
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="isNotRegisteredCheckBox">Is Not
+    Registered</mat-checkbox>
+</mat-menu>
+
+
+<mat-menu #isAdminFilterMenu="matMenu" yPosition="above">
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allIsAdminClicked();"
+    [(ngModel)]="allAdminCheckBox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="isNotAdminCheckBox">Is Not
+    Admin</mat-checkbox>
+  <mat-divider></mat-divider>
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="isAdminCheckBox">Is
+    Admin</mat-checkbox>
+</mat-menu>
+
+<mat-menu #hasCompletedGettingToKnowYouFilterMenu="matMenu" yPosition="above">
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allHasCompletedGettingToKNowYouClicked();"
+    [(ngModel)]="allHasCompletedGettingToKnowYouCheckBox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+    [(ngModel)]="hasCompletedGettingToKnowYouCheckBox">Has Completed Getting To Know You</mat-checkbox>
+  <mat-divider></mat-divider>
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+    [(ngModel)]="hasNotCompletedGettingToKnowYouheckBox">Has Not Completed Getting To Know You</mat-checkbox>
+</mat-menu>

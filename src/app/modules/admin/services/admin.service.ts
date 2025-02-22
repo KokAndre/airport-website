@@ -14,6 +14,7 @@ import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-re
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
+import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
 import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
 import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
@@ -777,7 +778,7 @@ export class AdminService {
     const requestData = new MembersDataResponse.Member
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.id = memberId;
-    
+
     return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteMember, { requestData: requestData }) as Observable<any>;
 
     // return fetch(Endpoints.BaseURL + Endpoints.DeleteMember, {
@@ -811,51 +812,17 @@ export class AdminService {
     let requestData = new UpdateMembersRequest.RootObject
     requestData = memberData;
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
-    
+
     return this.http.post(Endpoints.NewBaseURL + Endpoints.ManageMembersUpdateMemberData, { requestData: requestData }) as Observable<any>;
-
-    // return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
-    //   method: 'post',
-    //   body: JSON.stringify({ requestData: requestData })
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     return data;
-    //   });
   }
-
-
-
-
-
-
 
   public addExistingMember(memberData: MembersDataResponse.Member) {
     let requestData = new MembersDataResponse.Member
     requestData = memberData;
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
-    
+
     return this.http.post(Endpoints.NewBaseURL + '/members/add-existing-member', { requestData: requestData }) as Observable<any>;
-
-    // return fetch(Endpoints.BaseURL + Endpoints.ManageMembersUpdateMemberData, {
-    //   method: 'post',
-    //   body: JSON.stringify({ requestData: requestData })
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     return data;
-    //   });
   }
-
-
-
-
-
-
-
-
-
-
 
   public deleteIssueCategory(categoryId: number) {
     let requestData = new UpdateIssueConfigRequest.RootObject();
@@ -948,4 +915,19 @@ export class AdminService {
       });
   }
 
+  public getWebsiteTickets() {
+    return this.http.get(Endpoints.NewBaseURL + Endpoints.GetWebsiteTickets) as Observable<any>;
+  }
+
+  public addNewWebTicket(webItem: GetWebTicketsDataResponse.WebTicket) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.AddNewWebsiteTicket, { requestData: webItem }) as Observable<any>;
+  }
+
+  public editWebTicket(webItem: GetWebTicketsDataResponse.WebTicket) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.UpdateWebsiteTicket, { requestData: webItem }) as Observable<any>;
+  }
+
+  public deleteWebTicket(webItemId: number) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteWebsiteTicket, { requestData: { id: webItemId } }) as Observable<any>;
+  }
 }

@@ -56,7 +56,8 @@ export enum AppRoutes {
     ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale',
     ManageReportIssueConfig = '/admin/manage-report-issue-config',
     ManageGettingToKnowYou = '/admin/manage-getting-to-know-you',
-    ManageYoutubeVideos = '/admin/manage-youtube-videos'
+    ManageYoutubeVideos = '/admin/manage-youtube-videos',
+    ManageWebsiteTickets = '/admin/website-tickets'
 }
 
 export enum Endpoints {
@@ -190,7 +191,13 @@ export enum Endpoints {
     GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php',
 
     // Youtube Videos
-    GetYoutubeVideos = '/youtube-videos/get-videos.php'
+    GetYoutubeVideos = '/youtube-videos/get-videos.php',
+
+    // Website Tickets
+    GetWebsiteTickets = '/web-tickets/get-web-tickets',
+    AddNewWebsiteTicket = '/web-tickets/add-web-tickets',
+    UpdateWebsiteTicket = '/web-tickets/update-web-tickets',
+    DeleteWebsiteTicket = '/web-tickets/delete-web-tickets',
 }
 
 export enum CallTypes {
@@ -231,7 +238,8 @@ export enum ModalTypes {
     EditReportIssueData = 'editReportIssueData',
     CaptureMember = 'captureMember',
     CapturSingleInputField = 'capturSingleInputField',
-    CapturePriorityData = 'capturePriorityData'
+    CapturePriorityData = 'capturePriorityData',
+    CaptureWebTicketData = 'captureWebTicketData'
 }
 
 export enum ModalOutcomeOptions {

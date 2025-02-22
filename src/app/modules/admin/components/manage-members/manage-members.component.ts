@@ -17,22 +17,23 @@ import * as CryptoJS from 'crypto-js';
 export class ManageMembersComponent implements OnInit {
   public membersData = new Array<MembersDataResponse.Member>();
 
-  // public membersTestData: MembersDataResponse.Member[] = [
-    
-  //   {
-  //     "id": 55,
-  //     "name": "Andre",
-  //     "surname": "Kok",
-  //     "email": "andre.kok97@outlook.com",
-  //     "password": "8aHjByu4T3lke+VOCgDMjw==",
-  //     "isRegistered": 1,
-  //     "isAdmin": 1,
-  //     "hasCompletedGettingToKnowYou": 0,
-  //     "phoneNumber": "0605255551",
-  //     "hangarNumbers": "[\"Not Applicable\"]",
-  //     "standNumbers": "[\"Not Applicable\"]"
-  //   }
-  // ];
+  // Is Registered Filtes
+  public sortByIsRegistered = false;
+  public allRegisteredCheckBox = true;
+  public isRegisteredCheckBox = true;
+  public isNotRegisteredCheckBox = true;
+
+  // Is Admin Filtes
+  public sortByIsAdmin = false;
+  public allAdminCheckBox = true;
+  public isNotAdminCheckBox = true;
+  public isAdminCheckBox = true;
+
+  // Getting to know you Filters
+  public sortByHasCompletedGettingToKnowYou = false;
+  public allHasCompletedGettingToKnowYouCheckBox = true;
+  public hasNotCompletedGettingToKnowYouheckBox = true;
+  public hasCompletedGettingToKnowYouCheckBox = true;
 
   constructor(public adminService: AdminService, public appModalService: AppModalService) { }
 
@@ -124,31 +125,76 @@ export class ManageMembersComponent implements OnInit {
     this.adminService.exportAsExcelFile(standsForSaleExcelData, 'Members');
   }
 
+  public orderByIsRegisteredClicked() {
+    this.sortByIsRegistered = !this.sortByIsRegistered;
 
-  // public convertTestMembersData() {
-  //   this.membersTestData.forEach(member => {
-  //     if (member.password) {
-  //       member.newPassword = this.decryptPassword(member.password);
-  //     }
-  //   });
+    if (this.sortByIsRegistered) {
+      this.membersData.sort((a, b) => a.isRegistered > b.isRegistered ? 1 : -1);
+    } else {
+      this.membersData.sort((a, b) => a.isRegistered > b.isRegistered ? -1 : 1);
+    }
+  }
 
-  //   console.log('DATA AFTER ALTERING: ', this.membersTestData);
+  public allIsRegisteredClicked() {
+    this.isRegisteredCheckBox = this.allRegisteredCheckBox;
+    this.isNotRegisteredCheckBox = this.allRegisteredCheckBox;
+  }
 
-  //   // this.membersTestData.forEach(member => {
-  //   //   // setTimeout(() => {
-  //   //     this.adminService.addExistingMember(member).subscribe(results => {
-  //   //       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Member', results.message, null);
-  //   //     });
-  //   //   // }, 1000);
-  //   // });
-  // }
+  public orderByIsAdminClicked() {
+    this.sortByIsAdmin = !this.sortByIsAdmin;
 
-  // public decryptPassword(password: string) {
-  //   const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
-  //   const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
-  //   const decryptedBytes = CryptoJS.AES.decrypt(password, keyHex, { iv: ivHex });
-  //   const dectyptedString = decryptedBytes.toString(CryptoJS.enc.Utf8);
-  //   return dectyptedString;
-  // }
+    if (this.sortByIsAdmin) {
+      this.membersData.sort((a, b) => a.isAdmin > b.isAdmin ? 1 : -1);
+    } else {
+      this.membersData.sort((a, b) => a.isAdmin > b.isAdmin ? -1 : 1);
+    } 
+  }
+
+  public allIsAdminClicked() {
+    this.isNotAdminCheckBox = this.allRegisteredCheckBox;
+    this.isAdminCheckBox = this.allRegisteredCheckBox;
+  }
+
+  public orderByHasCompletedGettingToKNowYouClicked() {
+    this.sortByHasCompletedGettingToKnowYou = !this.sortByHasCompletedGettingToKnowYou;
+
+    if (this.sortByHasCompletedGettingToKnowYou) {
+      this.membersData.sort((a, b) => a.hasCompletedGettingToKnowYou > b.hasCompletedGettingToKnowYou ? 1 : -1);
+    } else {
+      this.membersData.sort((a, b) => a.hasCompletedGettingToKnowYou > b.hasCompletedGettingToKnowYou ? -1 : 1);
+    } 
+  }
+
+  public allHasCompletedGettingToKNowYouClicked() {
+    this.hasCompletedGettingToKnowYouCheckBox = this.allHasCompletedGettingToKnowYouCheckBox;
+    this.hasNotCompletedGettingToKnowYouheckBox = this.allHasCompletedGettingToKnowYouCheckBox;
+  }
+
+  public checkIfRowIsHidden(row: MembersDataResponse.Member) {
+    if (row.isRegistered === 1 && !this.isRegisteredCheckBox) {
+      return true
+    }
+    if (row.isRegistered === 0 && !this.isNotRegisteredCheckBox) {
+      return true
+    }
+
+    if (row.isAdmin === 0 && !this.isNotAdminCheckBox) {
+      return true
+    }
+    if (row.isRegistered > 0 && !this.isAdminCheckBox) {
+      return true
+    }
+
+    if (row.hasCompletedGettingToKnowYou === 1 && !this.hasCompletedGettingToKnowYouCheckBox) {
+      return true
+    }
+    if (row.hasCompletedGettingToKnowYou === 0 && !this.hasNotCompletedGettingToKnowYouheckBox) {
+      return true
+    }
+
+    return false;
+  }
+
+
 
 }

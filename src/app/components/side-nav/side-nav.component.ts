@@ -36,6 +36,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public hasViewedBanner = false;
   public displayGettingToKnowYouBanner = false;
   public hasDismissedGettingToKnowYou = false;
+  public isAllowedToViewWebsiteTickets = false;
 
   constructor(public router: Router,
     public loginService: LoginService,
@@ -112,8 +113,18 @@ export class SideNavComponent implements OnInit, OnDestroy {
         if (this.isUserAdmin) {
           // Check For Super Admin
           this.isSuperAdmin = this.tokenService.getUserData(UserDataInTokenToReturn.IsSuperAdmin) as boolean;
+
+          // Allow all super admin, and Chantal to see the website tickets
+          const userEmail = this.tokenService.getUserData(UserDataInTokenToReturn.Email);
+          if (this.isSuperAdmin || userEmail === 'grounds@tedderfield.co.za') {
+            this.isAllowedToViewWebsiteTickets = true;
+          } else {
+            this.isAllowedToViewWebsiteTickets = false;
+          }
+
         } else {
           this.isSuperAdmin = false;
+          this.isAllowedToViewWebsiteTickets = false;
         }
 
         // const userDetails = this.tokenService.getUserData();
@@ -132,6 +143,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         this.isUserAdmin = false;
         this.isSuperAdmin = false;
         this.displayGettingToKnowYouBanner = false;
+        this.isAllowedToViewWebsiteTickets = false;
       }
     }, 1000);
 
@@ -205,6 +217,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.CaptureMember:
         case ModalTypes.CapturSingleInputField:
         case ModalTypes.CapturePriorityData:
+        case ModalTypes.CaptureWebTicketData:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: true, maxWidth: '90vw', panelClass: 'min-width-modal-class-medium'
           });

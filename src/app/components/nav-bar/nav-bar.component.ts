@@ -36,6 +36,7 @@ export class NavBarComponent implements OnInit {
   @Input() public isSuperAdmin = false;
   @Input() public isMobileView = false;
   @Input() public hasCompletedGettingToKnowYou = false;
+  @Input() public isAllowedToViewWebsiteTickets = false;
 
   // @ViewChild('drawer') public drawer;
 

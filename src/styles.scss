@@ -507,6 +507,8 @@ h6,
 .min-width-modal-class-medium {
   min-width: 60vw;
   width: fit-content;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 .currency-input-prefix {

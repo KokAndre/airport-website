@@ -11,6 +11,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FormsModule } from '@angular/forms';
 import { DocumetsRowComponent } from './components/documets-row/documets-row.component';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DocumetsRowComponent } from './components/documets-row/documets-row.com
     ImageUploaderComponent,
     OnEnterDirective,
     LoginComponent,
-    DocumetsRowComponent
+    DocumetsRowComponent,
+    DatePickerComponent
   ],
   exports: [
     ArrowDividerComponent,
@@ -38,7 +40,8 @@ import { DocumetsRowComponent } from './components/documets-row/documets-row.com
     LoginComponent,
     PdfViewerModule,
     FormsModule,
-    DocumetsRowComponent
+    DocumetsRowComponent,
+    DatePickerComponent
   ],
   providers: [NgxImageCompressService]
 })

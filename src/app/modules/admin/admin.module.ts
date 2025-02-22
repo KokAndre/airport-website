@@ -19,6 +19,7 @@ import { ManageMembersComponent } from './components/manage-members/manage-membe
 import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
 import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
 import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
+import { WebsiteTicketsComponent } from './components/website-tickets/website-tickets.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos
     ManageMembersComponent,
     ManageReportIssueConfigComponent,
     ManageGettingToKnowYouComponent,
-    ManageYoutubeVideosComponent
+    ManageYoutubeVideosComponent,
+    WebsiteTicketsComponent
   ]
 })
 export class AdminModule { }

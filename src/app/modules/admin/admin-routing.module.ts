@@ -17,6 +17,7 @@ import { ManageMembersComponent } from './components/manage-members/manage-membe
 import { ManageReportIssueConfigComponent } from './components/manage-report-issue-config/manage-report-issue-config.component';
 import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
 import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
+import { WebsiteTicketsComponent } from './components/website-tickets/website-tickets.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
   },
   {
     path: 'manage-youtube-videos', component: ManageYoutubeVideosComponent
+  },
+  // TODO: Add Web Tickets Auth Guard !!!
+  {
+    path: 'website-tickets', component: WebsiteTicketsComponent
   }
 ];
 
