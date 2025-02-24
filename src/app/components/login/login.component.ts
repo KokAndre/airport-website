@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     this.registerFormGroup = this.formBuilder.group({
       registerNameControl: new FormControl(this.userData.name || '', [Validators.required]),
       registerSurnameControl: new FormControl(this.userData.surname || '', [Validators.required]),
-      registerPhoneNumberControl: new FormControl(this.userData.phoneNumber || '', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
+      registerPhoneNumberControl: new FormControl(this.userData.phoneNumber || '', [Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       registerEmailControl: new FormControl(this.userData.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       registerHangarNumbersControl: new FormControl(''),
       registerStandNumbersControl: new FormControl(''),

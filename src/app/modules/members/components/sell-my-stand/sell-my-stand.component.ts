@@ -72,7 +72,7 @@ export class SellMyStandComponent implements OnInit {
     this.sellMyStandFormGroup = this.formBuilder.group({
       nameControl: new FormControl('', [Validators.required]),
       emailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
-      phoneNumberControl: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
+      phoneNumberControl: new FormControl('', [Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       standNumberControl: new FormControl('', [Validators.required]),
       standDimentionsWidthControl: new FormControl(''),
       standDimentionsLengthControl: new FormControl(''),
@@ -107,9 +107,9 @@ export class SellMyStandComponent implements OnInit {
 
     if (this.loggedInUserDetails?.phoneNumber) {
       this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
-        this.phoneNumberControl.disable();
-      }
+      // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za' && this.loggedInUserDetails.email !== 'andre.kok97@outlook.com') {
+      //   this.phoneNumberControl.disable();
+      // }
     }
 
     this.isPersonalDetailsAcknowledgementCheckboxChecked = false;

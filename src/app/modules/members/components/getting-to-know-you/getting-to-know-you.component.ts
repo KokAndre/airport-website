@@ -53,7 +53,7 @@ export class GettingToKnowYouComponent implements OnInit {
     this.gettingToKnowYouFormGroup = this.formBuilder.group({
       nameControl: new FormControl('', [Validators.required]),
       emailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
-      phoneNumberControl: new FormControl('', [Validators.required, Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
+      phoneNumberControl: new FormControl('', [Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       emergencyContactOneNameControl: new FormControl('', [Validators.required]),
       emergencyContactOnePhoneNumberControl: new FormControl('', [Validators.required, Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       emergencyContactTwoNameControl: new FormControl(''),

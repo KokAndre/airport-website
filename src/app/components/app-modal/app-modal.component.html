@@ -242,10 +242,11 @@
 
       <mat-form-field class="col-12 px-0">
         <mat-label>Phone Number</mat-label>
-        <input style="color: black;" matInput required maxlength="10"
+        <input style="color: black;" matInput maxlength="10"
           formControlName="interestedInPropertyPhoneNumberControl" placeholder="Please enter your name">
-        <mat-error *ngIf="interestedInPropertyPhoneNumberControl.hasError('required')">Phone Number is
-          required</mat-error>
+        <!-- <mat-error *ngIf="interestedInPropertyPhoneNumberControl.hasError('required')">Phone Number is
+          required</mat-error> -->
+          <mat-error *ngIf="interestedInPropertyPhoneNumberControl.hasError('pattern')">Enter a valid phone number</mat-error>
       </mat-form-field>
     </div>
 

@@ -46,7 +46,7 @@ export class ManageProfileComponent implements OnInit {
     this.memberFormGroup = this.formBuilder.group({
       nameControl: new FormControl(this.userDetails.name || '', [Validators.required]),
       surnameControl: new FormControl(this.userDetails.surname || '', [Validators.required]),
-      phoneNumberControl: new FormControl(this.userDetails.phoneNumber || '', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
+      phoneNumberControl: new FormControl(this.userDetails.phoneNumber || '', [Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       emailControl: new FormControl(this.userDetails.email || '', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
       hangarNumbersControl: new FormControl(''),
       standNumbersControl: new FormControl(''),

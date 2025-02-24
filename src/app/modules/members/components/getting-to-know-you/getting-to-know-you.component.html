@@ -186,10 +186,10 @@
           <div class="row mx-0 justify-content-center mt-2">
             <mat-form-field class="col-10 px-0">
               <mat-label>Phone Number</mat-label>
-              <input style="color: black;" matInput required maxlength="10" formControlName="phoneNumberControl"
+              <input style="color: black;" matInput maxlength="10" formControlName="phoneNumberControl"
                 placeholder="Please enter a valid phone number."
                 (input)="numberControlInput(phoneNumberControl || undefined)">
-              <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error>
+              <!-- <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error> -->
               <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
             </mat-form-field>
           </div>

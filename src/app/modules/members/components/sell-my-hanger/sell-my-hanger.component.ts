@@ -67,7 +67,7 @@ export class SellMyHangerComponent implements OnInit {
     this.sellMyHangerFormGroup = this.formBuilder.group({
       nameControl: new FormControl('', [Validators.required]),
       emailControl: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$')]),
-      phoneNumberControl: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
+      phoneNumberControl: new FormControl('', [Validators.maxLength(10), Validators.pattern('^0[1-9]{1}[0-9]{1}[0-9]{7}$')]),
       hangerNumberControl: new FormControl('', [Validators.required]),
       hangerDimentionsWidthControl: new FormControl(''),
       hangerDimentionsLengthControl: new FormControl(''),
@@ -109,9 +109,9 @@ export class SellMyHangerComponent implements OnInit {
 
     if (this.loggedInUserDetails?.phoneNumber) {
       this.phoneNumberControl.setValue(this.loggedInUserDetails.phoneNumber);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
-        this.phoneNumberControl.disable();
-      }
+      // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+      //   this.phoneNumberControl.disable();
+      // }
     }
 
     this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
