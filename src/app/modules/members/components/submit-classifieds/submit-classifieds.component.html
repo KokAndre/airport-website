@@ -120,10 +120,11 @@
             <div class="row mx-0 justify-content-center mt-2">
               <mat-form-field class="col-10 px-0">
                 <mat-label>Description</mat-label>
-                <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="200"
-                  formControlName="descriptionControl" (keydown)="keydownOnBulletPointControl(descriptionControl)"
+                <!-- (keydown)="keydownOnBulletPointControl(descriptionControl)"
                   (keyup)="inputOnBulletPointControl(descriptionControl, $event)"
-                  (blur)="blurOnBulletPointControl(descriptionControl)"
+                  (blur)="blurOnBulletPointControl(descriptionControl)" -->
+                <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="200"
+                  formControlName="descriptionControl" 
                   placeholder="E.G. Well maintained Cessna 172 with 500 hours on the engine. New avionics installed in 2021. Perfect for cross - country flights."></textarea>
                 <mat-error *ngIf="descriptionControl?.hasError('required')">Description is required</mat-error>
               </mat-form-field>
@@ -262,10 +263,11 @@
             <div class="row mx-0 justify-content-center mt-2">
               <mat-form-field class="col-10 px-0">
                 <mat-label>Special Notes</mat-label>
-                <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="900"
-                  formControlName="specialNotesControl" (keydown)="keydownOnBulletPointControl(specialNotesControl)"
+                <!-- (keydown)="keydownOnBulletPointControl(specialNotesControl)"
                   (keyup)="inputOnBulletPointControl(specialNotesControl, $event)"
-                  (blur)="blurOnBulletPointControl(specialNotesControl)"
+                  (blur)="blurOnBulletPointControl(specialNotesControl)" -->
+                <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="900"
+                  formControlName="specialNotesControl"
                   placeholder="Any additional details, such as shipping options, warranties, or offers for trade."></textarea>
                 <mat-error *ngIf="specialNotesControl?.hasError('required')">Special Notes is required</mat-error>
               </mat-form-field>

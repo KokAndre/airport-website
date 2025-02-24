@@ -58,8 +58,10 @@ export class ClassifiedsComponent implements OnInit {
       // itemToPush.specialNotes = classifiedItem.specialNotes;
       itemToPush.dateAdded = classifiedItem.dateAdded;
 
-      itemToPush.description = classifiedItem.description?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.specialNotes = classifiedItem.specialNotes?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      // itemToPush.description = classifiedItem.description?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.description = classifiedItem.description;
+      // itemToPush.specialNotes = classifiedItem.specialNotes?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+      itemToPush.specialNotes = classifiedItem.specialNotes;
 
       const imageDataArray = classifiedItem.images.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 

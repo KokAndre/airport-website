@@ -278,11 +278,11 @@ export class SubmitClassifiedsComponent implements OnInit {
     this.submitClassifiedsRequestData.phoneNumber = this.phoneNumberControl.value;
     this.submitClassifiedsRequestData.condition = this.conditionSelectControl.value;
 
-    // this.submitClassifiedsRequestData.description = this.descriptionControl.value;
-    this.submitClassifiedsRequestData.description = this.formatBulletPointInputValuesToSubmit(this.descriptionControl.value);
+    this.submitClassifiedsRequestData.description = this.descriptionControl.value;
+    // this.submitClassifiedsRequestData.description = this.formatBulletPointInputValuesToSubmit(this.descriptionControl.value);
 
-    // this.submitClassifiedsRequestData.specialNotes = this.specialNotesControl.value;
-    this.submitClassifiedsRequestData.specialNotes = this.formatBulletPointInputValuesToSubmit(this.specialNotesControl.value);
+    this.submitClassifiedsRequestData.specialNotes = this.specialNotesControl.value;
+    // this.submitClassifiedsRequestData.specialNotes = this.formatBulletPointInputValuesToSubmit(this.specialNotesControl.value);
 
 
     if (this.availabilitySelectControl.value === 'Other') {
@@ -303,15 +303,16 @@ export class SubmitClassifiedsComponent implements OnInit {
       this.submitClassifiedsRequestData.category = this.categorySelectControl.value;
     }
 
-    this.membersService.submitClassifiedsItem(this.submitClassifiedsRequestData).then(results => {
-      if (results.status === 200) {
-        this.submitItemSucessId = results.id;
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', 'Your item has been captured successfully.', null);
-        this.uploadImages();
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);
-      }
-    });
+    console.log('DATA: ', this.submitClassifiedsRequestData);
+    // this.membersService.submitClassifiedsItem(this.submitClassifiedsRequestData).then(results => {
+    //   if (results.status === 200) {
+    //     this.submitItemSucessId = results.id;
+    //     this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', 'Your item has been captured successfully.', null);
+    //     this.uploadImages();
+    //   } else {
+    //     this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);
+    //   }
+    // });
   }
 
   private async uploadImages() {
