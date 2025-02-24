@@ -1,11 +1,8 @@
 <mat-form-field class="px-0 date-picker-form-field" subscriptSizing="dynamic">
-  <!-- <mat-label>{{ label }}</mat-label> -->
-<div>
-  <input hidden matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="startDate"
-    (dateChange)="valueChanged($event)">
-  <!-- <mat-hint *ngIf="!hideInput">MM/DD/YYYY</mat-hint> -->
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker [startAt]="datePickerStartDate" #picker></mat-datepicker>
-</div>
-
+  <div>
+    <input hidden matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="startDate"
+      (dateChange)="valueChanged($event)">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker [startAt]="datePickerStartDate" #picker></mat-datepicker>
+  </div>
 </mat-form-field>

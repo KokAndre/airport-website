@@ -77,7 +77,8 @@
                 <mat-icon class="pointer" (click)="orderByHasCompletedGettingToKNowYouClicked()">unfold_more</mat-icon>
               </span>
               <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="hasCompletedGettingToKnowYouFilterMenu" mat-icon-button aria-label="Menu">
+                <button class="p-0" [matMenuTriggerFor]="hasCompletedGettingToKnowYouFilterMenu" mat-icon-button
+                  aria-label="Menu">
                   <mat-icon class="">filter_list</mat-icon>
                 </button>
               </span>
@@ -85,8 +86,11 @@
           </div>
         </th>
 
+        <th># Logins</th>
+        <th>Login Date</th>
+
         <!-- <th>Getting To Know You</th> -->
-        <th>Actions</th>
+        <th class="text-no-wrap">Actions</th>
       </tr>
 
       <ng-container *ngFor="let item of membersData">
@@ -117,6 +121,10 @@
               class="green-text text-bold vertical-allign-bottom" fontIcon="check"></mat-icon><mat-icon
               *ngIf="item.hasCompletedGettingToKnowYou !== 1" class="red-text text-bold vertical-allign-bottom"
               fontIcon="close"></mat-icon></td>
+
+
+          <td>{{ item.numberOfLogins || 0 }}</td>
+          <td>{{ item.lastLoginDate || 'N/A' }}</td>
 
           <td>
             <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"

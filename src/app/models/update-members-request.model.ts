@@ -31,8 +31,5 @@ export namespace UpdateMembersRequest {
         hangarNumbersArray?: string[];
         standNumbers: string;
         standNumbersArray?: string[];
-
-        // Delete the below field! 
-        newPassword?: string;
     }
 }

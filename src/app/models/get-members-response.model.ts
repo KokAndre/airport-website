@@ -21,8 +21,7 @@ export namespace MembersDataResponse {
         hangarNumbersArray?: string[];
         standNumbers: string;
         standNumbersArray?: string[];
-
-        // Delete the below field! 
-        newPassword?: string;
+        numberOfLogins: number;
+        lastLoginDate: string;
     }
 }

@@ -66,3 +66,7 @@ th {
     border-collapse: separate;
     background: linear-gradient(#f5f5f5 0%, #f5f5f5 97%, black 97%, black 100%);
 }
+
+::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+    padding: 0px !important;
+}

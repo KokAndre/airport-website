@@ -79,9 +79,9 @@
           </div>
         </th>
 
-        <th>Description</th>
         <th>Section</th>
         <th>Page</th>
+        <th>Description</th>
 
         <th class="text-nowrap">
           <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
@@ -131,24 +131,8 @@
           </div>
         </th>
 
-        <!-- <th>Date Added</th> -->
-        <th>Estimated Completion Date</th>
-
-        <!-- <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
-            Section
-            <div class="width-fit-content pt-1">
-              <span class="ml-1 align-middle">
-                <mat-icon class="pointer" (click)="orderDataByPropertyNumber()">unfold_more</mat-icon>
-              </span>
-              <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="propertyNumberMenu" mat-icon-button aria-label="Menu">
-                  <mat-icon class="">filter_list</mat-icon>
-                </button>
-              </span>
-            </div>
-          </div>
-        </th> -->
+        <!-- <th>Estimated Completion Date</th> -->
+        <th style="width: 160px; min-width: 160px;">ETC</th>
 
         <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
@@ -162,9 +146,9 @@
           <td class="text-nowrap" [innerHTML]="item.id"></td>
           <td [innerHTML]="item.name"></td>
           <td [innerHTML]="item.category"></td>
-          <td [innerHTML]="item.description"></td>
           <td [innerHTML]="item.section"></td>
           <td [innerHTML]="item.page"></td>
+          <td [innerHTML]="item.description"></td>
 
           <td>
             <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
@@ -199,32 +183,25 @@
             </mat-form-field>
           </td>
 
-
-          <!-- <td [innerHTML]="item.estimatedCompletionDate"></td> -->
-
-          <td>
-            <!-- <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
-            style="width: 140px !important;">
-              <mat-label>ETA Date</mat-label>
-              <input matInput [matDatepicker]="picker">
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field> -->
-
-            <!-- <mat-calendar></mat-calendar> -->
-
-            <div class="row mx-0">
+          <td style="width: 160px;">
+            <!-- <div class="row mx-0">
               <div class="col-9 pl-3 px-0 align-content-center">
                 <p class="mb-0">{{ item.estimatedCompletionDate }}</p>
               </div>
               <div class="col-3 px-0 align-content-center">
-                <app-date-picker [startDate]="item.estimatedCompletionDate || ''" (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
+                <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
+                  (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
               </div>
+            </div> -->
+
+            <div class="row mx-0" style="flex-wrap: nowrap; justify-self: right; align-items: center;">
+                <p class="mb-0" style="width: fit-content; padding: 0;">{{ item.estimatedCompletionDate }}</p>
+                <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
+                  (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
             </div>
 
-          </td>
 
+          </td>
 
           <td>
             <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
@@ -234,43 +211,6 @@
             </div>
           </td>
 
-
-
-
-
-
-          <!-- <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
-              style="width: 195px !important;">
-              <mat-label>Category</mat-label>
-              <mat-select [(value)]="item.category"
-                (selectionChange)="updateReportIssueCategory(item.id, $event.value)">
-                <mat-option *ngFor="let category of categoryList" class="px-1" [value]="category.category">{{
-                  category.category }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td> -->
-
-          <!--   <td>
-            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
-              style="width: 140px !important;">
-              <mat-label>Status</mat-label>
-              <mat-select [(value)]="item.status" [disabled]="item.status === 'done' && !allowAdminToDelete"
-                (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
-                <mat-option class="px-1" value="notStarted">Not Started</mat-option>
-                <mat-option class="px-1" value="inProgress">In Progress</mat-option>
-                <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td> -->
-
-          <!-- <td>
-            <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
-                (click)="editReportIssueRequestClicked(item)"></mat-icon>
-              <mat-icon *ngIf="allowAdminToDelete" class="red-text pointer ml-1 p-0" fontIcon="delete"
-                (click)="deleteReportIssueRequestClicked(item)"></mat-icon>
-            </div>
-          </td> -->
         </tr>
       </ng-container>
     </table>
@@ -340,95 +280,3 @@
   </div>
 
 </mat-menu>
-
-<!-- <mat-menu #personResponsibleMenu="matMenu" yPosition="above">
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allResponsiblePersonsClicked();"
-    [(ngModel)]="allPersonResponsibleCheckbox"><b>Select All</b></mat-checkbox>
-
-  <mat-divider></mat-divider>
-
-  <div *ngFor="let person of responsiblePersonList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="person.isFilterSelected">{{
-      person.name
-      }}</mat-checkbox>
-    <mat-divider></mat-divider>
-  </div>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-    [(ngModel)]="blankPersonResponsibleCheckBox">(Blank)</mat-checkbox>
-
-</mat-menu> -->
-
-<!-- <mat-menu #categoryMenu="matMenu" yPosition="above">
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allCategoryClicked();"
-    [(ngModel)]="allCategoryCheckbox"><b>Select All</b></mat-checkbox>
-
-  <mat-divider></mat-divider>
-
-  <div *ngFor="let category of categoryList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="category.isFilterSelected">{{
-      category.category
-      }}</mat-checkbox>
-    <mat-divider></mat-divider>
-  </div>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-    [(ngModel)]="blankCategoryCheckBox">(Blank)</mat-checkbox>
-
-</mat-menu> -->
-
-<!-- <mat-menu #statusMenu="matMenu" yPosition="above">
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allStatusClicked();"
-    [(ngModel)]="allStatusCheckBox"><b>Select All</b></mat-checkbox>
-  <mat-divider></mat-divider>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusNotStartedCheckBox">Not
-    Started</mat-checkbox>
-  <mat-divider></mat-divider>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusInProgressCheckBox">In
-    Progress</mat-checkbox>
-  <mat-divider></mat-divider>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-    [(ngModel)]="statusDoneCheckBox">Done</mat-checkbox>
-
-</mat-menu> -->
-
-<!-- <mat-menu #propertyNumberMenu="matMenu" yPosition="above">
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allProperyNumberClicked();"
-    [(ngModel)]="allPropertyNumberCheckBox"><b>Select All</b></mat-checkbox>
-
-  <mat-divider></mat-divider>
-
-  <div *ngFor="let property of propertyNumbersList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="property.isFilterSelected">{{
-      property.description
-      }}</mat-checkbox>
-    <mat-divider *ngIf="!last"></mat-divider>
-  </div>
-
-</mat-menu> -->
-
-<!-- <mat-menu #priorityMenu="matMenu" yPosition="above">
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPriorityClicked();"
-    [(ngModel)]="allPriorityCheckbox"><b>Select All</b></mat-checkbox>
-
-  <mat-divider></mat-divider>
-
-  <div *ngFor="let priority of priorityList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="priority.isFilterSelected">{{
-      priority.name
-      }}</mat-checkbox>
-    <mat-divider></mat-divider>
-  </div>
-
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-    [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
-
-</mat-menu> -->

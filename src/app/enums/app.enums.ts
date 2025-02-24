@@ -57,7 +57,8 @@ export enum AppRoutes {
     ManageReportIssueConfig = '/admin/manage-report-issue-config',
     ManageGettingToKnowYou = '/admin/manage-getting-to-know-you',
     ManageYoutubeVideos = '/admin/manage-youtube-videos',
-    ManageWebsiteTickets = '/admin/website-tickets'
+    ManageWebsiteTickets = '/admin/website-tickets',
+    MembersConsents = '/admin/members-consents'
 }
 
 export enum Endpoints {
@@ -72,17 +73,15 @@ export enum Endpoints {
     RefreshAuthToken = '/members/refresh-token',
     TestEnpoint = '/members/test-endpoint',
     CheckWhitelisting = '/members/check-whitelisting',
+    GetConsentsData = '/members/get-consents',
     // Manage Members
     GetAllMembers = '/members/get-all-members',
     UpdateMemberData = '/members/update-member-data',
     DeleteMember = '/members/delete-members',
     AddNewMember = '/members/add-member',
     ManageMembersUpdateMemberData = '/members/manage-members-update-member-data',
-
     SendPasswordResetEmail = '/members/email-reset-password',
     SubmitPasswordReset = '/members/submit-reset-password',
-
-
 
     HomePageBannerBaseUrl = 'https://www.tedderfield.co.za/api/home/home-page-banner/',
     GalleryImagesBaseURL = 'https://www.tedderfield.co.za/api/gallery/images/',

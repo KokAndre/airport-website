@@ -243,6 +243,9 @@
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">
           Manage
           Interests In Classifieds For Sale</div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersConsents)">View Members Consents
+        </div>
         <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
@@ -520,6 +523,9 @@
     <div class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Manage
       Interests In Classifieds For Sale</div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersConsents)">View
+      Members Consents</div>
     <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>

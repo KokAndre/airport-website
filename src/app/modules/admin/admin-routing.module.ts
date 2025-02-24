@@ -18,6 +18,7 @@ import { ManageReportIssueConfigComponent } from './components/manage-report-iss
 import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-know-you/manage-getting-to-know-you.component';
 import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
 import { WebsiteTicketsComponent } from './components/website-tickets/website-tickets.component';
+import { MembersConsentsComponent } from './components/members-consents/members-consents.component';
 
 const routes: Routes = [
   {
@@ -74,7 +75,10 @@ const routes: Routes = [
   // TODO: Add Web Tickets Auth Guard !!!
   {
     path: 'website-tickets', component: WebsiteTicketsComponent
-  }
+  },
+  {
+    path: 'members-consents', component: MembersConsentsComponent
+  },
 ];
 
 @NgModule({

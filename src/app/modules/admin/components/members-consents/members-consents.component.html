@@ -1,0 +1,115 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Members Consents
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Members Consents</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="!membersConsentsData?.length && !isLoading"
+  class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+
+    <div class="row mx-0 pt-4 pb-5 align-items-center">
+      <p class="text-size-24 mb-0">There are currently no issues to review.</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24 pt-4 pb-5">Consent List is loading, please be patient.</p>
+  </div>
+</div>
+
+<div *ngIf="membersConsentsData?.length && !isLoading"
+  class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
+
+  <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4" (click)="exportToExcel()">
+      <p class="mb-0">Export To Excel</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
+    <table style="width:100%;">
+      <tr class="sticky-table-header">
+        <th>ID</th>
+        <th>Consent Name</th>
+        <th>Page Of Consent</th>
+        <th>Date</th>
+        <th>Client Name</th>
+        <th>Client Email</th>
+      </tr>
+
+      <ng-container *ngFor="let item of membersConsentsData">
+        <tr [hidden]="checkIfRowIsHidden(item)">
+          <td>{{ item.id }}</td>
+          <td>{{ item.consentName }}</td>
+          <td>{{ item.pageOfConsent }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.clientName }}</td>
+          <td>{{ item.clientEmail }}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>
+
+
+<!-- <mat-menu #peronResponsibleFilterMenu="matMenu" yPosition="above">
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPersonResponsibleClicked();"
+    [(ngModel)]="allPersonResponsibleCheckBox"><b>Select All</b></mat-checkbox>
+  <mat-divider></mat-divider>
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+    [(ngModel)]="andrePersonResponsibleCheckBox">Andre</mat-checkbox>
+  <mat-divider></mat-divider>
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+    [(ngModel)]="nicPersonResponsibleCheckBox">Chantal</mat-checkbox>
+  <mat-divider></mat-divider>
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+    [(ngModel)]="chantalPersonResponsibleCheckBox">Nic</mat-checkbox>
+
+</mat-menu> -->
+
+<!-- <mat-menu #priorityFilterMenu="matMenu" yPosition="above">
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPriorityClicked();"
+    [(ngModel)]="allPriorityCheckBox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let priorityItem of priorityData; let last = last">
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+      [(ngModel)]="priorityItem.isFilterSelected">{{
+      priorityItem.priority
+      }}</mat-checkbox>
+    <mat-divider></mat-divider>
+  </div>
+
+</mat-menu> -->
+
+<!-- <mat-menu #statusFilterMenu="matMenu" yPosition="above">
+
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allStatusClicked();"
+    [(ngModel)]="allStatusCheckBox"><b>Select All</b></mat-checkbox>
+
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let statusItem of statusData; let last = last">
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusItem.isFilterSelected">{{
+      statusItem.status
+      }}</mat-checkbox>
+    <mat-divider></mat-divider>
+  </div>
+
+</mat-menu> -->

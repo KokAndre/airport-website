@@ -930,4 +930,8 @@ export class AdminService {
   public deleteWebTicket(webItemId: number) {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteWebsiteTicket, { requestData: { id: webItemId } }) as Observable<any>;
   }
+
+  public getMembersConsentTickets() {
+    return this.http.get(Endpoints.NewBaseURL + Endpoints.GetConsentsData) as Observable<any>;
+  }
 }
