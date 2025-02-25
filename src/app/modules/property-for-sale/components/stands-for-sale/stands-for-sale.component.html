@@ -211,7 +211,7 @@
             <td>{{ standDetailsToDisplay.email }}</td>
           </tr>
 
-          <tr>
+          <tr *ngIf="standDetailsToDisplay.phoneNumber">
             <td>Seller Phone Number</td>
             <td>{{ standDetailsToDisplay.phoneNumber }}</td>
           </tr>

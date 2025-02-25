@@ -216,7 +216,7 @@
             <td>{{ hangerDetailsToDisplay.email }}</td>
           </tr>
 
-          <tr>
+          <tr *ngIf="hangerDetailsToDisplay.phoneNumber">
             <td>Seller Phone Number</td>
             <td>{{ hangerDetailsToDisplay.phoneNumber }}</td>
           </tr>

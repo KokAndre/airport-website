@@ -282,7 +282,7 @@
             <td>Seller Name</td>
             <td>{{ clasifiedDetailsToDisplay.name }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="clasifiedDetailsToDisplay.phoneNumber">
             <td>Seller Phone Number</td>
             <td>{{ clasifiedDetailsToDisplay.phoneNumber }}</td>
           </tr>
