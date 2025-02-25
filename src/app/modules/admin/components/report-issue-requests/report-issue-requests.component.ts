@@ -81,13 +81,16 @@ export class ReportIssueRequestsComponent implements OnInit {
 
         this.propertyNumbersList = new Array<GetReportIssueDataResponse.PropertyNumber>();
         this.reportIssueRequests.forEach(request => {
-          if (!this.propertyNumbersList.find(x => x.description === request.hangerOrSectionNumber)) {
+          if (!this.propertyNumbersList.find(x => x.description?.toLowerCase()?.trim() === request.hangerOrSectionNumber?.toLowerCase()?.trim())) {
             const itemToPush = new GetReportIssueDataResponse.PropertyNumber();
             itemToPush.description = request.hangerOrSectionNumber;
             itemToPush.isFilterSelected = true;
             this.propertyNumbersList.push(itemToPush);
           }
         });
+
+        
+      this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
 
         this.categoryList.forEach(x => {
           x.isFilterSelected = true;
@@ -136,7 +139,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       return true;
     }
 
-    const propertyNumberOfRow = this.propertyNumbersList.find(x => x.description === row.hangerOrSectionNumber);
+    const propertyNumberOfRow = this.propertyNumbersList.find(x => x.description?.toLowerCase()?.trim() === row.hangerOrSectionNumber?.toLowerCase()?.trim());
 
     if (propertyNumberOfRow) {
       if (!propertyNumberOfRow?.isFilterSelected) {
@@ -295,13 +298,32 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.orderDataByPriority();
   }
 
+  public clearFilters() {
+    this.allPropertyNumberCheckBox = true;
+    this.propertyNumbersList.forEach(x => {
+      x.isFilterSelected = true;
+    });
 
+    this.allCategoryCheckbox = true;
+    this.categoryList.forEach(x => {
+      x.isFilterSelected = true;
+    });
 
+    this.allPriorityCheckbox = true;
+    this.priorityList.forEach(x => {
+      x.isFilterSelected = true;
+    });
 
+    this.allPersonResponsibleCheckbox = true;
+    this.responsiblePersonList.forEach(x => {
+      x.isFilterSelected = true;
+    });
 
-
-
-
+    this.allStatusCheckBox = true;
+    this.statusNotStartedCheckBox = true;
+    this.statusInProgressCheckBox = true;
+    this.statusDoneCheckBox = true;
+  }
 
   public editReportIssueRequestClicked(reportIssueItem: GetReportIssueDataResponse.Requests) {
     const modalData = new GetReportIssueDataResponse.Requests();

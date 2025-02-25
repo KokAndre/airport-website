@@ -12,9 +12,15 @@
 
 <app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
 
-<div *ngIf="reportIssueRequests?.length && !isLoading" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
+<div *ngIf="reportIssueRequests?.length && !isLoading"
+  class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
 
   <div class="row mx-0 justify-content-end">
+    <div class="red-button mb-4 mr-3" (click)="clearFilters()">
+      <p class="mb-0">Clear Filters</p>
+      <span class="red-button-icon"></span>
+    </div>
+
     <div class="red-button mb-4 mr-3" (click)="myOpenTicketsClicked()">
       <p class="mb-0">My Open Tickets</p>
       <span class="red-button-icon"></span>
@@ -174,7 +180,8 @@
             <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
               style="width: 140px !important;">
               <mat-label>Status</mat-label>
-              <mat-select [(value)]="item.status" [disabled]="item.status === 'done' && !allowAdminToDelete" (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
+              <mat-select [(value)]="item.status" [disabled]="item.status === 'done' && !allowAdminToDelete"
+                (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
                 <mat-option class="px-1" value="notStarted">Not Started</mat-option>
                 <mat-option class="px-1" value="inProgress">In Progress</mat-option>
                 <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
@@ -203,7 +210,8 @@
   </div>
 </div>
 
-<div *ngIf="!reportIssueRequests?.length && !isLoading" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+<div *ngIf="!reportIssueRequests?.length && !isLoading"
+  class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
   <div class="col-10 mx-auto">
     <p class="text-size-24 pt-4 pb-5">There are currently no issues to review.</p>
   </div>
