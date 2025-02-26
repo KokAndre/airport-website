@@ -252,9 +252,9 @@
         <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
-        <!-- <mat-divider></mat-divider>
-          <div class="dropdown-item p-2"
-            (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
+        <mat-divider *ngIf="isSuperAdmin"></mat-divider>
+          <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
+            (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div>
         <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
         <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>
@@ -532,9 +532,9 @@
     <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
-    <!-- <mat-divider></mat-divider>
-      <div class="dropdown-item p-2" mat-menu-item
-        (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div> -->
+    <mat-divider *ngIf="isSuperAdmin"></mat-divider>
+      <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
+        (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div>
     <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
     <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
       (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>

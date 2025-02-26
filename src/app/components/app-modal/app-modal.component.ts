@@ -7,6 +7,7 @@ import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
+import { GetYoutubeVideosDataResponse } from 'src/app/models/get-youtube-videos-data-response.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 import { TokenService } from 'src/app/services/token/token.service';
@@ -36,6 +37,8 @@ export class AppModalComponent implements OnInit {
   public pageDisplayData: GetWebTicketsDataResponse.Page[];
   public priorityData: GetWebTicketsDataResponse.Priority[];
   public statusData: GetWebTicketsDataResponse.Status[];
+  public youtubeVideoData: GetYoutubeVideosDataResponse.Video;
+  public youtubeVideoDisplayTimeCheckBox = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -116,6 +119,15 @@ export class AppModalComponent implements OnInit {
           this.pageDisplayData = this.sectionsData.find(x => x.name === this.webTicketData.section)?.pages;
         }
 
+        this.isLoading = false;
+        break;
+
+        case ModalTypes.CaptureYoutubeVideo: 
+        if (this.data.inputValues) {
+          this.youtubeVideoData = this.data.inputValues
+        } else {
+          this.youtubeVideoData = new GetYoutubeVideosDataResponse.Video();
+        }
         this.isLoading = false;
         break;
 
@@ -406,6 +418,12 @@ export class AppModalComponent implements OnInit {
   public saveWebTicketData() {
     if (this.webTicketData.section && this.webTicketData.page && this.webTicketData.description && this.webTicketData.personResponsible && this.webTicketData.category && this.webTicketData.status && this.webTicketData.priority) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.webTicketData);
+    }
+  }
+
+  public saveYoutubeVideoClicked() {
+    if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
+      //
     }
   }
 

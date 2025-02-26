@@ -238,7 +238,8 @@ export enum ModalTypes {
     CaptureMember = 'captureMember',
     CapturSingleInputField = 'capturSingleInputField',
     CapturePriorityData = 'capturePriorityData',
-    CaptureWebTicketData = 'captureWebTicketData'
+    CaptureWebTicketData = 'captureWebTicketData',
+    CaptureYoutubeVideo = 'captureYoutubeVideo'
 }
 
 export enum ModalOutcomeOptions {
