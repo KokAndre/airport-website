@@ -10,6 +10,7 @@ import { CreateSectionRequest } from 'src/app/models/create-section-request.mode
 import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
+import { GetBackendEmailConfigDataResponse } from 'src/app/models/get-backend-email-config-data-response.model';
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
@@ -961,5 +962,13 @@ export class AdminService {
 
   public deleteYoutubeVideo(youtubeVideoId: number) {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteYoutubeVideo, { requestData: { id: youtubeVideoId } }) as Observable<any>;
+  }
+
+  public getBackendEmailConfigData() {
+    return this.http.get(Endpoints.NewBaseURL + Endpoints.GetEmailConfig) as Observable<any>;
+  }
+
+  public editBackendEmailConfigData(configData: GetBackendEmailConfigDataResponse.EmailConfigData) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.EditEmailConfig, { requestData: configData }) as Observable<any>;
   }
 }

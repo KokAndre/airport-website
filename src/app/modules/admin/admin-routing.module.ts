@@ -19,6 +19,7 @@ import { ManageGettingToKnowYouComponent } from './components/manage-getting-to-
 import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos/manage-youtube-videos.component';
 import { WebsiteTicketsComponent } from './components/website-tickets/website-tickets.component';
 import { MembersConsentsComponent } from './components/members-consents/members-consents.component';
+import { ManageBackendEmailConfigComponent } from './components/manage-backend-email-config/manage-backend-email-config.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,9 @@ const routes: Routes = [
   },
   {
     path: 'members-consents', component: MembersConsentsComponent
+  },
+  {
+    path: 'manage-backend-email-config', component: ManageBackendEmailConfigComponent
   },
 ];
 

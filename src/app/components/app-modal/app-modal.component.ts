@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { ModalDetails } from 'src/app/models/app-modal.model';
+import { GetBackendEmailConfigDataResponse } from 'src/app/models/get-backend-email-config-data-response.model';
 import { GetGalleryDataResponse } from 'src/app/models/get-gallery-data-response.model';
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
@@ -40,6 +41,9 @@ export class AppModalComponent implements OnInit {
   public youtubeVideoData: GetYoutubeVideosDataResponse.Video;
   public youtubeVideoDisplayTimeCheckBox = false;
   public isYoutubeURLValid = true;
+  public emailConfigItem: GetBackendEmailConfigDataResponse.EmailConfigData;
+  public emailIsValid = true;
+  public newEmailCaptured = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -123,11 +127,20 @@ export class AppModalComponent implements OnInit {
         this.isLoading = false;
         break;
 
-        case ModalTypes.CaptureYoutubeVideo: 
+      case ModalTypes.CaptureYoutubeVideo:
         if (this.data.inputValues) {
           this.youtubeVideoData = this.data.inputValues
         } else {
           this.youtubeVideoData = new GetYoutubeVideosDataResponse.Video();
+        }
+        this.isLoading = false;
+        break;
+
+      case ModalTypes.CaptureEmailConfigItem:
+        if (this.data.inputValues) {
+          this.emailConfigItem = this.data.inputValues
+        } else {
+          this.emailConfigItem = new GetBackendEmailConfigDataResponse.EmailConfigData();
         }
         this.isLoading = false;
         break;
@@ -286,21 +299,6 @@ export class AppModalComponent implements OnInit {
         formControl.setValue(formCotrolValue);
       }
     }
-
-    // if (keyPressed.key === ',') {
-    //   if (numOfLines < 10) {
-    //     let formCotrolValue = formControl.value;
-    //     formCotrolValue = formCotrolValue.replace(',', "\n")
-    //     formCotrolValue += '• ';
-    //     formControl.setValue(formCotrolValue);
-    //   } else {
-    //     let formCotrolValue = formControl.value;
-    //     const lastIndex = formCotrolValue.lastIndexOf(',');
-    //     formCotrolValue = formCotrolValue.substr(0, lastIndex);
-    //     formControl.setValue(formCotrolValue);
-    //   }
-    // }
-
   }
 
   public blurOnBulletPointControl(formControl: AbstractControl) {
@@ -439,6 +437,46 @@ export class AppModalComponent implements OnInit {
   public saveYoutubeVideoClicked() {
     if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.isYoutubeURLValid && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.youtubeVideoData);
+    }
+  }
+
+  public removeEmailFromArray(emailItem: string) {
+    this.emailConfigItem.emailAdressesArray = this.emailConfigItem.emailAdressesArray.filter(x => x !== emailItem);
+  }
+
+  public checkIfValidEmail() {
+    if (!this.newEmailCaptured) {
+      this.emailIsValid = true;
+    } else {
+      const emailRegex = new RegExp('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,24})$');
+
+      const isValid = emailRegex.test(this.newEmailCaptured);
+
+      if (isValid) {
+        const doesEmailAlreadyExist = this.emailConfigItem.emailAdressesArray.find(x => x === this.newEmailCaptured);
+        if (doesEmailAlreadyExist) {
+          this.emailIsValid = false;
+        } else {
+          this.emailIsValid = true;
+        }
+      } else {
+        this.emailIsValid = false;;
+      }
+    }
+  }
+
+  public addEmailToArray() {
+    if (!this.emailConfigItem.emailAdressesArray) {
+      this.emailConfigItem.emailAdressesArray = new Array<string>();
+    }
+
+    this.emailConfigItem.emailAdressesArray.push(this.newEmailCaptured);
+    this.newEmailCaptured = '';
+  }
+
+  public saveEmailConfigData() {
+    if (this.emailIsValid && this.emailConfigItem.emailDisplayName && this.emailConfigItem.emailAdressesArray.length) {
+      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.emailConfigItem);
     }
   }
 

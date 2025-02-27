@@ -59,7 +59,8 @@ export enum AppRoutes {
     ManageGettingToKnowYou = '/admin/manage-getting-to-know-you',
     ManageYoutubeVideos = '/admin/manage-youtube-videos',
     ManageWebsiteTickets = '/admin/website-tickets',
-    MembersConsents = '/admin/members-consents'
+    MembersConsents = '/admin/members-consents',
+    ManageBackendEmailConfig = '/admin/manage-backend-email-config'
 }
 
 export enum Endpoints {
@@ -201,6 +202,10 @@ export enum Endpoints {
     AddNewWebsiteTicket = '/web-tickets/add-web-tickets',
     UpdateWebsiteTicket = '/web-tickets/update-web-tickets',
     DeleteWebsiteTicket = '/web-tickets/delete-web-tickets',
+
+    // Email config endpoints
+    GetEmailConfig = '/email-config/get-email-config',
+    EditEmailConfig = '/email-config/edit-email-config',
 }
 
 export enum CallTypes {
@@ -243,7 +248,8 @@ export enum ModalTypes {
     CapturSingleInputField = 'capturSingleInputField',
     CapturePriorityData = 'capturePriorityData',
     CaptureWebTicketData = 'captureWebTicketData',
-    CaptureYoutubeVideo = 'captureYoutubeVideo'
+    CaptureYoutubeVideo = 'captureYoutubeVideo',
+    CaptureEmailConfigItem = 'captureEmailConfigItem'
 }
 
 export enum ModalOutcomeOptions {

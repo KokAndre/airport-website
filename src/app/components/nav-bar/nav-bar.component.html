@@ -34,7 +34,8 @@
           Gallery</div>
 
         <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
-        <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
+        <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
+          (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
           Youtube Videos</div>
 
         <mat-divider></mat-divider>
@@ -250,6 +251,10 @@
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersConsents)">View Members Consents
         </div>
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageBackendEmailConfig)">Manage
+          Backend Email Config
+        </div>
         <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
           (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
@@ -360,7 +365,8 @@
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryLanding)">
       Gallery</div>
     <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
-    <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
+    <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
       Youtube Videos</div>
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ContactUs)">
@@ -533,6 +539,10 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersConsents)">View
       Members Consents</div>
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageBackendEmailConfig)">
+      Manage Backend Email Config
+    </div>
     <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
       (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>

@@ -234,12 +234,10 @@ export class WebsiteTicketsComponent implements OnInit {
   public addWebTicketOutcome(modalOutcome: string, webTicket?: GetWebTicketsDataResponse.WebTicket) {
     if (modalOutcome === ModalOutcomeOptions.Update) {
       this.adminService.addNewWebTicket(webTicket).subscribe(results => {
-        if (results.status === 200) {
-          this.appModalService.CloseModal();
-          this.getWebTicketsData(true);
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Add Web Ticket', results.message, null);
-        }
+        this.appModalService.CloseModal();
+        this.getWebTicketsData(true);
+      }, error => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
       });
     }
   }
@@ -258,12 +256,10 @@ export class WebsiteTicketsComponent implements OnInit {
   public editWebTicketOutcome(modalOutcome: string, webTicket?: GetWebTicketsDataResponse.WebTicket) {
     if (modalOutcome === ModalOutcomeOptions.Update) {
       this.adminService.editWebTicket(webTicket).subscribe(results => {
-        if (results.status === 200) {
-          this.appModalService.CloseModal();
-          this.getWebTicketsData(true);
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Web Ticket', results.message, null);
-        }
+        this.appModalService.CloseModal();
+        this.getWebTicketsData(true);
+      }, error => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
       });
     }
   }
@@ -275,12 +271,10 @@ export class WebsiteTicketsComponent implements OnInit {
   public deleteWebItemOutcome(webItem: GetWebTicketsDataResponse.WebTicket, modalOutcome: string) {
     if (modalOutcome === ModalOutcomeOptions.Confirm) {
       this.adminService.deleteWebTicket(webItem.id).subscribe(results => {
-        if (results.status === 200) {
-          this.appModalService.CloseModal();
-          this.getWebTicketsData(true);
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Web Ticket', results.message, null);
-        }
+        this.appModalService.CloseModal();
+        this.getWebTicketsData(true);
+      }, error => {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
       });
     }
   }
@@ -289,12 +283,10 @@ export class WebsiteTicketsComponent implements OnInit {
     const webItemToUpdate = this.webTicketsData.find(x => x.id === webItemId);
 
     this.adminService.editWebTicket(webItemToUpdate).subscribe(results => {
-      if (results.status === 200) {
-        this.appModalService.CloseModal();
-        this.getWebTicketsData(true);
-      } else {
-        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Web Ticket', results.message, null);
-      }
+      this.appModalService.CloseModal();
+      this.getWebTicketsData(true);
+    }, error => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
     });
   }
 

@@ -1,0 +1,67 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Backend Emails Config
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Backend Emails Config</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="isLoading" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24 pt-4 pb-5">Data is loading, please be patient.</p>
+  </div>
+</div>
+
+<div *ngIf="emailConfigData?.length && !isLoading" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
+
+  <div class="row mx-0 justify-content-end pt-3">
+    <!-- <div class="red-button mb-4 mr-3" (click)="addWebItemClicked()">
+      <p class="mb-0">Add Ticket</p>
+      <span class="red-button-icon"></span>
+    </div> -->
+
+    <!-- <div class="red-button mb-4 mr-3" (click)="myOpenTicketsClicked()">
+      <p class="mb-0">My Open Tickets</p>
+      <span class="red-button-icon"></span>
+    </div> -->
+
+    <div class="red-button mb-4" (click)="exportToExcel()">
+      <p class="mb-0">Export To Excel</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
+    <table style="width:100%;">
+      <tr class="sticky-table-header">
+
+        <th>ID</th>
+        <th>Email Name</th>
+        <th>Email Adresses</th>
+
+        <th style="width: fit-content;">
+          <div class="row mx-0 justify-content-center" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon></div>
+        </th>
+      </tr>
+
+      <ng-container *ngFor="let item of emailConfigData">
+        <tr>
+          <td class="text-nowrap" [innerHTML]="item.id"></td>
+          <td [innerHTML]="item.emailDisplayName"></td>
+          <td><p class="mb-0 width-fit-content" *ngFor="let email of item.emailAdressesArray">• {{ email }}</p></td>
+          <td>
+            <div class="row mx-0 justify-content-center"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+                (click)="editConfigItemClicked(item)"></mat-icon>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</div>
