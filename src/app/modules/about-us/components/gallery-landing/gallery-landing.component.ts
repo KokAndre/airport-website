@@ -24,7 +24,9 @@ export class GalleryLandingComponent implements OnInit {
           section.images?.forEach(image => {
             image.imageSource = Endpoints.GalleryImagesBaseURL + image.name;
           });
+
         });
+        // this.testCreatingThumbnail();
       } else {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Get Gallery Data', results.message, null);
       }
@@ -42,5 +44,17 @@ export class GalleryLandingComponent implements OnInit {
   public togglePannel(indexToToggle: number) {
       this.galleryData[indexToToggle].isExpanded = !this.galleryData[indexToToggle].isExpanded;
   }
+
+  // public testCreatingThumbnail() {
+  //   const sectionToTest = this.galleryData.find(x => x.title === 'Tedderfield History');
+  //   const imageToTest = sectionToTest.images.find(x => x.name = 'image-1(Powered by MaxAI).jpeg');
+
+  //   console.log('IMAGE TO TEST: ', imageToTest);
+
+    
+  //   this.adminService.testCreatingThumbNail(imageToTest.name).then((results) => {
+  //     console.log('RESULT: ', results);
+  //   });
+  // }
 
 }

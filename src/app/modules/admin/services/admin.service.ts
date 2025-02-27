@@ -106,6 +106,17 @@ export class AdminService {
       });
   }
 
+  // public testCreatingThumbNail(imageName: string) {
+  //   return fetch(Endpoints.BaseURL + '/gallery/test-creating-thumbnail.php', {
+  //     method: 'post',
+  //     body: JSON.stringify({ requestData: {imageName: imageName} })
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       return data;
+  //     });
+  // }
+
   public deleteImage(imageId: string, imageName: string) {
     const requestData = new DeleteImageRequest.RootObject();
     requestData.imageName = imageName;
