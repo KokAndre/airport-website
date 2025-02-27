@@ -87,7 +87,7 @@ export class WebsiteTicketsComponent implements OnInit {
     }, error => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
       this.router.navigateByUrl(AppRoutes.Home);
-    })
+    });
   }
 
   public allCategoryClicked() {

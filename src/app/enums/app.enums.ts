@@ -11,6 +11,7 @@ export enum AppRoutes {
     TedderfieldHistory = '/about-us/tedderfield-history',
     LiveWeather = '/about-us/live-weather',
     GalleryLanding = '/about-us/gallery',
+    YoutubeVideos = '/about-us/youtube-videos',
     ContactUs = '/about-us/contact-us',
     MissionAndVisionStatement = '/about-us/mission-and-vision-statement',
     MapAndLocation = '/pilot-information/map-and-location',
@@ -190,7 +191,10 @@ export enum Endpoints {
     GetGettingToKnowYouData = '/getting-to-know-you/get-getting-to-know-you-data.php',
 
     // Youtube Videos
-    GetYoutubeVideos = '/youtube-videos/get-videos.php',
+    GetYoutubeVideos = '/youtube-videos/get-videos',
+    AddYoutubeVideo = '/youtube-videos/add-video',
+    EditYoutubeVideo = '/youtube-videos/edit-video',
+    DeleteYoutubeVideo = '/youtube-videos/delete-video',
 
     // Website Tickets
     GetWebsiteTickets = '/web-tickets/get-web-tickets',

@@ -15,6 +15,7 @@ import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
 import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
 import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
+import { GetYoutubeVideosDataResponse } from 'src/app/models/get-youtube-videos-data-response.model';
 import { RenameFolderRequest } from 'src/app/models/rename-folder-request.model';
 import { UpdateFollowUsItemRequest } from 'src/app/models/update-follow-us-item-request.model';
 import { UpdateGreeningTedderfieldItemRequest } from 'src/app/models/update-greening-tedderfield-item-request.model';
@@ -933,5 +934,21 @@ export class AdminService {
 
   public getMembersConsentTickets() {
     return this.http.get(Endpoints.NewBaseURL + Endpoints.GetConsentsData) as Observable<any>;
+  }
+
+  public getYoutubeVideos() {
+    return this.http.get(Endpoints.NewBaseURL + Endpoints.GetYoutubeVideos) as Observable<any>;
+  }
+
+  public addYoutubeVideo(youtubeVideoData: GetYoutubeVideosDataResponse.Video) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.AddYoutubeVideo, { requestData: youtubeVideoData }) as Observable<any>;
+  }
+
+  public editYoutubeVideo(youtubeVideoData: GetYoutubeVideosDataResponse.Video) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.EditYoutubeVideo, { requestData: youtubeVideoData }) as Observable<any>;
+  }
+
+  public deleteYoutubeVideo(youtubeVideoId: number) {
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteYoutubeVideo, { requestData: { id: youtubeVideoId } }) as Observable<any>;
   }
 }

@@ -683,8 +683,10 @@
   <div class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
       <mat-label>Video URL</mat-label>
-      <input style="color: black;" matInput required maxlength="200" [(ngModel)]="youtubeVideoData.videoURL">
+      <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200" [(ngModel)]="youtubeVideoData.videoURL">
       <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
+      <!-- <mat-error *ngIf="!isYoutubeURLValid">Enter a valid URL: https://www.youtube.com/watch?v=[VideoId]</mat-error> -->
+      <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL: https://www.youtube.com/watch?v=[VideoId]</mat-hint>
     </mat-form-field>
   </div>
 
@@ -696,13 +698,13 @@
     </mat-form-field>
   </div>
 
-  <mat-checkbox class="mx-3" [(ngModel)]="youtubeVideoDisplayTimeCheckBox">Add video start and end time</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="youtubeVideoDisplayTimeCheckBox" (change)="youtubeVideoDisplayTimeCheckBoxChaged()">Add video start and end time</mat-checkbox>
 
-  <div>
+  <div *ngIf="youtubeVideoDisplayTimeCheckBox">
     <div class="row mx-3 justify-content-center">
       <mat-form-field class="col-12 px-0">
         <mat-label>Video start time (Seconds)</mat-label>
-        <input style="color: black;" matInput required maxlength="100" [(ngModel)]="youtubeVideoData.videoStartTime">
+        <input type="number" style="color: black;" matInput required maxlength="100" [(ngModel)]="youtubeVideoData.videoStartTime">
         <mat-error *ngIf="!youtubeVideoData.videoStartTime">Start time is required</mat-error>
       </mat-form-field>
     </div>
@@ -710,7 +712,7 @@
     <div class="row mx-3 justify-content-center">
       <mat-form-field class="col-12 px-0">
         <mat-label>Video end time (Seconds)</mat-label>
-        <input style="color: black;" matInput required maxlength="100" [(ngModel)]="youtubeVideoData.videoEndTime">
+        <input type="number" style="color: black;" matInput required maxlength="100" [(ngModel)]="youtubeVideoData.videoEndTime">
         <mat-error *ngIf="!youtubeVideoData.videoEndTime">End time is required</mat-error>
       </mat-form-field>
     </div>
@@ -724,7 +726,7 @@
     </div>
 
     <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': !youtubeVideoData.title || !youtubeVideoData.videoURL || !youtubeVideoData.credits || (youtubeVideoDisplayTimeCheckBox && (!youtubeVideoData.videoStartTime || !youtubeVideoData.videoEndTime))}"
+      [ngClass]="{'disable-user-click': !youtubeVideoData.title || !youtubeVideoData.videoURL || !isYoutubeURLValid || !youtubeVideoData.credits || (youtubeVideoDisplayTimeCheckBox && (!youtubeVideoData.videoStartTime || !youtubeVideoData.videoEndTime))}"
       (click)="saveYoutubeVideoClicked()">
       <p class="mb-0">Save</p>
       <span class="red-button-icon"></span>

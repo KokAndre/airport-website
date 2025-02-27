@@ -1,0 +1,39 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <p class="mb-0 section-header-text">Youtube Videos</p>
+    <p class="mb-0 text-size-14">About Us / <span class="child-path-text">Youtube Videos</span></p>
+  </div>
+</div>
+
+
+<app-arrow-divider class="pointer" (click)="isVideosExpanded = !isVideosExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
+
+<div class="dark-background">
+  <div class="col-10 mx-auto pb-4">
+    <mat-expansion-panel hideToggle [expanded]="isVideosExpanded" class="page-section-expansion-pannel">
+      <mat-expansion-panel-header>
+        <p class="text-size-24 mb-3">Tedderfield Airpark Youtube Videos
+      </mat-expansion-panel-header>
+
+
+      <div class="row">
+        <div *ngFor="let item of youtubeData" class="col-lg-6 col-md-6 col-sm-12 col-12 px-3 mb-3">
+          <div class="video-container p-3">
+
+            <p class="text-bold mb-2 text-center">{{ item.title }}</p>
+
+            <youtube-player class="youtube-video-player" [videoId]="item.videoId" suggestedQuality="medium"
+              [startSeconds]="item.videoStartTime" [endSeconds]="item.videoEndTime">
+            </youtube-player>
+
+            <p class="mb-0 mt-2 text-size-12">Credits: <b>{{ item.credits }}</b></p>
+          </div>
+        </div>
+      </div>
+
+
+    </mat-expansion-panel>
+  </div>
+
+</div>

@@ -12,13 +12,15 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { FormsModule } from '@angular/forms';
 import { DocumetsRowComponent } from './components/documets-row/documets-row.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     PdfViewerModule,
-    FormsModule
+    FormsModule,
+    YouTubePlayerModule
   ],
   declarations: [
     ArrowDividerComponent,
@@ -41,7 +43,8 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     PdfViewerModule,
     FormsModule,
     DocumetsRowComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    YouTubePlayerModule
   ],
   providers: [NgxImageCompressService]
 })

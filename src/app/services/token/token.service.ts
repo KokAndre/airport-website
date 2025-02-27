@@ -4,6 +4,7 @@ import { AppRoutes, SessionStorageKeys, UserDataInTokenToReturn } from 'src/app/
 import { AppHelperFunction, SessionStorageHelper } from 'src/app/helpers/app-helper.functions';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { UpdateMemberDataRequest } from 'src/app/models/update-user-data-request';
+import { AppModalService } from '../app-modal/app-modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class TokenService {
     localRegister: 'http://localhost/tedderfield-api/public/api/members/register'
   };
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public appModalService: AppModalService) { }
 
   public setToken(token: any) {
     SessionStorageHelper.storeItem(SessionStorageKeys.AuthToken, token);
@@ -42,6 +43,7 @@ export class TokenService {
         } else {
           const currentRoute = this.router.url;
           if (currentRoute.includes('/members') || currentRoute.includes('/admin')) {
+            this.appModalService.CloseModal();
             this.router.navigateByUrl(AppRoutes.Home);
           }
           return false;

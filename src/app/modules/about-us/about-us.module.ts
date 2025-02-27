@@ -9,6 +9,7 @@ import { LiveWeatherComponent } from './components/live-weather/live-weather.com
 import { MissionAndVisionStatementComponent } from './components/mission-and-vision-statement/mission-and-vision-statement.component';
 import { GalleryLandingComponent } from './components/gallery-landing/gallery-landing.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { YoutubeVideosComponent } from './components/youtube-videos/youtube-videos.component';
 
 
 
@@ -20,7 +21,8 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     LiveWeatherComponent,
     MissionAndVisionStatementComponent,
     GalleryLandingComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    YoutubeVideosComponent
   ],
   imports: [
     CommonModule,

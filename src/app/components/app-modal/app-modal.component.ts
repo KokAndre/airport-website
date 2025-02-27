@@ -39,6 +39,7 @@ export class AppModalComponent implements OnInit {
   public statusData: GetWebTicketsDataResponse.Status[];
   public youtubeVideoData: GetYoutubeVideosDataResponse.Video;
   public youtubeVideoDisplayTimeCheckBox = false;
+  public isYoutubeURLValid = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -421,9 +422,23 @@ export class AppModalComponent implements OnInit {
     }
   }
 
+  public youtubeVideoDisplayTimeCheckBoxChaged() {
+    this.youtubeVideoData.videoStartTime = 0;
+    this.youtubeVideoData.videoEndTime = 0;
+  }
+
+  public checkIfValidYoutubeURL() {
+    const youtubePattern = 'https://www.youtube.com/watch?v=';
+    if (this.youtubeVideoData.videoURL.startsWith(youtubePattern)) {
+      this.isYoutubeURLValid = true;
+    } else {
+      this.isYoutubeURLValid = false;
+    }
+  }
+
   public saveYoutubeVideoClicked() {
-    if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
-      //
+    if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.isYoutubeURLValid && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
+      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.youtubeVideoData);
     }
   }
 
