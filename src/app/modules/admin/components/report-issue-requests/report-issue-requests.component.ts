@@ -89,8 +89,8 @@ export class ReportIssueRequestsComponent implements OnInit {
           }
         });
 
-        
-      this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
+
+        this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
 
         this.categoryList.forEach(x => {
           x.isFilterSelected = true;
@@ -373,6 +373,16 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   public updateReportIssueStatus(reportIssueRequestId: string, reportIssueStatus: string) {
     this.adminService.updateReportIssueStatus(reportIssueRequestId, reportIssueStatus).then(results => {
+      if (results.status !== 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
+      }
+    });
+  }
+
+  public estimatedCompletionDateChanged(newDate: string, reportIssueRequestId: string) {
+    this.reportIssueRequests.find(x => x.id === reportIssueRequestId).estimatedCompletionDate = newDate;
+
+    this.adminService.updateReportIssueEstimatedCompletionDate(reportIssueRequestId, newDate).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
       }

@@ -121,6 +121,8 @@
           </div>
         </th>
 
+        <th style="width: 160px; min-width: 160px;">ETC</th>
+
         <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
               *ngIf="allowAdminToDelete" class="ml-1 p-0" fontIcon="delete"></mat-icon></div>
@@ -187,6 +189,14 @@
                 <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
               </mat-select>
             </mat-form-field>
+          </td>
+
+          <td style="width: 160px;">
+            <div class="row mx-0" style="flex-wrap: nowrap; justify-self: right; align-items: center;">
+                <p class="mb-0" style="width: fit-content; padding: 0;">{{ item.estimatedCompletionDate }}</p>
+                <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
+                  (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
+            </div>
           </td>
 
           <td>

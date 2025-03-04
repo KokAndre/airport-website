@@ -21,6 +21,7 @@ export namespace GetReportIssueDataResponse {
     status: string
     statusDateChanged: string;
     priority: string;
+    estimatedCompletionDate: string;
   }
 
   export class Category {

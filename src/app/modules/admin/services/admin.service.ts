@@ -349,6 +349,23 @@ export class AdminService {
       });
   }
 
+  public updateReportIssueEstimatedCompletionDate(reportIssueRequestId: string, estimatedCompletionDate: string) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    requestData.reportIssueId = reportIssueRequestId;
+    requestData.estimatedCompletionDate = estimatedCompletionDate;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueEstimatedTimeToComplete, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+
   public getGreeningTedderfieldData() {
     const requestData = new UpdateGreeningTedderfieldItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;

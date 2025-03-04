@@ -184,23 +184,11 @@
           </td>
 
           <td style="width: 160px;">
-            <!-- <div class="row mx-0">
-              <div class="col-9 pl-3 px-0 align-content-center">
-                <p class="mb-0">{{ item.estimatedCompletionDate }}</p>
-              </div>
-              <div class="col-3 px-0 align-content-center">
-                <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
-                  (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
-              </div>
-            </div> -->
-
             <div class="row mx-0" style="flex-wrap: nowrap; justify-self: right; align-items: center;">
                 <p class="mb-0" style="width: fit-content; padding: 0;">{{ item.estimatedCompletionDate }}</p>
                 <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
                   (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
             </div>
-
-
           </td>
 
           <td>

@@ -8,5 +8,6 @@ export namespace UpdateReportIssueItemRequest {
         hangarOrSectionNumber: string;
         issueDescription: string;
         priority: string;
+        estimatedCompletionDate: string;
     }
 }

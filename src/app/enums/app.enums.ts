@@ -113,6 +113,7 @@ export enum Endpoints {
     UpdateReportIssuePriority = '/report-issue/update-issue-priority.php',
     UpdateReportIssuePersonResponsible = '/report-issue/update-issue-person-responsible.php',
     UpdateReportIssueStatus = '/report-issue/update-issue-status.php',
+    UpdateReportIssueEstimatedTimeToComplete = '/report-issue/update-issue-etc.php',
     UpdateReportIssueData = '/report-issue/update-issue-data.php',
 
     DeleteReportIssueCategory = '/report-issue/delete-issue-category.php',
