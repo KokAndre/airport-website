@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { DocumetsRowComponent } from './components/documets-row/documets-row.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { CaptureGettingToKnowYouComponent } from './components/capture-getting-to-know-you/capture-getting-to-know-you.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     OnEnterDirective,
     LoginComponent,
     DocumetsRowComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    CaptureGettingToKnowYouComponent
   ],
   exports: [
     ArrowDividerComponent,
@@ -44,6 +46,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     FormsModule,
     DocumetsRowComponent,
     DatePickerComponent,
+    CaptureGettingToKnowYouComponent,
     YouTubePlayerModule
   ],
   providers: [NgxImageCompressService]

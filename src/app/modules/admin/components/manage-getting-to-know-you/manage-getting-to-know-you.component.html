@@ -39,6 +39,11 @@
         <th>Most Usefull Talent</th>
         <th>Immediate Family</th>
         <th>Image</th>
+
+        <!-- <th style="width: fit-content;">
+          <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon></div>
+        </th> -->
+
       </tr>
 
       <tr *ngFor="let item of membersData">
@@ -47,8 +52,16 @@
         <td [innerHTML]="item.email"></td>
         <td [innerHTML]="item.phoneNumber"></td>
 
-        <td><p class="mb-0" [innerHTML]="item.emergencyContactOneName"></p><p class="mb-0" [innerHTML]="item.emergencyContactOnePhoneNumber"></p></td>
-        <td><p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0" [innerHTML]="item.emergencyContactTwoName"></p><p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0" [innerHTML]="item.emergencyContactTwoPhoneNumber"></p></td>
+        <td>
+          <p class="mb-0" [innerHTML]="item.emergencyContactOneName"></p>
+          <p class="mb-0" [innerHTML]="item.emergencyContactOnePhoneNumber"></p>
+        </td>
+        <td>
+          <p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0"
+            [innerHTML]="item.emergencyContactTwoName"></p>
+          <p *ngIf="item.emergencyContactTwoName && item.emergencyContactTwoPhoneNumber" class="mb-0"
+            [innerHTML]="item.emergencyContactTwoPhoneNumber"></p>
+        </td>
 
         <td [innerHTML]="item.whereWereYouBorn"></td>
         <td [innerHTML]="item.howFarDoYouDrive"></td>
@@ -60,6 +73,12 @@
         <td [innerHTML]="item.yourMostUsefullTalent"></td>
         <td [innerHTML]="item.immediateFamily"></td>
         <td [innerHTML]="item.image.fileName"></td>
+
+        <!-- <td>
+          <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+              (click)="editGettingToKnowYouDataClicked(item)"></mat-icon>
+          </div>
+        </td> -->
 
       </tr>
 

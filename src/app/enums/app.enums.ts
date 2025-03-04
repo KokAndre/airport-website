@@ -249,7 +249,8 @@ export enum ModalTypes {
     CapturePriorityData = 'capturePriorityData',
     CaptureWebTicketData = 'captureWebTicketData',
     CaptureYoutubeVideo = 'captureYoutubeVideo',
-    CaptureEmailConfigItem = 'captureEmailConfigItem'
+    CaptureEmailConfigItem = 'captureEmailConfigItem',
+    CaptureGettingToKnowYouData = 'captureGettingToKnowYouData'
 }
 
 export enum ModalOutcomeOptions {

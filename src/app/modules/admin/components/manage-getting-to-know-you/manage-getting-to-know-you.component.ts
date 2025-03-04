@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Endpoints, ModalTypes } from 'src/app/enums/app.enums';
+import { Endpoints, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { GetGettingToKnowYouResponse } from 'src/app/models/get-getting-to-know-you-response.model';
 import { MembersService } from 'src/app/modules/members/services/members.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
@@ -59,6 +59,20 @@ export class ManageGettingToKnowYouComponent implements OnInit {
 
       this.membersData.push(itemToPush);
     });
+  }
+
+  public editGettingToKnowYouDataClicked(gettingToKnowYouItem: GetGettingToKnowYouResponse.Member) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.CaptureGettingToKnowYouData, 'Edit Data', '', JSON.parse(JSON.stringify(gettingToKnowYouItem)), this.editGettingToKnowYouDataOutcome.bind(this));
+  }
+
+  public editGettingToKnowYouDataOutcome(modalOutcome: string, gettingToKnowYouItem: GetGettingToKnowYouResponse.Member) {
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.updateGettingToKnowYouData(gettingToKnowYouItem);
+    }
+  }
+
+  public updateGettingToKnowYouData(gettingToKnowYouItem: GetGettingToKnowYouResponse.Member) {
+    console.log('NEW DATA: ', gettingToKnowYouItem);
   }
 
   public exportToExcel() {

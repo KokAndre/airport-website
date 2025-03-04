@@ -21,8 +21,10 @@
     [ngTemplateOutlet]="CaptureWebTicketItemTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.CaptureYoutubeVideo"
     [ngTemplateOutlet]="CaptureYoutubeVideoTemplate"></ng-container>
-  <ng-container *ngSwitchCase="modalTypesEnum.CaptureEmailConfigItem"
-    [ngTemplateOutlet]="CaptureEmailConfigItemTemplate"></ng-container>
+    <ng-container *ngSwitchCase="modalTypesEnum.CaptureEmailConfigItem"
+      [ngTemplateOutlet]="CaptureEmailConfigItemTemplate"></ng-container>
+      <ng-container *ngSwitchCase="modalTypesEnum.CaptureGettingToKnowYouData"
+        [ngTemplateOutlet]="CaptureGettingToKnowYouDataTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -765,8 +767,7 @@
 
   <div class="m-3">
     <div class="row mx-0" *ngFor="let emailItem of emailConfigItem.emailAdressesArray">
-      <mat-icon class="red-text pointer p-0" fontIcon="delete"
-        (click)="removeEmailFromArray(emailItem)"></mat-icon>
+      <mat-icon class="red-text pointer p-0" fontIcon="delete" (click)="removeEmailFromArray(emailItem)"></mat-icon>
       <p class="width-fit-content mb-0 ml-2">{{ emailItem }}</p>
       <span></span>
     </div>
@@ -777,17 +778,10 @@
       <mat-label>Email Address</mat-label>
       <input style="color: black;" (input)="checkIfValidEmail()" matInput required maxlength="200"
         [(ngModel)]="newEmailCaptured">
-
-      <!-- <button class="red-button" mat-icon-button matSuffix [disabled]="!newEmailCaptured || !emailIsValid" (click)="addEmailToArray()">Add</button> -->
-
       <div class="red-button ml-3 mr-2" mat-icon-button matSuffix
-      [ngClass]="{'disable-user-click': !newEmailCaptured || !emailIsValid}"
-      (click)="addEmailToArray()">
-      <p class="mb-0">Add</p>
-    </div>
-
-
-      <!-- <mat-error *ngIf="!isYoutubeURLValid">Enter a valid URL: https://www.youtube.com/watch?v=[VideoId]</mat-error> -->
+        [ngClass]="{'disable-user-click': !newEmailCaptured || !emailIsValid}" (click)="addEmailToArray()">
+        <p class="mb-0">Add</p>
+      </div>
       <mat-hint class="red-text" *ngIf="newEmailCaptured && !emailIsValid">Enter a new valid email</mat-hint>
     </mat-form-field>
   </div>
@@ -805,4 +799,35 @@
       <span class="red-button-icon"></span>
     </div>
   </div>
+</ng-template>
+
+<ng-template #CaptureGettingToKnowYouDataTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <app-capture-getting-to-know-you [gettingToKnowYouRequestData]="data.inputValues" (submitDataEmit)="submitGettingToKnowYouData($event)"></app-capture-getting-to-know-you>
+
+  <!-- <div class="row mx-0 my-4 justify-content-center">
+    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
+      <p class="mb-0">Cancel</p>
+      <span class="white-button-icon"></span>
+    </div>
+
+    <div class="red-button ml-3"
+      [ngClass]="{'disable-user-click': newEmailCaptured || !emailIsValid || !emailConfigItem.emailDisplayName || !emailConfigItem.emailAdressesArray.length}"
+      (click)="saveEmailConfigData()">
+      <p class="mb-0">Save</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div> -->
 </ng-template>

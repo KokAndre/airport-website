@@ -1,0 +1,235 @@
+<div class="mb-3 py-4" [formGroup]="gettingToKnowYouFormGroup">
+  <!-- <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto form-background"> -->
+
+  <div class="row mx-0 justify-content-center mt-4">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Name</mat-label>
+      <input style="color: black;" matInput required maxlength="100" formControlName="nameControl"
+        placeholder="Please enter your name.">
+      <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Email</mat-label>
+      <input style="color: black;" matInput required maxlength="100" formControlName="emailControl"
+        placeholder="Please capture a valid email address.">
+      <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Phone Number</mat-label>
+      <input style="color: black;" matInput maxlength="10" formControlName="phoneNumberControl"
+        placeholder="Please enter a valid phone number." (input)="numberControlInput(phoneNumberControl || undefined)">
+      <!-- <mat-error *ngIf="phoneNumberControl?.hasError('required')">Phone Number is required</mat-error> -->
+      <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">Enter a valid phone number</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Emergency Contact Name</mat-label>
+      <input style="color: black;" matInput required maxlength="100" formControlName="emergencyContactOneNameControl"
+        placeholder="Please capture a Name.">
+      <mat-error *ngIf="emergencyContactOneNameControl?.hasError('required')">Emergency Contact Name is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Emergency Contact Phone Number</mat-label>
+      <input style="color: black;" matInput required maxlength="10"
+        formControlName="emergencyContactOnePhoneNumberControl" placeholder="Please enter a valid phone number."
+        (input)="numberControlInput(emergencyContactOnePhoneNumberControl || undefined)">
+      <mat-error *ngIf="emergencyContactOnePhoneNumberControl?.hasError('required')">Emergency Contact Phone
+        Number is required</mat-error>
+      <mat-error *ngIf="emergencyContactOnePhoneNumberControl?.hasError('pattern')">Enter a valid phone
+        number</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="emergencyContactOneNameControl.valid && emergencyContactOnePhoneNumberControl.valid">
+    <div class="row mx-0 justify-content-center mt-2">
+      <mat-form-field class="col-10 px-0">
+        <mat-label>Second Emergency Contact Name</mat-label>
+        <input style="color: black;" matInput maxlength="100" formControlName="emergencyContactTwoNameControl"
+          placeholder="Please capture a Name. (Second Emergency Contact Is Optional)">
+        <mat-error *ngIf="emergencyContactTwoNameControl?.hasError('required')">Emergency Contact Name is
+          required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mx-0 justify-content-center mt-2">
+      <mat-form-field class="col-10 px-0">
+        <mat-label>Second Emergency Contact Phone Number</mat-label>
+        <input style="color: black;" matInput maxlength="10" formControlName="emergencyContactTwoPhoneNumberControl"
+          placeholder="Please enter a valid phone number. (Second Emergency Contact Is Optional)"
+          (input)="numberControlInput(emergencyContactTwoPhoneNumberControl || undefined)">
+        <mat-error *ngIf="emergencyContactTwoPhoneNumberControl?.hasError('required')">Emergency Contact Phone
+          Number is required</mat-error>
+        <mat-error *ngIf="emergencyContactTwoPhoneNumberControl?.hasError('pattern')">Enter a valid phone
+          number</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <div class="col-10 px-0">
+      <P class="mb-1">Upload high quality images of yourself. <span class="text-size-14 red-text ml-1">*</span>
+      </P>
+      <p class="text-size-12 child-path-text">Upload up to 1 supported files. File types: PNG, JPG, JPEG, SVG.
+        Max 50MB per file.
+      </p>
+
+      <div *ngIf="gettingToKnowYouRequestData.image?.fileName">
+        <div class="row mb-2 mx-0">
+
+          <div class="col-1 px-0 align-content-center">
+            <mat-icon class="pointer red-text align-bottom" (click)="deleteImage()">delete</mat-icon>
+          </div>
+          <div class="col-11 pr-0 align-content-center">
+            <p class="mb-0 text-size-14">{{gettingToKnowYouRequestData.image?.fileName }}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-12 px-0">
+        <app-file-uploader [numOfFilesAllowed]="1" [maxFileSize]="50000000" [allowSelectImages]="true"
+          [returnAsFile]="true" (emitFileData)="updateUploadedImage($event)"></app-file-uploader>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Where were you born?</mat-label>
+      <input style="color: black;" matInput required maxlength="200" formControlName="whereWereYouBornControl"
+        placeholder="Please specify the place you were born.">
+      <mat-error *ngIf="whereWereYouBornControl?.hasError('required')">Where were you born is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>I fly because..........</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="iFlyBecauseControl" (keydown)="keydownOnBulletPointControl(iFlyBecauseControl)"
+        (keyup)="inputOnBulletPointControl(iFlyBecauseControl, $event)"
+        (blur)="blurOnBulletPointControl(iFlyBecauseControl)"
+        placeholder="What gets you exited about flying?"></textarea>
+      <mat-error *ngIf="iFlyBecauseControl?.hasError('required')">I fly because is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>I love Tedderfield Airpark, because..........</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="iLoveTedderfieldControl" (keydown)="keydownOnBulletPointControl(iLoveTedderfieldControl)"
+        (keyup)="inputOnBulletPointControl(iLoveTedderfieldControl, $event)"
+        (blur)="blurOnBulletPointControl(iLoveTedderfieldControl)"
+        placeholder="What do you love most about Tedderfield Airpark?"></textarea>
+      <mat-error *ngIf="iLoveTedderfieldControl?.hasError('required')">I love Tedderfield Airpark is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>When I am not flying I keep myself busy with..........</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="whenIAmNotFlyingControl" (keydown)="keydownOnBulletPointControl(whenIAmNotFlyingControl)"
+        (keyup)="inputOnBulletPointControl(whenIAmNotFlyingControl, $event)"
+        (blur)="blurOnBulletPointControl(whenIAmNotFlyingControl)"
+        placeholder="What are your favourite hobbies and activities (Except flying, and spending time at Tedderfield Airpark)?"></textarea>
+      <mat-error *ngIf="whenIAmNotFlyingControl?.hasError('required')">When I am not flying is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Who inspires you?</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="whoInspiresYouControl" (keydown)="keydownOnBulletPointControl(whoInspiresYouControl)"
+        (keyup)="inputOnBulletPointControl(whoInspiresYouControl, $event)"
+        (blur)="blurOnBulletPointControl(whoInspiresYouControl)"
+        placeholder="Who are your heroes, the people that motivate you?"></textarea>
+      <mat-error *ngIf="whoInspiresYouControl?.hasError('required')">Who inspires you is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>What stresses you most about Tedderfield Airpark?</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="whatStressesYouMostControl" (keydown)="keydownOnBulletPointControl(whatStressesYouMostControl)"
+        (keyup)="inputOnBulletPointControl(whatStressesYouMostControl, $event)"
+        (blur)="blurOnBulletPointControl(whatStressesYouMostControl)"
+        placeholder="What are your biggest stresses and concerns about Tedderfield Airpark?"></textarea>
+      <mat-error *ngIf="whatStressesYouMostControl?.hasError('required')">What stresses you most is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>What is the most useful talent you have?</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="yourMostUsefullTalentControl"
+        (keydown)="keydownOnBulletPointControl(yourMostUsefullTalentControl)"
+        (keyup)="inputOnBulletPointControl(yourMostUsefullTalentControl, $event)"
+        (blur)="blurOnBulletPointControl(yourMostUsefullTalentControl)"
+        placeholder="What is your most useful talent?"></textarea>
+      <mat-error *ngIf="yourMostUsefullTalentControl?.hasError('required')">Most useful talent is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>How far do you drive from home to get to Tedderfield Airpark?</mat-label>
+      <div class="d-flex">
+        <input (input)="numberControlInputWithDecimals(howFarDoYouDriveControl)" style="color: black;" matInput required
+          maxlength="100" formControlName="howFarDoYouDriveControl"
+          placeholder="Distance travelled to experience the Tedderfield Airpark joy?">
+        <span *ngIf="howFarDoYouDriveControl.value" class="currency-input-suffix">km</span>
+      </div>
+      <mat-error *ngIf="howFarDoYouDriveControl?.hasError('required')">How far do you drive is
+        required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row mx-0 justify-content-center mt-2">
+    <mat-form-field class="col-10 px-0">
+      <mat-label>Tell us a little about your immediate family..........</mat-label>
+      <textarea cdkTextareaAutosize style="color: black;" matInput required maxlength="500"
+        formControlName="immediateFamilyControl" (keydown)="keydownOnBulletPointControl(immediateFamilyControl)"
+        (keyup)="inputOnBulletPointControl(immediateFamilyControl, $event)"
+        (blur)="blurOnBulletPointControl(immediateFamilyControl)"
+        placeholder="Tell us a little about your immediate family - share a little about yourself and your closest"></textarea>
+      <mat-error *ngIf="immediateFamilyControl?.hasError('required')">Immediate family is required</mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="row mx-0 justify-content-center">
+    <div class="red-button mb-4" [ngClass]="{'disable-user-click': isSubmitDisabled()}" (click)="submitClicked()">
+      <p class="mb-0">Update</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <p *ngIf="displayImageErrorMessage && !gettingToKnowYouRequestData.image?.fileName"
+    class="text-size-18 red-text p-0 my-3 text-center px-2 text-bold">Please upload an image before submitting the data.
+  </p>
+
+  <!-- </div> -->
+</div>

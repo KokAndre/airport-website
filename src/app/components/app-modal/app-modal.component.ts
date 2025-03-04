@@ -9,6 +9,7 @@ import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
 import { GetYoutubeVideosDataResponse } from 'src/app/models/get-youtube-videos-data-response.model';
+import { SubmitGettingToKnowYouRequest } from 'src/app/models/submit-getting-to-know-you-request.model';
 import { SubmitInterestedInPropertyRequest } from 'src/app/models/submit-interested-in-property-request.model';
 import { UpdateMembersRequest } from 'src/app/models/update-members-request.model';
 import { TokenService } from 'src/app/services/token/token.service';
@@ -478,6 +479,11 @@ export class AppModalComponent implements OnInit {
     if (this.emailIsValid && this.emailConfigItem.emailDisplayName && this.emailConfigItem.emailAdressesArray.length) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.emailConfigItem);
     }
+  }
+
+  public submitGettingToKnowYouData(gettigToKnowYouData: SubmitGettingToKnowYouRequest.RootObject){
+    console.log('IN MODAL CALLBACK');
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, gettigToKnowYouData);
   }
 
   public get interestedInPropertyNameControl() {

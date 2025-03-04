@@ -220,6 +220,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
         case ModalTypes.CaptureWebTicketData:
         case ModalTypes.CaptureYoutubeVideo:
         case ModalTypes.CaptureEmailConfigItem:
+        case ModalTypes.CaptureGettingToKnowYouData:
           this.dialogRefModel = this.modalDialog.open(AppModalComponent, {
             data: modalDetails, disableClose: true, maxWidth: '90vw', panelClass: 'min-width-modal-class-medium'
           });
