@@ -40,9 +40,9 @@
         <th>Immediate Family</th>
         <th>Image</th>
 
-        <!-- <th style="width: fit-content;">
+        <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon></div>
-        </th> -->
+        </th>
 
       </tr>
 
@@ -74,11 +74,13 @@
         <td [innerHTML]="item.immediateFamily"></td>
         <td [innerHTML]="item.image.fileName"></td>
 
-        <!-- <td>
+        <td>
           <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
               (click)="editGettingToKnowYouDataClicked(item)"></mat-icon>
+            <!-- <mat-icon *ngIf="allowAdminToDelete" class="red-text pointer ml-1 p-0" fontIcon="delete"
+              (click)="deleteWebItemClicked(item)"></mat-icon> -->
           </div>
-        </td> -->
+        </td>
 
       </tr>
 

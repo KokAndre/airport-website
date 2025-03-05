@@ -233,11 +233,14 @@ export class MembersService {
       });
   }
 
-  public submitGettingToKnowYou(gettingToKnowYouRequestData: SubmitGettingToKnowYouRequest.RootObject) {
+  public submitGettingToKnowYou(gettingToKnowYouRequestData: SubmitGettingToKnowYouRequest.RootObject, skipSettingUserId?: boolean) {
     // Remove files to ensure request is not to big.
     const requestData = JSON.parse(JSON.stringify(gettingToKnowYouRequestData));
     requestData.image.fileData = '';
-    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID);
+
+    if (!skipSettingUserId) {
+          requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID);
+    }
 
     return fetch(Endpoints.BaseURL + Endpoints.SubmitGettingToKnowYou, {
       method: 'post',

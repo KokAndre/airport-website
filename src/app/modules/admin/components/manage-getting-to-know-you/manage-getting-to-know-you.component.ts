@@ -12,6 +12,7 @@ import { AdminService } from '../../services/admin.service';
 })
 export class ManageGettingToKnowYouComponent implements OnInit {
   public membersData = new Array<GetGettingToKnowYouResponse.Member>();
+  public submitItemSucessId: number;
 
   constructor(public appModalService: AppModalService, public membersService: MembersService, public adminService: AdminService) { }
 
@@ -72,7 +73,35 @@ export class ManageGettingToKnowYouComponent implements OnInit {
   }
 
   public updateGettingToKnowYouData(gettingToKnowYouItem: GetGettingToKnowYouResponse.Member) {
-    console.log('NEW DATA: ', gettingToKnowYouItem);
+    this.membersService.submitGettingToKnowYou(gettingToKnowYouItem, true).then(results => {
+      if (results.status === 200) {
+        this.submitItemSucessId = results.id;
+        this.appModalService.CloseModal();
+
+        const originalHasCompletedGettingToKnowYouData = this.membersData.find(x => x.id === gettingToKnowYouItem.id);
+
+        // Update the member data:
+        this.getUsersData();
+
+        if (originalHasCompletedGettingToKnowYouData.image.fileName !== gettingToKnowYouItem.image.fileName) {
+          this.uploadImage(gettingToKnowYouItem);
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Data has successfully been updated.', null);
+        }
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
+      }
+    });
+  }
+
+  public uploadImage(gettingToKnowYouItem: GetGettingToKnowYouResponse.Member) {
+    this.membersService.uploadGettingToKnowImage(this.submitItemSucessId, gettingToKnowYouItem.image).then(results => {
+      if (results.status === 200) {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', 'Data has successfully been updated.', null);
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Getting To Know You', results.message, null);
+      }
+    });
   }
 
   public exportToExcel() {
