@@ -303,16 +303,16 @@ export class SubmitClassifiedsComponent implements OnInit {
       this.submitClassifiedsRequestData.category = this.categorySelectControl.value;
     }
 
-    console.log('DATA: ', this.submitClassifiedsRequestData);
-    // this.membersService.submitClassifiedsItem(this.submitClassifiedsRequestData).then(results => {
-    //   if (results.status === 200) {
-    //     this.submitItemSucessId = results.id;
-    //     this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', 'Your item has been captured successfully.', null);
-    //     this.uploadImages();
-    //   } else {
-    //     this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);
-    //   }
-    // });
+    // console.log('DATA: ', this.submitClassifiedsRequestData);
+    this.membersService.submitClassifiedsItem(this.submitClassifiedsRequestData).then(results => {
+      if (results.status === 200) {
+        this.submitItemSucessId = results.id;
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', 'Your item has been captured successfully.', null);
+        this.uploadImages();
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Classifieds', results.message, null);
+      }
+    });
   }
 
   private async uploadImages() {
