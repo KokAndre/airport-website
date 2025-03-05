@@ -47,6 +47,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log('2025-05-03:3');
     this.initializeIsLoggedInCheck();
     this.initializeModal();
     this.initializeScreenSizeCheck();

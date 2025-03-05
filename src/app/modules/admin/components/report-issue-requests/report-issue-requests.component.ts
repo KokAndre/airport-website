@@ -41,6 +41,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   // Status Filters
   public statusNotStartedCheckBox = true;
   public statusInProgressCheckBox = true;
+  public statusToBeReleasedCheckBox = true;
   public statusDoneCheckBox = false;
   public allStatusCheckBox = true;
   public sortAlphabeticalStatus = false;
@@ -154,6 +155,9 @@ export class ReportIssueRequestsComponent implements OnInit {
     if (row.status === 'inProgress' && !this.statusInProgressCheckBox) {
       return true
     }
+    if (row.status === 'toBeReleased' && !this.statusToBeReleasedCheckBox) {
+      return true
+    }
     if (row.status === 'done' && !this.statusDoneCheckBox) {
       return true
     }
@@ -239,6 +243,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
     this.statusNotStartedCheckBox = this.allStatusCheckBox;
     this.statusInProgressCheckBox = this.allStatusCheckBox;
+    this.statusToBeReleasedCheckBox = this.allStatusCheckBox;
     this.statusDoneCheckBox = this.allStatusCheckBox;
   }
 
@@ -292,6 +297,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.allStatusCheckBox = false;
     this.statusNotStartedCheckBox = true;
     this.statusInProgressCheckBox = true;
+    this.statusToBeReleasedCheckBox = false;
     this.statusDoneCheckBox = false;
 
     // Order all tickets by Priority
@@ -323,6 +329,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.allStatusCheckBox = true;
     this.statusNotStartedCheckBox = true;
     this.statusInProgressCheckBox = true;
+    this.statusToBeReleasedCheckBox = true;
     this.statusDoneCheckBox = true;
   }
 
