@@ -10,7 +10,7 @@ import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model
 export enum StatusEnum {
   notStarted = "Not Started",
   inProgress = "In Progress",
-  toBeReleased= "To be Released",
+  toBeReleased = "To be Released",
   done = "Done",
 }
 
@@ -56,6 +56,10 @@ export class ReportIssueRequestsComponent implements OnInit {
   public allPriorityCheckbox = true;
   public sortAlphabeticalPriority = false;
 
+  // ETC Filters
+  public sortAlphabeticalByDate = false;
+  public sortAlphabeticalByDaysToOs = false;
+
   constructor(private adminService: AdminService,
     private appModalService: AppModalService,
     public tokenService: TokenService,
@@ -81,6 +85,8 @@ export class ReportIssueRequestsComponent implements OnInit {
         this.responsiblePersonList = results.resposiblePersons;
         this.priorityList = results.priority;
 
+        const currentDate = new Date();
+
         this.propertyNumbersList = new Array<GetReportIssueDataResponse.PropertyNumber>();
         this.reportIssueRequests.forEach(request => {
           if (!this.propertyNumbersList.find(x => x.description?.toLowerCase()?.trim() === request.hangerOrSectionNumber?.toLowerCase()?.trim())) {
@@ -89,7 +95,28 @@ export class ReportIssueRequestsComponent implements OnInit {
             itemToPush.isFilterSelected = true;
             this.propertyNumbersList.push(itemToPush);
           }
+
+          // Add # Days remaining to OS
+          if (request.estimatedCompletionDate) {
+            // let date1 = new Date();
+            let date2 = new Date(request.estimatedCompletionDate + 'T23:59:59');
+
+            // Calculating the time difference
+            // of two dates
+            let Difference_In_Time =
+              date2.getTime() - currentDate.getTime();
+
+            // Calculating the no. of days between
+            // two dates
+            let Difference_In_Days =
+              Math.round
+                (Difference_In_Time / (1000 * 3600 * 24));
+
+            request.numOfRemainingDaysToETC = Difference_In_Days;
+          }
         });
+
+        console.log('DATA: ', this.reportIssueRequests);
 
 
         this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
@@ -254,6 +281,27 @@ export class ReportIssueRequestsComponent implements OnInit {
       this.reportIssueRequests.sort((a, b) => a.status > b.status ? 1 : -1);
     } else {
       this.reportIssueRequests.sort((a, b) => a.status > b.status ? -1 : 1);
+    }
+  }
+
+  public orderDataByETCDate() {
+    this.sortAlphabeticalByDate = !this.sortAlphabeticalByDate;
+
+    if (this.sortAlphabeticalByDate) {
+      this.reportIssueRequests.sort((a, b) => (a.estimatedCompletionDate ? +a.estimatedCompletionDate.replaceAll('-', '') : 99999999) >= (b.estimatedCompletionDate ? +b.estimatedCompletionDate.replaceAll('-', '') : 99999999) ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => (a.estimatedCompletionDate ? +a.estimatedCompletionDate.replaceAll('-', '') : 99999999) >= (b.estimatedCompletionDate ? +b.estimatedCompletionDate.replaceAll('-', '') : 99999999) ? -1 : 1);
+    }
+  }
+
+  public orderDataByDaysToOS() {
+    this.sortAlphabeticalByDaysToOs = !this.sortAlphabeticalByDaysToOs;
+
+
+    if (this.sortAlphabeticalByDaysToOs) {
+      this.reportIssueRequests.sort((a, b) => (a.numOfRemainingDaysToETC !== undefined && a.numOfRemainingDaysToETC !== null ? a.numOfRemainingDaysToETC : 99999999) >= (b.numOfRemainingDaysToETC !== undefined && b.numOfRemainingDaysToETC !== null ? b.numOfRemainingDaysToETC : 99999999) ? 1 : -1);
+    } else {
+      this.reportIssueRequests.sort((a, b) => (a.numOfRemainingDaysToETC !== undefined && a.numOfRemainingDaysToETC !== null ? a.numOfRemainingDaysToETC : -99999999) >= (b.numOfRemainingDaysToETC !== undefined && b.numOfRemainingDaysToETC !== null ? b.numOfRemainingDaysToETC : -99999999) ? -1 : 1);
     }
   }
 

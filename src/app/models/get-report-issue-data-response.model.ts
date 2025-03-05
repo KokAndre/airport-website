@@ -22,6 +22,7 @@ export namespace GetReportIssueDataResponse {
     statusDateChanged: string;
     priority: string;
     estimatedCompletionDate: string;
+    numOfRemainingDaysToETC: number;
   }
 
   export class Category {

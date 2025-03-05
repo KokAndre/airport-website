@@ -75,7 +75,7 @@ export class NavBarComponent implements OnInit {
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20241205 - Tedderfielf Airpark - Runway Information as at January 2024.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20241205  - FATA Emergency Contacts.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts', '../../../assets/documents/20250305 - Emergency Contacts.pdf', null);
         break;
       case DocumentsToDisplayEnum.SalesBrochure:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Tedderfield Sales Brochure', '../../../assets/documents/20241120-Tedderfield_Sales_Brochure_v2.pdf', null);
