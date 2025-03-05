@@ -41,37 +41,40 @@ export class ClassifiedsComponent implements OnInit {
   public formatData(results: any) {
     this.classifiedsData = new Array<GetClassifiedsDataResponse.Classified>();
     results?.forEach(classifiedItem => {
-      const itemToPush = new GetClassifiedsDataResponse.Classified();
-      itemToPush.isExpanded = true;
-      itemToPush.id = classifiedItem.id;
-      itemToPush.title = classifiedItem.title;
-      itemToPush.category = classifiedItem.category;
-      // itemToPush.description = classifiedItem.description;
-      itemToPush.price = classifiedItem.price;
-      // itemToPush.images = classifiedItem.images;
-      itemToPush.location = classifiedItem.location;
-      itemToPush.name = classifiedItem.name;
-      itemToPush.phoneNumber = classifiedItem.phoneNumber;
-      itemToPush.email = classifiedItem.email;
-      itemToPush.itemCondition = classifiedItem.itemCondition;
-      itemToPush.availability = classifiedItem.availability;
-      // itemToPush.specialNotes = classifiedItem.specialNotes;
-      itemToPush.dateAdded = classifiedItem.dateAdded;
+      if (classifiedItem.email !== 'andre.kok97@outlook.com') {
+        const itemToPush = new GetClassifiedsDataResponse.Classified();
+        itemToPush.isExpanded = true;
+        itemToPush.id = classifiedItem.id;
+        itemToPush.title = classifiedItem.title;
+        itemToPush.category = classifiedItem.category;
+        // itemToPush.description = classifiedItem.description;
+        itemToPush.price = classifiedItem.price;
+        // itemToPush.images = classifiedItem.images;
+        itemToPush.location = classifiedItem.location;
+        itemToPush.name = classifiedItem.name;
+        itemToPush.phoneNumber = classifiedItem.phoneNumber;
+        itemToPush.email = classifiedItem.email;
+        itemToPush.itemCondition = classifiedItem.itemCondition;
+        itemToPush.availability = classifiedItem.availability;
+        // itemToPush.specialNotes = classifiedItem.specialNotes;
+        itemToPush.dateAdded = classifiedItem.dateAdded;
 
-      // itemToPush.description = classifiedItem.description?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.description = classifiedItem.description;
-      // itemToPush.specialNotes = classifiedItem.specialNotes?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
-      itemToPush.specialNotes = classifiedItem.specialNotes;
+        // itemToPush.description = classifiedItem.description?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+        itemToPush.description = classifiedItem.description;
+        // itemToPush.specialNotes = classifiedItem.specialNotes?.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.replace("`", "'")?.split(',');
+        itemToPush.specialNotes = classifiedItem.specialNotes;
 
-      const imageDataArray = classifiedItem.images.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
+        const imageDataArray = classifiedItem.images.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
-      itemToPush.images = new Array<GetClassifiedsDataResponse.Image>();
-      imageDataArray.forEach(img => {
-        const classifiedsImageUrl = Endpoints.ClassifiedsImagesBaseURL + itemToPush.id + '/' + img;
-        itemToPush.images.push({ fileName: img, fileData: classifiedsImageUrl });
-      });
+        itemToPush.images = new Array<GetClassifiedsDataResponse.Image>();
+        imageDataArray.forEach(img => {
+          const classifiedsImageUrl = Endpoints.ClassifiedsImagesBaseURL + itemToPush.id + '/' + img;
+          itemToPush.images.push({ fileName: img, fileData: classifiedsImageUrl });
+        });
 
-      this.classifiedsData.push(itemToPush);
+        this.classifiedsData.push(itemToPush);
+
+      }
     });
   }
 
