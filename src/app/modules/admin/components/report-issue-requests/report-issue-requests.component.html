@@ -186,6 +186,7 @@
                 (selectionChange)="updateReportIssueStatus(item.id, $event.value)">
                 <mat-option class="px-1" value="notStarted">Not Started</mat-option>
                 <mat-option class="px-1" value="inProgress">In Progress</mat-option>
+                <mat-option class="px-1" value="toBeReleased">To be Released</mat-option>
                 <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
               </mat-select>
             </mat-form-field>

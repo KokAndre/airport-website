@@ -10,6 +10,7 @@ import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model
 export enum StatusEnum {
   notStarted = "Not Started",
   inProgress = "In Progress",
+  toBeReleased= "To be Released",
   done = "Done",
 }
 
