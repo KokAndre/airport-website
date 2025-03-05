@@ -684,7 +684,15 @@
     </mat-form-field>
   </div>
 
-  <div class="row mx-3 justify-content-center">
+  <div class="mx-3">
+    <p>Select video upload type:</p>
+    <mat-radio-group [(ngModel)]="captureYoutubeVideoUploadType" [disabled]="youtubeVideoData.id ? true : false">
+      <mat-radio-button value="youtube">Youtube Video</mat-radio-button>
+      <mat-radio-button value="upload">Upload Video</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div *ngIf="captureYoutubeVideoUploadType === 'youtube'" class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
       <mat-label>Video URL</mat-label>
       <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200"
@@ -694,6 +702,19 @@
       <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
         https://www.youtube.com/watch?v=[VideoId]</mat-hint>
     </mat-form-field>
+  </div>
+
+  <div *ngIf="captureYoutubeVideoUploadType === 'upload'" class="row m-3 justify-content-center">
+    <!-- <mat-form-field class="col-12 px-0">
+      <mat-label>Video URL</mat-label>
+      <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200"
+        [(ngModel)]="youtubeVideoData.videoURL">
+      <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
+      <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
+        https://www.youtube.com/watch?v=[VideoId]</mat-hint>
+    </mat-form-field> -->
+
+    <app-file-uploader [allowSelectVideo]="true" [returnAsFile]="true" [isFromMembersDocumentsAddFile]="true" (emitFileData)="uploadVideo($event)"></app-file-uploader>
   </div>
 
   <div class="row mx-3 justify-content-center">
@@ -816,18 +837,4 @@
   </div>
 
   <app-capture-getting-to-know-you [gettingToKnowYouRequestData]="data.inputValues" (submitDataEmit)="submitGettingToKnowYouData($event)"></app-capture-getting-to-know-you>
-
-  <!-- <div class="row mx-0 my-4 justify-content-center">
-    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
-      <p class="mb-0">Cancel</p>
-      <span class="white-button-icon"></span>
-    </div>
-
-    <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': newEmailCaptured || !emailIsValid || !emailConfigItem.emailDisplayName || !emailConfigItem.emailAdressesArray.length}"
-      (click)="saveEmailConfigData()">
-      <p class="mb-0">Save</p>
-      <span class="red-button-icon"></span>
-    </div>
-  </div> -->
 </ng-template>

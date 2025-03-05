@@ -12,15 +12,18 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 export class FileUploaderComponent implements OnInit {
   @Input() public numOfFilesAllowed = 1;
   @Input() public allowSelectImages = false;
+  @Input() public allowSelectVideo = false;
   @Input() public maxFileSize = 10000000; // This defaults to 10MB
   @Input() public returnAsFile = false;
   @Input() public isFromMembersDocumentsAddFile = false;
+  @Input() public isSmallUploader = false;
   @Output() public emitFileData: EventEmitter<SellMyHangerRequest.FileData[]> = new EventEmitter<SellMyHangerRequest.FileData[]>();
   // @Output() public emitFileDataAsFile = new EventEmitter<any>();
   @ViewChild('fileUploaded', { static: true }) fileUploaded: ElementRef;
 
   public fileUploadTypes = '.pdf, .PDF';
   public imageUploadTypes = '.PNG, .JPG, .JPEG, .SVG ';
+  public videoUploadTypes = '.MP4, .WebM, .Ogg';
 
   constructor(public appModalService: AppModalService, private imageCompress: NgxImageCompressService) { }
 

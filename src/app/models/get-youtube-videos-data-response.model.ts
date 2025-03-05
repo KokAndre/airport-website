@@ -16,7 +16,13 @@ export namespace GetYoutubeVideosDataResponse {
         videoStartTime: number;
         videoEndTime: number;
         sortOrder: number;
+        uploadType: string;
 
+        fileData: FileData
+    }
+
+    export class FileData {
+        //
     }
 
 }

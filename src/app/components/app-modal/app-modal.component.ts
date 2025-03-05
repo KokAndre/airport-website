@@ -45,6 +45,7 @@ export class AppModalComponent implements OnInit {
   public emailConfigItem: GetBackendEmailConfigDataResponse.EmailConfigData;
   public emailIsValid = true;
   public newEmailCaptured = '';
+  public captureYoutubeVideoUploadType = 'youtube';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -131,8 +132,10 @@ export class AppModalComponent implements OnInit {
       case ModalTypes.CaptureYoutubeVideo:
         if (this.data.inputValues) {
           this.youtubeVideoData = this.data.inputValues
+          this.captureYoutubeVideoUploadType = this.youtubeVideoData.uploadType;
         } else {
           this.youtubeVideoData = new GetYoutubeVideosDataResponse.Video();
+          this.captureYoutubeVideoUploadType = 'youtube';
         }
         this.isLoading = false;
         break;
@@ -439,6 +442,10 @@ export class AppModalComponent implements OnInit {
     if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.isYoutubeURLValid && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
       this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.youtubeVideoData);
     }
+  }
+
+  public uploadVideo(videoData: GetYoutubeVideosDataResponse.FileData) {
+    //
   }
 
   public removeEmailFromArray(emailItem: string) {

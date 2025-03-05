@@ -12,7 +12,7 @@
 
   <input type="file" [multiple]="numOfFilesAllowed > 1 ? true : false" [max]="numOfFilesAllowed" size="" hidden
     #fileUploaded (click)="$event.stopPropagation()" (change)="uploadItem($event)"
-    [accept]="allowSelectImages ? imageUploadTypes : fileUploadTypes" />
+    [accept]="allowSelectImages ? imageUploadTypes : (allowSelectVideo ? videoUploadTypes : fileUploadTypes)" />
 </div>
 
 
