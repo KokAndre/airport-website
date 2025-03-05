@@ -684,38 +684,28 @@
     </mat-form-field>
   </div>
 
-  <div class="mx-3">
+  <!-- <div class="mx-3">
     <p>Select video upload type:</p>
     <mat-radio-group [(ngModel)]="captureYoutubeVideoUploadType" [disabled]="youtubeVideoData.id ? true : false">
       <mat-radio-button value="youtube">Youtube Video</mat-radio-button>
       <mat-radio-button value="upload">Upload Video</mat-radio-button>
     </mat-radio-group>
-  </div>
+  </div> -->
 
-  <div *ngIf="captureYoutubeVideoUploadType === 'youtube'" class="row mx-3 justify-content-center">
+  <div class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
       <mat-label>Video URL</mat-label>
       <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200"
         [(ngModel)]="youtubeVideoData.videoURL">
       <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
-      <!-- <mat-error *ngIf="!isYoutubeURLValid">Enter a valid URL: https://www.youtube.com/watch?v=[VideoId]</mat-error> -->
       <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
         https://www.youtube.com/watch?v=[VideoId]</mat-hint>
     </mat-form-field>
   </div>
 
-  <div *ngIf="captureYoutubeVideoUploadType === 'upload'" class="row m-3 justify-content-center">
-    <!-- <mat-form-field class="col-12 px-0">
-      <mat-label>Video URL</mat-label>
-      <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200"
-        [(ngModel)]="youtubeVideoData.videoURL">
-      <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
-      <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
-        https://www.youtube.com/watch?v=[VideoId]</mat-hint>
-    </mat-form-field> -->
-
+  <!-- <div *ngIf="captureYoutubeVideoUploadType === 'upload'" class="row m-3 justify-content-center">
     <app-file-uploader [allowSelectVideo]="true" [returnAsFile]="true" [isFromMembersDocumentsAddFile]="true" (emitFileData)="uploadVideo($event)"></app-file-uploader>
-  </div>
+  </div> -->
 
   <div class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
