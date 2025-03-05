@@ -83,7 +83,7 @@
 
             <div class="row mx-0 justify-content-center mt-4">
               <mat-form-field class="col-10 px-0">
-                <mat-label>Title</mat-label>
+                <mat-label>Title for the Advertisement</mat-label>
                 <input style="color: black;" matInput required maxlength="100" formControlName="titleControl"
                   placeholder="E.G. Cessna 172 for Sale or Propeller - Hartzell 3 - Blade">
                 <mat-error *ngIf="titleControl?.hasError('required')">Title is required</mat-error>
@@ -148,7 +148,7 @@
                 <P class="mb-1">Upload high quality images of the item, showing all key aspects such as the overall
                   condition and any unique features</P>
                 <P class="mb-1">Tip: include multiple angles</P>
-                <p class="text-size-12 child-path-text">Upload up to 4 supported files. File types: PNG, JPG, JPEG, SVG.
+                <p class="red-text text-bold">Upload up to 4 supported files. File types: PNG, JPG, JPEG, SVG.
                   Max 50MB per file.
                 </p>
 
