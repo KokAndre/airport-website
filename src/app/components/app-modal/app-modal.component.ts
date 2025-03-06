@@ -45,7 +45,6 @@ export class AppModalComponent implements OnInit {
   public emailConfigItem: GetBackendEmailConfigDataResponse.EmailConfigData;
   public emailIsValid = true;
   public newEmailCaptured = '';
-  public captureYoutubeVideoUploadType = 'youtube';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ModalDetails, public formBuilder: FormBuilder, public tokenService: TokenService) { }
 
@@ -132,10 +131,10 @@ export class AppModalComponent implements OnInit {
       case ModalTypes.CaptureYoutubeVideo:
         if (this.data.inputValues) {
           this.youtubeVideoData = this.data.inputValues
-          this.captureYoutubeVideoUploadType = this.youtubeVideoData.uploadType;
+          this.youtubeVideoData.uploadType;
         } else {
           this.youtubeVideoData = new GetYoutubeVideosDataResponse.Video();
-          this.captureYoutubeVideoUploadType = 'youtube';
+          this.youtubeVideoData.uploadType = 'youtube';
         }
         this.isLoading = false;
         break;
@@ -438,14 +437,64 @@ export class AppModalComponent implements OnInit {
     }
   }
 
-  public saveYoutubeVideoClicked() {
-    if (this.youtubeVideoData.title && this.youtubeVideoData.videoURL && this.isYoutubeURLValid && this.youtubeVideoData.credits && (!this.youtubeVideoDisplayTimeCheckBox || (this.youtubeVideoDisplayTimeCheckBox && this.youtubeVideoData.videoStartTime && this.youtubeVideoData.videoEndTime))) {
-      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.youtubeVideoData);
+  public blurOnYoutubeURL() {
+    if (this.youtubeVideoData.videoURL?.includes('&t=')) {
+      let time = this.youtubeVideoData.videoURL.split('&t=')[1];
+      time = time.replaceAll('s', '');
+
+      let startTime = 0;
+      let endTime = 0;
+      if (time.includes(',')) {
+        startTime = +time.split(',')[0];
+        endTime = +time.split(',')[1];
+      } else {
+        startTime = +time;
+      }
+
+      this.youtubeVideoDisplayTimeCheckBox = true;
+      this.youtubeVideoData.videoStartTime = startTime;
+      this.youtubeVideoData.videoEndTime = endTime;
+      this.youtubeVideoData.videoURL = this.youtubeVideoData.videoURL.split('&t=')[0];
     }
   }
 
-  public uploadVideo(videoData: GetYoutubeVideosDataResponse.FileData) {
-    //
+  public isYoutubeVideoSaveButtonDisabled() {
+    if (!this.youtubeVideoData.title || !this.youtubeVideoData.credits) {
+      return true
+    }
+
+    if (this.youtubeVideoData.uploadType === 'youtube') {
+      if (!this.youtubeVideoData.videoURL || !this.isYoutubeURLValid) {
+        return true;
+      }
+
+      if (this.youtubeVideoDisplayTimeCheckBox) {
+        if (!this.youtubeVideoData.videoStartTime || this.youtubeVideoData.videoEndTime === undefined || this.youtubeVideoData.videoEndTime === null) {
+          return true;
+        }
+      }
+    }
+
+    if (this.youtubeVideoData.uploadType === 'upload') {
+      if (!this.youtubeVideoData?.fileData?.fileName || !this.youtubeVideoData?.fileData?.fileData) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public deleteVideoFile() {
+    this.youtubeVideoData.fileData = new GetYoutubeVideosDataResponse.FileData();
+  }
+
+  public uploadVideo(videoData: GetYoutubeVideosDataResponse.FileData[]) {
+    console.log('VIDEO DATA EMITTED: ', videoData);
+    this.youtubeVideoData.fileData = videoData[0];
+  }
+
+  public saveYoutubeVideoClicked() {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.youtubeVideoData);
   }
 
   public removeEmailFromArray(emailItem: string) {
@@ -488,7 +537,7 @@ export class AppModalComponent implements OnInit {
     }
   }
 
-  public submitGettingToKnowYouData(gettigToKnowYouData: SubmitGettingToKnowYouRequest.RootObject){
+  public submitGettingToKnowYouData(gettigToKnowYouData: SubmitGettingToKnowYouRequest.RootObject) {
     console.log('IN MODAL CALLBACK');
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, gettigToKnowYouData);
   }

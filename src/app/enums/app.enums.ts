@@ -197,6 +197,7 @@ export enum Endpoints {
     AddYoutubeVideo = '/youtube-videos/add-video',
     EditYoutubeVideo = '/youtube-videos/edit-video',
     DeleteYoutubeVideo = '/youtube-videos/delete-video',
+    UploadVideo = '/youtube-videos/upload-video',
 
     // Website Tickets
     GetWebsiteTickets = '/web-tickets/get-web-tickets',

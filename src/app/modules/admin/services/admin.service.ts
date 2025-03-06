@@ -981,6 +981,23 @@ export class AdminService {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.DeleteYoutubeVideo, { requestData: { id: youtubeVideoId } }) as Observable<any>;
   }
 
+  public uploadVideo(fileData: any) {
+    let fileDataToUpload: FormData = new FormData();
+    fileDataToUpload.append('file', fileData);
+    fileDataToUpload.append('name', fileData.name);
+
+    return this.http.post(Endpoints.NewBaseURL + Endpoints.UploadVideo, fileDataToUpload) as Observable<any>;
+
+    // return fetch(Endpoints.BaseURL + Endpoints.UploadVideo, {
+    //   method: 'post',
+    //   body: fileDataToUpload
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     return data;
+    //   });
+  }
+
   public getBackendEmailConfigData() {
     return this.http.get(Endpoints.NewBaseURL + Endpoints.GetEmailConfig) as Observable<any>;
   }

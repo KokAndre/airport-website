@@ -395,7 +395,9 @@ export class ReportIssueRequestsComponent implements OnInit {
       this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
         if (results.status === 200) {
           // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
-          this.getReportIssueData();
+          // this.getReportIssueData();
+          this.reportIssueRequests.find(x => x.id === reportIssueItem.id).hangerOrSectionNumber = reportIssueItem.hangerOrSectionNumber;
+          this.reportIssueRequests.find(x => x.id === reportIssueItem.id).issueDescription = reportIssueItem.issueDescription;
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
         }
@@ -438,6 +440,16 @@ export class ReportIssueRequestsComponent implements OnInit {
   public estimatedCompletionDateChanged(newDate: string, reportIssueRequestId: string) {
     this.reportIssueRequests.find(x => x.id === reportIssueRequestId).estimatedCompletionDate = newDate;
 
+    const currentDate = new Date();
+    let date2 = new Date(newDate + 'T23:59:59');
+
+    let Difference_In_Time =
+      date2.getTime() - currentDate.getTime();
+
+    let Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+
+    this.reportIssueRequests.find(x => x.id === reportIssueRequestId).numOfRemainingDaysToETC = Difference_In_Days;
+
     this.adminService.updateReportIssueEstimatedCompletionDate(reportIssueRequestId, newDate).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
@@ -454,7 +466,8 @@ export class ReportIssueRequestsComponent implements OnInit {
       this.adminService.deleteReportIssueEntry(reportIssueRequest.id).then(results => {
         if (results.status === 200) {
           // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
-          this.getReportIssueData();
+          // this.getReportIssueData();
+          this.reportIssueRequests = this.reportIssueRequests.filter(x => x.id !== reportIssueRequest.id);
         } else {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
         }

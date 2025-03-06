@@ -33,8 +33,9 @@ export class ManageYoutubeVideosComponent implements OnInit {
   }
 
   public addYoutubeVideoOutcome(modalOutcome: string, videoData?: GetYoutubeVideosDataResponse.Video) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    console.log('MODAL DAT: ', videoData);
     if (modalOutcome === ModalOutcomeOptions.Update) {
-      videoData.videoId = videoData.videoURL.split('?v=')[1];
 
       if (!videoData.videoStartTime) {
         videoData.videoStartTime = 0;
@@ -44,13 +45,46 @@ export class ManageYoutubeVideosComponent implements OnInit {
         videoData.videoEndTime = 0;
       }
 
-      this.adminService.addYoutubeVideo(videoData).subscribe((result: GetYoutubeVideosDataResponse.RootObject) => {
+      const dataToSubmit = new GetYoutubeVideosDataResponse.Video();
+      dataToSubmit.title = videoData.title;
+      dataToSubmit.credits = videoData.credits;
+      dataToSubmit.uploadType = videoData.uploadType;
+
+      if (videoData.uploadType === 'youtube') {
+        dataToSubmit.videoURL = videoData.videoURL;
+        dataToSubmit.videoId = videoData.videoURL.split('?v=')[1];
+        dataToSubmit.videoStartTime = videoData.videoStartTime;
+        dataToSubmit.videoEndTime = videoData.videoEndTime;
+      } else {
+        dataToSubmit.videoURL = videoData.fileData.fileName;
+        dataToSubmit.videoStartTime = 0;
+        dataToSubmit.videoEndTime = 0;
+        dataToSubmit.videoId = '';
+      }
+
+      // console.log('DATA TO SUBMIT: ', videoData);
+      console.log('DATA TO SUBMIT: ', dataToSubmit);
+
+      this.adminService.addYoutubeVideo(dataToSubmit).subscribe((result: GetYoutubeVideosDataResponse.RootObject) => {
         this.appModalService.CloseModal();
-        this.getYoutubeVideos();
+        if (videoData.uploadType = 'upload') {
+          this.uploadVideo(videoData.fileData.fileData);
+        } else {
+          this.getYoutubeVideos();
+        }
       }, error => {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
       });
     }
+  }
+
+  public uploadVideo(fileData: any) {
+    this.adminService.uploadVideo(fileData).subscribe((result) => {
+      this.appModalService.CloseModal();
+      this.getYoutubeVideos();
+    }, error => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, error.error.header, error.error.message, '');
+    });
   }
 
   public editYoutubeVideoClicked(videoData: GetYoutubeVideosDataResponse.Video) {

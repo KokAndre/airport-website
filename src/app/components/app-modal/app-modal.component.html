@@ -684,18 +684,18 @@
     </mat-form-field>
   </div>
 
-  <!-- <div class="mx-3">
+  <div class="mx-3">
     <p>Select video upload type:</p>
-    <mat-radio-group [(ngModel)]="captureYoutubeVideoUploadType" [disabled]="youtubeVideoData.id ? true : false">
+    <mat-radio-group [(ngModel)]="youtubeVideoData.uploadType" [disabled]="youtubeVideoData.id ? true : false">
       <mat-radio-button value="youtube">Youtube Video</mat-radio-button>
       <mat-radio-button value="upload">Upload Video</mat-radio-button>
     </mat-radio-group>
-  </div> -->
+  </div>
 
-  <div class="row mx-3 justify-content-center">
+  <div *ngIf="youtubeVideoData.uploadType === 'youtube'" class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
       <mat-label>Video URL</mat-label>
-      <input style="color: black;" (input)="checkIfValidYoutubeURL()" matInput required maxlength="200"
+      <input style="color: black;" (input)="checkIfValidYoutubeURL()" (blur)="blurOnYoutubeURL()" matInput required maxlength="200"
         [(ngModel)]="youtubeVideoData.videoURL">
       <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
       <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
@@ -703,9 +703,24 @@
     </mat-form-field>
   </div>
 
-  <!-- <div *ngIf="captureYoutubeVideoUploadType === 'upload'" class="row m-3 justify-content-center">
+  <div *ngIf="youtubeVideoData.uploadType === 'upload'" class="row m-3 justify-content-center">
+
+    <!-- <div *ngIf="youtubeVideoData?.fileData?.fileName" class="row mx-0">
+      <mat-icon class="pointer delete-icon align-bottom mr-3" (click)="deleteVideoFile()">delete</mat-icon>
+      <p class="width-fit-content" >{{ youtubeVideoData.fileData.fileName }}</p>
+    </div> -->
+
+    <div *ngIf="youtubeVideoData?.fileData?.fileName" class="row mb-2 mx-0">
+      <div class="col-1 px-0 align-content-center">
+        <mat-icon class="pointer delete-icon align-bottom" (click)="deleteVideoFile()">delete</mat-icon>
+      </div>
+      <div class="col-11 pr-0 align-content-center">
+        <p class="mb-0 text-size-14">{{youtubeVideoData.fileData?.fileName }}</p>
+      </div>
+    </div>
+
     <app-file-uploader [allowSelectVideo]="true" [returnAsFile]="true" [isFromMembersDocumentsAddFile]="true" (emitFileData)="uploadVideo($event)"></app-file-uploader>
-  </div> -->
+  </div>
 
   <div class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
@@ -715,6 +730,7 @@
     </mat-form-field>
   </div>
 
+  <div *ngIf="youtubeVideoData.uploadType === 'youtube'">
   <mat-checkbox class="mx-3" [(ngModel)]="youtubeVideoDisplayTimeCheckBox"
     (change)="youtubeVideoDisplayTimeCheckBoxChaged()">Add video start and end time</mat-checkbox>
 
@@ -737,7 +753,7 @@
       </mat-form-field>
     </div>
   </div>
-
+</div>
 
   <div class="row mx-0 my-4 justify-content-center">
     <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
@@ -746,7 +762,7 @@
     </div>
 
     <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': !youtubeVideoData.title || !youtubeVideoData.videoURL || !isYoutubeURLValid || !youtubeVideoData.credits || (youtubeVideoDisplayTimeCheckBox && (!youtubeVideoData.videoStartTime || !youtubeVideoData.videoEndTime))}"
+      [ngClass]="{'disable-user-click': isYoutubeVideoSaveButtonDisabled()}"
       (click)="saveYoutubeVideoClicked()">
       <p class="mb-0">Save</p>
       <span class="red-button-icon"></span>

@@ -34,8 +34,7 @@
           Gallery</div>
 
         <mat-divider *ngIf="isUserAdmin"></mat-divider>
-        <div *ngIf="isUserAdmin" class="dropdown-item p-2"
-          (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
+        <div *ngIf="isUserAdmin" class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.YoutubeVideos)">
           Youtube Videos</div>
 
         <mat-divider></mat-divider>
@@ -203,70 +202,84 @@
     <div class="dropdown-content-container">
       <div class="dropdown-content-up-arrow"></div>
       <div class="dropdown-content">
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersAdmin)">
-          Manage Members</div>
+
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">Body Corporate
+          - Documents</div>
+
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
-          Manage Gallery</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us Requests
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageLevies)">Body Corporate - Levies
         </div>
+
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Report Issue
-          Requests
-        </div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening
-          Tedderfield
-          Requests
-        </div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">Manage Home
-          Screen Banner
-        </div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageHangersForSale)">Manage Hangars
-          For Sale</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageStandsForSale)">Manage Stands For
-          Sale</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInHangersForSale)">Manage
-          Interests In Hangars For Sale</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInStandsForSale)">Manage
-          Interests In Stands For Sale</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageLevies)">Manage Levies</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">Manage Members
-          Documents</div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageClassifiedsForSale)">
-          Manage Classifieds For Sale</div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageClassifiedsForSale)">Classifieds
+          - Manage</div>
+
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">
-          Manage
-          Interests In Classifieds For Sale</div>
+          Classifieds - Manage Interest</div>
+
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersConsents)">View Members Consents
-        </div>
-        <mat-divider></mat-divider>
-        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageBackendEmailConfig)">Manage
-          Backend Email Config
-        </div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageBackendEmailConfig)">
+          Configuration - Email</div>
+
         <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
-          (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
+          (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Configuration - Issues</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us - Requests
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">Gallery - Manage</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Gallery - YOUTUBE
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">Gallery - Home
+          Screen</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening
+          - Requests</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageHangersForSale)">Hangars - Manage
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInHangersForSale)">
+          Hangars - Interest</div>
+
         <mat-divider *ngIf="isSuperAdmin"></mat-divider>
         <div *ngIf="isSuperAdmin" class="dropdown-item p-2"
-          (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
+          (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Members - Getting to Know You</div>
+
         <mat-divider></mat-divider>
-        <div class="dropdown-item p-2"
-          (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersAdmin)">Members - Manage</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.MembersConsents)">Members - Consents
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageStandsForSale)">Stands - Manage
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageInterestInStandsForSale)">Stands
+          - Interest</div>
+
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Tickets - Body
+          Corporate</div>
+
         <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
         <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
-          (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>
+          (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Tickets - Web Dev</div>
+
       </div>
     </div>
   </div>
@@ -488,72 +501,85 @@
   </mat-menu>
 
   <mat-menu #adminMenu="matMenu">
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersAdmin)">
-      Manage Members</div>
+
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">Body
+      Corporate - Documents</div>
+
     <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">
-      Manage Gallery</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us
-      Requests
-    </div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Report
-      Issue Requests
-    </div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening Tedderfield Requests
-    </div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">
-      Manage Home Screen Banner
-    </div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageHangersForSale)">Manage
-      Hangars For Sale</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageStandsForSale)">Manage
-      Stands For Sale</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageInterestInHangersForSale)">Manage
-      Interests In Hangars For Sale</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageInterestInStandsForSale)">Manage
-      Interests In Stands For Sale</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageLevies)">Manage Levies
-    </div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageMembersDocuments)">
-      Manage Members Documents</div>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageLevies)">Body Corporate
+      - Levies</div>
+
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageClassifiedsForSale)">
-      Manage Classifieds For Sale</div>
+      Classifieds - Manage</div>
+
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Manage
-      Interests In Classifieds For Sale</div>
-    <mat-divider></mat-divider>
-    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersConsents)">View
-      Members Consents</div>
+      (click)="navigateToRoute(navigationRoutes.ManageInterestInClassifiedsForSale)">Classifieds - Manage Interest</div>
+
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageBackendEmailConfig)">
-      Manage Backend Email Config
-    </div>
+      Configuration - Email</div>
+
     <mat-divider *ngIf="isSuperAdmin"></mat-divider>
     <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Manage Getting To Know You</div>
-    <mat-divider *ngIf="isSuperAdmin"></mat-divider>
-    <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Report Issue Config</div>
-    <mat-divider ></mat-divider>
+      (click)="navigateToRoute(navigationRoutes.ManageReportIssueConfig)">Configuration - Issues</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.FollowUsRequests)">Follow Us
+      - Requests</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.GalleryAdmin)">Gallery -
+      Manage</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Gallery
+      - YOUTUBE</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageHomeScreenBanner)">
+      Gallery - Home Screen</div>
+
+    <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item
-      (click)="navigateToRoute(navigationRoutes.ManageYoutubeVideos)">Manage Youtube Videos</div>
+      (click)="navigateToRoute(navigationRoutes.GreeningTedderfieldRequests)">Greening - Requests</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageHangersForSale)">
+      Hangars - Manage</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageInterestInHangersForSale)">Hangars - Interest</div>
+
+    <mat-divider *ngIf="isSuperAdmin"></mat-divider>
+    <div *ngIf="isSuperAdmin" class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageGettingToKnowYou)">Members - Getting to Know You</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersAdmin)">Members -
+      Manage</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.MembersConsents)">Members -
+      Consents</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageStandsForSale)">Stands
+      - Manage</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageInterestInStandsForSale)">Stands - Interest</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Tickets
+      - Body Corporate</div>
+
     <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
-    <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
-      (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Website Tickets</div>
+    <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2" mat-menu-item
+      (click)="navigateToRoute(navigationRoutes.ManageWebsiteTickets)">Tickets - Web Dev</div>
+
   </mat-menu>
 </div>
