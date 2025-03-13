@@ -11,7 +11,7 @@ export enum AppRoutes {
     TedderfieldHistory = '/about-us/tedderfield-history',
     LiveWeather = '/about-us/live-weather',
     GalleryLanding = '/about-us/gallery',
-    YoutubeVideos = '/about-us/youtube-videos',
+    YoutubeVideos = '/about-us/videos',
     ContactUs = '/about-us/contact-us',
     MissionAndVisionStatement = '/about-us/mission-and-vision-statement',
     MapAndLocation = '/pilot-information/map-and-location',
@@ -57,7 +57,7 @@ export enum AppRoutes {
     ManageInterestInClassifiedsForSale = '/admin/manage-interest-in-classifieds-for-sale',
     ManageReportIssueConfig = '/admin/manage-report-issue-config',
     ManageGettingToKnowYou = '/admin/manage-getting-to-know-you',
-    ManageYoutubeVideos = '/admin/manage-youtube-videos',
+    ManageYoutubeVideos = '/admin/manage-videos',
     ManageWebsiteTickets = '/admin/website-tickets',
     MembersConsents = '/admin/members-consents',
     ManageBackendEmailConfig = '/admin/manage-backend-email-config'

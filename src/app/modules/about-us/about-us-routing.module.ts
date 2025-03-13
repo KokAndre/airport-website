@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'gallery', component: GalleryLandingComponent
   },
   {
-    path: 'youtube-videos', component: YoutubeVideosComponent
+    path: 'videos', component: YoutubeVideosComponent
   },
   {
     path: 'contact-us', component: ContactUsComponent

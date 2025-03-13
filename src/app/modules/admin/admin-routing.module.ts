@@ -71,7 +71,7 @@ const routes: Routes = [
     path: 'manage-getting-to-know-you', component: ManageGettingToKnowYouComponent
   },
   {
-    path: 'manage-youtube-videos', component: ManageYoutubeVideosComponent
+    path: 'manage-videos', component: ManageYoutubeVideosComponent
   },
   // TODO: Add Web Tickets Auth Guard !!!
   {

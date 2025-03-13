@@ -987,15 +987,6 @@ export class AdminService {
     fileDataToUpload.append('name', fileData.name);
 
     return this.http.post(Endpoints.NewBaseURL + Endpoints.UploadVideo, fileDataToUpload) as Observable<any>;
-
-    // return fetch(Endpoints.BaseURL + Endpoints.UploadVideo, {
-    //   method: 'post',
-    //   body: fileDataToUpload
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     return data;
-    //   });
   }
 
   public getBackendEmailConfigData() {

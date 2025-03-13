@@ -20,12 +20,16 @@
       <div class="row">
         <div *ngFor="let item of youtubeData" class="col-lg-6 col-md-6 col-sm-12 col-12 px-3 mb-3">
           <div class="video-container p-3">
-
             <p class="text-bold mb-2 text-center">{{ item.title }}</p>
 
-            <youtube-player class="youtube-video-player" [videoId]="item.videoId" suggestedQuality="medium"
+            <youtube-player *ngIf="item.uploadType === 'youtube'" class="youtube-video-player" [videoId]="item.videoId" suggestedQuality="medium"
               [startSeconds]="item.videoStartTime" [endSeconds]="item.videoEndTime">
             </youtube-player>
+
+            <video *ngIf="item.uploadType === 'upload'" class="youtube-video-player" controls>
+              <source [src]="'https://tedderfield.co.za/tedderfield-api/api/youtube-videos/get-video?videoId=' + item.videoURL">
+              Your browser does not support the video tag.
+            </video>
 
             <p class="mb-0 mt-2 text-size-12">Credits: <b>{{ item.credits }}</b></p>
           </div>
