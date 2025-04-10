@@ -157,7 +157,7 @@
               <mat-select [(value)]="item.personResponsible" (selectionChange)="updateWebItem(item.id)">
                 <mat-option value="Andre">Andre</mat-option>
                 <mat-option value="Nic">Nic</mat-option>
-                <mat-option value="Chantal">Chantal</mat-option>
+                <mat-option value="Mandy">Mandy</mat-option>
               </mat-select>
             </mat-form-field>
           </td>
@@ -229,7 +229,7 @@
     [(ngModel)]="andrePersonResponsibleCheckBox">Andre</mat-checkbox>
   <mat-divider></mat-divider>
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
-    [(ngModel)]="chantalPersonResponsibleCheckBox">Chantal</mat-checkbox>
+    [(ngModel)]="mandyPersonResponsibleCheckBox">Mandy</mat-checkbox>
   <mat-divider></mat-divider>
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
     [(ngModel)]="nicPersonResponsibleCheckBox">Nic</mat-checkbox>

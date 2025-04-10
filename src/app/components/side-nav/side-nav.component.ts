@@ -117,7 +117,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
           // Allow all super admin, and Chantal to see the website tickets
           const userEmail = this.tokenService.getUserData(UserDataInTokenToReturn.Email);
-          if (this.isSuperAdmin || userEmail === 'grounds@tedderfield.co.za') {
+          if (this.isSuperAdmin || userEmail === 'swallowmandy@gmail.com') {
             this.isAllowedToViewWebsiteTickets = true;
           } else {
             this.isAllowedToViewWebsiteTickets = false;

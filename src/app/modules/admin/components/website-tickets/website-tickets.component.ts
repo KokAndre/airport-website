@@ -33,7 +33,7 @@ export class WebsiteTicketsComponent implements OnInit {
   public allPersonResponsibleCheckBox = true;
   public andrePersonResponsibleCheckBox = true;
   public nicPersonResponsibleCheckBox = true;
-  public chantalPersonResponsibleCheckBox = true;
+  public mandyPersonResponsibleCheckBox = true;
 
   // Priority Filters
   public orderByPriority = false;
@@ -108,7 +108,7 @@ export class WebsiteTicketsComponent implements OnInit {
   public allPersonResponsibleClicked() {
     this.andrePersonResponsibleCheckBox = this.allPersonResponsibleCheckBox;
     this.nicPersonResponsibleCheckBox = this.allPersonResponsibleCheckBox;
-    this.chantalPersonResponsibleCheckBox = this.allPersonResponsibleCheckBox;
+    this.mandyPersonResponsibleCheckBox = this.allPersonResponsibleCheckBox;
   }
 
   public orderByPersonResponsibleClicked() {
@@ -165,7 +165,7 @@ export class WebsiteTicketsComponent implements OnInit {
     if (row.personResponsible === 'Andre' && !this.andrePersonResponsibleCheckBox) {
       return true
     }
-    if (row.personResponsible === 'Chantal' && !this.chantalPersonResponsibleCheckBox) {
+    if (row.personResponsible === 'Mandy' && !this.mandyPersonResponsibleCheckBox) {
       return true
     }
     if (row.personResponsible === 'Nic' && !this.nicPersonResponsibleCheckBox) {
@@ -192,21 +192,21 @@ export class WebsiteTicketsComponent implements OnInit {
       this.allPersonResponsibleCheckBox = false;
       this.andrePersonResponsibleCheckBox = true;
       this.nicPersonResponsibleCheckBox = false;
-      this.chantalPersonResponsibleCheckBox = false;
+      this.mandyPersonResponsibleCheckBox = false;
     }
 
     if (loggedInPersonName === 'Nic') {
       this.allPersonResponsibleCheckBox = false;
       this.andrePersonResponsibleCheckBox = false;
       this.nicPersonResponsibleCheckBox = true;
-      this.chantalPersonResponsibleCheckBox = false;
+      this.mandyPersonResponsibleCheckBox = false;
     }
 
-    if (loggedInPersonName === 'Chantal') {
+    if (loggedInPersonName === 'Mandy') {
       this.allPersonResponsibleCheckBox = false;
       this.andrePersonResponsibleCheckBox = false;
       this.nicPersonResponsibleCheckBox = false;
-      this.chantalPersonResponsibleCheckBox = true;
+      this.mandyPersonResponsibleCheckBox = true;
     }
 
     // Filter on all ticketsd that are not in a Done status

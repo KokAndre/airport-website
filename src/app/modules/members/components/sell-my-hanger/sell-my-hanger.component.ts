@@ -95,16 +95,16 @@ export class SellMyHangerComponent implements OnInit {
   public prePopulateData() {
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+      // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
         this.nameControl.disable();
-      }
+      // }
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
-      if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
+      // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
         this.emailControl.disable();
-      }
+      // }
     }
 
     if (this.loggedInUserDetails?.phoneNumber) {
