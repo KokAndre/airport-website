@@ -22,6 +22,7 @@ import { ManageYoutubeVideosComponent } from './components/manage-youtube-videos
 import { WebsiteTicketsComponent } from './components/website-tickets/website-tickets.component';
 import { MembersConsentsComponent } from './components/members-consents/members-consents.component';
 import { ManageBackendEmailConfigComponent } from './components/manage-backend-email-config/manage-backend-email-config.component';
+import { ManageTedderfieldMerchHubComponent } from './components/manage-tedderfield-merch-hub/manage-tedderfield-merch-hub.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { ManageBackendEmailConfigComponent } from './components/manage-backend-e
     ManageYoutubeVideosComponent,
     WebsiteTicketsComponent,
     MembersConsentsComponent,
-    ManageBackendEmailConfigComponent
+    ManageBackendEmailConfigComponent,
+    ManageTedderfieldMerchHubComponent
   ]
 })
 export class AdminModule { }

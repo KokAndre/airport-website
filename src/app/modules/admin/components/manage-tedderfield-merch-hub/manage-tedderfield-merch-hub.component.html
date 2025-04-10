@@ -1,0 +1,193 @@
+<div class="page-header">
+  <div class="col-10 mx-auto">
+    <div class="row mx-0 justify-content-between align-items-center">
+      <div class="width-fit-content">
+        <p class="mb-0 section-header-text">Manage Tedderfield Merch Hub
+        </p>
+        <p class="mb-0 text-size-14">Admin / <span class="child-path-text">Manage Tedderfield Merch Hub</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-arrow-divider [isLightToDark]="true"></app-arrow-divider>
+
+<div *ngIf="!merchHubItems?.length && !isLoading" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+
+    <div class="row mx-0 pt-4 pb-5 align-items-center">
+      <div class="col">
+        <p class="text-size-24 mb-0">There are currently no items captured.</p>
+      </div>
+      <div class="col-auto">
+        <div class="red-button" (click)="addItemClicked()">
+          <p class="mb-0">Add Item</p>
+          <span class="red-button-icon"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="col-12 col-sm-12 col-md-12 col-lg-12 px-2 dark-background">
+  <div class="col-10 mx-auto">
+    <p class="text-size-24 pt-4 pb-5">Items is loading, please be patient.</p>
+  </div>
+</div>
+
+<div *ngIf="merchHubItems?.length && !isLoading" class="col 12 col-sm-12 col-md 12 col-lg-12 px-2 dark-background">
+
+  <div class="row mx-0 justify-content-end pt-3">
+    <div class="red-button mb-4 mr-3" (click)="addItemClicked()">
+      <p class="mb-0">Add Ticket</p>
+      <span class="red-button-icon"></span>
+    </div>
+  </div>
+
+  <div class="col-12 pb-4">
+    <!-- <table style="width:100%;">
+      <tr class="sticky-table-header">
+
+        <th>ID</th>
+        <th>Name</th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Category
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderDataByCategory()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="categoryFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th>Section</th>
+        <th>Page</th>
+        <th>Description</th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Assignee
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByPersonResponsibleClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="peronResponsibleFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Priority
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByPriorityClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="priorityFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th class="text-nowrap">
+          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
+            Status
+            <div class="width-fit-content pt-1">
+              <span class="ml-1 align-middle">
+                <mat-icon class="pointer" (click)="orderByStatusClicked()">unfold_more</mat-icon>
+              </span>
+              <span class="ml-1 align-middle">
+                <button class="p-0" [matMenuTriggerFor]="statusFilterMenu" mat-icon-button aria-label="Menu">
+                  <mat-icon class="">filter_list</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+        </th>
+
+        <th style="width: 160px; min-width: 160px;">ETC</th>
+
+        <th style="width: fit-content;">
+          <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
+              *ngIf="allowAdminToDelete" class="ml-1 p-0" fontIcon="delete"></mat-icon></div>
+        </th>
+      </tr>
+
+      <ng-container *ngFor="let item of webTicketsData">
+        <tr [hidden]="checkIfRowIsHidden(item)">
+
+          <td class="text-nowrap" [innerHTML]="item.id"></td>
+          <td [innerHTML]="item.name"></td>
+          <td [innerHTML]="item.category"></td>
+          <td [innerHTML]="item.section"></td>
+          <td [innerHTML]="item.page"></td>
+          <td [innerHTML]="item.description"></td>
+
+          <td>
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 140px !important;">
+              <mat-label>Assignee</mat-label>
+              <mat-select [(value)]="item.personResponsible" (selectionChange)="updateWebItem(item.id)">
+                <mat-option value="Andre">Andre</mat-option>
+                <mat-option value="Nic">Nic</mat-option>
+                <mat-option value="Chantal">Chantal</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 140px !important;">
+              <mat-label>Priority</mat-label>
+              <mat-select [(value)]="item.priority" (selectionChange)="updateWebItem(item.id)">
+                <mat-option *ngFor="let priority of priorityData" [value]="priority.priority">{{ priority.priority
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 140px !important;">
+              <mat-label>Status</mat-label>
+              <mat-select [(ngModel)]="item.status" (selectionChange)="updateWebItem(item.id)">
+                <mat-option *ngFor="let status of statusData" [value]="status.status">{{ status.status }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td style="width: 160px;">
+            <div class="row mx-0" style="flex-wrap: nowrap; justify-self: right; align-items: center;">
+                <p class="mb-0" style="width: fit-content; padding: 0;">{{ item.estimatedCompletionDate }}</p>
+                <app-date-picker [startDate]="item.estimatedCompletionDate || ''"
+                  (dateChangedEmit)="estimatedCompletionDateChanged($event, item.id)"></app-date-picker>
+            </div>
+          </td>
+
+          <td>
+            <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
+                (click)="editWebItemClicked(item)"></mat-icon>
+              <mat-icon *ngIf="allowAdminToDelete" class="red-text pointer ml-1 p-0" fontIcon="delete"
+                (click)="deleteWebItemClicked(item)"></mat-icon>
+            </div>
+          </td>
+
+        </tr>
+      </ng-container>
+    </table> -->
+  </div>
+</div>

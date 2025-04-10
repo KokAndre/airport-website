@@ -60,7 +60,8 @@ export enum AppRoutes {
     ManageYoutubeVideos = '/admin/manage-videos',
     ManageWebsiteTickets = '/admin/website-tickets',
     MembersConsents = '/admin/members-consents',
-    ManageBackendEmailConfig = '/admin/manage-backend-email-config'
+    ManageBackendEmailConfig = '/admin/manage-backend-email-config',
+    ManageTedderfieldMerchHub = '/admin/manage-tedderfield-merch-hub'
 }
 
 export enum Endpoints {

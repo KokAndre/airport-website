@@ -279,6 +279,9 @@
         <mat-divider></mat-divider>
         <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Tickets - Body
           Corporate</div>
+          
+        <mat-divider></mat-divider>
+        <div class="dropdown-item p-2" (click)="navigateToRoute(navigationRoutes.ManageTedderfieldMerchHub)">Merch Hub - Manage</div>
 
         <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
         <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2"
@@ -584,6 +587,9 @@
     <mat-divider></mat-divider>
     <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ReportIssueRequests)">Tickets
       - Body Corporate</div>
+
+    <mat-divider></mat-divider>
+    <div class="dropdown-item p-2" mat-menu-item (click)="navigateToRoute(navigationRoutes.ManageTedderfieldMerchHub)">Merch Hub - Manage</div>
 
     <mat-divider *ngIf="isAllowedToViewWebsiteTickets"></mat-divider>
     <div *ngIf="isAllowedToViewWebsiteTickets" class="dropdown-item p-2" mat-menu-item

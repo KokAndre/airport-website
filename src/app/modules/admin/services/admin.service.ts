@@ -996,4 +996,8 @@ export class AdminService {
   public editBackendEmailConfigData(configData: GetBackendEmailConfigDataResponse.EmailConfigData) {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.EditEmailConfig, { requestData: configData }) as Observable<any>;
   }
+
+  public get() {
+    return this.http.get(Endpoints.NewBaseURL + Endpoints.GetYoutubeVideos) as Observable<any>;
+  }
 }
