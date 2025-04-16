@@ -6,6 +6,7 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import { AdminService } from '../../services/admin.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 export enum StatusEnum {
   notStarted = "Not Started",
@@ -27,6 +28,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   public priorityList: GetReportIssueDataResponse.priorityList[];
   public allowAdminToDelete = false;
   public loggedInUserName = '';
+  public reportIssueFormGroup: FormGroup;
 
   // Person Responsible Filters
   public blankPersonResponsibleCheckBox = true;
@@ -63,11 +65,19 @@ export class ReportIssueRequestsComponent implements OnInit {
   constructor(private adminService: AdminService,
     private appModalService: AppModalService,
     public tokenService: TokenService,
-    public excelService: ExcelService) { }
+    public excelService: ExcelService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initializeControls();
     this.getReportIssueData();
     this.checkIfAdminIsAllowedToDelete();
+  }
+
+  private initializeControls() {
+    this.reportIssueFormGroup = this.fb.group({
+      filterControl: new FormControl('')
+    });
   }
 
   private checkIfAdminIsAllowedToDelete() {
@@ -116,9 +126,6 @@ export class ReportIssueRequestsComponent implements OnInit {
           }
         });
 
-        console.log('DATA: ', this.reportIssueRequests);
-
-
         this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
 
         this.categoryList.forEach(x => {
@@ -135,6 +142,8 @@ export class ReportIssueRequestsComponent implements OnInit {
 
         this.orderDataByPriority();
 
+        this.filterTickets();
+
         setTimeout(() => {
           this.isLoading = false;
         }, 300);
@@ -147,7 +156,6 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public checkIfRowIsHidden(row: GetReportIssueDataResponse.Requests) {
-
     const personResponsibleOfRow = this.responsiblePersonList.find(x => x.name === row.personResponsible);
 
     if (personResponsibleOfRow) {
@@ -198,6 +206,12 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else if (!this.blankPriorityCheckBox) {
       return true;
     }
+
+    // Check for search values
+    if (this.filterControl?.value && !row.isFilteredOnSearch) {
+      return true;
+    }
+
 
     return false;
   }
@@ -505,6 +519,45 @@ export class ReportIssueRequestsComponent implements OnInit {
     const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
 
     this.excelService.generateExcel(fileName, headersData, dataForExcell);
+  }
+
+  public async filterTickets() {
+    const filterValue = this.filterControl.value;
+
+    this.reportIssueRequests.forEach(x => {
+      x.isFilteredOnSearch = false;
+    });
+
+    if (!filterValue) {
+      return;
+    }
+
+    this.reportIssueRequests.filter(x => x.id?.toString()?.includes(filterValue?.toString()))?.forEach(x => {
+      x.isFilteredOnSearch = true;
+    });
+
+    this.reportIssueRequests.filter(x => x.issueDescription?.toString()?.toLowerCase()?.includes(filterValue?.toString()?.toLowerCase()))?.forEach(x => {
+      x.isFilteredOnSearch = true;
+    });
+  }
+
+  public clearSearchField() {
+    this.filterControl.setValue('');
+    this.filterControl.reset();
+    this.filterTickets();
+  }
+
+  public highlightSearchText(textToHightlight: string) {
+    if (!this.filterControl.value) {
+      return textToHightlight;
+    }
+    return textToHightlight.replace(new RegExp(this.filterControl.value, 'gi'), match => {
+      return '<span class="highlight-text">' + match + '</span>';
+    });
+  }
+
+  public get filterControl() {
+    return this.reportIssueFormGroup.get('filterControl');
   }
 
 }

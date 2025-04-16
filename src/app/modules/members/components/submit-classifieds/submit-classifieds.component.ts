@@ -303,7 +303,6 @@ export class SubmitClassifiedsComponent implements OnInit {
       this.submitClassifiedsRequestData.category = this.categorySelectControl.value;
     }
 
-    // console.log('DATA: ', this.submitClassifiedsRequestData);
     this.membersService.submitClassifiedsItem(this.submitClassifiedsRequestData).then(results => {
       if (results.status === 200) {
         this.submitItemSucessId = results.id;

@@ -32,28 +32,22 @@
     </div>
   </div>
 
+  <div [formGroup]="reportIssueFormGroup" class="row mx-0 justify-content-end">
+    <mat-form-field class="col-12 col-sm-12 col-md-6 col-lg-4 px-0">
+      <mat-label>Search by ID or Description</mat-label>
+      <span matPrefix class="mx-2"><mat-icon class="p-0">search</mat-icon></span>
+      <input style="color: black;" matInput (input)="filterTickets()" formControlName="filterControl">
+      <button mat-icon-button matSuffix (click)="clearSearchField()">
+        <mat-icon class="">backspace</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
   <div class="col-12 pb-4">
     <table style="width:100%;">
       <tr class="sticky-table-header">
         <th>ID</th>
         <th>Date Captured</th>
-        <!-- <th>Name</th> -->
-
-        <!-- <th class="text-nowrap">
-          <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
-            Section
-            <div class="width-fit-content pt-1">
-              <span class="ml-1 align-middle">
-                <mat-icon class="pointer" (click)="orderDataByPropertyNumber()">unfold_more</mat-icon>
-              </span>
-              <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="propertyNumberMenu" mat-icon-button aria-label="Menu">
-                  <mat-icon class="">filter_list</mat-icon>
-                </button>
-              </span>
-            </div>
-          </div>
-        </th> -->
 
         <th style="width: 30%;">Issue Description</th>
 
@@ -128,15 +122,9 @@
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByETCDate()">unfold_more</mat-icon>
               </span>
-              <!-- <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="propertyNumberMenu" mat-icon-button aria-label="Menu">
-                  <mat-icon class="">filter_list</mat-icon>
-                </button>
-              </span> -->
             </div>
           </div>
         </th>
-
 
         <th class="text-nowrap">
           <div class="row mx-0 justify-content-between row-no-wrap align-items-center">
@@ -145,16 +133,9 @@
               <span class="ml-1 align-middle">
                 <mat-icon class="pointer" (click)="orderDataByDaysToOS()">unfold_more</mat-icon>
               </span>
-              <!-- <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="propertyNumberMenu" mat-icon-button aria-label="Menu">
-                  <mat-icon class="">filter_list</mat-icon>
-                </button>
-              </span> -->
             </div>
           </div>
         </th>
-
-        
 
         <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
@@ -164,11 +145,9 @@
 
       <ng-container *ngFor="let item of reportIssueRequests">
         <tr [hidden]="checkIfRowIsHidden(item)">
-          <td class="text-no-wrap" [innerHTML]="item.id"></td>
+          <td class="text-no-wrap" [innerHTML]="highlightSearchText(item.id)"></td>
           <td class="text-no-wrap" [innerHTML]="item.dateAdded"></td>
-          <!-- <td class="text-no-wrap" [innerHTML]="item.name"></td> -->
-          <!-- <td [innerHTML]="item.hangerOrSectionNumber"></td> -->
-          <td [innerHTML]="item.issueDescription"></td>
+          <td [innerHTML]="highlightSearchText(item.issueDescription)"></td>
 
           <td>
             <mat-form-field class="px-0 change-request-form-field" subscriptSizing="dynamic"

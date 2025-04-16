@@ -22,7 +22,6 @@ export class CaptureGettingToKnowYouComponent implements OnInit {
   constructor(public formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    console.log('DATA: ', this.gettingToKnowYouRequestData);
     this.initializeFormControls();
 
   }

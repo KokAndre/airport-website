@@ -23,6 +23,7 @@ export namespace GetReportIssueDataResponse {
     priority: string;
     estimatedCompletionDate: string;
     numOfRemainingDaysToETC: number;
+    isFilteredOnSearch: boolean;
   }
 
   export class Category {

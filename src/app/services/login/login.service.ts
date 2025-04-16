@@ -31,17 +31,6 @@ export class LoginService {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.Register, { requestData: requestData }) as Observable<any>;
   }
 
-  //TODO: Remove !!!!!!
-  //TODO: Remove !!!!!!
-  //TODO: Remove !!!!!!
-  // public decryptPassword(password: string) {
-  //   const keyHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
-  //   const ivHex = CryptoJS.enc.Hex.parse(EncryptionKeys.LoginPasswordEncryptionKey);
-  //   const decryptedBytes = CryptoJS.AES.decrypt(password, keyHex, { iv: ivHex });
-  //   const dectyptedString = decryptedBytes.toString(CryptoJS.enc.Utf8);
-  //   console.log('PASSWORD: ', dectyptedString);
-  // }
-
   public loginUser(requestData: LoginRequest) {
     return this.http.post(Endpoints.NewBaseURL + Endpoints.Login, { requestData: requestData }) as Observable<any>;
   }

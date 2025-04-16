@@ -489,7 +489,6 @@ export class AppModalComponent implements OnInit {
   }
 
   public uploadVideo(videoData: GetYoutubeVideosDataResponse.FileData[]) {
-    console.log('VIDEO DATA EMITTED: ', videoData);
     this.youtubeVideoData.fileData = videoData[0];
   }
 
@@ -538,7 +537,6 @@ export class AppModalComponent implements OnInit {
   }
 
   public submitGettingToKnowYouData(gettigToKnowYouData: SubmitGettingToKnowYouRequest.RootObject) {
-    console.log('IN MODAL CALLBACK');
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, gettigToKnowYouData);
   }
 

@@ -147,7 +147,7 @@ export class ManageMembersComponent implements OnInit {
       this.membersData.sort((a, b) => a.isAdmin > b.isAdmin ? 1 : -1);
     } else {
       this.membersData.sort((a, b) => a.isAdmin > b.isAdmin ? -1 : 1);
-    } 
+    }
   }
 
   public allIsAdminClicked() {
@@ -162,7 +162,7 @@ export class ManageMembersComponent implements OnInit {
       this.membersData.sort((a, b) => a.hasCompletedGettingToKnowYou > b.hasCompletedGettingToKnowYou ? 1 : -1);
     } else {
       this.membersData.sort((a, b) => a.hasCompletedGettingToKnowYou > b.hasCompletedGettingToKnowYou ? -1 : 1);
-    } 
+    }
   }
 
   public allHasCompletedGettingToKNowYouClicked() {

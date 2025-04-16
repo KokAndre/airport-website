@@ -33,8 +33,6 @@ export class ManageYoutubeVideosComponent implements OnInit {
   }
 
   public addYoutubeVideoOutcome(modalOutcome: string, videoData?: GetYoutubeVideosDataResponse.Video) {
-    console.log('MODAL OUTCOME: ', modalOutcome);
-    console.log('MODAL DAT: ', videoData);
     if (modalOutcome === ModalOutcomeOptions.Update) {
 
       if (!videoData.videoStartTime) {
@@ -61,9 +59,6 @@ export class ManageYoutubeVideosComponent implements OnInit {
         dataToSubmit.videoEndTime = 0;
         dataToSubmit.videoId = '';
       }
-
-      // console.log('DATA TO SUBMIT: ', videoData);
-      console.log('DATA TO SUBMIT: ', dataToSubmit);
 
       this.adminService.addYoutubeVideo(dataToSubmit).subscribe((result: GetYoutubeVideosDataResponse.RootObject) => {
         this.appModalService.CloseModal();
