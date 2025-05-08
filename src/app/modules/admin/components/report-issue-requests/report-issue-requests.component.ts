@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/services/token/token.service';
 import { AdminService } from '../../services/admin.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatMenu } from '@angular/material/menu';
 
 export enum StatusEnum {
   notStarted = "Not Started",
@@ -61,6 +62,10 @@ export class ReportIssueRequestsComponent implements OnInit {
   // ETC Filters
   public sortAlphabeticalByDate = false;
   public sortAlphabeticalByDaysToOs = false;
+
+  public menuInterval: any;
+  public menuOpenedButton: any;
+  public menuOpenedItem: any;
 
   constructor(private adminService: AdminService,
     private appModalService: AppModalService,
@@ -506,9 +511,9 @@ export class ReportIssueRequestsComponent implements OnInit {
           priorityItem.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
 
           x.personResponsible || '',
-          StatusEnum[x.status] || ''
+          StatusEnum[x.status] || '',
+          x.statusDateChanged
         ];
-
 
         dataForExcell.push(itemToPush);
       }
@@ -516,7 +521,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
 
     const fileName = 'Report Issue Requests';
-    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status'];
+    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status', 'Last Date Status Changed'];
 
     this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }
@@ -558,6 +563,60 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   public get filterControl() {
     return this.reportIssueFormGroup.get('filterControl');
+  }
+
+
+
+
+
+
+
+
+
+  public menuOpened(menuOpenedId: string) {
+    console.log('1');
+    this.menuOpenedButton = document.getElementById(`${menuOpenedId}Button`);
+    this.menuOpenedItem = document.getElementById(menuOpenedId);
+    console.log('MENU OENED: ', this.menuOpenedItem);
+    if (this.menuOpenedItem) {
+      console.log('2');
+      this.startMenuTimer();
+      // this.menuOpenedItem.addEventListener('click', () => this.resetMenuTimer(false));
+    }
+  }
+
+  public startMenuTimer() {
+    console.log('start Timer');
+    this.menuInterval = setInterval(() => {
+      console.log('IN TIMEOUT');
+      // document.getElementById('mockButton').click();
+      // this.menuOpenedButton.closeMenu();
+      this.menuOpenedButton.click();
+      this.resetMenuTimer(true);
+    }, 3000);
+  }
+
+  public resetMenuTimer(isStopTimer: boolean) {
+    console.log('Reset Timer');
+    clearInterval(this.menuInterval);
+
+
+
+    if (!isStopTimer) {
+      this.startMenuTimer();
+    }
+  }
+
+  public menuClosed(menuOpenedId: string) {
+    // const menuOpened = document.getElementById(menuOpenedId);
+    console.log('closed 1');
+    if (this.menuOpenedItem) {
+      console.log('closed 2');
+      // this.menuOpenedItem.removeEventListener('click', () => this.resetMenuTimer(true));
+      this.resetMenuTimer(true);
+      this.menuOpenedButton = null;
+      this.menuOpenedItem = null;
+    }
   }
 
 }

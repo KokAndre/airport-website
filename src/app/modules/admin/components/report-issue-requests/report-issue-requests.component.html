@@ -30,6 +30,8 @@
       <p class="mb-0">Export To Excel</p>
       <span class="red-button-icon"></span>
     </div>
+
+    <button style="display: none;" id="mockButton"></button>
   </div>
 
   <div [formGroup]="reportIssueFormGroup" class="row mx-0 justify-content-end">
@@ -59,7 +61,7 @@
                 <mat-icon class="pointer" (click)="orderDataByCategory()">unfold_more</mat-icon>
               </span>
               <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="categoryMenu" mat-icon-button aria-label="Menu">
+                <button class="p-0" [matMenuTriggerFor]="categoryMenu" mat-icon-button aria-label="Menu" id="categoryMenuButton" (menuOpened)="menuOpened('categoryMenu')" (menuClosed)="menuClosed('categoryMenu')">
                   <mat-icon class="">filter_list</mat-icon>
                 </button>
               </span>
@@ -75,7 +77,7 @@
                 <mat-icon class="pointer" (click)="orderDataByPriority()">unfold_more</mat-icon>
               </span>
               <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="priorityMenu" mat-icon-button aria-label="Menu">
+                <button class="p-0" [matMenuTriggerFor]="priorityMenu" mat-icon-button aria-label="Menu" id="priorityMenuButton" (menuOpened)="menuOpened('priorityMenu')" (menuClosed)="menuClosed('priorityMenu')">
                   <mat-icon class="">filter_list</mat-icon>
                 </button>
               </span>
@@ -91,7 +93,7 @@
                 <mat-icon class="pointer" (click)="orderDataByPersonResponsible()">unfold_more</mat-icon>
               </span>
               <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="personResponsibleMenu" mat-icon-button aria-label="Menu">
+                <button class="p-0" [matMenuTriggerFor]="personResponsibleMenu" mat-icon-button aria-label="Menu" id="personResponsibleMenuButton" (menuOpened)="menuOpened('personResponsibleMenu')" (menuClosed)="menuClosed('personResponsibleMenu')">
                   <mat-icon class="">filter_list</mat-icon>
                 </button>
               </span>
@@ -107,7 +109,7 @@
                 <mat-icon class="pointer" (click)="orderDataByStatusy()">unfold_more</mat-icon>
               </span>
               <span class="ml-1 align-middle">
-                <button class="p-0" [matMenuTriggerFor]="statusMenu" mat-icon-button aria-label="Menu">
+                <button class="p-0" [matMenuTriggerFor]="statusMenu" mat-icon-button aria-label="Menu" id="statusMenuButton" (menuOpened)="menuOpened('statusMenu')" (menuClosed)="menuClosed('statusMenu')">
                   <mat-icon class="">filter_list</mat-icon>
                 </button>
               </span>
@@ -136,6 +138,8 @@
             </div>
           </div>
         </th>
+
+        <th style="width: fit-content;">SCD</th>
 
         <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
@@ -212,7 +216,9 @@
             </div>
           </td>
 
-          <td>{{ item.numOfRemainingDaysToETC !== undefined ? item.numOfRemainingDaysToETC : 'N/A' }}</td>
+          <td>{{ item.numOfRemainingDaysToETC !== undefined ? item.numOfRemainingDaysToETC <= 0 ? 'PAST DUE' : item.numOfRemainingDaysToETC : 'N/A' }}</td>
+
+          <td>{{ item.statusDateChanged }}</td>
 
           <td>
             <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
@@ -242,76 +248,76 @@
   </div>
 </div>
 
-<mat-menu #personResponsibleMenu="matMenu" yPosition="above">
+<mat-menu #personResponsibleMenu="matMenu" yPosition="above" id="personResponsibleMenu">
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allResponsiblePersonsClicked();"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allResponsiblePersonsClicked(); resetMenuTimer(false)"
     [(ngModel)]="allPersonResponsibleCheckbox"><b>Select All</b></mat-checkbox>
 
   <mat-divider></mat-divider>
 
   <div *ngFor="let person of responsiblePersonList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="person.isFilterSelected">{{
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="person.isFilterSelected">{{
       person.name
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
     [(ngModel)]="blankPersonResponsibleCheckBox">(Blank)</mat-checkbox>
 
 </mat-menu>
 
-<mat-menu #categoryMenu="matMenu" yPosition="above">
+<mat-menu #categoryMenu="matMenu" yPosition="above" id="categoryMenu">
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allCategoryClicked();"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allCategoryClicked(); resetMenuTimer(false);"
     [(ngModel)]="allCategoryCheckbox"><b>Select All</b></mat-checkbox>
 
   <mat-divider></mat-divider>
 
   <div *ngFor="let category of categoryList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="category.isFilterSelected">{{
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="category.isFilterSelected">{{
       category.category
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
     [(ngModel)]="blankCategoryCheckBox">(Blank)</mat-checkbox>
 
 </mat-menu>
 
-<mat-menu #statusMenu="matMenu" yPosition="above">
+<mat-menu #statusMenu="matMenu" yPosition="above" id="statusMenu">
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allStatusClicked();"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allStatusClicked(); resetMenuTimer(false)"
     [(ngModel)]="allStatusCheckBox"><b>Select All</b></mat-checkbox>
   <mat-divider></mat-divider>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusNotStartedCheckBox">Not
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="statusNotStartedCheckBox">Not
     Started</mat-checkbox>
   <mat-divider></mat-divider>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusInProgressCheckBox">In
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="statusInProgressCheckBox">In
     Progress</mat-checkbox>
   <mat-divider></mat-divider>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="statusToBeReleasedCheckBox">To Be
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="statusToBeReleasedCheckBox">To Be
     Released</mat-checkbox>
   <mat-divider></mat-divider>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
     [(ngModel)]="statusDoneCheckBox">Done</mat-checkbox>
 
 </mat-menu>
 
-<mat-menu #propertyNumberMenu="matMenu" yPosition="above">
+<mat-menu #propertyNumberMenu="matMenu" yPosition="above" id="propertyNumberMenu">
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allProperyNumberClicked();"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allProperyNumberClicked(); resetMenuTimer(false);"
     [(ngModel)]="allPropertyNumberCheckBox"><b>Select All</b></mat-checkbox>
 
   <mat-divider></mat-divider>
 
   <div *ngFor="let property of propertyNumbersList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="property.isFilterSelected">{{
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="property.isFilterSelected">{{
       property.description
       }}</mat-checkbox>
     <mat-divider *ngIf="!last"></mat-divider>
@@ -319,21 +325,21 @@
 
 </mat-menu>
 
-<mat-menu #priorityMenu="matMenu" yPosition="above">
+<mat-menu #priorityMenu="matMenu" yPosition="above" id="priorityMenu">
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPriorityClicked();"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); allPriorityClicked(); resetMenuTimer(false);"
     [(ngModel)]="allPriorityCheckbox"><b>Select All</b></mat-checkbox>
 
   <mat-divider></mat-divider>
 
   <div *ngFor="let priority of priorityList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()" [(ngModel)]="priority.isFilterSelected">{{
+    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="priority.isFilterSelected">{{
       priority.name
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
-  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation()"
+  <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
     [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
 
 </mat-menu>
