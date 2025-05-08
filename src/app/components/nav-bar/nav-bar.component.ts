@@ -73,10 +73,10 @@ export class NavBarComponent implements OnInit {
   public displayDocument(documentToDisplay: DocumentsToDisplayEnum) {
     switch (documentToDisplay) {
       case DocumentsToDisplayEnum.RunwayInfo:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20241205 - Tedderfielf Airpark - Runway Information as at January 2024.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Runway Info', '../../../assets/documents/20250506 - Tedderfield Airpark - Runway Information as at May 2025.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContacts:
-        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts - Tedderfield Airpark', '../../../assets/documents/20250305 - Emergency Contacts.pdf', null);
+        this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts - Tedderfield Airpark', '../../../assets/documents/20250505 - Emergency Contacts.pdf', null);
         break;
       case DocumentsToDisplayEnum.EmergencyContactsMaydaySa:
         this.appModalService.ShowConfirmationModal(ModalTypes.PDFModal, 'Emergency Contacts - MAYDAY SA', '../../../assets/documents/20250312 - Mayday Poster.pdf', null);
