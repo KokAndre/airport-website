@@ -107,7 +107,7 @@ export class GalleryAdminPageComponent implements OnInit {
       if (!section.title) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Error uploading image', 'No section data was provided.', null);
       } else {
-        this.adminService.createSection(section.title, section.description).then(results => {
+        this.adminService.createSection(section.title?.replaceAll("'", "`"), section.description?.replaceAll("'", "`")).then(results => {
           if (results.status === 200) {
             this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Create Section', results.message, null);
             this.getGalleryData();
