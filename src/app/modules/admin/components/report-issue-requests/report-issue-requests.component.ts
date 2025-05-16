@@ -508,11 +508,12 @@ export class ReportIssueRequestsComponent implements OnInit {
           x.issueDescription || '',
           x.category || '',
 
-          priorityItem.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
+          priorityItem?.name ? `${priorityItem.name} [${priorityItem.time || 'No Time Frame'}]` : '',
 
           x.personResponsible || '',
           StatusEnum[x.status] || '',
-          x.statusDateChanged
+          x.estimatedCompletionDate || '',
+          x.statusDateChanged,
         ];
 
         dataForExcell.push(itemToPush);
@@ -521,7 +522,7 @@ export class ReportIssueRequestsComponent implements OnInit {
 
 
     const fileName = 'Report Issue Requests';
-    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status', 'Last Date Status Changed'];
+    const headersData = ['ID', 'Date Captured', 'Name', 'Section', 'Issue Description', 'Category', 'Priority', 'Assignee', 'Status', 'ETC', 'Last Date Status Changed'];
 
     this.excelService.generateExcel(fileName, headersData, dataForExcell);
   }
@@ -574,30 +575,22 @@ export class ReportIssueRequestsComponent implements OnInit {
 
 
   public menuOpened(menuOpenedId: string) {
-    console.log('1');
     this.menuOpenedButton = document.getElementById(`${menuOpenedId}Button`);
     this.menuOpenedItem = document.getElementById(menuOpenedId);
-    console.log('MENU OENED: ', this.menuOpenedItem);
     if (this.menuOpenedItem) {
-      console.log('2');
       this.startMenuTimer();
       // this.menuOpenedItem.addEventListener('click', () => this.resetMenuTimer(false));
     }
   }
 
   public startMenuTimer() {
-    console.log('start Timer');
     this.menuInterval = setInterval(() => {
-      console.log('IN TIMEOUT');
-      // document.getElementById('mockButton').click();
-      // this.menuOpenedButton.closeMenu();
       this.menuOpenedButton.click();
       this.resetMenuTimer(true);
     }, 3000);
   }
 
   public resetMenuTimer(isStopTimer: boolean) {
-    console.log('Reset Timer');
     clearInterval(this.menuInterval);
 
 
@@ -608,10 +601,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public menuClosed(menuOpenedId: string) {
-    // const menuOpened = document.getElementById(menuOpenedId);
-    console.log('closed 1');
     if (this.menuOpenedItem) {
-      console.log('closed 2');
       // this.menuOpenedItem.removeEventListener('click', () => this.resetMenuTimer(true));
       this.resetMenuTimer(true);
       this.menuOpenedButton = null;
