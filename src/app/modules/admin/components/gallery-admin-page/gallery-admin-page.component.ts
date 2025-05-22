@@ -97,6 +97,23 @@ export class GalleryAdminPageComponent implements OnInit {
     }
   }
 
+  public editImageDecriptionClicked(imageId: string, imageDescription: string) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.CapturSingleInputField, 'Update Image Name', 'Image name', imageDescription, this.editImageDecriptionModalOutcome.bind(this, imageId));
+  }
+
+  public editImageDecriptionModalOutcome(imageId: string, modalOutcome: string, imageName: string) {
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.adminService.editImageDescription(imageId, imageName).then(results => {
+        if (results.status === 200) {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Image Name', results.message, null);
+          this.getGalleryData();
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Image Name', results.message, null);
+        }
+      });
+    }
+  }
+
   public addSectionCLicked() {
     const newSectionToAdd = new GetGalleryDataResponse.Section();
     this.appModalService.ShowConfirmationModal(ModalTypes.CaptureGallerySectionTitle, 'Add Section', '', newSectionToAdd, this.createSectionModalOutcone.bind(this));

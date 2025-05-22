@@ -99,6 +99,7 @@ export enum Endpoints {
     CreateGallerySection = '/gallery/create-section.php',
     GetGalleryData = '/gallery/get-gallery-data.php',
     DeleteImage = '/gallery/delete-image.php',
+    EditImageDesctiption = '/gallery/edit-image-description.php',
     DeleteSection = '/gallery/delete-section.php',
     EditSection = '/gallery/edit-section.php',
     SubmitFollowUsRequest = '/follow-us/submit-follow-up.php',

@@ -9,6 +9,7 @@ import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-membe
 import { CreateSectionRequest } from 'src/app/models/create-section-request.model';
 import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
+import { EditImageRequest } from 'src/app/models/edit-image-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
 import { GetBackendEmailConfigDataResponse } from 'src/app/models/get-backend-email-config-data-response.model';
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
@@ -125,6 +126,22 @@ export class AdminService {
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
 
     return fetch(Endpoints.BaseURL + Endpoints.DeleteImage, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+    public editImageDescription(imageId: string, imageDescription: string) {
+    const requestData = new EditImageRequest.RootObject();
+    requestData.description = imageDescription;
+    requestData.id = imageId;
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+
+    return fetch(Endpoints.BaseURL + Endpoints.EditImageDesctiption, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })

@@ -148,6 +148,13 @@ export class AppModalComponent implements OnInit {
         this.isLoading = false;
         break;
 
+      case ModalTypes.CapturSingleInputField:
+        if (this.data.inputValues) {
+          this.captureSingleFieldData = this.data.inputValues;
+        }
+        this.isLoading = false;
+        break;
+
       default:
         this.isLoading = false;
         break;

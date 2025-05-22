@@ -28,14 +28,23 @@
     </div>
 
     <div class="row mt-3">
-      <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center image-container" *ngFor="let img of section.images">
-        <mat-icon class="pointer delete-image-icon"
-          (click)="deleteImageClicked(img.name, img.id)">delete</mat-icon>
-        <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height"/>
+      <div class="col-lg-3 col-md-6 col-sm-12 py-2 align-content-between image-container"
+        *ngFor="let img of section.images">
+        <div class="image-actions-container row">
+          <mat-icon class="pointer delete-image-icon mr-3"
+            (click)="editImageDecriptionClicked(img.id, img.description)">edit</mat-icon>
+          <mat-icon class="pointer delete-image-icon" (click)="deleteImageClicked(img.name, img.id)">delete</mat-icon>
+        </div>
+        <div class="image-box">
+          <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height" />
+          <p class="px-2 text-center">{{ img.description || ' ' }}</p>
+        </div>
+
       </div>
 
       <div *ngIf="section.images?.length < 24" class="col-lg-3 col-md-6 col-sm-12 p-2">
-        <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)" [returnAsFile]="true"></app-image-uploader>
+        <app-image-uploader (imageUploadedEmit)="uploadImage(section, $event)"
+          [returnAsFile]="true"></app-image-uploader>
       </div>
     </div>
   </div>

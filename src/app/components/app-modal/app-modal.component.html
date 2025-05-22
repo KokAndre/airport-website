@@ -481,7 +481,7 @@
     <div class="row mx-3 justify-content-center">
       <mat-form-field class="col-12 px-0">
         <mat-label>{{ data.details || 'Capture Data' }}</mat-label>
-        <input style="color: black;" matInput required maxlength="50" [(ngModel)]="captureSingleFieldData">
+        <input style="color: black;" matInput [required]="data.details !== 'Image name'" maxlength="200" [(ngModel)]="captureSingleFieldData">
         <!-- <mat-error *ngIf="captureMemberNameControl?.hasError('required')">{{ data.details || 'Capture Data' }} is required</mat-error> -->
       </mat-form-field>
     </div>
@@ -492,7 +492,7 @@
         <span class="white-button-icon"></span>
       </div>
 
-      <div class="red-button ml-3" [ngClass]="{'disable-user-click': !captureSingleFieldData}"
+      <div class="red-button ml-3" [ngClass]="{'disable-user-click': data.details === 'Image name' ? false : !captureSingleFieldData}"
         (click)="updateSinglrFieldData()">
         <p class="mb-0">Save</p>
         <span class="red-button-icon"></span>

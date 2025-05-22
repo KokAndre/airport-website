@@ -15,12 +15,19 @@
 
 .delete-image-icon {
     color: #ee202e;
+    // font-size: 30px;
+    height: fit-content;
+    padding: 0px !important;
+    // margin-right: 5%;
+    // margin-top: 1%;
+}
+
+.image-actions-container {
     position: absolute;
     right: 0;
-    font-size: 30px;
     height: fit-content;
-    margin-right: 5%;
-    margin-top: 1%;
+    margin-right: 8%;
+    margin-top: 3%;
 }
 
 .add-section-container {
@@ -41,4 +48,12 @@
 
 .image-max-height {
     max-height: 300px !important;
+}
+
+.image-box {
+    border: 1px solid #113c67;
+    border-radius: 8px;
+    margin: 0px;
+    padding: 7px;
+    height: 100%;
 }

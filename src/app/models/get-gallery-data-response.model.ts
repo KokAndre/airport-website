@@ -17,6 +17,7 @@ export namespace GetGalleryDataResponse {
       export class Image {
         id: string
         name: string
+        description: string;
         uploadDate: string
         sectionId: string
         imageSource: string;

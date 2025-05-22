@@ -25,8 +25,11 @@
         <p class="width-fit-content mb-0" *ngIf="section.description" [innerHTML]="section.description"></p>
       </div>
       <div class="row mt-3">
-        <div class="col-lg-3 col-md-6 col-sm-12 p-2 align-content-center" *ngFor="let img of section.images">
-          <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height" />
+        <div class="col-lg-3 col-md-6 col-sm-12 py-2 align-content-between" *ngFor="let img of section.images">
+          <div class="image-box">
+            <img [src]="img.imageSource" [alt]="img.name" width="100%" class="image-max-height" />
+            <p class="px-2 text-center">{{ img.description || ' ' }}</p>
+          </div>
         </div>
       </div>
     </mat-expansion-panel>
