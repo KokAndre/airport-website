@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalOutcomeOptions, ModalTypes, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
-import { ExcelService } from 'src/app/modules/shared/services/excel.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel/excel.service';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import { AdminService } from '../../services/admin.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatMenu } from '@angular/material/menu';
+import { WordDocumentService } from 'src/app/modules/shared/services/word-document/word-document.service';
 
 export enum StatusEnum {
   notStarted = "Not Started",
@@ -61,7 +62,15 @@ export class ReportIssueRequestsComponent implements OnInit {
 
   // ETC Filters
   public sortAlphabeticalByDate = false;
+  public etcValuesList: GetReportIssueDataResponse.EtcFilters[];
+  public allETCValuesCheckBox = true;
+  public blankETCValuesCheckBox = true;
+
+  // Days to ETC Filters
   public sortAlphabeticalByDaysToOs = false;
+  public daysToEtcValuesList: GetReportIssueDataResponse.EtcFilters[];
+  public allDaysToETCValuesCheckBox = true;
+  public blankDaysToETCValuesCheckBox = true;
 
   public menuInterval: any;
   public menuOpenedButton: any;
@@ -71,6 +80,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     private appModalService: AppModalService,
     public tokenService: TokenService,
     public excelService: ExcelService,
+    private wordDocumentService: WordDocumentService,
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -103,6 +113,8 @@ export class ReportIssueRequestsComponent implements OnInit {
         const currentDate = new Date();
 
         this.propertyNumbersList = new Array<GetReportIssueDataResponse.PropertyNumber>();
+        this.etcValuesList = new Array<GetReportIssueDataResponse.EtcFilters>();
+        this.daysToEtcValuesList = new Array<GetReportIssueDataResponse.EtcFilters>();
         this.reportIssueRequests.forEach(request => {
           if (!this.propertyNumbersList.find(x => x.description?.toLowerCase()?.trim() === request.hangerOrSectionNumber?.toLowerCase()?.trim())) {
             const itemToPush = new GetReportIssueDataResponse.PropertyNumber();
@@ -128,10 +140,30 @@ export class ReportIssueRequestsComponent implements OnInit {
                 (Difference_In_Time / (1000 * 3600 * 24));
 
             request.numOfRemainingDaysToETC = Difference_In_Days;
+
+
+            if (!this.etcValuesList.find(x => x.date?.toLowerCase()?.trim() === request.estimatedCompletionDate?.toLowerCase()?.trim())) {
+              const etcItemToPush = new GetReportIssueDataResponse.EtcFilters();
+              etcItemToPush.date = request.estimatedCompletionDate;
+              etcItemToPush.isFilterSelected = true;
+              this.etcValuesList.push(etcItemToPush);
+            }
+
+            const valueToCheck = request.numOfRemainingDaysToETC <= 0 ? 'PAST DUE' : request.numOfRemainingDaysToETC.toString();
+            if (!this.daysToEtcValuesList.find(x => x.date === valueToCheck)) {
+              const daysToEtcItemToPush = new GetReportIssueDataResponse.EtcFilters();
+              daysToEtcItemToPush.date = valueToCheck;
+              daysToEtcItemToPush.isFilterSelected = true;
+              this.daysToEtcValuesList.push(daysToEtcItemToPush);
+            }
+
+
           }
         });
 
         this.propertyNumbersList.sort((a, b) => a.description > b.description ? 1 : -1);
+        this.etcValuesList.sort((a, b) => a.date > b.date ? 1 : -1);
+        this.daysToEtcValuesList.sort((a, b) => a.date > b.date ? 1 : -1);
 
         this.categoryList.forEach(x => {
           x.isFilterSelected = true;
@@ -209,6 +241,26 @@ export class ReportIssueRequestsComponent implements OnInit {
         return true;
       }
     } else if (!this.blankPriorityCheckBox) {
+      return true;
+    }
+
+
+    const etcOfRow = this.etcValuesList.find(x => x.date === row.estimatedCompletionDate);
+    if (etcOfRow) {
+      if (!etcOfRow?.isFilterSelected) {
+        return true;
+      }
+    } else if (!this.blankETCValuesCheckBox) {
+      return true;
+    }
+
+    const valueToUseForCheck = row.numOfRemainingDaysToETC <= 0 ? 'PAST DUE' : row.numOfRemainingDaysToETC?.toString();
+    const daysToEtcOfRow = this.daysToEtcValuesList.find(x => x.date === valueToUseForCheck);
+    if (daysToEtcOfRow) {
+      if (!daysToEtcOfRow?.isFilterSelected) {
+        return true;
+      }
+    } else if (!this.blankDaysToETCValuesCheckBox) {
       return true;
     }
 
@@ -331,6 +383,19 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.blankPriorityCheckBox = this.allPriorityCheckbox
   }
 
+  public allETCValuesClicked() {
+    this.etcValuesList.forEach(x => {
+      x.isFilterSelected = this.allETCValuesCheckBox;
+    });
+    this.blankETCValuesCheckBox = this.allETCValuesCheckBox;
+  }
+
+    public allDayToETCValuesClicked() {
+    this.daysToEtcValuesList.forEach(x => {
+      x.isFilterSelected = this.allDaysToETCValuesCheckBox;
+    });
+    this.blankDaysToETCValuesCheckBox = this.allDaysToETCValuesCheckBox;
+  }
 
   public allPriorityClicked() {
     this.priorityList.forEach(x => {
@@ -566,14 +631,6 @@ export class ReportIssueRequestsComponent implements OnInit {
     return this.reportIssueFormGroup.get('filterControl');
   }
 
-
-
-
-
-
-
-
-
   public menuOpened(menuOpenedId: string) {
     this.menuOpenedButton = document.getElementById(`${menuOpenedId}Button`);
     this.menuOpenedItem = document.getElementById(menuOpenedId);
@@ -587,7 +644,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.menuInterval = setInterval(() => {
       this.menuOpenedButton.click();
       this.resetMenuTimer(true);
-    }, 3000);
+    }, 4000);
   }
 
   public resetMenuTimer(isStopTimer: boolean) {
@@ -607,6 +664,24 @@ export class ReportIssueRequestsComponent implements OnInit {
       this.menuOpenedButton = null;
       this.menuOpenedItem = null;
     }
+  }
+
+  public generateDocument() {
+    const dataToUse = new Array<GetReportIssueDataResponse.Requests>();
+
+    this.reportIssueRequests.forEach(x => {
+      if (!this.checkIfRowIsHidden(x)) {
+        const dataToPush = new GetReportIssueDataResponse.Requests();
+        dataToPush.id = x.id;
+        dataToPush.personResponsible = x.personResponsible;
+        dataToPush.priority = x.priority;
+        dataToPush.numOfRemainingDaysToETC = x.numOfRemainingDaysToETC;
+        dataToPush.issueDescription = x.issueDescription?.length > 350 ? x.issueDescription.substring(0, 350) + '...' : x.issueDescription;
+        dataToUse.push(dataToPush);
+      }
+    })
+
+    this.wordDocumentService.generateWordDocument(dataToUse);
   }
 
 }
