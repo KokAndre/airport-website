@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { AppRoutes, ModalTypes } from 'src/app/enums/app.enums';
 import { GetMembersConsentsResponse } from 'src/app/models/get-members-consents-response.model';
-import { ExcelService } from 'src/app/modules/shared/services/excel.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel/excel.service';
 
 @Component({
   selector: 'app-members-consents',

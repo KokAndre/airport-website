@@ -8,6 +8,7 @@ import { AddHomePageBannerRequest } from 'src/app/models/add-home-page-banner-re
 import { CreateMembersDocumentsFolderRequest } from 'src/app/models/create-members-documents-folder-request.model';
 import { CreateSectionRequest } from 'src/app/models/create-section-request.model';
 import { DeleteImageRequest } from 'src/app/models/delete-image-request.model';
+import { DeleteReportIssueDocument } from 'src/app/models/delete-report-issue-document.model';
 import { DeleteSectionRequest } from 'src/app/models/delete-section-request.model';
 import { EditImageRequest } from 'src/app/models/edit-image-request.model';
 import { EditSectionRequest } from 'src/app/models/edit-section-request.model';
@@ -15,6 +16,7 @@ import { GetBackendEmailConfigDataResponse } from 'src/app/models/get-backend-em
 import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { MembersDataResponse } from 'src/app/models/get-members-response.model';
+import { GetReportIssueDataResponse } from 'src/app/models/get-report-issue-data-response.model';
 import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
 import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-response.model';
 import { GetYoutubeVideosDataResponse } from 'src/app/models/get-youtube-videos-data-response.model';
@@ -135,7 +137,7 @@ export class AdminService {
       });
   }
 
-    public editImageDescription(imageId: string, imageDescription: string) {
+  public editImageDescription(imageId: string, imageDescription: string) {
     const requestData = new EditImageRequest.RootObject();
     requestData.description = imageDescription;
     requestData.id = imageId;
@@ -255,7 +257,7 @@ export class AdminService {
       });
   }
 
-  public deleteReportIssueEntry(reportIssueRequestId: string) {
+  public deleteReportIssueEntry(reportIssueRequestId: number) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
@@ -263,6 +265,61 @@ export class AdminService {
     return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueItem, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public deleteReportIssueDocument(fileName: string, reportIssueRequestId: number) {
+    const requestData = new DeleteReportIssueDocument.RootObject();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    requestData.issueId = reportIssueRequestId;
+    requestData.fileName = fileName;
+
+    return fetch(Endpoints.BaseURL + Endpoints.DeleteReportIssueDocuments, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public updateReportIssueData(issueData: GetReportIssueDataResponse.Requests) {
+    const requestData = new UpdateReportIssueItemRequest.RootObject();
+    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+    requestData.reportIssueId = issueData.id;
+    requestData.hangerOrSectionNumber = issueData.hangerOrSectionNumber;
+    requestData.issueDescription = issueData.issueDescription;
+    requestData.personResponsible = issueData.personResponsible;
+    requestData.personResponsibleTwo = issueData.personResponsibleTwo;
+    requestData.category = issueData.category;
+    requestData.status = issueData.status;
+    requestData.priority = issueData.priority;
+    requestData.estimatedCompletionDate = issueData.estimatedCompletionDate;
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueData, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public uploadReportIssueDocument(itemId: number, fileData: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', fileData);
+    testData.append('name', fileData.name);
+    testData.append('issueId', `${itemId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitReportIssueDocuments, {
+      method: 'post',
+      body: testData
     })
       .then(response => response.json())
       .then(data => {
@@ -285,7 +342,7 @@ export class AdminService {
   //     });
   // }
 
-  public updateReportIssueCategory(reportIssueRequestId: string, category: string) {
+  public updateReportIssueCategory(reportIssueRequestId: number, category: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
@@ -301,11 +358,12 @@ export class AdminService {
       });
   }
 
-  public updateReportIssuePersonResponsible(reportIssueRequestId: string, personResponsible: string) {
+  public updateReportIssuePersonResponsible(reportIssueRequestId: number, personResponsible: string, personResponsibleTwo: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
     requestData.personResponsible = personResponsible;
+    requestData.personResponsibleTwo = personResponsibleTwo;
 
     return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssuePersonResponsible, {
       method: 'post',
@@ -317,7 +375,7 @@ export class AdminService {
       });
   }
 
-  public updateReportIssueStatus(reportIssueRequestId: string, status: string) {
+  public updateReportIssueStatus(reportIssueRequestId: number, status: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
@@ -333,7 +391,7 @@ export class AdminService {
       });
   }
 
-  public updateReportIssuePriority(reportIssueRequestId: string, priority: string) {
+  public updateReportIssuePriority(reportIssueRequestId: number, priority: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;
@@ -349,24 +407,24 @@ export class AdminService {
       });
   }
 
-  public updateReportIssueData(reportIssueRequestId: string, hangarOrSectionNumber: string, issueDescription: string) {
-    const requestData = new UpdateReportIssueItemRequest.RootObject();
-    requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
-    requestData.reportIssueId = reportIssueRequestId;
-    requestData.hangarOrSectionNumber = hangarOrSectionNumber;
-    requestData.issueDescription = issueDescription;
+  // public updateReportIssueData(reportIssueRequestId: number, hangarOrSectionNumber: string, issueDescription: string) {
+  //   const requestData = new UpdateReportIssueItemRequest.RootObject();
+  //   requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
+  //   requestData.reportIssueId = reportIssueRequestId;
+  //   requestData.hangarOrSectionNumber = hangarOrSectionNumber;
+  //   requestData.issueDescription = issueDescription;
 
-    return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueData, {
-      method: 'post',
-      body: JSON.stringify({ requestData: requestData })
-    })
-      .then(response => response.json())
-      .then(data => {
-        return data;
-      });
-  }
+  //   return fetch(Endpoints.BaseURL + Endpoints.UpdateReportIssueData, {
+  //     method: 'post',
+  //     body: JSON.stringify({ requestData: requestData })
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       return data;
+  //     });
+  // }
 
-  public updateReportIssueEstimatedCompletionDate(reportIssueRequestId: string, estimatedCompletionDate: string) {
+  public updateReportIssueEstimatedCompletionDate(reportIssueRequestId: number, estimatedCompletionDate: string) {
     const requestData = new UpdateReportIssueItemRequest.RootObject();
     requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID) as number;
     requestData.reportIssueId = reportIssueRequestId;

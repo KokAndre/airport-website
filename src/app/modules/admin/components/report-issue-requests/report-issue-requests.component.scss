@@ -62,3 +62,19 @@ td {
   border-collapse: separate;
   background: linear-gradient(#f5f5f5 0%, #f5f5f5 97%, black 97%, black 100%);
 }
+
+.file-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url("../../../../../assets/file-icon.svg");
+    background-size: cover;
+    background-position: center;
+    color: black;
+    margin: 5px 10px;
+}
+
+.active-documents {
+  color: #ee202e !important;
+  cursor: pointer;
+}

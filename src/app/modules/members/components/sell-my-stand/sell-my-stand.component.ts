@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
 import { LoginToken } from 'src/app/models/login-token.model';
@@ -10,6 +10,7 @@ import { ModalTypes, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { GetLeviesResponse } from 'src/app/models/get-levies-response.model';
 import { TokenService } from 'src/app/services/token/token.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { GetStandsForSaleReponse } from 'src/app/models/get-stands-for-sale-reponse.model';
 
 @Component({
   selector: 'app-sell-my-stand',
@@ -27,14 +28,17 @@ export class SellMyStandComponent implements OnInit {
   public isPersonalDetailsAcknowledgementCheckboxChecked = false;
   public isSuperAdmin = false;
 
+  @Input() public originalStandData: GetStandsForSaleReponse.Stands;
+  @Output() public updateStandDataEmit: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(public formBuilder: FormBuilder,
     public tokenServise: TokenService,
     public membersService: MembersService,
     public appModalService: AppModalService) { }
 
   ngOnInit() {
-    this.getUserData();
     this.getLeviesData();
+    this.getUserData();
     this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
     this.initializeFormControls();
   }
@@ -45,6 +49,7 @@ export class SellMyStandComponent implements OnInit {
 
   public getLeviesData() {
     this.membersService.getLeviesData().then(results => {
+      console.log('LEVIES RESULTS: ', results);
       if (results.status === 200) {
         this.leviesData = results.levies;
         this.leviesData?.forEach(levie => {
@@ -64,6 +69,9 @@ export class SellMyStandComponent implements OnInit {
 
         this.leviesData = new Array<GetLeviesResponse.Levie>();
         this.leviesData.push(defaultLevieToAdd);
+      }
+      if (this.originalStandData?.id) {
+        this.prePopulateExistingData();
       }
     });
   }
@@ -86,7 +94,9 @@ export class SellMyStandComponent implements OnInit {
       reasonForSellingControl: new FormControl('', [Validators.required]),
     });
 
-    this.prePopulateData();
+    if (!this.originalStandData?.id) {
+      this.prePopulateData();
+    }
   }
 
   public prePopulateData() {
@@ -113,6 +123,36 @@ export class SellMyStandComponent implements OnInit {
     }
 
     this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
+  }
+
+  public prePopulateExistingData() {
+    console.log("ORIGINAL STAND DATA: ", this.originalStandData);
+    this.nameControl.setValue(this.originalStandData.name || '');;
+    this.emailControl.setValue(this.originalStandData.email || '');
+    this.phoneNumberControl.setValue(this.originalStandData.phoneNumber || '');
+    this.standNumberControl.setValue(this.originalStandData.standNumber || '');
+    this.standDimentionsWidthControl.setValue(this.originalStandData.standDimensions?.width || '');
+    this.standDimentionsLengthControl.setValue(this.originalStandData.standDimensions?.length || '');
+    this.standSecurityControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalStandData.securty) || '');
+    this.askingPriceControl.setValue(this.originalStandData.price || '');
+    this.reasonForSellingControl.setValue(this.originalStandData.reasonsForSelling || '');
+
+    this.submitStandForSaleRequestData.standImages = new Array<SellMyStandRequest.FileData>();
+    this.originalStandData.standImages.forEach(imgData => {
+      this.submitStandForSaleRequestData.standImages.push(imgData);
+    });
+
+    this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
+    this.submitStandForSaleRequestData.titleDocument = this.originalStandData.titleDocument;
+
+    console.log('LEVIES DATA: ', this.leviesData);
+    this.originalStandData.leviesApplicable.forEach(levy => {
+      const levyName = levy.split('Levy')[0];
+      console.log('LEVY NAME: ', levyName);
+      if (this.leviesData.find(levyItem => levyItem.levieName.includes(levyName))) {
+        this.leviesData.find(levyItem => levyItem.levieName.includes(levyName)).isSelected = true;
+      }
+    });
   }
 
   public numberControlInput(formControl?: AbstractControl) {
@@ -312,6 +352,7 @@ export class SellMyStandComponent implements OnInit {
     this.submitStandForSaleRequestData.standDimensions.length = this.standDimentionsLengthControl.value;
 
     // this.submitStandForSaleRequestData.featuresAndBenefits = this.formatBulletPointInputValuesToSubmit(this.standFeaturesAndBenefitsControl.value);
+    console.log('STAND SECURITY CONTROL VALUE: ', this.standSecurityControl.value);
     this.submitStandForSaleRequestData.securty = this.formatBulletPointInputValuesToSubmit(this.standSecurityControl.value);
     this.submitStandForSaleRequestData.price = this.askingPriceControl.value;
     this.submitStandForSaleRequestData.reasonsForSelling = this.reasonForSellingControl.value?.replaceAll("'", '’');
@@ -330,6 +371,16 @@ export class SellMyStandComponent implements OnInit {
       this.submitStandForSaleRequestData.titleDocument = new SellMyStandRequest.FileData();
     }
 
+    if (this.originalStandData?.id) {
+      this.submitStandForSaleRequestData.id = this.originalStandData.id;
+      this.updateItem();
+    } else {
+      this.submitNewItem();
+    }
+
+  }
+
+  public submitNewItem() {
     this.membersService.submitSellMyStand(this.submitStandForSaleRequestData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Stand', results.message, null);
       if (results.status === 200) {
@@ -337,18 +388,34 @@ export class SellMyStandComponent implements OnInit {
         this.uploadDocuments();
       }
     });
+  }
 
+  public updateItem() {
+    this.membersService.updateSellMyStand(this.submitStandForSaleRequestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Stand', results.message, null);
+      if (results.status === 200) {
+        this.submitAdSucessId = results.id;
+        this.uploadDocuments();
+      }
+    });
   }
 
   public async uploadDocuments() {
     if (this.submitStandForSaleRequestData.titleDocument?.fileData && this.submitStandForSaleRequestData.titleDocument?.fileName) {
-      await this.uploadTitleDocument();
+      // await this.uploadTitleDocument();
+      if (!this.submitStandForSaleRequestData?.id || (this.submitStandForSaleRequestData.id && this.submitStandForSaleRequestData.titleDocument?.fileName !== this.originalStandData?.titleDocument?.fileName)) {
+        await this.uploadTitleDocument();
+      }
     }
     if (this.submitStandForSaleRequestData.standImages?.length) {
       await this.uploadStandImages();
     }
 
     this.clearFormData();
+
+    if (this.submitStandForSaleRequestData.id) {
+      this.updateStandDataEmit.emit();
+    }
   }
 
   public async uploadTitleDocument() {
@@ -363,18 +430,23 @@ export class SellMyStandComponent implements OnInit {
   public async uploadStandImages() {
     this.submitStandForSaleRequestData.standImages.forEach(async (image) => {
       if (image.fileName && image.fileData) {
-        await this.membersService.uploadSellMyStandImages(this.submitAdSucessId, image.fileData).then(results => {
-          if (results.status === 200) {
-          } else {
-            this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Docuemtn', results.message, null);
-          }
-        });
+
+        if (!this.submitStandForSaleRequestData?.id || (this.submitStandForSaleRequestData.id && !this.originalStandData?.standImages?.find(x => x.fileName === image.fileName))) {
+          await this.membersService.uploadSellMyStandImages(this.submitAdSucessId, image.fileData).then(results => {
+            if (results.status === 200) {
+            } else {
+              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Docuemtn', results.message, null);
+            }
+          });
+        }
       }
     })
   }
 
   public clearFormData() {
-    this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
+    if (!this.originalStandData?.id) {
+      this.submitStandForSaleRequestData = new SellMyStandRequest.RootObject();
+    }
     this.sellMyStandFormGroup.reset();
     this.prePopulateData();
   }

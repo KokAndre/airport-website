@@ -1,0 +1,131 @@
+<div class="row mx-3 justify-content-center mt-2">
+  <mat-form-field class="col-12 px-0">
+    <mat-label>Hangar or Section Number</mat-label>
+    <input style="color: black;" matInput required maxlength="50"
+      [(ngModel)]="editReportIssueData.hangerOrSectionNumber">
+    <mat-error *ngIf="!editReportIssueData.hangerOrSectionNumber">Hangar or Section Number is required</mat-error>
+  </mat-form-field>
+</div>
+
+<div class="row mx-3 justify-content-center mt-2">
+  <mat-form-field class="col-12 px-0">
+    <mat-label>Issue Description</mat-label>
+    <textarea style="color: black;" matInput maxlength="2000"
+      [(ngModel)]="editReportIssueData.issueDescription"></textarea>
+    <mat-error *ngIf="!editReportIssueData.issueDescription">Issue Description is required</mat-error>
+  </mat-form-field>
+</div>
+
+<div class="row mx-0 mt-2">
+  <div class="col-6 pl-0 pr-2">
+    <mat-form-field class="px-0 full-width-field" subscriptSizing="dynamic">
+      <mat-label>Category</mat-label>
+      <!-- (selectionChange)="updateReportIssueCategory(editReportIssueData.id, $event.value)" -->
+      <mat-select [(value)]="editReportIssueData.category">
+        <mat-option *ngFor="let category of categoryList" class="px-1" [value]="category.category">{{
+          category.category }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-6 pl-2 pr-0">
+    <mat-form-field class="px-0 full-width-field" subscriptSizing="dynamic">
+      <mat-label>Priority</mat-label>
+      <!-- (selectionChange)="updateReposrtIssuePriority(editReportIssueData.id, $event.value)" -->
+      <mat-select [(value)]="editReportIssueData.priority">
+        <mat-option *ngFor="let priority of priorityList" class="px-1" [value]="priority.name">{{
+          priority.name }} [{{ priority.time || 'No Time Frame' }}]</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row mx-0 mt-2">
+  <div class="col-6 pl-0 pr-2">
+    <mat-form-field class="px-0 full-width-field" subscriptSizing="dynamic">
+      <mat-label>Assignee</mat-label>
+      <!-- (selectionChange)="updateReportIssuePersonResponsible(editReportIssueData.id, $event.value, editReportIssueData.personResponsibleTwo)" -->
+      <mat-select [(value)]="editReportIssueData.personResponsible">
+        <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{
+          person.name
+          }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-6 pl-2 pr-0">
+    <mat-form-field *ngIf="editReportIssueData.personResponsible" class="px-0 full-width-field"
+      subscriptSizing="dynamic">
+      <mat-label>Assignee Two</mat-label>
+      <!-- (selectionChange)="updateReportIssuePersonResponsible(editReportIssueData.id, editReportIssueData.personResponsible, $event.value)" -->
+      <mat-select [(value)]="editReportIssueData.personResponsibleTwo">
+        <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{
+          person.name
+          }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="row mx-0 mt-2">
+  <div class="col-6 pl-0 pr-2">
+    <mat-form-field class="px-0 full-width-field" subscriptSizing="dynamic">
+      <mat-label>Status</mat-label>
+      <!-- (selectionChange)="updateReportIssueStatus(editReportIssueData.id, $event.value)" -->
+      <mat-select [(value)]="editReportIssueData.status"
+        [disabled]="editReportIssueData.status === 'done' && !allowAdminToDelete">
+        <mat-option class="px-1" value="notStarted">Not Started</mat-option>
+        <mat-option class="px-1" value="inProgress">In Progress</mat-option>
+        <mat-option class="px-1" value="toBeReleased">To Be Released</mat-option>
+        <mat-option class="px-1" [disabled]="!allowAdminToDelete" value="done">Done</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-6 pl-2 pr-0">
+    <div class="row mx-0" style="flex-wrap: nowrap; justify-self: right; align-items: center;">
+      <p class="mb-0" style="width: fit-content; padding: 0;">{{ editReportIssueData.estimatedCompletionDate }}</p>
+      <app-date-picker [startDate]="editReportIssueData.estimatedCompletionDate || ''"
+        (dateChangedEmit)="estimatedCompletionDateChanged($event)"></app-date-picker>
+    </div>
+  </div>
+</div>
+
+<div class="row mx-0 justify-content-center mt-2">
+  <div class="col-10 px-0">
+    <P class="mb-1">Upload supporting documentation if available.</P>
+    <p class="red-text text-bold">Upload up to 8 supported files. Max 100MB per file.</p>
+
+    <div *ngIf="uploadedDocumentsList?.length">
+      <div class="row mb-2 mx-0" *ngFor="let file of uploadedDocumentsList">
+
+        <div class="col-1 px-0 align-content-center">
+          <mat-icon class="pointer red-text align-bottom"
+            (click)="deleteFileItemClicked(file.fileName)">delete</mat-icon>
+        </div>
+        <div class="col-11 pr-0 align-content-center">
+          <p class="mb-0 text-size-14">{{ file.fileName }}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12 px-0">
+      <div class="add-image-section pointer" (click)="handleClick()">
+        <mat-icon class="upload-file-icon pt-2">upload</mat-icon>
+        <input type="file" multiple="true" [max]="8" hidden #fileUploaderTester (click)="$event.stopPropagation()"
+          (change)="uploadDocument($event)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mx-0 my-4 justify-content-center">
+  <div class="white-button" (click)="cancelClicked()">
+    <p class="mb-0">Cancel</p>
+    <span class="white-button-icon"></span>
+  </div>
+
+  <div class="red-button ml-3" [ngClass]="{'disable-user-click': isUpdateDisabled()}" (click)="updateReportIssueData()">
+    <p class="mb-0">Update</p>
+    <span class="red-button-icon"></span>
+  </div>
+</div>

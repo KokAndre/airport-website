@@ -31,6 +31,7 @@ export class ReportIssueRequestsComponent implements OnInit {
   public allowAdminToDelete = false;
   public loggedInUserName = '';
   public reportIssueFormGroup: FormGroup;
+  public idOfEditIssueClicked: number;
 
   // Person Responsible Filters
   public blankPersonResponsibleCheckBox = true;
@@ -142,11 +143,18 @@ export class ReportIssueRequestsComponent implements OnInit {
             request.numOfRemainingDaysToETC = Difference_In_Days;
 
 
-            if (!this.etcValuesList.find(x => x.date?.toLowerCase()?.trim() === request.estimatedCompletionDate?.toLowerCase()?.trim())) {
+            const filterItemToCheck = this.etcValuesList.find(x => x.date?.toLowerCase()?.trim() === request.estimatedCompletionDate?.toLowerCase()?.trim());
+            if (!filterItemToCheck) {
               const etcItemToPush = new GetReportIssueDataResponse.EtcFilters();
               etcItemToPush.date = request.estimatedCompletionDate;
               etcItemToPush.isFilterSelected = true;
+              etcItemToPush.filterStatus = new Array<string>();
+              etcItemToPush.filterStatus.push(request.status)
               this.etcValuesList.push(etcItemToPush);
+            } else {
+              if (!filterItemToCheck.filterStatus?.includes(request.status)) {
+                this.etcValuesList.find(x => x.date?.toLowerCase()?.trim() === request.estimatedCompletionDate?.toLowerCase()?.trim())?.filterStatus.push(request.status);
+              }
             }
 
             const valueToCheck = request.numOfRemainingDaysToETC <= 0 ? 'PAST DUE' : request.numOfRemainingDaysToETC.toString();
@@ -192,6 +200,24 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
+  public checkIfETCFilterShouldDisplay(statuses: string[]) {
+    let displayItem = false;
+    if (statuses?.find(x => x === 'notStarted') && this.statusNotStartedCheckBox) {
+      displayItem = true;
+    }
+    if (statuses?.find(x => x === 'inProgress') && this.statusInProgressCheckBox) {
+      displayItem = true;
+    }
+    if (statuses?.find(x => x === 'toBeReleased') && this.statusToBeReleasedCheckBox) {
+      displayItem = true;
+    }
+    if (statuses?.find(x => x === 'done') && this.statusDoneCheckBox) {
+      displayItem = true;
+    }
+
+    return displayItem;
+  }
+
   public checkIfRowIsHidden(row: GetReportIssueDataResponse.Requests) {
     const personResponsibleOfRow = this.responsiblePersonList.find(x => x.name === row.personResponsible);
 
@@ -233,6 +259,20 @@ export class ReportIssueRequestsComponent implements OnInit {
     if (row.status === 'done' && !this.statusDoneCheckBox) {
       return true
     }
+
+    // const statusesOfRowETCDate = this.etcValuesList.find(x => x.date === row.estimatedCompletionDate)?.filterStatus;
+    // if (statusesOfRowETCDate?.includes('notStarted') && !this.statusNotStartedCheckBox) {
+    //   return false;
+    // }
+    // if (statusesOfRowETCDate?.includes('inProgress') && !this.statusInProgressCheckBox) {
+    //   return false;
+    // }
+    // if (statusesOfRowETCDate?.includes('toBeReleased') && !this.statusToBeReleasedCheckBox) {
+    //   return false;
+    // }
+    // if (statusesOfRowETCDate?.includes('done') && !this.statusDoneCheckBox) {
+    //   return false;
+    // }
 
     const priorityOfRow = this.priorityList.find(x => x.name === row.priority);
 
@@ -390,7 +430,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.blankETCValuesCheckBox = this.allETCValuesCheckBox;
   }
 
-    public allDayToETCValuesClicked() {
+  public allDayToETCValuesClicked() {
     this.daysToEtcValuesList.forEach(x => {
       x.isFilterSelected = this.allDaysToETCValuesCheckBox;
     });
@@ -466,30 +506,61 @@ export class ReportIssueRequestsComponent implements OnInit {
   }
 
   public editReportIssueRequestClicked(reportIssueItem: GetReportIssueDataResponse.Requests) {
-    const modalData = new GetReportIssueDataResponse.Requests();
-    modalData.id = reportIssueItem.id;
-    modalData.hangerOrSectionNumber = reportIssueItem.hangerOrSectionNumber;
-    modalData.issueDescription = reportIssueItem.issueDescription;
-    this.appModalService.ShowConfirmationModal(ModalTypes.EditReportIssueData, 'Edit Report Issue Request Data', '', modalData, this.editReportIssueRequest.bind(this));
+    this.idOfEditIssueClicked = reportIssueItem.id;
+    const modalData = {
+      issueData: JSON.parse(JSON.stringify(reportIssueItem)),
+      categoryList: this.categoryList,
+      priorityList: this.priorityList,
+      responsiblePersonList: this.responsiblePersonList,
+      allowAdminToDelete: this.allowAdminToDelete
+    };
+    this.appModalService.ShowConfirmationModal(ModalTypes.EditReportIssueData, 'Edit Report Issue Request Data', '', modalData, this.editReportIssueOutcome.bind(this));
   }
 
-  public editReportIssueRequest(modalOutcome: string, reportIssueItem?: GetReportIssueDataResponse.Requests) {
-    if (modalOutcome === ModalOutcomeOptions.Update) {
+  public editReportIssueOutcome(modalOutcome: ModalOutcomeOptions, dataReturned: any) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    console.log('DATA RETURNE: ', dataReturned);
+    if (modalOutcome === ModalOutcomeOptions.Close) {
       this.appModalService.CloseModal();
-      this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
-        if (results.status === 200) {
-          // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
-          // this.getReportIssueData();
-          this.reportIssueRequests.find(x => x.id === reportIssueItem.id).hangerOrSectionNumber = reportIssueItem.hangerOrSectionNumber;
-          this.reportIssueRequests.find(x => x.id === reportIssueItem.id).issueDescription = reportIssueItem.issueDescription;
-        } else {
-          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+    } else if (modalOutcome === ModalOutcomeOptions.Delete) {
+      if (this.reportIssueRequests.find(x => x.id === this.idOfEditIssueClicked)) {
+        this.reportIssueRequests.find(x => x.id === this.idOfEditIssueClicked).documents = this.reportIssueRequests.find(x => x.id === this.idOfEditIssueClicked).documents.filter(y => y !== dataReturned);
+      }
+    } else if (modalOutcome === ModalOutcomeOptions.Update) {
+      if (dataReturned?.id) {
+        if (this.reportIssueRequests.find(x => x.id === dataReturned.id)) {
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).hangerOrSectionNumber = dataReturned.hangerOrSectionNumber;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).issueDescription = dataReturned.issueDescription;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).personResponsible = dataReturned.personResponsible;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).personResponsibleTwo = dataReturned.personResponsibleTwo;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).category = dataReturned.category;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).status = dataReturned.status;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).priority = dataReturned.priority;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).estimatedCompletionDate = dataReturned.estimatedCompletionDate;
+          this.reportIssueRequests.find(x => x.id === dataReturned.id).documents = dataReturned.documents;
         }
-      });
+      }
+      this.appModalService.CloseModal();
     }
   }
 
-  public updateReportIssueCategory(reportIssueRequestId: string, reportIssueCategory: string) {
+  // public editReportIssueRequest(modalOutcome: string, reportIssueItem?: GetReportIssueDataResponse.Requests) {
+  //   if (modalOutcome === ModalOutcomeOptions.Update) {
+  //     this.appModalService.CloseModal();
+  //     this.adminService.updateReportIssueData(reportIssueItem.id, reportIssueItem.hangerOrSectionNumber, reportIssueItem.issueDescription).then(results => {
+  //       if (results.status === 200) {
+  //         // this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+  //         // this.getReportIssueData();
+  //         this.reportIssueRequests.find(x => x.id === reportIssueItem.id).hangerOrSectionNumber = reportIssueItem.hangerOrSectionNumber;
+  //         this.reportIssueRequests.find(x => x.id === reportIssueItem.id).issueDescription = reportIssueItem.issueDescription;
+  //       } else {
+  //         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Edit Report Issue Request Data', results.message, null);
+  //       }
+  //     });
+  //   }
+  // }
+
+  public updateReportIssueCategory(reportIssueRequestId: number, reportIssueCategory: string) {
     this.adminService.updateReportIssueCategory(reportIssueRequestId, reportIssueCategory).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Category', results.message, null);
@@ -497,7 +568,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
-  public updateReposrtIssuePriority(reportIssueRequestId: string, reportIssuePriority: string) {
+  public updateReposrtIssuePriority(reportIssueRequestId: number, reportIssuePriority: string) {
     this.adminService.updateReportIssuePriority(reportIssueRequestId, reportIssuePriority).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Priority', results.message, null);
@@ -505,15 +576,15 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
-  public updateReportIssuePersonResponsible(reportIssueRequestId: string, reportIssuePersonResponsible: string) {
-    this.adminService.updateReportIssuePersonResponsible(reportIssueRequestId, reportIssuePersonResponsible).then(results => {
+  public updateReportIssuePersonResponsible(reportIssueRequestId: number, reportIssuePersonResponsible: string, reportIssuePersonResponsibleTwo: string) {
+    this.adminService.updateReportIssuePersonResponsible(reportIssueRequestId, reportIssuePersonResponsible, reportIssuePersonResponsibleTwo).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Responsible Person', results.message, null);
       }
     });
   }
 
-  public updateReportIssueStatus(reportIssueRequestId: string, reportIssueStatus: string) {
+  public updateReportIssueStatus(reportIssueRequestId: number, reportIssueStatus: string) {
     this.adminService.updateReportIssueStatus(reportIssueRequestId, reportIssueStatus).then(results => {
       if (results.status !== 200) {
         this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Update Report Issue Status', results.message, null);
@@ -521,7 +592,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     });
   }
 
-  public estimatedCompletionDateChanged(newDate: string, reportIssueRequestId: string) {
+  public estimatedCompletionDateChanged(newDate: string, reportIssueRequestId: number) {
     this.reportIssueRequests.find(x => x.id === reportIssueRequestId).estimatedCompletionDate = newDate;
 
     const currentDate = new Date();
@@ -556,6 +627,17 @@ export class ReportIssueRequestsComponent implements OnInit {
           this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Delete Report Issue Request', results.message, null);
         }
       });
+    }
+  }
+
+  public displayDocumentsList(item: GetReportIssueDataResponse.Requests) {
+    if (item.documents?.length) {
+      console.log(item.documents);
+      const modalData = {
+        itemId: item.id,
+        documents: item.documents
+      };
+      this.appModalService.ShowConfirmationModal(ModalTypes.DisplayDocuments, 'Documents on ticket', '', modalData, null);
     }
   }
 
@@ -618,7 +700,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.filterTickets();
   }
 
-  public highlightSearchText(textToHightlight: string) {
+  public highlightSearchText(textToHightlight: any) {
     if (!this.filterControl.value) {
       return textToHightlight;
     }

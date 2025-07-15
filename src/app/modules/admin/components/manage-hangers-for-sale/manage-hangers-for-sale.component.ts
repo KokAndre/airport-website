@@ -54,8 +54,10 @@ export class ManageHangersForSaleComponent implements OnInit {
       itemToPush.titleDocument.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/title-document/' + hangerItem.titleDocument;
 
       itemToPush.detailedFloorPlan = new GetHangersForSaleReponse.FileData();
-      itemToPush.detailedFloorPlan.fileName = hangerItem.detailedFloorPlan;
-      itemToPush.detailedFloorPlan.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/floor-plan-document/' + hangerItem.titleDocument;
+      if (hangerItem.detailedFloorPlan) {
+        itemToPush.detailedFloorPlan.fileName = hangerItem.detailedFloorPlan;
+        itemToPush.detailedFloorPlan.fileData = Endpoints.HangersForSaleBaseURL + itemToPush.id + '/floor-plan-document/' + hangerItem.detailedFloorPlan;
+      }
 
       const imageDataArray = hangerItem.hangerImages.replaceAll('\\', '')?.replaceAll('[', '')?.replaceAll(']', '')?.replaceAll('"', '')?.split(',');
 
@@ -109,11 +111,21 @@ export class ManageHangersForSaleComponent implements OnInit {
     }
   }
 
+  public editItemClicked(hangarData: GetHangersForSaleReponse.Hanger) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.EditHangarData, 'Edit Hangar for Sale Data', '', hangarData, this.editItemOutcome.bind(this));
+  }
+
+  public editItemOutcome(modalOutcome: string, data: string) {
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.getHangerForSaleData();
+    }
+  }
+
   public exportToExcel() {
     const hangersForSaleExcelData = new Array<any>();
     this.hangersForSaleData.forEach(item => {
       let itemToPush: any = {};
-      itemToPush.ID= item.id;
+      itemToPush.ID = item.id;
       itemToPush.Name = item.name;
       itemToPush.Email = item.email;
       itemToPush.PhoneNumber = item.phoneNumber;

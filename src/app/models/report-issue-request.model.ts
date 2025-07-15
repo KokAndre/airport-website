@@ -5,4 +5,10 @@ export namespace ReportIssueRequest {
         hangerOrSectionNumber: string;
         issueDescription: string;
     }
+
+    export class FileDataModel {
+        fileData: any;
+        fileName: string;
+        fileExtension: string;
+    }
 }

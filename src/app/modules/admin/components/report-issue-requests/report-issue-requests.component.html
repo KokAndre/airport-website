@@ -166,6 +166,8 @@
 
         <th style="width: fit-content;">SCD</th>
 
+        <th style="width: fit-content;"><div class="file-icon"></div></th>
+
         <th style="width: fit-content;">
           <div class="row mx-0" style="flex-wrap: nowrap;"><mat-icon class="p-0" fontIcon="edit"></mat-icon><mat-icon
               *ngIf="allowAdminToDelete" class="ml-1 p-0" fontIcon="delete"></mat-icon></div>
@@ -207,7 +209,18 @@
               style="width: 160px !important;">
               <mat-label>Assignee</mat-label>
               <mat-select [(value)]="item.personResponsible"
-                (selectionChange)="updateReportIssuePersonResponsible(item.id, $event.value)">
+                (selectionChange)="updateReportIssuePersonResponsible(item.id, $event.value, item.personResponsibleTwo)">
+                <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{
+                  person.name
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="item.personResponsible" class="px-0 change-request-form-field" subscriptSizing="dynamic"
+              style="width: 160px !important;">
+              <mat-label>Assignee</mat-label>
+              <mat-select [(value)]="item.personResponsibleTwo"
+                (selectionChange)="updateReportIssuePersonResponsible(item.id, item.personResponsible, $event.value)">
                 <mat-option *ngFor="let person of responsiblePersonList" class="px-1" [value]="person.name">{{
                   person.name
                   }}</mat-option>
@@ -245,6 +258,10 @@
               item.numOfRemainingDaysToETC : 'N/A' }}</td>
 
           <td>{{ item.statusDateChanged }}</td>
+
+          <td>
+            <div class="file-icon" [ngClass]="item.documents?.length ? 'active-documents' : ''" (click)="displayDocumentsList(item)"></div>
+          </td>
 
           <td>
             <div class="row mx-0"><mat-icon class="red-text pointer p-0" fontIcon="edit"
@@ -387,8 +404,8 @@
   <mat-divider></mat-divider>
 
   <div *ngFor="let item of etcValuesList; let last = last">
-    <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="item.isFilterSelected">{{
+    <mat-checkbox *ngIf="checkIfETCFilterShouldDisplay(item.filterStatus)" class="pr-3" menuItems
+      (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="item.isFilterSelected">{{
       item.date
       }}</mat-checkbox>
   </div>

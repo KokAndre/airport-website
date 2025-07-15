@@ -14,6 +14,9 @@ import { DocumetsRowComponent } from './components/documets-row/documets-row.com
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { CaptureGettingToKnowYouComponent } from './components/capture-getting-to-know-you/capture-getting-to-know-you.component';
+import { SellMyStandComponent } from '../members/components/sell-my-stand/sell-my-stand.component';
+import { SellMyHangerComponent } from '../members/components/sell-my-hanger/sell-my-hanger.component';
+import { EditReportIssueRequestComponent } from '../admin/components/edit-report-issue-request/edit-report-issue-request.component';
 
 @NgModule({
   imports: [
@@ -32,7 +35,10 @@ import { CaptureGettingToKnowYouComponent } from './components/capture-getting-t
     LoginComponent,
     DocumetsRowComponent,
     DatePickerComponent,
-    CaptureGettingToKnowYouComponent
+    CaptureGettingToKnowYouComponent,
+    SellMyStandComponent,
+    SellMyHangerComponent,
+    EditReportIssueRequestComponent
   ],
   exports: [
     ArrowDividerComponent,
@@ -47,7 +53,10 @@ import { CaptureGettingToKnowYouComponent } from './components/capture-getting-t
     DocumetsRowComponent,
     DatePickerComponent,
     CaptureGettingToKnowYouComponent,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    SellMyStandComponent,
+    SellMyHangerComponent,
+    EditReportIssueRequestComponent
   ],
   providers: [NgxImageCompressService]
 })

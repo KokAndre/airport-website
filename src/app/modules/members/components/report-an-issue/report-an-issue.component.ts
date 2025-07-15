@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalTypes } from 'src/app/enums/app.enums';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
@@ -21,13 +21,18 @@ export class ReportAnIssueComponent implements OnInit {
   public isHowItWorksExpanded = true;
   public isReportFormExpanded = true;
   public loggedInUserDetails: GetUserDataResponse.Data;
+  public uploadedDocumentsList: ReportIssueRequest.FileDataModel[];
+  public maxFileSize = 100000000;
+
+  @ViewChild('fileUploaderTester', { static: true }) fileUploaderTester: ElementRef;
 
   constructor(private formBuilder: FormBuilder,
     private membersService: MembersService,
     public appModalService: AppModalService,
-  public tokenService: TokenService) { }
+    public tokenService: TokenService) { }
 
   ngOnInit() {
+    this.uploadedDocumentsList = new Array<ReportIssueRequest.FileDataModel>();
     this.getUserData();
     this.initializeFollowUsControls();
   }
@@ -64,6 +69,35 @@ export class ReportAnIssueComponent implements OnInit {
     }
   }
 
+  public deleteFileItem(fileToDelete: string) {
+    this.uploadedDocumentsList = this.uploadedDocumentsList.filter(x => x.fileName !== fileToDelete);
+  }
+
+  public handleClick() {
+    this.fileUploaderTester.nativeElement.click();
+  }
+
+  public uploadDocument(event: any) {
+    let files = event.target.files;
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+
+      if (file.size <= this.maxFileSize) {
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+          const fileDataToAdd = new ReportIssueRequest.FileDataModel();
+          fileDataToAdd.fileName = file.name;
+          fileDataToAdd.fileData = file;
+          this.uploadedDocumentsList.push(fileDataToAdd);
+        }
+      } else {
+        this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Max file size exceeded', 'The file you selected is to big. The max file size is: ' + (this.maxFileSize / 1000000) + 'MB', null);
+      }
+    }
+  }
+
   public submitClicked() {
     const requestData = new ReportIssueRequest.RootObject();
     requestData.name = this.nameControl?.value;
@@ -74,9 +108,25 @@ export class ReportAnIssueComponent implements OnInit {
     this.membersService.submitReportIssue(requestData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Report Issue', results.message, null);
       if (results.status === 200) {
-        this.clearFormData();
+        if (this.uploadedDocumentsList?.length) {
+          this.uploadFiles(results.itemId);
+        } else {
+          this.clearFormData();
+        }
       }
     });
+  }
+
+  public async uploadFiles(issueId: number) {
+    await this.uploadedDocumentsList.forEach(async doc => {
+      await this.membersService.uploadReportIssueDocument(issueId, doc.fileData).then(results => {
+        if (results.status === 200) {
+        } else {
+          this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Document', results.message, null);
+        }
+      });
+    });
+    this.clearFormData();
   }
 
   public clearFormData() {
@@ -88,6 +138,7 @@ export class ReportAnIssueComponent implements OnInit {
     this.hangerOrsectionNumberControl?.reset();
     this.descriptionControl?.setValue('');
     this.descriptionControl?.reset();
+    this.uploadedDocumentsList = new Array<ReportIssueRequest.FileDataModel>();
     this.prePopulateData();
   }
 

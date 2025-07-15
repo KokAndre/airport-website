@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalTypes } from 'src/app/enums/app.enums';
 import { AppHelperFunction } from 'src/app/helpers/app-helper.functions';
@@ -9,6 +9,7 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import { MembersService } from '../../services/members.service';
 import { GetUserDataResponse } from 'src/app/models/get-user-data-response.model';
+import { GetHangersForSaleReponse } from 'src/app/models/get-hangers-for-sale-reponse.model';
 
 @Component({
   selector: 'app-sell-my-hanger',
@@ -24,6 +25,9 @@ export class SellMyHangerComponent implements OnInit {
   public submitAdSucessId: number;
   public leviesData = new Array<GetLeviesResponse.Levie>();
   public isPersonalDetailsAcknowledgementCheckboxChecked = false;
+
+  @Input() public originalHangarData: GetHangersForSaleReponse.Hanger;
+  @Output() public updateHangarDataEmit: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public formBuilder: FormBuilder, public tokenService: TokenService, public membersService: MembersService, public appModalService: AppModalService) { }
 
@@ -59,6 +63,10 @@ export class SellMyHangerComponent implements OnInit {
 
         this.leviesData = new Array<GetLeviesResponse.Levie>();
         this.leviesData.push(defaultLevieToAdd);
+      }
+
+      if (this.originalHangarData?.id) {
+        this.prePopulateExistingData();
       }
     });
   }
@@ -96,14 +104,14 @@ export class SellMyHangerComponent implements OnInit {
     if (this.loggedInUserDetails?.name && this.loggedInUserDetails?.surname) {
       this.nameControl.setValue(this.loggedInUserDetails.name + ' ' + this.loggedInUserDetails.surname);
       // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
-        this.nameControl.disable();
+      this.nameControl.disable();
       // }
     }
 
     if (this.loggedInUserDetails?.email) {
       this.emailControl.setValue(this.loggedInUserDetails.email);
       // if (this.loggedInUserDetails.email !== 'grounds@tedderfield.co.za') {
-        this.emailControl.disable();
+      this.emailControl.disable();
       // }
     }
 
@@ -115,6 +123,43 @@ export class SellMyHangerComponent implements OnInit {
     }
 
     this.isPersonalDetailsAcknowledgementCheckboxChecked = false;
+  }
+
+  public prePopulateExistingData() {
+    this.nameControl.setValue(this.originalHangarData.name || '');
+    this.emailControl.setValue(this.originalHangarData.email || '');
+    this.phoneNumberControl.setValue(this.originalHangarData.phoneNumber || '');
+    this.hangerNumberControl.setValue(this.originalHangarData.hangerNumber || '');
+    this.hangerDimentionsWidthControl.setValue(this.originalHangarData.hangerDimensions.width || '');
+    this.hangerDimentionsLengthControl.setValue(this.originalHangarData.hangerDimensions.length || '');
+    this.hangerDoorTypeSelectControl.setValue(this.originalHangarData.doorType || '');
+    this.hangerDoorDimensionsWidthControl.setValue(this.originalHangarData.doorDimensions.width || '');
+    this.hangerDoorDimensionsLengthControl.setValue(this.originalHangarData.doorDimensions.length || '');
+    this.hangerDoorDimensionsHeightControl.setValue(this.originalHangarData.doorDimensions.height || '');
+    this.hangerYearBuiltControl.setValue(this.originalHangarData.yearBuilt || '');
+    this.askingPriceControl.setValue(this.originalHangarData.price || '');
+    this.reasonForSellingControl.setValue(this.originalHangarData.reasonsForSelling);
+
+    this.hangerBuildingMaterialControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalHangarData.buildingMaterial) || '');
+    this.hangerCustomisationsControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalHangarData.hangerCustomisations) || '');
+    this.hangerFeaturesAndBenefitsControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalHangarData.featuresAndBenefits) || '');
+    this.hangerSecurityControl.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalHangarData.securty) || '');
+    this.hangerAdditionalInfrastucture.setValue(AppHelperFunction.formatBulletPointInputDataForPrePopulation(this.originalHangarData.additionalInfrastructure) || '');
+
+    this.submitHangerForSaleRequestData.hangerImages = new Array<SellMyHangerRequest.FileData>();
+    this.originalHangarData.hangerImages.forEach(imgData => {
+      this.submitHangerForSaleRequestData.hangerImages.push(imgData);
+    });
+
+    this.submitHangerForSaleRequestData.titleDocument = new SellMyHangerRequest.FileData();
+    this.submitHangerForSaleRequestData.titleDocument = this.originalHangarData.titleDocument;
+
+    this.originalHangarData.leviesApplicable.forEach(levy => {
+      const levyName = levy.split('Levy')[0];
+      if (this.leviesData.find(levyItem => levyItem.levieName.includes(levyName))) {
+        this.leviesData.find(levyItem => levyItem.levieName.includes(levyName)).isSelected = true;
+      }
+    });
   }
 
   public numberControlInput(formControl?: AbstractControl) {
@@ -362,7 +407,26 @@ export class SellMyHangerComponent implements OnInit {
       }
     });
 
+    if (this.originalHangarData?.id) {
+      this.submitHangerForSaleRequestData.id = this.originalHangarData.id;
+      this.updateItem();
+    } else {
+      this.submitNewItem();
+    }
+  }
+
+  public submitNewItem() {
     this.membersService.submitSellMyHanger(this.submitHangerForSaleRequestData).then(results => {
+      this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', results.message, null);
+      if (results.status === 200) {
+        this.submitAdSucessId = results.id;
+        this.uploadDocuments();
+      }
+    });
+  }
+
+  public updateItem() {
+    this.membersService.submitUpdateMyHanger(this.submitHangerForSaleRequestData).then(results => {
       this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Sell My Hanger', results.message, null);
       if (results.status === 200) {
         this.submitAdSucessId = results.id;
@@ -373,16 +437,24 @@ export class SellMyHangerComponent implements OnInit {
 
   public async uploadDocuments() {
     if (this.submitHangerForSaleRequestData.titleDocument?.fileData && this.submitHangerForSaleRequestData.titleDocument?.fileName) {
-      await this.uploadTitleDocument();
+      if (!this.submitHangerForSaleRequestData?.id || (this.submitHangerForSaleRequestData.id && this.submitHangerForSaleRequestData.titleDocument?.fileName !== this.originalHangarData?.titleDocument?.fileName)) {
+        await this.uploadTitleDocument();
+      }
     }
     if (this.submitHangerForSaleRequestData.detailedFloorPlan?.fileData && this.submitHangerForSaleRequestData.detailedFloorPlan?.fileName) {
-      await this.uploadFloorPlanDocument();
+      if (!this.submitHangerForSaleRequestData?.id || (this.submitHangerForSaleRequestData.id && this.submitHangerForSaleRequestData.detailedFloorPlan?.fileName !== this.originalHangarData?.detailedFloorPlan?.fileName)) {
+        await this.uploadFloorPlanDocument();
+      }
     }
     if (this.submitHangerForSaleRequestData.hangerImages?.length) {
       await this.uploadHangerImages();
     }
 
     this.clearFormData();
+
+    if (this.submitHangerForSaleRequestData.id) {
+      this.updateHangarDataEmit.emit();
+    }
   }
 
   public async uploadTitleDocument() {
@@ -406,18 +478,23 @@ export class SellMyHangerComponent implements OnInit {
   public async uploadHangerImages() {
     this.submitHangerForSaleRequestData.hangerImages.forEach(async (image) => {
       if (image.fileName && image.fileData) {
-        await this.membersService.uploadSellMyHangerImages(this.submitAdSucessId, image.fileData).then(results => {
-          if (results.status === 200) {
-          } else {
-            this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Document', results.message, null);
-          }
-        });
+
+        if (!this.submitHangerForSaleRequestData?.id || (this.submitHangerForSaleRequestData.id && !this.originalHangarData?.hangerImages?.find(x => x.fileName === image.fileName))) {
+          await this.membersService.uploadSellMyHangerImages(this.submitAdSucessId, image.fileData).then(results => {
+            if (results.status === 200) {
+            } else {
+              this.appModalService.ShowConfirmationModal(ModalTypes.InformationModal, 'Upload Floor Plan Document', results.message, null);
+            }
+          });
+        }
       }
     });
   }
 
   public clearFormData() {
-    this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
+    if (!this.originalHangarData?.id) {
+      this.submitHangerForSaleRequestData = new SellMyHangerRequest.RootObject();
+    }
     this.sellMyHangerFormGroup.reset();
     this.prePopulateData();
   }

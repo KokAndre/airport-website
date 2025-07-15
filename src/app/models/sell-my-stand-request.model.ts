@@ -1,5 +1,6 @@
 export namespace SellMyStandRequest {
     export class RootObject {
+        id: number;
         name: string;
         email: string;
         phoneNumber: string;

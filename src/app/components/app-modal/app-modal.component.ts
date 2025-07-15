@@ -82,8 +82,8 @@ export class AppModalComponent implements OnInit {
         break;
 
       case ModalTypes.EditReportIssueData:
-        if (this.data.inputValues) {
-          this.editReportIssueData = this.data.inputValues;
+        if (this.data.inputValues?.issueData) {
+          this.editReportIssueData = this.data.inputValues.issueData;
         } else {
           this.editReportIssueData = new GetReportIssueDataResponse.Requests;
         }
@@ -157,6 +157,7 @@ export class AppModalComponent implements OnInit {
 
       default:
         this.isLoading = false;
+        console.log('INPUT VALUES: ', this.data.inputValues);
         break;
     }
   }
@@ -167,11 +168,11 @@ export class AppModalComponent implements OnInit {
     }
   }
 
-  public updateReportIssueData() {
-    if (this.editReportIssueData.hangerOrSectionNumber && this.editReportIssueData.issueDescription) {
-      this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.editReportIssueData);
-    }
-  }
+  // public updateReportIssueData() {
+  //   if (this.editReportIssueData.hangerOrSectionNumber && this.editReportIssueData.issueDescription) {
+  //     this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.editReportIssueData);
+  //   }
+  // }
 
   public addFolderConfirmClicked() {
     if (this.folderName) {
@@ -351,6 +352,11 @@ export class AppModalComponent implements OnInit {
 
   public updatePriorityData() {
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, this.capturePriorityData);
+  }
+
+  public updatePropertyResponse() {
+    console.log('IN UPDATE PROPERTY RESPONSE');
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, '');
   }
 
   public checkIfUserIsLoggedIn() {
@@ -547,6 +553,18 @@ export class AppModalComponent implements OnInit {
     this.data.callbackMessageResult(ModalOutcomeOptions.Update, gettigToKnowYouData);
   }
 
+  public closeModal() {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Close, '');
+  }
+
+  public deleteReportIssueFile(fileToDelete: string) {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Delete, fileToDelete);
+  }
+
+  public updateReportIssueData(editReportIssueData: GetReportIssueDataResponse.Requests) {
+    this.data.callbackMessageResult(ModalOutcomeOptions.Update, editReportIssueData);
+  }
+
   public get interestedInPropertyNameControl() {
     return this.interestedInPropertyFormGroup.get('interestedInPropertyNameControl');
   }
@@ -556,7 +574,6 @@ export class AppModalComponent implements OnInit {
   public get interestedInPropertyPhoneNumberControl() {
     return this.interestedInPropertyFormGroup.get('interestedInPropertyPhoneNumberControl');
   }
-
 
   public get captureMemberNameControl() {
     return this.captureMemberFormGroup.get('captureMemberNameControl');

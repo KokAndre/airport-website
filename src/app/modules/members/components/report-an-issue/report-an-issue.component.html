@@ -5,7 +5,8 @@
   </div>
 </div>
 
-<app-arrow-divider class="pointer" (click)="isWereHereToHelpExpanded = !isWereHereToHelpExpanded" [isLightToDark]="true"></app-arrow-divider>
+<app-arrow-divider class="pointer" (click)="isWereHereToHelpExpanded = !isWereHereToHelpExpanded"
+  [isLightToDark]="true"></app-arrow-divider>
 
 <div class="dark-background">
   <div class="col-10 mx-auto pb-4">
@@ -24,7 +25,8 @@
   </div>
 
 
-  <app-arrow-divider class="pointer" (click)="isHowItWorksExpanded = !isHowItWorksExpanded" [isLightToDark]="false"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isHowItWorksExpanded = !isHowItWorksExpanded"
+    [isLightToDark]="false"></app-arrow-divider>
 
 </div>
 
@@ -37,19 +39,20 @@
       </mat-expansion-panel-header>
 
 
-    <ol>
-      <li>Fill out a quick form describing the issue.</li>
-      <li>Submit your request.</li>
-      <li>Our team will review it and get to work on a solution.</li>
-    </ol>
+      <ol>
+        <li>Fill out a quick form describing the issue.</li>
+        <li>Submit your request.</li>
+        <li>Our team will review it and get to work on a solution.</li>
+      </ol>
 
-    <p>Your input helps us keep Tedderfield running like a well-oiled machine, so don't hesitate to let us know how we
-      can help!</p>
+      <p>Your input helps us keep Tedderfield running like a well-oiled machine, so don't hesitate to let us know how we
+        can help!</p>
 
-      </mat-expansion-panel>
+    </mat-expansion-panel>
   </div>
 
-  <app-arrow-divider class="pointer" (click)="isReportFormExpanded = !isReportFormExpanded" [isLightToDark]="true"></app-arrow-divider>
+  <app-arrow-divider class="pointer" (click)="isReportFormExpanded = !isReportFormExpanded"
+    [isLightToDark]="true"></app-arrow-divider>
 
 </div>
 
@@ -61,56 +64,111 @@
     <mat-expansion-panel-header>
       <div class="col-10 mx-auto">
         <p class="text-size-24 mb-3">Report an Issue</p>
-      </div>      
+      </div>
     </mat-expansion-panel-header>
 
 
-  <div class="mb-3 py-4" [formGroup]="reportIssueFormGroup">
-    <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto report-issue-form-background">
-      <div class="row mx-0 justify-content-center mt-4">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Name</mat-label>
-          <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
-          <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
-        </mat-form-field>
-      </div>
+    <div class="mb-3 py-4" [formGroup]="reportIssueFormGroup">
+      <div class="col-11 col-sm-11 col-md-10 col-lg-8 mx-auto report-issue-form-background">
+        <div class="row mx-0 justify-content-center mt-4">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Name</mat-label>
+            <input style="color: black;" matInput required maxlength="50" formControlName="nameControl">
+            <mat-error *ngIf="nameControl?.hasError('required')">Name is required</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center mt-2">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Email</mat-label>
-          <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
-          <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
-        </mat-form-field>
-      </div>
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Email</mat-label>
+            <input style="color: black;" matInput required maxlength="100" formControlName="emailControl">
+            <mat-error *ngIf="emailControl?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="emailControl?.hasError('pattern')">Enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center mt-2">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Hangar or Section Number</mat-label>
-          <input style="color: black;" matInput required maxlength="50" formControlName="hangerOrsectionNumberControl">
-          <mat-error *ngIf="hangerOrsectionNumberControl?.hasError('required')">Hangar or Section Number is
-            required</mat-error>
-        </mat-form-field>
-      </div>
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Hangar or Section Number</mat-label>
+            <input style="color: black;" matInput required maxlength="50"
+              formControlName="hangerOrsectionNumberControl">
+            <mat-error *ngIf="hangerOrsectionNumberControl?.hasError('required')">Hangar or Section Number is
+              required</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center mt-2">
-        <mat-form-field class="col-10 px-0">
-          <mat-label>Please describe your issue here</mat-label>
-          <textarea style="color: black;" required="" matInput maxlength="2000"
-            formControlName="descriptionControl"></textarea>
-          <mat-error *ngIf="descriptionControl?.hasError('required')">Issue description is required</mat-error>
-        </mat-form-field>
-      </div>
+        <div class="row mx-0 justify-content-center mt-2">
+          <mat-form-field class="col-10 px-0">
+            <mat-label>Please describe your issue here</mat-label>
+            <textarea style="color: black;" required="" matInput maxlength="2000"
+              formControlName="descriptionControl"></textarea>
+            <mat-error *ngIf="descriptionControl?.hasError('required')">Issue description is required</mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row mx-0 justify-content-center">
-        <div class="red-button mb-4" [ngClass]="{'disable-user-click': reportIssueFormGroup.invalid}"
-          (click)="submitClicked()">
-          <p class="mb-0">Submit</p>
-          <span class="red-button-icon"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row mx-0 justify-content-center mt-2">
+          <div class="col-10 px-0">
+            <P class="mb-1">Upload supporting documentation if available.</P>
+            <p class="red-text text-bold">Upload up to 8 supported files. Max 100MB per file.</p>
+            <!-- File types: PNG, JPG, JPEG, SVG, DOC, DOCX, XLSX. -->
+
+            <div *ngIf="uploadedDocumentsList?.length">
+              <div class="row mb-2 mx-0" *ngFor="let file of uploadedDocumentsList">
+
+                <div class="col-1 px-0 align-content-center">
+                  <mat-icon class="pointer red-text align-bottom"
+                    (click)="deleteFileItem(file.fileName)">delete</mat-icon>
+                </div>
+                <div class="col-11 pr-0 align-content-center">
+                  <p class="mb-0 text-size-14">{{ file.fileName }}</p>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-12 px-0">
+              <div class="add-image-section pointer" (click)="handleClick()">
+                <mat-icon class="upload-file-icon pt-2">upload</mat-icon>
+                <input type="file" multiple="true" [max]="8" hidden #fileUploaderTester (click)="$event.stopPropagation()"
+                  (change)="uploadDocument($event)"/>
+                  <!-- accept=".PNG, .JPG, .JPEG, .SVG, .jfif"  -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row mx-0 justify-content-center mt-4">
+          <div class="red-button mb-4" [ngClass]="{'disable-user-click': reportIssueFormGroup.invalid}"
+            (click)="submitClicked()">
+            <p class="mb-0">Submit</p>
+            <span class="red-button-icon"></span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
   </mat-expansion-panel>
 </div>

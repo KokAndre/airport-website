@@ -97,6 +97,17 @@ export class ManageStandsForSaleComponent implements OnInit {
     }
   }
 
+  public editItemClicked(standData: GetStandsForSaleReponse.Stands) {
+    this.appModalService.ShowConfirmationModal(ModalTypes.EditStandData, 'Edit Stand for Sale Data', '', standData, this.editItemOutcome.bind(this));
+  }
+
+  public editItemOutcome(modalOutcome: string) {
+    console.log('MODAL OUTCOME: ', modalOutcome);
+    if (modalOutcome === ModalOutcomeOptions.Update) {
+      this.getStandForSaleData();
+    }
+  }
+
   public exportToExcel() {
     const standsForSaleExcelData = new Array<any>();
     this.standsForSaleData.forEach(item => {

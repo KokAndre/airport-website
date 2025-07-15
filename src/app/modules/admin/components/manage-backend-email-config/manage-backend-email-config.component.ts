@@ -4,7 +4,7 @@ import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { Router } from '@angular/router';
 import { AppRoutes, ModalOutcomeOptions, ModalTypes } from 'src/app/enums/app.enums';
 import { GetBackendEmailConfigDataResponse } from 'src/app/models/get-backend-email-config-data-response.model';
-import { ExcelService } from 'src/app/modules/shared/services/excel.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel/excel.service';
 
 @Component({
   selector: 'app-manage-backend-email-config',

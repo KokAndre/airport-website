@@ -66,6 +66,8 @@
           <div class="row mx-auto mx-0 actions-row">
             <mat-icon class="red-text pointer p-0" fontIcon="delete"
               (click)="deleteStandForSaleClicked(item)"></mat-icon>
+            <mat-icon class="blue-text pointer ml-2 p-0" fontIcon="edit"
+              (click)="editItemClicked(item)"></mat-icon>
             <mat-icon *ngIf="item.approvedByAdmin !== '1'" class="green-text pointer ml-2 p-0" fontIcon="check"
               (click)="markAdAsApprovedClicked(item)"></mat-icon>
           </div>

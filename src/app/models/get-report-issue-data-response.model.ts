@@ -10,13 +10,14 @@ export namespace GetReportIssueDataResponse {
   }
 
   export class Requests {
-    id: string;
+    id: number;
     name: string;
     email: string;
     hangerOrSectionNumber: string;
     issueDescription: string;
     dateAdded: string;
     personResponsible: string;
+    personResponsibleTwo: string;
     category: string
     status: string
     statusDateChanged: string;
@@ -24,6 +25,7 @@ export namespace GetReportIssueDataResponse {
     estimatedCompletionDate: string;
     numOfRemainingDaysToETC: number;
     isFilteredOnSearch: boolean;
+    documents: string[];
   }
 
   export class Category {
@@ -48,5 +50,16 @@ export namespace GetReportIssueDataResponse {
   export class PropertyNumber {
     description: string;
     isFilterSelected: boolean;
+  }
+
+  export class EtcFilters {
+    date: string;
+    isFilterSelected: boolean;
+    // canFiltedDisplay: boolean;
+    filterStatus: string[];
+    // displayForStatusNotStartedCheckBox: boolean;
+    // displayForStatusInProgressCheckBox: boolean;
+    // displayForStatusToBeReleasedCheckBox: boolean;
+    // displayForStatusDoneCheckBox: boolean;
   }
 }

@@ -29,6 +29,22 @@ export class MembersService {
       });
   }
 
+    public uploadReportIssueDocument(itemId: number, fileData: any) {
+    let testData: FormData = new FormData();
+    testData.append('file', fileData);
+    testData.append('name', fileData.name);
+    testData.append('issueId', `${itemId}`);
+
+    return fetch(Endpoints.BaseURL + Endpoints.SubmitReportIssueDocuments, {
+      method: 'post',
+      body: testData
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
   public submitGreeningTedderfield(reportIssueData: SubmitGreeningTedderfieldRequest.RootObject) {
     return fetch(Endpoints.BaseURL + Endpoints.SubmitGreeninTedderfield, {
       method: 'post',
@@ -43,13 +59,13 @@ export class MembersService {
   public submitSellMyHanger(sellMyHangerRequestData: SellMyHangerRequest.RootObject) {
     // Remove files to ensure request is not to big.
     const requestData = JSON.parse(JSON.stringify(sellMyHangerRequestData))
-    if (requestData.titleDocument){
+    if (requestData.titleDocument) {
       requestData.titleDocument.fileData = '';
     } else {
       requestData.titleDocument = new SellMyHangerRequest.FileData
     }
 
-    if (requestData.detailedFloorPlan){
+    if (requestData.detailedFloorPlan) {
       requestData.detailedFloorPlan.fileData = '';
     } else {
       requestData.detailedFloorPlan = new SellMyHangerRequest.FileData
@@ -60,6 +76,36 @@ export class MembersService {
     });
 
     return fetch(Endpoints.BaseURL + Endpoints.SubmitSellMyHanger, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  
+  public submitUpdateMyHanger(sellMyHangerRequestData: SellMyHangerRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(sellMyHangerRequestData))
+    if (requestData.titleDocument) {
+      requestData.titleDocument.fileData = '';
+    } else {
+      requestData.titleDocument = new SellMyHangerRequest.FileData
+    }
+
+    if (requestData.detailedFloorPlan) {
+      requestData.detailedFloorPlan.fileData = '';
+    } else {
+      requestData.detailedFloorPlan = new SellMyHangerRequest.FileData
+    }
+
+    requestData.hangerImages.forEach(x => {
+      x.fileData = '';
+    });
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateSellMyHanger, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })
@@ -117,15 +163,33 @@ export class MembersService {
       });
   }
 
-  public submitSellMyStand(dellMyStandRequestData: SellMyStandRequest.RootObject) {
+  public submitSellMyStand(sellMyStandRequestData: SellMyStandRequest.RootObject) {
     // Remove files to ensure request is not to big.
-    const requestData = JSON.parse(JSON.stringify(dellMyStandRequestData))
+    const requestData = JSON.parse(JSON.stringify(sellMyStandRequestData))
     // requestData.titleDocument.fileData = '';
     requestData.standImages.forEach(x => {
       x.fileData = '';
     });
 
     return fetch(Endpoints.BaseURL + Endpoints.SubmitSellMyStand, {
+      method: 'post',
+      body: JSON.stringify({ requestData: requestData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      });
+  }
+
+  public updateSellMyStand(sellMyStandRequestData: SellMyStandRequest.RootObject) {
+    // Remove files to ensure request is not to big.
+    const requestData = JSON.parse(JSON.stringify(sellMyStandRequestData))
+    // requestData.titleDocument.fileData = '';
+    requestData.standImages.forEach(x => {
+      x.fileData = '';
+    });
+
+    return fetch(Endpoints.BaseURL + Endpoints.UpdateSellMyStand, {
       method: 'post',
       body: JSON.stringify({ requestData: requestData })
     })
@@ -176,7 +240,7 @@ export class MembersService {
         return data;
       });
   }
-  
+
   public getMemebersDocuments() {
     return fetch(Endpoints.BaseURL + Endpoints.GetMemebersDocuments, {
       method: 'get',
@@ -188,7 +252,7 @@ export class MembersService {
   }
 
   public getMembersDocumentBase64(documentRoute: string) {
-    const requestData = {filePath: documentRoute};
+    const requestData = { filePath: documentRoute };
 
     return fetch(Endpoints.BaseURL + Endpoints.GetMemebersDocumentBase64, {
       method: 'post',
@@ -239,7 +303,7 @@ export class MembersService {
     requestData.image.fileData = '';
 
     if (!skipSettingUserId) {
-          requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID);
+      requestData.userId = this.tokenService.getUserData(UserDataInTokenToReturn.ID);
     }
 
     return fetch(Endpoints.BaseURL + Endpoints.SubmitGettingToKnowYou, {
@@ -273,7 +337,7 @@ export class MembersService {
 
     return fetch(Endpoints.BaseURL + Endpoints.GetGettingToKnowYouData, {
       method: 'post',
-      body: JSON.stringify({ requestData: {userId: userId} })
+      body: JSON.stringify({ requestData: { userId: userId } })
     })
       .then(response => response.json())
       .then(data => {

@@ -44,3 +44,15 @@ a {
 .delete-icon {
     color: #ee202e;
 }
+
+.documents-min-width {
+    min-width: 400px;
+}
+
+.hover-text {
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+        border-color: #ee202e !important;
+    }
+}

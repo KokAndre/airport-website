@@ -1,5 +1,6 @@
 export namespace SellMyHangerRequest {
     export class RootObject {
+        id: number;
         name: string;
         email: string;
         phoneNumber: string;

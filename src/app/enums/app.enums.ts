@@ -107,6 +107,8 @@ export enum Endpoints {
     DeleteFollowUsItem = '/follow-us/delete-follow-us-item.php',
     MarkFollowUsAsFollowedUp = '/follow-us/update-follow-us-item.php',
     ReportIssue = '/report-issue/submit-report-issue.php',
+    SubmitReportIssueDocuments = '/report-issue/submit-report-issue-document.php',
+    DeleteReportIssueDocuments = '/report-issue/delete-report-issue-document.php',
     GetReportIssueData = '/report-issue/get-report-issue-data.php',
     GetReportIssueConfigData = '/report-issue/get-report-issue-config-data.php',
 
@@ -135,6 +137,7 @@ export enum Endpoints {
     AddNewHomeScreenBannerAsFile = '/home/add-home-page-banner-file.php',
     GetHangersForSales = '/hangers-for-sale/get-hangers-for-sale.php',
     SubmitSellMyHanger = '/hangers-for-sale/submit-hanger-for-sale.php',
+    UpdateSellMyHanger = '/hangers-for-sale/update-hanger-for-sale.php',
     UploadSellMyHangerTitleDocument = '/hangers-for-sale/upload-title-document.php',
     uploadSellMyHangerFloorPlanDocument = '/hangers-for-sale/upload-floor-plan-document.php',
     uploadSellMyHangerImages = '/hangers-for-sale/upload-hanger-for-sale-image.php',
@@ -150,6 +153,7 @@ export enum Endpoints {
     DeleteInterestedInHangerItem = '/hangers-for-sale/delete-interested-in-hanger-item.php',
     GetStandsForSales = '/stands-for-sale/get-stands-for-sale.php',
     SubmitSellMyStand = '/stands-for-sale/submit-stand-for-sale.php',
+    UpdateSellMyStand = '/stands-for-sale/update-stand-for-sale.php',
     UploadSellMyStandTitleDocument = '/stands-for-sale/upload-title-document.php',
     uploadSellMyStandImages = '/stands-for-sale/upload-stand-for-sale-image.php',
     GetStandTitleDocument = '/stands-for-sale/get-title-document.php',
@@ -253,14 +257,18 @@ export enum ModalTypes {
     CaptureWebTicketData = 'captureWebTicketData',
     CaptureYoutubeVideo = 'captureYoutubeVideo',
     CaptureEmailConfigItem = 'captureEmailConfigItem',
-    CaptureGettingToKnowYouData = 'captureGettingToKnowYouData'
+    CaptureGettingToKnowYouData = 'captureGettingToKnowYouData',
+    EditStandData = 'editStandData',
+    EditHangarData = 'editHangarData',
+    DisplayDocuments = 'DisplayDocuments'
 }
 
 export enum ModalOutcomeOptions {
     Close = 'close',
     Cancel = 'cancel',
     Confirm = 'confirm',
-    Update = 'update'
+    Update = 'update',
+    Delete = 'delete'
 }
 
 export enum UserDataInTokenToReturn {

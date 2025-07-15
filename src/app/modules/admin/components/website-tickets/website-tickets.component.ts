@@ -4,7 +4,7 @@ import { GetWebTicketsDataResponse } from 'src/app/models/get-web-tickets-data-r
 import { AppModalService } from 'src/app/services/app-modal/app-modal.service';
 import { AppRoutes, ModalOutcomeOptions, ModalTypes, UserDataInTokenToReturn } from 'src/app/enums/app.enums';
 import { Router } from '@angular/router';
-import { ExcelService } from 'src/app/modules/shared/services/excel.service';
+import { ExcelService } from 'src/app/modules/shared/services/excel/excel.service';
 import { TokenService } from 'src/app/services/token/token.service';
 import * as moment from 'moment';
 

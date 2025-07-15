@@ -21,10 +21,15 @@
     [ngTemplateOutlet]="CaptureWebTicketItemTemplate"></ng-container>
   <ng-container *ngSwitchCase="modalTypesEnum.CaptureYoutubeVideo"
     [ngTemplateOutlet]="CaptureYoutubeVideoTemplate"></ng-container>
-    <ng-container *ngSwitchCase="modalTypesEnum.CaptureEmailConfigItem"
-      [ngTemplateOutlet]="CaptureEmailConfigItemTemplate"></ng-container>
-      <ng-container *ngSwitchCase="modalTypesEnum.CaptureGettingToKnowYouData"
-        [ngTemplateOutlet]="CaptureGettingToKnowYouDataTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CaptureEmailConfigItem"
+    [ngTemplateOutlet]="CaptureEmailConfigItemTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.CaptureGettingToKnowYouData"
+    [ngTemplateOutlet]="CaptureGettingToKnowYouDataTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.EditStandData" [ngTemplateOutlet]="EditStandDataTemplate"></ng-container>
+  <ng-container *ngSwitchCase="modalTypesEnum.EditHangarData"
+    [ngTemplateOutlet]="EditHangarDataTemplate"></ng-container>
+      <ng-container *ngSwitchCase="modalTypesEnum.DisplayDocuments"
+    [ngTemplateOutlet]="DisplayIssueDocumentsTemplate"></ng-container>
 </ng-container>
 
 <ng-template #InformationModal>
@@ -323,37 +328,8 @@
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
   </div>
 
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Hangar or Section Number</mat-label>
-      <input style="color: black;" matInput required maxlength="50"
-        [(ngModel)]="editReportIssueData.hangerOrSectionNumber">
-      <mat-error *ngIf="!editReportIssueData.hangerOrSectionNumber">Hangar or Section Number is required</mat-error>
-    </mat-form-field>
-  </div>
+  <app-edit-report-issue-request [editIssueData]="data.inputValues" (updatIssueDataEmit)="updateReportIssueData($event)" (deleteFileEmit)="deleteReportIssueFile($event)" (cancelClickedEmit)="closeModal()"></app-edit-report-issue-request>
 
-  <div class="row mx-3 justify-content-center mt-2">
-    <mat-form-field class="col-12 px-0">
-      <mat-label>Issue Description</mat-label>
-      <textarea style="color: black;" matInput maxlength="2000"
-        [(ngModel)]="editReportIssueData.issueDescription"></textarea>
-      <mat-error *ngIf="!editReportIssueData.issueDescription">Issue Description is required</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="row mx-0 my-4 justify-content-center">
-    <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
-      <p class="mb-0">Cancel</p>
-      <span class="white-button-icon"></span>
-    </div>
-
-    <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': !editReportIssueData.hangerOrSectionNumber || !editReportIssueData.issueDescription}"
-      (click)="updateReportIssueData()">
-      <p class="mb-0">Update</p>
-      <span class="red-button-icon"></span>
-    </div>
-  </div>
 </ng-template>
 
 <ng-template #CaptureMemberTemplate>
@@ -481,7 +457,8 @@
     <div class="row mx-3 justify-content-center">
       <mat-form-field class="col-12 px-0">
         <mat-label>{{ data.details || 'Capture Data' }}</mat-label>
-        <input style="color: black;" matInput [required]="data.details !== 'Image name'" maxlength="200" [(ngModel)]="captureSingleFieldData">
+        <input style="color: black;" matInput [required]="data.details !== 'Image name'" maxlength="200"
+          [(ngModel)]="captureSingleFieldData">
         <!-- <mat-error *ngIf="captureMemberNameControl?.hasError('required')">{{ data.details || 'Capture Data' }} is required</mat-error> -->
       </mat-form-field>
     </div>
@@ -492,7 +469,8 @@
         <span class="white-button-icon"></span>
       </div>
 
-      <div class="red-button ml-3" [ngClass]="{'disable-user-click': data.details === 'Image name' ? false : !captureSingleFieldData}"
+      <div class="red-button ml-3"
+        [ngClass]="{'disable-user-click': data.details === 'Image name' ? false : !captureSingleFieldData}"
         (click)="updateSinglrFieldData()">
         <p class="mb-0">Save</p>
         <span class="red-button-icon"></span>
@@ -695,8 +673,8 @@
   <div *ngIf="youtubeVideoData.uploadType === 'youtube'" class="row mx-3 justify-content-center">
     <mat-form-field class="col-12 px-0">
       <mat-label>Video URL</mat-label>
-      <input style="color: black;" (input)="checkIfValidYoutubeURL()" (blur)="blurOnYoutubeURL()" matInput required maxlength="200"
-        [(ngModel)]="youtubeVideoData.videoURL">
+      <input style="color: black;" (input)="checkIfValidYoutubeURL()" (blur)="blurOnYoutubeURL()" matInput required
+        maxlength="200" [(ngModel)]="youtubeVideoData.videoURL">
       <mat-error *ngIf="!youtubeVideoData.videoURL">URL is required</mat-error>
       <mat-hint class="red-text" *ngIf="!isYoutubeURLValid">Enter a valid URL:
         https://www.youtube.com/watch?v=[VideoId]</mat-hint>
@@ -719,7 +697,8 @@
       </div>
     </div>
 
-    <app-file-uploader [allowSelectVideo]="true" [returnAsFile]="true" [isFromMembersDocumentsAddFile]="true" (emitFileData)="uploadVideo($event)"></app-file-uploader>
+    <app-file-uploader [allowSelectVideo]="true" [returnAsFile]="true" [isFromMembersDocumentsAddFile]="true"
+      (emitFileData)="uploadVideo($event)"></app-file-uploader>
   </div>
 
   <div class="row mx-3 justify-content-center">
@@ -731,29 +710,29 @@
   </div>
 
   <div *ngIf="youtubeVideoData.uploadType === 'youtube'">
-  <mat-checkbox class="mx-3" [(ngModel)]="youtubeVideoDisplayTimeCheckBox"
-    (change)="youtubeVideoDisplayTimeCheckBoxChaged()">Add video start and end time</mat-checkbox>
+    <mat-checkbox class="mx-3" [(ngModel)]="youtubeVideoDisplayTimeCheckBox"
+      (change)="youtubeVideoDisplayTimeCheckBoxChaged()">Add video start and end time</mat-checkbox>
 
-  <div *ngIf="youtubeVideoDisplayTimeCheckBox">
-    <div class="row mx-3 justify-content-center">
-      <mat-form-field class="col-12 px-0">
-        <mat-label>Video start time (Seconds)</mat-label>
-        <input type="number" style="color: black;" matInput required maxlength="100"
-          [(ngModel)]="youtubeVideoData.videoStartTime">
-        <mat-error *ngIf="!youtubeVideoData.videoStartTime">Start time is required</mat-error>
-      </mat-form-field>
-    </div>
+    <div *ngIf="youtubeVideoDisplayTimeCheckBox">
+      <div class="row mx-3 justify-content-center">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Video start time (Seconds)</mat-label>
+          <input type="number" style="color: black;" matInput required maxlength="100"
+            [(ngModel)]="youtubeVideoData.videoStartTime">
+          <mat-error *ngIf="!youtubeVideoData.videoStartTime">Start time is required</mat-error>
+        </mat-form-field>
+      </div>
 
-    <div class="row mx-3 justify-content-center">
-      <mat-form-field class="col-12 px-0">
-        <mat-label>Video end time (Seconds)</mat-label>
-        <input type="number" style="color: black;" matInput required maxlength="100"
-          [(ngModel)]="youtubeVideoData.videoEndTime">
-        <mat-error *ngIf="!youtubeVideoData.videoEndTime">End time is required</mat-error>
-      </mat-form-field>
+      <div class="row mx-3 justify-content-center">
+        <mat-form-field class="col-12 px-0">
+          <mat-label>Video end time (Seconds)</mat-label>
+          <input type="number" style="color: black;" matInput required maxlength="100"
+            [(ngModel)]="youtubeVideoData.videoEndTime">
+          <mat-error *ngIf="!youtubeVideoData.videoEndTime">End time is required</mat-error>
+        </mat-form-field>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="row mx-0 my-4 justify-content-center">
     <div class="white-button" [matDialogClose]="modalOutcomeOptions.Cancel">
@@ -761,8 +740,7 @@
       <span class="white-button-icon"></span>
     </div>
 
-    <div class="red-button ml-3"
-      [ngClass]="{'disable-user-click': isYoutubeVideoSaveButtonDisabled()}"
+    <div class="red-button ml-3" [ngClass]="{'disable-user-click': isYoutubeVideoSaveButtonDisabled()}"
       (click)="saveYoutubeVideoClicked()">
       <p class="mb-0">Save</p>
       <span class="red-button-icon"></span>
@@ -842,5 +820,62 @@
     <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
   </div>
 
-  <app-capture-getting-to-know-you [gettingToKnowYouRequestData]="data.inputValues" (submitDataEmit)="submitGettingToKnowYouData($event)"></app-capture-getting-to-know-you>
+  <app-capture-getting-to-know-you [gettingToKnowYouRequestData]="data.inputValues"
+    (submitDataEmit)="submitGettingToKnowYouData($event)"></app-capture-getting-to-know-you>
+</ng-template>
+
+<ng-template #EditStandDataTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <app-sell-my-stand [originalStandData]="data.inputValues" (updateStandDataEmit)="updatePropertyResponse()"></app-sell-my-stand>
+</ng-template>
+
+<ng-template #EditHangarDataTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <app-sell-my-hanger [originalHangarData]="data.inputValues" (updateHangarDataEmit)="updatePropertyResponse()"></app-sell-my-hanger>
+</ng-template>
+
+<ng-template #DisplayIssueDocumentsTemplate>
+  <div *ngIf="data.title" class="modal-title">
+    <div class="row mx-0 p-3" style="flex-flow: nowrap;">
+      <div class="col-1 px-0"></div>
+      <div class="col-10">
+        <p class="text-size-20 mb-0 text-center" [innerHTML]="data.title"></p>
+      </div>
+      <div class="col-1 px-0 text-end"><mat-icon [matDialogClose]="modalOutcomeOptions.Close"
+          class="ml-n2 mb-n4 pt-1 pointer">close</mat-icon></div>
+    </div>
+
+    <app-arrow-divider [isLightToDark]="false" [isSmallDivider]="true"></app-arrow-divider>
+  </div>
+
+  <div class="p-3 text-center documents-min-width">
+    <div class="mb-2" *ngFor="let doc of data.inputValues?.documents">
+      <a class="red-text text-size-16 no-underline pointer hover-text" target="_blank" [href]="'https://tedderfield.co.za/api/report-issue/documents/' + data.inputValues.itemId + '/' + doc">{{ doc }}</a>
+    </div>
+  </div>
+
 </ng-template>
