@@ -763,7 +763,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       }
     })
 
-    this.wordDocumentService.generateWordDocument(dataToUse);
+    this.wordDocumentService.testEditingFileMethod(dataToUse);
   }
 
 }
