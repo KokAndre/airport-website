@@ -62,4 +62,8 @@ export namespace GetReportIssueDataResponse {
     // displayForStatusToBeReleasedCheckBox: boolean;
     // displayForStatusDoneCheckBox: boolean;
   }
+
+  export class TablePages {
+    data: Requests[];
+  }
 }

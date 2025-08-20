@@ -32,6 +32,9 @@ export class ReportIssueRequestsComponent implements OnInit {
   public loggedInUserName = '';
   public reportIssueFormGroup: FormGroup;
   public idOfEditIssueClicked: number;
+  public itemsPerPage = 10;
+  public pageToDisplay = 1;
+  public filteredTableDataToDisplay: GetReportIssueDataResponse.TablePages[];
 
   // Person Responsible Filters
   public blankPersonResponsibleCheckBox = true;
@@ -189,6 +192,8 @@ export class ReportIssueRequestsComponent implements OnInit {
 
         this.filterTickets();
 
+        this.updateFilteredList();
+
         setTimeout(() => {
           this.isLoading = false;
         }, 300);
@@ -216,6 +221,35 @@ export class ReportIssueRequestsComponent implements OnInit {
     }
 
     return displayItem;
+  }
+
+  public updateFilteredList() {
+    this.filteredTableDataToDisplay = new Array<GetReportIssueDataResponse.TablePages>();
+
+    let itemsToPush = new Array<GetReportIssueDataResponse.Requests>();
+
+    let count = 0;
+
+    this.reportIssueRequests.forEach((request, index) => {
+      if (!this.checkIfRowIsHidden(request)) {
+        ++count;
+        itemsToPush.push(request);
+
+        if (itemsToPush?.length === this.itemsPerPage) {
+          this.filteredTableDataToDisplay.push({ data: itemsToPush });
+          itemsToPush = new Array<GetReportIssueDataResponse.Requests>();
+        }
+      }
+
+      if (itemsToPush?.length && index === this.reportIssueRequests.length - 1) {
+          this.filteredTableDataToDisplay.push({ data: itemsToPush });
+          itemsToPush = new Array<GetReportIssueDataResponse.Requests>();
+        }
+    });
+
+    console.log('COUNT: ', count);
+
+    console.log('NEW TABLE DATA: ', this.filteredTableDataToDisplay);
   }
 
   public checkIfRowIsHidden(row: GetReportIssueDataResponse.Requests) {
@@ -318,6 +352,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       x.isFilterSelected = this.allPersonResponsibleCheckbox;
     });
     this.blankPersonResponsibleCheckBox = this.allPersonResponsibleCheckbox;
+    this.updateFilteredList();
   }
 
   public orderDataByPersonResponsible() {
@@ -328,6 +363,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => a.personResponsible > b.personResponsible ? -1 : 1);
     }
+    this.updateFilteredList();
   }
 
   public allCategoryClicked() {
@@ -335,6 +371,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       x.isFilterSelected = this.allCategoryCheckbox;
     });
     this.blankCategoryCheckBox = this.allCategoryCheckbox;
+    this.updateFilteredList();
   }
 
   public orderDataByCategory() {
@@ -345,6 +382,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => a.category > b.category ? -1 : 1);
     }
+    this.updateFilteredList();
   }
 
   public orderDataByPriority() {
@@ -374,6 +412,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     newOrderedList = [...newOrderedList, ...this.reportIssueRequests.filter(x => x.priority === '')];
 
     this.reportIssueRequests = newOrderedList;
+    this.updateFilteredList();
   }
 
   public allStatusClicked() {
@@ -383,6 +422,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.statusInProgressCheckBox = this.allStatusCheckBox;
     this.statusToBeReleasedCheckBox = this.allStatusCheckBox;
     this.statusDoneCheckBox = this.allStatusCheckBox;
+    this.updateFilteredList();
   }
 
   public orderDataByStatusy() {
@@ -393,6 +433,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => a.status > b.status ? -1 : 1);
     }
+    this.updateFilteredList();
   }
 
   public orderDataByETCDate() {
@@ -403,6 +444,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => (a.estimatedCompletionDate ? +a.estimatedCompletionDate.replaceAll('-', '') : 99999999) >= (b.estimatedCompletionDate ? +b.estimatedCompletionDate.replaceAll('-', '') : 99999999) ? -1 : 1);
     }
+    this.updateFilteredList();
   }
 
   public orderDataByDaysToOS() {
@@ -414,13 +456,15 @@ export class ReportIssueRequestsComponent implements OnInit {
     } else {
       this.reportIssueRequests.sort((a, b) => (a.numOfRemainingDaysToETC !== undefined && a.numOfRemainingDaysToETC !== null ? a.numOfRemainingDaysToETC : -99999999) >= (b.numOfRemainingDaysToETC !== undefined && b.numOfRemainingDaysToETC !== null ? b.numOfRemainingDaysToETC : -99999999) ? -1 : 1);
     }
+    this.updateFilteredList();
   }
 
   public allProperyNumberClicked() {
     this.propertyNumbersList.forEach(x => {
       x.isFilterSelected = this.allPropertyNumberCheckBox;
     });
-    this.blankPriorityCheckBox = this.allPriorityCheckbox
+    this.blankPriorityCheckBox = this.allPriorityCheckbox;
+    this.updateFilteredList();
   }
 
   public allETCValuesClicked() {
@@ -428,6 +472,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       x.isFilterSelected = this.allETCValuesCheckBox;
     });
     this.blankETCValuesCheckBox = this.allETCValuesCheckBox;
+    this.updateFilteredList();
   }
 
   public allDayToETCValuesClicked() {
@@ -435,6 +480,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       x.isFilterSelected = this.allDaysToETCValuesCheckBox;
     });
     this.blankDaysToETCValuesCheckBox = this.allDaysToETCValuesCheckBox;
+    this.updateFilteredList();
   }
 
   public allPriorityClicked() {
@@ -442,6 +488,7 @@ export class ReportIssueRequestsComponent implements OnInit {
       x.isFilterSelected = this.allPriorityCheckbox;
     });
     this.blankPriorityCheckBox = this.allPriorityCheckbox;
+    this.updateFilteredList();
   }
 
   public orderDataByPropertyNumber() {
@@ -475,6 +522,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     // Order all tickets by Priority
     this.sortAlphabeticalPriority = false;
     this.orderDataByPriority();
+    this.updateFilteredList();
   }
 
   public clearFilters() {
@@ -503,6 +551,7 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.statusInProgressCheckBox = true;
     this.statusToBeReleasedCheckBox = true;
     this.statusDoneCheckBox = true;
+    this.updateFilteredList();
   }
 
   public editReportIssueRequestClicked(reportIssueItem: GetReportIssueDataResponse.Requests) {
@@ -692,6 +741,8 @@ export class ReportIssueRequestsComponent implements OnInit {
     this.reportIssueRequests.filter(x => x.issueDescription?.toString()?.toLowerCase()?.includes(filterValue?.toString()?.toLowerCase()))?.forEach(x => {
       x.isFilteredOnSearch = true;
     });
+
+    this.updateFilteredList();
   }
 
   public clearSearchField() {

@@ -301,14 +301,14 @@
 
   <div *ngFor="let person of responsiblePersonList; let last = last">
     <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="person.isFilterSelected">{{
+      [(ngModel)]="person.isFilterSelected" (change)="updateFilteredList()">{{
       person.name
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="blankPersonResponsibleCheckBox">(Blank)</mat-checkbox>
+    [(ngModel)]="blankPersonResponsibleCheckBox" (change)="updateFilteredList()">(Blank)</mat-checkbox>
 
 </mat-menu>
 
@@ -321,14 +321,14 @@
 
   <div *ngFor="let category of categoryList; let last = last">
     <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="category.isFilterSelected">{{
+      [(ngModel)]="category.isFilterSelected" (change)="updateFilteredList()">{{
       category.category
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="blankCategoryCheckBox">(Blank)</mat-checkbox>
+    [(ngModel)]="blankCategoryCheckBox" (change)="updateFilteredList()">(Blank)</mat-checkbox>
 
 </mat-menu>
 
@@ -339,22 +339,22 @@
   <mat-divider></mat-divider>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="statusNotStartedCheckBox">Not
+    [(ngModel)]="statusNotStartedCheckBox" (change)="updateFilteredList()">Not
     Started</mat-checkbox>
   <mat-divider></mat-divider>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="statusInProgressCheckBox">In
+    [(ngModel)]="statusInProgressCheckBox" (change)="updateFilteredList()">In
     Progress</mat-checkbox>
   <mat-divider></mat-divider>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="statusToBeReleasedCheckBox">To Be
+    [(ngModel)]="statusToBeReleasedCheckBox" (change)="updateFilteredList()">To Be
     Released</mat-checkbox>
   <mat-divider></mat-divider>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="statusDoneCheckBox">Done</mat-checkbox>
+    [(ngModel)]="statusDoneCheckBox" (change)="updateFilteredList()">Done</mat-checkbox>
 
 </mat-menu>
 
@@ -368,7 +368,7 @@
 
   <div *ngFor="let property of propertyNumbersList; let last = last">
     <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="property.isFilterSelected">{{
+      [(ngModel)]="property.isFilterSelected" (change)="updateFilteredList()">{{
       property.description
       }}</mat-checkbox>
     <mat-divider *ngIf="!last"></mat-divider>
@@ -385,14 +385,14 @@
 
   <div *ngFor="let priority of priorityList; let last = last">
     <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="priority.isFilterSelected">{{
+      [(ngModel)]="priority.isFilterSelected" (change)="updateFilteredList()">{{
       priority.name
       }}</mat-checkbox>
     <mat-divider></mat-divider>
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="blankPriorityCheckBox">(Blank)</mat-checkbox>
+    [(ngModel)]="blankPriorityCheckBox" (change)="updateFilteredList()">(Blank)</mat-checkbox>
 
 </mat-menu>
 
@@ -405,13 +405,13 @@
 
   <div *ngFor="let item of etcValuesList; let last = last">
     <mat-checkbox *ngIf="checkIfETCFilterShouldDisplay(item.filterStatus)" class="pr-3" menuItems
-      (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="item.isFilterSelected">{{
+      (click)="$event.stopPropagation(); resetMenuTimer(false)" [(ngModel)]="item.isFilterSelected" (change)="updateFilteredList()">{{
       item.date
       }}</mat-checkbox>
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="blankETCValuesCheckBox">(Blank)</mat-checkbox>
+    [(ngModel)]="blankETCValuesCheckBox" (change)="updateFilteredList()">(Blank)</mat-checkbox>
 
 </mat-menu>
 
@@ -425,12 +425,12 @@
 
   <div *ngFor="let item of daysToEtcValuesList; let last = last">
     <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-      [(ngModel)]="item.isFilterSelected">{{
+      [(ngModel)]="item.isFilterSelected" (change)="updateFilteredList()">{{
       item.date
       }}</mat-checkbox>
   </div>
 
   <mat-checkbox class="pr-3" menuItems (click)="$event.stopPropagation(); resetMenuTimer(false)"
-    [(ngModel)]="blankDaysToETCValuesCheckBox">N/A</mat-checkbox>
+    [(ngModel)]="blankDaysToETCValuesCheckBox" (change)="updateFilteredList()">N/A</mat-checkbox>
 
 </mat-menu>
